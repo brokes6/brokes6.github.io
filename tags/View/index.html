@@ -20,7 +20,7 @@
 
   
 
-  <title>CoordinatorLayout的使用 | Hexo</title>
+  <title>Tag: View | Hexo</title>
 
   
 
@@ -76,7 +76,7 @@
 
     
 <!-- header container -->
-<header class="header-container post">
+<header class="header-container">
 
   
   
@@ -89,27 +89,17 @@
 
   
   
-
-  
-  
+    
     <div class="header-content">
       <div class="post-image" style="background-image: url(https://qiniu.miiiku.xyz/src/images/banner.jpg)"></div>
       <div class="post-text">
-        <div class="type-wrap">
-          
-        </div>
-        <h1 class="title-wrap">CoordinatorLayout的使用</h1>
-        <h2 class="title-sub-wrap">
-          <strong>Fuxinbo</strong>
-          <span>发布于</span>
-          
-  <a href="javascript:;" class="article-date">
-    <time datetime="2020-09-21T12:44:00.000Z" itemprop="datePublished">2020-09-21</time>
-  </a>
-
-        </h2>
+        <h1 class="title-wrap">View</h1>
+        <h2 class="title-sub-wrap">当前标签下共有1篇文章</h2>
       </div>
     </div>
+  
+
+  
   
 
   
@@ -117,78 +107,44 @@
 
   </header>
 
-    <!-- 文章 -->
+    <!-- 标签归档 -->
 
-<!-- 文章内容 -->
-
-<div class="body-container">
-  <article class="content-container article-container">
-    <div class="article-content">
-      
-      
-
-      <section class="article-entry">
-        <h1 id="CoordinatorLayout的使用"><a href="#CoordinatorLayout的使用" class="headerlink" title="CoordinatorLayout的使用"></a>CoordinatorLayout的使用</h1><h4 id="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"><a href="#本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果" class="headerlink" title="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"></a>本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果</h4><h6 id="讲解为什么要使用CoordinatorLayout："><a href="#讲解为什么要使用CoordinatorLayout：" class="headerlink" title="讲解为什么要使用CoordinatorLayout："></a>讲解为什么要使用CoordinatorLayout：</h6><ul>
-<li>NestedScrollView角度:<ol>
-<li>首先一般想要嵌套滑动的地方都是嵌套RecyclerView来进行屏幕滑动，但是使用NestedScrollView嵌套RecyclerView会造成当进入页面的时候，RecyclerView会一次性全部展开。RecyclerView会失去复用性。在一些RecyclerView条目数量不多的时候，并不会造成多大的印象，但失去复用性会到时候RecyclerView滑出屏幕外无法被回收，数量一旦过多就会造成性能问题。</li>
-</ol>
-</li>
-<li>CoordinatorLayout角度：<ol>
-<li>使用CoordinatorLayout嵌套RecyclerView也可以达到跟随屏幕一起滑动的效果，并不会造成什么性能问题，并不会丢失特性。</li>
-</ol>
-</li>
-</ul>
-<h6 id="讲解如何使用CoordinatorLayout嵌套RecyclerView："><a href="#讲解如何使用CoordinatorLayout嵌套RecyclerView：" class="headerlink" title="讲解如何使用CoordinatorLayout嵌套RecyclerView："></a>讲解如何使用CoordinatorLayout嵌套RecyclerView：</h6><p>首先CoordinatorLayout是要与AppBarLayout一起使用才能做出许多效果。</p>
-<ul>
-<li><p>AppBarLayout：<br>  1.AppBarLayout用来规划需要要滑出屏幕的控件，被AppBarLayout包裹的控件需要添加（layout_scrollFlags=”scroll”）的属性</p>
-<blockquote>
-<p>layout_scrollFlags=”scroll”：当它滚动的时候，AppBarLayout会回调触发内部设置了layout_scrollFlags=””的控件的滚动行为。<br>scroll：跟随屏幕一起滑动<br>enterAlways：使用enterAlways，必须要带上scroll,否则没有效果，同样使用后面哪一个都要有scroll;使用要两个一块使用,enterAlways决定向下滚动时Scrolling View和Child View之间的滚动优先级问题。<br>enterAlwaysCollapsed：这里涉及到Child View的高度和最小高度，向下滚动时，<br>Child View先向下滚动最小高度值，然后Scrolling View开始滚动，到达边界时，Child View再向下滚动，直至显示完全。</p>
-</blockquote>
-</li>
-</ul>
-
-      </section>
-
-      <section class="article-footer">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">#Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/" rel="tag">#View</a></li></ul>
-      </section>
-
-      <section class="article-navs">
+<!-- post list container -->
+<div class="body-container float">
+  <div class="content-container article-list">
+    <div class="card-container card-articles">
+      <div class="card-wrap">
         
-<nav class="card-container card-article-nav">
-  <div class="card-wrap">
-    
-    
-      <div id="article-nav-older" class="card-item">
-        <article>
           
-          <a class="card-link article-nav-link" href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"></a>
-          <strong class="article-nav-caption">Older</strong>
-          <p class="article-nav-title">
-            
-              MVP 设计模式
-            
-          </p>
-        </article>
+          <div class="card-item">
+            <article>
+              
+              
+                <a class="article-link card-link" href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url"></a>
+              
+              <h2 class="article-title">CoordinatorLayout的使用</h2>
+              <div class="article-meta">
+                <strong>Fuxinbo</strong>
+                <span>发布于</span>
+                
+  <a href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+    <time datetime="2020-09-21T12:44:00.000Z" itemprop="datePublished">2020-09-21</time>
+  </a>
+
+              </div>
+              <div class="article-category">
+                
+              </div>
+            </article>
+          </div>
+        
       </div>
-    
-  </div>
-</nav>
-
-      </section>
-
-      
-
-  
-  
-
-  
-  
-
-
     </div>
-  </article>
+  </div>
 </div>
+
+<!-- page container -->
+
 
     <!-- footer container -->
 <footer id="footer" class="footer">
