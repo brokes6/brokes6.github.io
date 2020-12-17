@@ -20,7 +20,7 @@
 
   
 
-  <title>Archives | Hexo</title>
+  <title>SmallestWidth 限定符 | Hexo</title>
 
   
 
@@ -76,7 +76,16 @@
 
     
 <!-- header container -->
-<header class="header-container">
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
 
   
   
@@ -86,19 +95,21 @@
     <div class="header-content">
       <div class="post-image" style="background-image: url(https://qiniu.miiiku.xyz/src/images/banner.jpg)"></div>
       <div class="post-text">
-        <h1 class="title-wrap">归档</h1>
-        <h2 class="title-sub-wrap">共有10篇文章</h2>
+        <div class="type-wrap">
+          
+        </div>
+        <h1 class="title-wrap">SmallestWidth 限定符</h1>
+        <h2 class="title-sub-wrap">
+          <strong>Fuxinbo</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-12-17T09:42:00.000Z" itemprop="datePublished">2020-12-17</time>
+  </a>
+
+        </h2>
       </div>
     </div>
-  
-
-  
-  
-
-  
-  
-
-  
   
 
   
@@ -106,114 +117,89 @@
 
   </header>
 
-    <!-- 归档 -->
+    <!-- 文章 -->
 
-<!-- post list container -->
-<div class="body-container float">
-  <div class="content-container article-list">
-    <div class="card-container card-articles">
-      <div class="card-wrap">
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="SmallestWidth-限定符"><a href="#SmallestWidth-限定符" class="headerlink" title="SmallestWidth 限定符"></a>SmallestWidth 限定符</h1><h3 id="介绍smallestWidth-限定符"><a href="#介绍smallestWidth-限定符" class="headerlink" title="介绍smallestWidth 限定符"></a>介绍smallestWidth 限定符</h3><ol>
+<li>优点<ul>
+<li>使用这种方式只需要少量 dimens.xml 文件即可达到适配，而且根本不用考虑虚拟按键的问题。如果只适配手机，dimens.xml 文件所占的体积只有 100 多 KB，即使加上平板和 TV，也就 500 多 KB，完全可以接收。</li>
+</ul>
+</li>
+</ol>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li>打开AndroidStudio</li>
+<li>进入Settings</li>
+<li>选择Plugins</li>
+<li>在插件商店里面 搜索 “ScreenMatch” 点击安装 最后点击“ok”，重启AndroidStudio即可</li>
+<li>在项目的默认 values 文件夹中需要一份 dimens.xml 文件<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/wildma/ScreenAdaptation/blob/master/app/src/main/res/values/dimens.xml%EF%BC%88%E6%8F%90%E4%BE%9B%E4%BD%BF%E7%94%A8%EF%BC%89">https://github.com/wildma/ScreenAdaptation/blob/master/app/src/main/res/values/dimens.xml（提供使用）</a></li>
+</ul>
+</li>
+<li>执行生成<ul>
+<li>插件安装好后，在项目的任意目录或文件上右键，选择 ScreenMatch 选项（如下图）</li>
+<li><img src="https://upload-images.jianshu.io/upload_images/5382223-6ad9ee0eb0238886.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/416/format/webp" alt="img"></li>
+</ul>
+</li>
+<li>选择对那个module进行适配（一般来说就是选择app即可）</li>
+<li>res目录下会生成对应宽度dpi的文件（如下图）<ul>
+<li><img src="https://upload-images.jianshu.io/upload_images/5382223-29986645ad1009fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/377/format/webp" alt="img"></li>
+</ul>
+</li>
+<li>在xml文件中写布局的时候，单位就使用dp_xxx即可完成适配（如下）</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;TextView</span><br><span class="line">            android:layout_width=<span class="string">&quot;@dimen/dp_50&quot;</span></span><br><span class="line">            android:layout_height=<span class="string">&quot;@dimen/dp_50&quot;</span></span><br><span class="line">            android:text=<span class="string">&quot;Hello World!&quot;</span> /&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" rel="tag">#屏幕适配</a></li></ul>
+      </section>
+
+      <section class="article-navs">
         
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+    
+      <div id="article-nav-older" class="card-item">
+        <article>
           
-          <div class="card-item large">
-            <article>
-              
-              
-                <a class="article-link card-link" href="/2020/09/22/SmartRefreshLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url"></a>
-              
-              <h2 class="article-title">SmartRefreshLayout的使用</h2>
-              <div class="article-meta">
-                <strong>Fuxinbo</strong>
-                <span>发布于</span>
-                
-  <a href="/2020/09/22/SmartRefreshLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-    <time datetime="2020-09-22T10:00:00.000Z" itemprop="datePublished">2020-09-22</time>
-  </a>
-
-              </div>
-              <div class="article-category">
-                
-              </div>
-            </article>
-          </div>
-        
-          
-          <div class="card-item">
-            <article>
-              
-              
-                <a class="article-link card-link" href="/2020/09/21/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" itemprop="url"></a>
-              
-              <h2 class="article-title">依赖注入</h2>
-              <div class="article-meta">
-                <strong>Fuxinbo</strong>
-                <span>发布于</span>
-                
-  <a href="/2020/09/21/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="article-date">
-    <time datetime="2020-09-21T14:14:00.000Z" itemprop="datePublished">2020-09-21</time>
-  </a>
-
-              </div>
-              <div class="article-category">
-                
-              </div>
-            </article>
-          </div>
-        
-          
-          <div class="card-item">
-            <article>
-              
-              
-                <a class="article-link card-link" href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" itemprop="url"></a>
-              
-              <h2 class="article-title">CoordinatorLayout的使用</h2>
-              <div class="article-meta">
-                <strong>Fuxinbo</strong>
-                <span>发布于</span>
-                
-  <a href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-    <time datetime="2020-09-21T12:44:00.000Z" itemprop="datePublished">2020-09-21</time>
-  </a>
-
-              </div>
-              <div class="article-category">
-                
-              </div>
-            </article>
-          </div>
-        
-          
-          <div class="card-item">
-            <article>
-              
-              
-                <a class="article-link card-link" href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url"></a>
-              
-              <h2 class="article-title">MVP 设计模式</h2>
-              <div class="article-meta">
-                <strong>Fuxinbo</strong>
-                <span>发布于</span>
-                
-  <a href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
-    <time datetime="2020-09-18T13:36:00.000Z" itemprop="datePublished">2020-09-18</time>
-  </a>
-
-              </div>
-              <div class="article-category">
-                
-              </div>
-            </article>
-          </div>
-        
+          <a class="card-link article-nav-link" href="/2020/12/17/Andorid%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C-UI/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              Andorid的多线程操作/UI
+            
+          </p>
+        </article>
       </div>
-    </div>
+    
   </div>
+</nav>
+
+      </section>
+
+      
+
+  
+  
+
+  
+  
+
+
+    </div>
+  </article>
 </div>
-
-<!-- page container -->
-
-
 
     <!-- footer container -->
 <footer id="footer" class="footer">
