@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="John Doe">
+  
+
+  
+
+  
+
+  <title>WorkManager后台任务 | Hexo</title>
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/default.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://qiniu.miiiku.xyz/src/images/banner.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          
+        </div>
+        <h1 class="title-wrap">WorkManager后台任务</h1>
+        <h2 class="title-sub-wrap">
+          <strong>Fuxinbo</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2020-12-24T07:57:00.000Z" itemprop="datePublished">2020-12-24</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="关于WorkManager的使用"><a href="#关于WorkManager的使用" class="headerlink" title="关于WorkManager的使用"></a>关于WorkManager的使用</h1><blockquote>
+<p>本篇以Kotlin为主要语言</p>
+</blockquote>
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p><strong>WorkManager</strong>是一个后台执行任务管理，即使在应用退出，也可以继续执行被创建的任务。还可以为<strong>WorkManager</strong>添加触发条件。当然还有特殊情况，当应用被彻底杀死的时候，任务是不会触发的，会等到下次应用开启，然后触发任务</p>
+<ol>
+<li><p>添加依赖</p>
+<ul>
+<li><p>打开当前项目的ProjecySturcture</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201224145449.png" alt="image-20201224145447147"></p>
+</li>
+<li><p>在Dependencies.app中点击 + 来添加依赖，之后在Library Dependency中搜索androidx.work</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201224145615.png" alt="image-20201223092135741"></p>
+</li>
+<li><p>选择ktx结尾的，点击ok，等待下载完成</p>
+</li>
+</ul>
+</li>
+<li><p>接下来创建一个类MyWorker 继承 Worker</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyWorker</span></span>(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">doWork</span><span class="params">()</span></span>: Result &#123;</span><br><span class="line">        Log.e(<span class="string">&quot;work&quot;</span>, <span class="string">&quot;doWork: <span class="variable">$data</span> 任务开始&quot;</span> )</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>)</span><br><span class="line">        Log.e(<span class="string">&quot;work&quot;</span>, <span class="string">&quot;doWork: <span class="variable">$data</span> 任务结束&quot;</span> )</span><br><span class="line">        <span class="keyword">return</span> Result.success()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继承Worker 是需要传入参数，所以需要创建构造方法。这里为了方便观察，于是打印日志</p>
+</li>
+<li><p>然后再Activity中创建全局变量 workMananger，并且创建workRequest且传入</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> workManager = WorkManager.getInstance(<span class="keyword">this</span>)</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="comment">//这里在XML中创建了一个Button，为其设置点击事件</span></span><br><span class="line">        button.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">val</span> wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()</span><br><span class="line">            .build()</span><br><span class="line">            workManager.enqueue(wrokRequest)</span><br><span class="line">            <span class="comment">//将创建好的workRequest传递给workManager</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上，关于workManager的简单使用就完成了</p>
+</li>
+</ol>
+<h3 id="WorkManager的触发条件与传递数据、串接"><a href="#WorkManager的触发条件与传递数据、串接" class="headerlink" title="WorkManager的触发条件与传递数据、串接"></a>WorkManager的触发条件与传递数据、串接</h3><h5 id="触发条件"><a href="#触发条件" class="headerlink" title="触发条件"></a>触发条件</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">val</span> constraints = Constraints.Builder()</span><br><span class="line">           .setRequiredNetworkType(NetworkType.CONNECTED)</span><br><span class="line">           .build()</span><br><span class="line"><span class="keyword">val</span> wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()</span><br><span class="line">           .setConstraints(constraints)</span><br><span class="line">           .build()</span><br></pre></td></tr></table></figure>
+
+<p>创建一个constraints，并且给他设置触发条件为连接网络时触发，然后传递给workRequest</p>
+<h5 id="传递数据"><a href="#传递数据" class="headerlink" title="传递数据"></a>传递数据</h5><p>可以将数据传递进Worker，Worker也可以把数据传递出来</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()</span><br><span class="line">            .setConstraints(constraints)</span><br><span class="line">            .setInputData(workDataOf(INTPUT_WORK_KEY to <span class="keyword">data</span>))</span><br><span class="line">            .build()</span><br></pre></td></tr></table></figure>
+
+<p>传递数据是通过setInputData，接受一个workData参数，workData是一个键值对，最后在Worker中接受数据</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyWorker</span></span>(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">doWork</span><span class="params">()</span></span>: Result &#123;</span><br><span class="line">        <span class="keyword">val</span> <span class="keyword">data</span> = inputData.getString(<span class="string">&quot;Key&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> Result.success(workDataOf(OUT_WORK_KEY to <span class="string">&quot;任务已结束&quot;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过inputData 来接受数据，并且可以通过return Success来传递出去数据，在Activity/Fragment中通过LiveData观察来获取数据</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">workManage.getWorkInfoByIdLiveData(workRequestA.id).observe(<span class="keyword">this</span>, Observer &#123;</span><br><span class="line">                Toast.makeText(<span class="keyword">this</span>, <span class="string">&quot;任务完成，返回数据为<span class="subst">$&#123;it.outputData&#125;</span>&quot;</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="串接"><a href="#串接" class="headerlink" title="串接"></a>串接</h5><p>首先，我们先将创建触发条件与创建workRequest的内容提取出来（快捷键为:ctrl+alt+m）</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">createWork</span><span class="params">(<span class="keyword">data</span>: <span class="type">String</span>)</span></span>: OneTimeWorkRequest &#123;</span><br><span class="line">        <span class="keyword">val</span> constraints = Constraints.Builder()</span><br><span class="line">            .setRequiredNetworkType(NetworkType.CONNECTED)</span><br><span class="line">            .build()</span><br><span class="line">        <span class="keyword">return</span> OneTimeWorkRequestBuilder&lt;MyWorker&gt;()</span><br><span class="line">            .setConstraints(constraints)</span><br><span class="line">            .setInputData(workDataOf(INTPUT_WORK_KEY to <span class="keyword">data</span>))</span><br><span class="line">            .build()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>并且给这个方法传入一个参数，用来进行与Worker之间传递数据,然后使用</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> WORK_A_DATA = <span class="string">&quot;A ni shi han han&quot;</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> WORK_B_DATA = <span class="string">&quot;B ni shi han han&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> workRequestA = createWork(WORK_A_DATA)</span><br><span class="line"><span class="keyword">val</span> workRequestB = createWork(WORK_B_DATA)</span><br><span class="line">    workManager.beginWith(workRequestA)</span><br><span class="line">        .then(workRequestB)</span><br><span class="line">        .enqueue()</span><br></pre></td></tr></table></figure>
+
+<p>beginWith() 是传入第一个workRequest，剩下的通过then来传递，最后别忘了调用enqueue()</p>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/" rel="tag">#Kotlin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Thread/" rel="tag">#Thread</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+      <div id="article-nav-newer" class="card-item">
+        <article>
+          
+          <a class="card-link article-nav-link" href="/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/"></a>
+          <strong class="article-nav-caption">Newer</strong>
+          <p class="article-nav-title">
+            
+              DrawerLayout的使用
+            
+          </p>
+        </article>
+      </div>
+    
+    
+      <div id="article-nav-older" class="card-item">
+        <article>
+          
+          <a class="card-link article-nav-link" href="/2020/12/24/PicGo%E4%B8%8ETypora-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              PicGo与Typora 上传图片
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+
+      
+
+  
+  
+
+  
+  
+
+
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2020 <a href="/" target="_blank">John Doe</a></p>
+
+    
+      <p id="hitokoto"></p>
+      <script src="https://v1.hitokoto.cn/?c=a&amp;encode=js&select=%23hitokoto" defer></script>
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
