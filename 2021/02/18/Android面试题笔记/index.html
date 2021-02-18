@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+
+  
+
+  
+
+  
+    <meta name="author" content="John Doe">
+  
+
+  
+
+  
+
+  <title>Android面试题笔记 | Hexo</title>
+
+  
+
+  
+    <link rel="icon" href="/favicon.ico">
+  
+
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/default.min.css" rel="stylesheet">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+<body>
+  <div class="root-container">
+    <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          Hexo
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">HOME</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">LINK</a></li>
+        
+          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
+        
+          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    
+<!-- header container -->
+<header class="header-container post">
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-image" style="background-image: url(https://qiniu.miiiku.xyz/src/images/banner.jpg)"></div>
+      <div class="post-text">
+        <div class="type-wrap">
+          
+        </div>
+        <h1 class="title-wrap">Android面试题笔记</h1>
+        <h2 class="title-sub-wrap">
+          <strong>Fuxinbo</strong>
+          <span>发布于</span>
+          
+  <a href="javascript:;" class="article-date">
+    <time datetime="2021-02-18T02:43:00.000Z" itemprop="datePublished">2021-02-18</time>
+  </a>
+
+        </h2>
+      </div>
+    </div>
+  
+
+  
+  
+
+  </header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+
+<div class="body-container">
+  <article class="content-container article-container">
+    <div class="article-content">
+      
+      
+
+      <section class="article-entry">
+        <h1 id="Android面试题笔记"><a href="#Android面试题笔记" class="headerlink" title="Android面试题笔记"></a>Android面试题笔记</h1><blockquote>
+<p>面试题的笔记与自己的看法</p>
+</blockquote>
+<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ol>
+<li><p>数组</p>
+<ul>
+<li><p>是由同一种数据类型组成</p>
+</li>
+<li><p>存储在连续的内存中</p>
+</li>
+<li><p>可以使用索引来查找数组中的元素地址</p>
+</li>
+<li><p>通常有一维数组（也是最常用的，也是最简单的数据结构），多维数组</p>
+</li>
+<li><p>时间复杂度：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>平均复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空间</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>插入</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>O(n)</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li><p>链表</p>
+<ul>
+<li><p>链表整体看起来是个树型，而不是数组</p>
+</li>
+<li><p>每一个节点都包括一个数组和一个指针</p>
+</li>
+<li><p>节点中的数据类型可以为任意类型</p>
+</li>
+<li><p>指针就是指向下一节点的引用</p>
+</li>
+<li><p>每个链表都包含一个头节点和一个尾节点</p>
+</li>
+<li><p>头节点就是链表中的第一个节点。尾节点就是链表中最后一个节点</p>
+</li>
+<li><p>头节点和尾节点并不相连，尾节点的指针下一个是结尾（也就是指向空），并不是一个循环数据结构</p>
+</li>
+<li><p>时间复杂度：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>平均复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空间</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>插入</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>双向链表</p>
+<ul>
+<li><p>一个双向链表首先是一个链表</p>
+</li>
+<li><p>一个双向链表中有一个前驱指针和一个后继指针</p>
+</li>
+<li><p>前驱指针是指向前驱结点（也就是前一个节点）</p>
+</li>
+<li><p>后继指针是指向后继结点（也就是后一个结点）</p>
+</li>
+<li><p>在双向链表中也有一个头结点，头结点是指向第一个节点，最后一个结点指向空</p>
+</li>
+<li><p>如果最后一个结点指向第一个结点，那么这就变成了双向循环链表</p>
+</li>
+<li><p>双向循环链表可以很容易从每个结点查找到它的前驱节点和后继节点</p>
+</li>
+<li><p>时间复杂度：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>平均复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空间</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>插入</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>栈</p>
+<ul>
+<li><p>是一个有着【后进先出】特性的数据结构</p>
+</li>
+<li><p>也就是最后进栈的元素也是第一个出栈的元素</p>
+</li>
+<li><p>想要得到栈中第一个元素（也就是最下面的元素），就必须要把后面（上面）所有的元素都先出栈，才可以取出第一个元素</p>
+</li>
+<li><p>向栈中添加一个元素的操作被称作Push(入栈)</p>
+</li>
+<li><p>从栈中取出一个元素的操作被称为Pop(出栈)</p>
+</li>
+<li><p>查看且不删除栈中最后一个入栈的元素（也就是最上方的元素）的操作被称为Top</p>
+</li>
+<li><p>时间复杂度：</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>平均复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空间</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>查找</td>
+<td>O(n)</td>
+</tr>
+<tr>
+<td>入栈(Push)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>出栈(Pop)</td>
+<td>O(1)</td>
+</tr>
+<tr>
+<td>查看栈顶(Top)</td>
+<td>O(1)</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</li>
+<li><p>队列</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li></li>
+<li><p>贪婪算法</p>
+<ul>
+<li>贪婪算法也就是在求解一个问题的时候，做出当前最好的解决，而不是全局最好的解决</li>
+<li>这种算法的实现都是在某一方面上局部最优解</li>
+<li>贪婪算法也是不可回退的</li>
+<li>贪婪算法在最优子结构问题中尤为有效，最优子结构也就是局部最优能决定全局最优（问题能分成多个小问题，每个小问题的最优解决能递推到最终问题的最优解）</li>
+<li>当一个问题可以通过贪婪算法解决时，那么贪婪算法一般是解决这个问题的最好解决办法</li>
+</ul>
+</li>
+<li></li>
+</ol>
+<h3 id="Java核心"><a href="#Java核心" class="headerlink" title="Java核心"></a>Java核心</h3><ol>
+<li><p>基本数据类型</p>
+<ul>
+<li><p>byte（数据类型为8位，有符号，以而进程补码的整数，默认值是”0”）</p>
+</li>
+<li><p>short（数据类型位16位，有符号，以二进程补码的整数，默认值是”0”）</p>
+</li>
+<li><p>int（数据类型为32位，有符号，以二进程补码表示的整数，默认值是”0”）</p>
+</li>
+<li><p>long（数据类型为64位，有符号，以二进程补码的整数，默认值是”0L”(L是不区分大小写，为了书写规范，最好写成大写)）</p>
+</li>
+<li><p>float（数据类型为单精度，32位的浮点数，默认值是”0f”）</p>
+</li>
+<li><p>double（数据类型为双精度，64位的浮点数，默认值是”0d”）</p>
+</li>
+<li><p>boolean（数据类型为表示一位的信息，默认值只有两种”true”,”false”）</p>
+</li>
+<li><p>char（数据类型为一个单一的16位Unicode字符，可以存储任意字符）</p>
+<blockquote>
+<p>Unicode是全球统一的字符编码</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>抽象的概念</p>
+<ul>
+<li>在面向对象的概念中，所有的对象都是用类来描述，但是并不是所有的类都是来描述对象的，当一个类没有足够多的信息来描绘一个对象时，这个类就是一个抽象类</li>
+</ul>
+</li>
+<li><p>继承</p>
+<ul>
+<li>继承可以使子类别具有父类别的各种属性和方法，而不需要去在重复编写相同代码。子类在继承父类的同时，也可以去重新定义某些属性，并重写某些方法，来覆盖父类别的原有属性和方法，使获取和父类别不同的功能。当遇到需要多重继承的时候，可以使用实现接口来实现多继承相似的效果</li>
+</ul>
+</li>
+<li><p>封装</p>
+<ul>
+<li>从字面意思上来讲就是包装的意思，是指利用抽象数据类型，将数据和有关数据操作都封装起来，使它变成一个不可分割的独立体。用户不知道对象内部的细节，但是可以通过该对象提供的接口来进行访问对象。好处是：减少耦合性，方便未来修改</li>
+</ul>
+</li>
+<li><p>多态</p>
+<ul>
+<li>多态就是指一个行为有多个不同的表现形式或形态的能力。多态就是一个接口，使用不同的实例而执行不同的操作（比如说定义了一个接口，它有两个不同的实例对象，使用不同的实例化就可以使用不同的效果）</li>
+</ul>
+</li>
+<li><p>面向对象的三个基本元素和五个原则</p>
+<ol>
+<li>元素<ul>
+<li>继承</li>
+<li>多态</li>
+<li>封装</li>
+</ul>
+</li>
+<li>原则<ul>
+<li>单一职责</li>
+<li>开闭原则</li>
+<li>里氏替换</li>
+<li>依赖倒置</li>
+<li>接口隔离</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>什么是线程，什么是进程？</p>
+<ol>
+<li>进程<ul>
+<li>进程就是程序一次运行的过程，是系统运行程序的基本单位，因此进程是动态的。在java中，当我们运行main函数，其实也就是开启了一个JVM进程</li>
+</ul>
+</li>
+<li>线程<ul>
+<li>线程于进程类似，是一个比进程更小的执行单位，一个进程在执行过程中可以开启多个线程。当运行main函数时，main函数所在的线程就是进程中的一个线程，也就是主线程</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>JDK &amp; JVM &amp; JRE分别是什么以及它们的区别？</p>
+<ol>
+<li><p>JDK</p>
+<ul>
+<li>JDK是整个JAVA开发的核心，是面向开发者使用的SDK，它提供了JAVA的开发环境和运行环境</li>
+</ul>
+</li>
+<li><p>JRE</p>
+<ul>
+<li>JRE就是运行时环境（它主要包含两个部分，JVM的标准实现，JAVA的一些基本类库）</li>
+</ul>
+</li>
+<li><p>JVM</p>
+<ul>
+<li>JVM是JAVA虚拟机，也就是因为它，所以JAVA才拥有跨平台性</li>
+</ul>
+</li>
+<li><p>区别</p>
+<ul>
+<li><p>它们三者的关系为：JDK包含JRE包含JVM</p>
+<p><img src="https://i.loli.net/2021/02/16/QnCLmVgM7TbdjD2.png" alt="image-20210216113540235"></p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>什么是面向过程 &amp; 什么是面向对象 &amp; 区别？</p>
+<ol>
+<li>面向对象<ul>
+<li>面向对象是一种对<strong>现实世界理解和抽象</strong>的方法</li>
+</ul>
+</li>
+<li>面向过程<ul>
+<li>是一种 <strong>以过程为中心</strong> 的编程思想。这些都是以什么正在发生为主要目标进行编程，不同于面向对象的是谁在受影响。每个过程有一个阶段性的目标，依次完成这些过程，才能得到结果</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>给我说说Java面向对象的特征</p>
+<ol>
+<li>特点<ul>
+<li>对象具有属性和行为</li>
+<li>对象具有变化和形态</li>
+<li>对象具有唯一性</li>
+<li>对象都是某个类别的实例</li>
+<li>一切皆为对象，真实世界中的所有事物都可以视为对象</li>
+</ul>
+</li>
+<li>三大基本特征<ul>
+<li>继承</li>
+<li>多态</li>
+<li>封装</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>什么是重载 &amp; 什么是重写 &amp; 区别</p>
+<ol>
+<li><p>重载</p>
+<ul>
+<li>重载就是指在同一个类中，方法名相同，而参数不同，返回类型可以相同，也可以不相同</li>
+</ul>
+</li>
+<li><p>重写</p>
+<ul>
+<li>重写是指在方法名相同时，参数也相同，返回类型也相同，但方法内部实现操作不同（一般表示子类与父类之间的关系）</li>
+</ul>
+</li>
+<li><p>区别</p>
+<table>
+<thead>
+<tr>
+<th>区别点</th>
+<th>重载方法</th>
+<th>重写方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>参数列表</td>
+<td>必须修改</td>
+<td>一定不能修改</td>
+</tr>
+<tr>
+<td>返回类型</td>
+<td>必须修改</td>
+<td>一定不能修改</td>
+</tr>
+<tr>
+<td>访问修饰符</td>
+<td>不能比父类更严格</td>
+<td>一定不能修改</td>
+</tr>
+<tr>
+<td>方法名</td>
+<td>一致</td>
+<td>一致</td>
+</tr>
+<tr>
+<td>异常</td>
+<td>可以修改</td>
+<td>可以减少或删除，一定不能抛出新的或者更</td>
+</tr>
+<tr>
+<td>访问</td>
+<td>可以修改</td>
+<td>一定不能做更严格的限制（可以降低限制）</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+</li>
+<li><p>谈谈你对this和super的认识</p>
+<ol>
+<li>this<ul>
+<li>this就是指当前方法的调用者（也就是指当前使用的对象）</li>
+</ul>
+</li>
+<li>super<ul>
+<li>super只是编译期中的一个指示符（也就是被看作是调用父类中被重写的方法，但实际上调用者还是子类对象）</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>接口和抽象类的区别</p>
+<ol>
+<li>接口<ul>
+<li>接口是公开的，不能有私有的变量和方法，接口中的所有方法都<strong>没有方法体</strong>，通过关键字<strong>interface</strong>实现。接口也可以被看做抽象类的变体，接口中所有的方法都是抽象的，可以通过接口来实现多重继承</li>
+</ul>
+</li>
+<li>抽象类<ul>
+<li>抽象类可以拥有私有的方法和变量，通过<strong>abstract</strong>来声明一个类是一个抽象类，被声明为抽象方法<strong>不能包含方法体</strong>。抽象类的子类为父类中<strong>所有抽象方法的具体实现</strong>，否则也是抽象类</li>
+</ul>
+</li>
+<li>相同点<ul>
+<li>都不能被实例化</li>
+<li>接口的实现类或者抽象类的子类都只有实现了<strong>接口或者抽象类中的方法</strong>后才能实例化</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>接口只能定义，不能有方法的实现。抽象类可以定义也可以实现方法</li>
+<li>实现接口的关键字为implements，继承抽象类的关键字为extends。一个类可以实现多个接口，但只能继承一个抽象类</li>
+<li>接口强调特定功能的实现，抽象类强调所属关系</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>给我说说权限修饰符特性</p>
+<ol>
+<li>public 公开的</li>
+<li>private 类内部使用，外部没有访问权</li>
+<li>protected 继承权限，子类继承父类后，子类有权限访问父类，在同个包下都可以访问</li>
+<li>default 默认访问权限，在同个包下都可以访问</li>
+</ol>
+</li>
+<li><p>给我谈谈Java中的内部类</p>
+<blockquote>
+<p>在Java中允许在类的内部在创建一个类，这个定义在类内部的类就被称作内部类，包含内部类的类就被称作外部类。内部类可以方便的访问外部类私有属性和方法</p>
+</blockquote>
+<ol>
+<li><p>静态内部类</p>
+<ul>
+<li><p>定义方式为 static class。静态内部类可以直接访问外部类的静态属性和方法，但是不可以访问外部类的实例属性和方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticOutter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Integer outterNum = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outStatic</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;run out static&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInner</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStaticInner</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;调用外部类的静态方法&quot;</span>);</span><br><span class="line">            outStatic();</span><br><span class="line">            System.out.println(<span class="string">&quot;调用外部类的静态属性&quot;</span>);</span><br><span class="line">            System.out.println(outterNum);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>成员内部类</p>
+<ul>
+<li><p>定义方式为 class。成员内部类除了可以访问外部类的静态属性和方法，还可以访问实例属性和方法，但不可以定义静态变量和静态方法。这里可以吧成员内部类看作一个比较特殊的<strong>实例方法</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer outterNum = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">outterMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行外部方法......&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;outterNum:&quot;</span>+outterNum);</span><br><span class="line">            System.out.println(<span class="string">&quot;运行outter的方法&quot;</span>);</span><br><span class="line">            outterMethod();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>方法内部类</p>
+<ul>
+<li><p>定义方式为 class。方法内部类就是在一个方法中定义的一个类，方法内部类只能在定义的方法中使用。方法内部类可以直接调用定义方法的参数和方法内部的属性，也可以调用外部类中的静态属性和方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodOutter</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> Integer outter = <span class="number">10</span>;</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMethod</span><span class="params">(Integer param)</span></span>&#123;</span><br><span class="line">         String local = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">         <span class="class"><span class="keyword">class</span> <span class="title">MethodInner</span></span>&#123;</span><br><span class="line">             <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">                 System.out.println(<span class="string">&quot;MethodOutter outter:&quot;</span>+outter);</span><br><span class="line">                 System.out.println(<span class="string">&quot;param:&quot;</span>+param);</span><br><span class="line">                 System.out.println(<span class="string">&quot;local:&quot;</span>+local);</span><br><span class="line">             &#125;</span><br><span class="line">             </span><br><span class="line">         &#125;</span><br><span class="line">         MethodInner inner = <span class="keyword">new</span> MethodInner();</span><br><span class="line">         inner.innerMethod();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         MethodOutter out = <span class="keyword">new</span> MethodOutter();</span><br><span class="line">         out.testMethod(<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>匿名内部类</p>
+<ul>
+<li><p>匿名内部类只能使用一次，它没有名字，没有构造方法，但它可以根据参数调用父类的构造方法。和方法内部类一样，匿名内部类可以访问外部类的属性和方法，也可以访问局部变量和参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestInteface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String param)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnonymousTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> TestInteface() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String param)</span> </span>&#123;</span><br><span class="line">                System.out.println(param);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>什么是拆箱 &amp; 装箱，能给我举栗子吗？</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>static关键字的作用？</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>final关键字的作用</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>说说Java异常体系主要用来干什么的 &amp; 异常体系？</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>Error和Exception的区别？</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>说说运行时异常和非运行时异常的区别？</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>如何自定义一个异常？</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>5个常见的运行时异常</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li></li>
+</ol>
+<h3 id="Android核心"><a href="#Android核心" class="headerlink" title="Android核心"></a>Android核心</h3><ol>
+<li><p>Activity生命周期（具体可以去Activity的讲解里查看）</p>
+<ul>
+<li>onCreate(在活动第一次启动时，触发该方法)</li>
+<li>onStart(该方法表示活动将被展现给用户)</li>
+<li>onResume（该方法表示活动准备好与用户进行交互）</li>
+<li>onPause（该方法表示活动因为其他原因，被其他Activity，全屏的Dialog覆盖）</li>
+<li>onStop（该方法表示活动不在想要展示给用户，如果内存不足则会进行回收）</li>
+<li>onRestart （该方法表示活动从停止状态再次想要展示给用户）</li>
+<li>onDestory（该方法表示活动被销毁，可能会有一定延迟才会被回收）</li>
+</ul>
+</li>
+<li><p>Android四大组件</p>
+<ul>
+<li>活动 Activity（是所有程序的根本）</li>
+<li>服务 Service（Android组件中的一种，不可以自己运行，只能后台运行，可以与其他组件进行交互）</li>
+<li>广播 BroadcastReceiver（是一种在应用程序之间传递信息的一种机制，也可以在应用内部进行传递信息）</li>
+<li>内容提供者 Content Provider（Android提供第三方应用数据访问的机制）</li>
+</ul>
+</li>
+<li><p>Service与IntentService的区别</p>
+<ul>
+<li>Android中的Service是用于后台服务的，它不是一个独立的进程，也不是一个独立的线程，它是依赖与程序的主线程，也就是说它是运行来主线程上的，不推荐在Service中编写耗时操作</li>
+<li>但是如果必须要在Service中编写耗时操作，那么就需要使用IntentService</li>
+<li>IntentService是继承Service的，它包含了Service的全部特性，生命周期</li>
+<li>IntentService与Service不同的是，在IntentService进行onCreate的时候，内部开启了一个线程，可以去执行耗时操作</li>
+</ul>
+</li>
+<li><p>Android 应用的结构</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>Android 应用中保存数据</p>
+<ul>
+<li>sharedPreference（用xml来保存应用中的数据，本地）</li>
+<li>SQL（将应用数据保存到应用本地数据库中，应用本地）</li>
+<li>File（将应用数据保存到创建的txt文件中，本地）</li>
+</ul>
+</li>
+<li><p>在 Android 应用中执行耗时操作</p>
+<ul>
+<li>使用Thread执行耗时操作（也就是在子线程中进行耗时操作，在将结果通过Handler传回主线程）</li>
+<li>使用AsyncTask执行耗时操作（也就是在子线程中进行耗时操作，可通过<strong>onProgressUpdate</strong>方法来修改UI）</li>
+</ul>
+</li>
+<li><p>两个 Fragment 之间进行通信</p>
+<ul>
+<li>使用接口来进行两个Fragment之间的通信，通过宿主Activity中转一下</li>
+<li>使用广播</li>
+</ul>
+</li>
+<li><p>Android 的通知系统</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>Android启动模式</p>
+<ul>
+<li>standard（那里调用就去那里，可多次堆叠，可以创建多个相同的Activity）</li>
+<li>singleTop（可多次实例化，但不可堆叠，当栈顶为相同的Activity则会调用onNewIntent()方法）</li>
+<li>singleTask（当已被实例化，再次创建则会将自己以上的所有Activity全部销毁，在调用onNewIntent()，如没被实例化，那将会创建新的Task并实例化后在入栈）</li>
+<li>singleInstance（存在于单独的栈中，在这个栈中，只有也仅有它一个）</li>
+</ul>
+</li>
+<li><p>什么是Fragment</p>
+<ul>
+<li>Fragment相当于是Activity中的模块，它有着自己的布局，生命周期，单独处理自己的输入输出</li>
+</ul>
+</li>
+<li><p>Fragment 的生命周期</p>
+<ul>
+<li>onAttch（当Fragment与Activity发生关联时调用）</li>
+<li>onCreate（创建Fragment时回调，如果想要保存Fragment基本组件，则在这里初始化）</li>
+<li>onCreateView（首次绘制页面时调用，在此可以创建View。这里不能进行耗时操作）</li>
+<li>onActivityCreated（在onCreate方法完成后返回，这里可以进行与Activity交互UI操作，不能在此之前与Activity进行交互）</li>
+<li>onStart（启动Fragment时回调，此时Fragment可见，只是没有显示在前台，不能和用户进行交互）</li>
+<li>onResume（Fragment在前台处于可见状态时返回，可以与用户交互）</li>
+<li>onPause（Fragment处于暂停状态时返回，处于可见状态，但不能和用户交互）</li>
+<li>onStop（停止Fragment时回调，处于完全不可见）</li>
+<li>onDestoryView（销毁有关Fragment的视图，但还未与Activity解除绑定）</li>
+<li>onDestory（销毁Fragment时回调）</li>
+<li>onDetach（与Activity的关联被取消时调用）</li>
+</ul>
+</li>
+<li><p>Android 的 Dialog</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>Android 的 View </p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>Fragment 和 Activity 有什么区别？它们之间又有什么关系？</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>解释一下 Android 中的 Intent </p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li><p>onSaveInstanceState方法会在什么时候被执行？</p>
+<ul>
+<li>按下Home键时，因为系统不知道你在按下Home键之后要运行多少个程序，自然也不知道当前的Activity会不会销毁，所以系统则会调用onSaveInstanceState来保存那些非永久性的数据</li>
+<li>关闭屏幕</li>
+<li>从当前Activity开启另一个Activity</li>
+<li>屏幕方向发生变化时</li>
+</ul>
+<blockquote>
+<p>onSaveInstanceState() 这个方法是用来保存UI状态的，可以使用它来保存当前UI和你所想保存的东西</p>
+</blockquote>
+</li>
+<li><p>简述View Touch事件传递机制。</p>
+<ol>
+<li>过程<ul>
+<li>dispatchTouchEvent -&gt; onInterceptTouchEvent（该方法只在ViewGroup中有） -&gt; onTouchEvent</li>
+</ul>
+</li>
+<li>dispatchTouchEvent （进行事件分发，返回值是Boolean）</li>
+<li>onInterceptTouchEvent （进行事件拦截，该方法只在ViewGroup中有，View中是没此方法，一旦拦截，则执行ViewGroup的onTouchEvent，在ViewGroup中处理事件，而不会接着分发给View，且只调用一次，所以后面的事件都会交给ViewGroup来处理）</li>
+<li>onTouchEvent（进行事件处理）</li>
+</ol>
+</li>
+<li><p>为什么在子线程中执行 new Handler() 会抛出异常?</p>
+<ul>
+<li>是因为在创建Handler时，会先获取当前线程的Looper，如果Looper为空，则会异常</li>
+</ul>
+</li>
+<li><p>invalidate()和postInvalidate()的区别？</p>
+<ul>
+<li>invalidate和postInvalidate都是用来刷新View的，但是invalidate是用于主线程刷新，如果在子线程则需要配合Handler。而postInvalidate可以在子线程中直接调用</li>
+</ul>
+<blockquote>
+<p>invalidate() 请求重绘View树，即draw()过程，即用来刷新View的（谁调用他，谁就刷新）</p>
+</blockquote>
+</li>
+<li><p>res目录和assets目录的区别？</p>
+<ul>
+<li>res/raw中的文件是会被映射到R.java中的，可以直接使用资源ID，不可以有目录结构</li>
+<li>assets中的文件是不会映射到R.java中的，如果需要使用则需要AssetsManager类来进行访问，可以创建子文件夹</li>
+</ul>
+</li>
+<li><p>onTouch()、onTouchEvent()和onClick()关系？</p>
+<ul>
+<li></li>
+</ul>
+</li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ol>
+
+      </section>
+
+      <section class="article-footer">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">#Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">#面试题</a></li></ul>
+      </section>
+
+      <section class="article-navs">
+        
+<nav class="card-container card-article-nav">
+  <div class="card-wrap">
+    
+    
+      <div id="article-nav-older" class="card-item">
+        <article>
+          
+          <a class="card-link article-nav-link" href="/2020/12/24/Collapsing%E4%B8%8ENavigation/"></a>
+          <strong class="article-nav-caption">Older</strong>
+          <p class="article-nav-title">
+            
+              Collapsing与Navigation
+            
+          </p>
+        </article>
+      </div>
+    
+  </div>
+</nav>
+
+      </section>
+
+      
+
+  
+  
+
+  
+  
+
+
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+     
+    <p>&copy; 2021 <a href="/" target="_blank">John Doe</a></p>
+
+    
+      <p id="hitokoto"></p>
+      <script src="https://v1.hitokoto.cn/?c=a&amp;encode=js&select=%23hitokoto" defer></script>
+    
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+</svg> 
+  </div>
+
+  
+  
+
+
+  <!-- aplayer 音频 start -->
+  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
+  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+  <script type="text/javascript">
+    const aplayer = document.querySelectorAll(".aplayer");
+    aplayer && initaplayer(aplayer);
+    function initaplayer(els) {
+      let elsArr = Array.from(els);
+      elsArr.forEach(el => {
+        new APlayer({
+          container: el,
+          audio: { ...el.dataset },
+          theme: "#b7daff",
+          lrcType: 3,
+          autoplay: false,
+          loop: false,
+          mutex: true,
+        });
+      });
+    }
+  </script>
+  <!-- aplayer 音频 end -->
+  
+
+<!-- dplayer 视频 start -->
+<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
+<script type="text/javascript">
+  const dplayer = document.querySelectorAll(".dplayer");
+  dplayer && initDPlayer(dplayer);
+  function initDPlayer(els) {
+    let elsArr = Array.from(els);
+    elsArr.forEach(el => {
+      let url = el.dataset.url;
+      let cover = el.dataset.cover;
+      let subtitle = el.dataset.subtitle;
+
+      let options = {
+        container: el,
+        video: { url: url, pic: cover },
+        theme: "#b7daff",
+        autoplay: false,
+        loop: false,
+        mutex: true,
+      }
+
+      if (subtitle) {
+        options.subtitle = {
+          url: el.dataset.subtitle,
+        }
+      }
+      new DPlayer(options);
+    });
+  }
+</script>
+<!-- dplayer 视频 end -->
+
+
+<!-- waterfall 瀑布流 start -->
+
+<script src="/lib/waterfall.min.js"></script>
+
+<script type="text/javascript">
+
+const waterfalls = document.querySelectorAll(".waterfall-container");
+
+if (waterfalls && waterfalls.length > 0) {
+  waterfalls.forEach((waterfall, index) => {
+    let cls = "waterfall-container-" + index;
+    waterfall.classList.add(cls);
+    initWaterfall(cls, waterfall);
+  });
+}
+
+function initWaterfall(selector, el) {
+  const options = {};
+  if (Object.keys(el.dataset).length > 0) {
+    for (let k in el.dataset) {
+      options[k] = el.dataset[k];
+    }
+  }
+  waterfall(`.${selector}`, options);
+}
+</script>
+<!-- waterfall 瀑布流 end -->
+
+
+  <!-- zoom start -->
+  
+<script src="/lib/zoom.min.js"></script>
+
+  <script type="text/javascript">
+    document.querySelector(".article-content") && zoom(".article-content");
+  </script>
+  <!-- zoom end -->
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+
+</body>
+</html>
