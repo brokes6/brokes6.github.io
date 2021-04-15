@@ -1,214 +1,115 @@
 <!DOCTYPE html>
-<!--[if lte IE 8 ]>
-<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<!--
-***************  *      *     *
-      8          *    *       *
-      8          *  *         *
-      8          **           *
-      8          *  *         *
-      8          *    *       *
-      8          *      *     *
-      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
--->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<!--<![endif]-->
+<html lang="en">
 
 <head>
-  <title>Kotlin中使用ViewModel的数据共享 | Fuxinbo博客</title>
-  <!-- Meta data -->
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="Fuxinbo博客">
-    <meta name="author" content="Fuxinbo">
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-
-    <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
-
-    <link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
-    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Kotlin中使用ViewModel的数据共享 |
     
-    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
-    
-
-    <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
-    <![endif]-->
-
-    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
-
-    <!-- Load these in the <head> for quicker IE8+ load times -->
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="/js/html5shiv.min.js"></script>
-    <script src="/js/respond.min.js"></script>
-    <![endif]-->
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
   
   
-  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
 </head>
 
-<!--
-<body class="post-template">
--->
-<body id="index" class="lightnav animsition">
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Kotlin中使用ViewModel的数据共享" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
 
-      <!-- ============================ Off-canvas navigation =========================== -->
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
 
-    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
-        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
-        </div>
-        <!-- Lists in Slidebars -->
-        <ul class="sb-menu">
-            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
-            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
-            <!-- Dropdown Menu -->
-			 
-            <li>
-                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
-                    
-                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
-                    
-                </ul>
-            </li>
-            
-            
-            
-            <li>
-                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                    <li><a target="_blank" rel="noopener" href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
-                    
-                    <li><a target="_blank" rel="noopener" href="http://domain.com/" class="animsition-link">Name</a></li>
-                    
-                </ul>
-            </li>
-            
-        </ul>
-        <!-- Lists in Slidebars -->
-        <ul class="sb-menu secondary">
-            
-            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
-            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
-        </ul>
+<h1 class="article-title" itemprop="name">
+  Kotlin中使用ViewModel的数据共享
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" class="article-date">
+  <time datetime="2021-04-15T02:53:00.000Z" itemprop="datePublished">2021-04-15</time>
+</a>
+      
     </div>
     
-    <!-- ============================ END Off-canvas navigation =========================== -->
 
-    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+    
+    
+<div class="tocbot"></div>
 
-    <div id="sb-site">
-        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+    
 
-        <!-- ============================ Header & Logo bar =========================== -->
-
-        <div id="navigation" class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <!-- Nav logo -->
-                    <div class="logo">
-                        <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
-                        </a>
-                    </div>
-                    <!-- // Nav logo -->
-                    <!-- Info-bar -->
-                    <nav>
-                        <ul class="nav">
-                            <li><a href="/" class="animsition-link">Fuxinbo博客</a></li>
-                            <li class="nolink"><span>Always </span>Creative.</li>
-                            
-                            <li><a href="https://github.com/brokes6" title="Github" target="_blank"><i class="icon-github"></i></a></li>
-                            
-                            
-                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
-                            
-                            
-                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
-                            
-                            
-                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
-                            
-                            
-                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
-                            
-                            <li class="nolink"><span>Welcome!</span></li>
-                        </ul>
-                    </nav>
-                    <!--// Info-bar -->
-                </div>
-                <!-- // .container -->
-                <div class="learnmore sb-toggle-right">More</div>
-                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar before"></span>
-                <span class="icon-bar main"></span>
-                <span class="icon-bar after"></span>
-                </button>
-            </div>
-            <!-- // .navbar-inner -->
-        </div>
-
-        <!-- ============================ Header & Logo bar =========================== -->
-
-
+    <div class="article-entry" itemprop="articleBody">
       
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2021-04-15T02:53:00.000Z" itemprop="datePublished">
-          2021-04-15
-      </time>
-    
-    
-    | 
-    <a href='/tags/Kotlin/'>Kotlin</a>,
-    
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/ViewModel/'>ViewModel</a>
-    
-    
-</span>
-                <h1>Kotlin中使用ViewModel的数据共享</h1>
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h1 id="Kotlin中使用ViewModel的数据共享"><a href="#Kotlin中使用ViewModel的数据共享" class="headerlink" title="Kotlin中使用ViewModel的数据共享"></a>Kotlin中使用ViewModel的数据共享</h1><blockquote>
+      
+      
+      <p>本篇将讲述对于使用ViewModel来进行Fragment之间的数据共享，使用的技术为ViewModel，dataBinding</p>
+<a id="more"></a>
+<h1 id="Kotlin中使用ViewModel的数据共享"><a href="#Kotlin中使用ViewModel的数据共享" class="headerlink" title="Kotlin中使用ViewModel的数据共享"></a>Kotlin中使用ViewModel的数据共享</h1><blockquote>
 <p>本篇已Kotlin为主要语言</p>
 </blockquote>
 <p>本篇将讲述对于使用ViewModel来进行Fragment之间的数据共享，使用的技术为ViewModel，dataBinding</p>
 <h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>对于ViewModel是属于Androidx包下的JetPack组件，所以只需要项目使用了Androidx，就可直接使用，无需引入额外依赖包</p>
 <h3 id="代码教程"><a href="#代码教程" class="headerlink" title="代码教程"></a>代码教程</h3><p>在进行编码之前想要做一些准备工作，给项目开启dataBinding，在项目级的build.gradle中，defaultConfig闭包下</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">defaultConfig&#123;</span><br><span class="line">    ...</span><br><span class="line">    dataBinding.enabled = <span class="keyword">true</span> </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">defaultConfig&#123;
+    ...
+    dataBinding.enabled = true 
+    ...
+&#125;</code></pre>
 <p>这样就开启了dataBinding了</p>
 <ol>
 <li><p>创建ViewModel</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyViewModel</span> : <span class="type">ViewModel</span></span>() &#123;</span><br><span class="line">    <span class="keyword">var</span> number: MutableLiveData&lt;<span class="built_in">Int</span>&gt; = MutableLiveData(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">get</span><span class="params">()</span></span>: MutableLiveData&lt;<span class="built_in">Int</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">return</span> number</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">add</span><span class="params">(value: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        number.value = number.value?.plus(value)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">set</span><span class="params">(value: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        number.value = value</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class MyViewModel : ViewModel() &#123;
+    var number: MutableLiveData&lt;Int&gt; = MutableLiveData(0)
 
+    fun get(): MutableLiveData&lt;Int&gt; &#123;
+        return number
+    &#125;
+
+    fun add(value: Int) &#123;
+        number.value = number.value?.plus(value)
+    &#125;
+
+    fun set(value: Int) &#123;
+        number.value = value
+    &#125;
+&#125;</code></pre>
 <p>创建一个继承ViewModel的类，在这个类中创建一个MutableLiveData的变量，并给他设置获取和设置值的方法</p>
 </li>
 <li><p>在Activity中获取ViewModel</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> viewModel: MyViewModel</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        viewModel = ViewModelProvider(<span class="keyword">this</span>).<span class="keyword">get</span>(MyViewModel::<span class="keyword">class</span>.java)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class MainActivity : AppCompatActivity() &#123;
+   private lateinit var viewModel: MyViewModel
 
+   override fun onCreate(savedInstanceState: Bundle?) &#123;
+       super.onCreate(savedInstanceState)
+       setContentView(R.layout.activity_main)
+       viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+   &#125;
+&#125;</code></pre>
 <p>获取ViewModel是通过<strong>ViewModelProvider</strong>(this).get(刚刚创建的ViewModel::class.java)</p>
 <blockquote>
 <p>这里原本可以使用<strong>ViewModelProviders</strong>.of(Activity).get(刚刚创建的ViewModel::class.java)，但是ViewModelProviders已经被淘汰了</p>
@@ -220,169 +121,374 @@
 <p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210104194138.png" alt="image-20210104194137046"></p>
 </li>
 </ol>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlankFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line">    <span class="comment">//这里创建了一个变量，将它的值设置为ActivityViewModel，括号里面只需要输入ViewModel类型即可</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> viewModel <span class="keyword">by</span> activityViewModels&lt;MyViewModel&gt;()</span><br><span class="line">    <span class="comment">//这个技就是当前项目的dataBinding（lateinit 代表等下进行初始化）</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding: FragmentBlankBinding</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>, container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View &#123;</span><br><span class="line">        <span class="comment">//在这里进行dataBinding的初始化</span></span><br><span class="line">        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_blank, container, <span class="literal">false</span>)</span><br><span class="line">        initView()</span><br><span class="line">        <span class="keyword">return</span> binding.root</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">initView</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">//将获取完的ViewModel传给dataBinding（是因为xml文件设置了属性）</span></span><br><span class="line">        binding.<span class="keyword">data</span> = viewModel</span><br><span class="line">        <span class="comment">//设置统一的生命周期管理为父类Activity</span></span><br><span class="line">        binding.lifecycleOwner = activity</span><br><span class="line">        <span class="comment">//点击按钮进行切换Fragment，是通过Navigation进行切换</span></span><br><span class="line">        binding.button.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">val</span> controller: NavController = Navigation.findNavController(it)</span><br><span class="line">            controller.navigate(R.id.action_blankFragment_to_detailFragment)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//下面的？.let&#123;&#125;代表当前对象不为空的时候才会执行&#123;&#125;内的内容</span></span><br><span class="line">        viewModel.number.value?.let &#123; binding.seekBar.progress = it &#125;</span><br><span class="line">        binding.seekBar.setOnSeekBarChangeListener(<span class="keyword">object</span> : SeekBar.OnSeekBarChangeListener &#123;</span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onProgressChanged</span><span class="params">(p0: <span class="type">SeekBar</span>?, p1: <span class="type">Int</span>, p2: <span class="type">Boolean</span>)</span></span> &#123;<span class="comment">//如果插件的值变了</span></span><br><span class="line">                viewModel.number.value = p1</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStartTrackingTouch</span><span class="params">(p0: <span class="type">SeekBar</span>?)</span></span> &#123;<span class="comment">//刚开始触摸的时候</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onStopTrackingTouch</span><span class="params">(p0: <span class="type">SeekBar</span>?)</span></span> &#123;<span class="comment">//结束触摸</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class BlankFragment : Fragment() &#123;
+   //这里创建了一个变量，将它的值设置为ActivityViewModel，括号里面只需要输入ViewModel类型即可
+   private val viewModel by activityViewModels&lt;MyViewModel&gt;()
+   //这个技就是当前项目的dataBinding（lateinit 代表等下进行初始化）
+   private lateinit var binding: FragmentBlankBinding
 
+   override fun onCreateView(
+       inflater: LayoutInflater, container: ViewGroup?,
+       savedInstanceState: Bundle?
+   ): View &#123;
+       //在这里进行dataBinding的初始化
+       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_blank, container, false)
+       initView()
+       return binding.root
+   &#125;
+
+   private fun initView() &#123;
+       //将获取完的ViewModel传给dataBinding（是因为xml文件设置了属性）
+       binding.data = viewModel
+       //设置统一的生命周期管理为父类Activity
+       binding.lifecycleOwner = activity
+       //点击按钮进行切换Fragment，是通过Navigation进行切换
+       binding.button.setOnClickListener &#123;
+           val controller: NavController = Navigation.findNavController(it)
+           controller.navigate(R.id.action_blankFragment_to_detailFragment)
+       &#125;
+       //下面的？.let&#123;&#125;代表当前对象不为空的时候才会执行&#123;&#125;内的内容
+       viewModel.number.value?.let &#123; binding.seekBar.progress = it &#125;
+       binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener &#123;
+           override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) &#123;//如果插件的值变了
+               viewModel.number.value = p1
+           &#125;
+
+           override fun onStartTrackingTouch(p0: SeekBar?) &#123;//刚开始触摸的时候
+           &#125;
+
+           override fun onStopTrackingTouch(p0: SeekBar?) &#123;//结束触摸
+           &#125;
+
+       &#125;)
+   &#125;
+&#125;</code></pre>
 <p>​    xml：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">layout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">variable</span></span></span><br><span class="line"><span class="tag">            <span class="attr">name</span>=<span class="string">&quot;data&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">type</span>=<span class="string">&quot;com.laboratory.navviewmodel.MyViewModel&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/frameLayout&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/Title&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;@&#123;String.valueOf(data.get())&#125;&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;30sp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintHorizontal_bias</span>=<span class="string">&quot;0.498&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintVertical_bias</span>=<span class="string">&quot;0.222&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">SeekBar</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/seekBar&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;0dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_margin</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintHorizontal_bias</span>=<span class="string">&quot;1.0&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintVertical_bias</span>=<span class="string">&quot;0.347&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/button&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:background</span>=<span class="string">&quot;#858A8A&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;进入&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+   xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;
 
+   &lt;data&gt;
+
+       &lt;variable
+           name=&quot;data&quot;
+           type=&quot;com.laboratory.navviewmodel.MyViewModel&quot; /&gt;
+   &lt;/data&gt;
+
+   &lt;androidx.constraintlayout.widget.ConstraintLayout
+       android:id=&quot;@+id/frameLayout&quot;
+       android:layout_width=&quot;match_parent&quot;
+       android:layout_height=&quot;match_parent&quot;&gt;
+
+       &lt;TextView
+           android:id=&quot;@+id/Title&quot;
+           android:layout_width=&quot;wrap_content&quot;
+           android:layout_height=&quot;wrap_content&quot;
+           android:text=&quot;@&#123;String.valueOf(data.get())&#125;&quot;
+           android:textSize=&quot;30sp&quot;
+           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+           app:layout_constraintHorizontal_bias=&quot;0.498&quot;
+           app:layout_constraintStart_toStartOf=&quot;parent&quot;
+           app:layout_constraintTop_toTopOf=&quot;parent&quot;
+           app:layout_constraintVertical_bias=&quot;0.222&quot; /&gt;
+
+       &lt;SeekBar
+           android:id=&quot;@+id/seekBar&quot;
+           android:layout_width=&quot;0dp&quot;
+           android:layout_height=&quot;wrap_content&quot;
+           android:layout_margin=&quot;10dp&quot;
+           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+           app:layout_constraintHorizontal_bias=&quot;1.0&quot;
+           app:layout_constraintStart_toStartOf=&quot;parent&quot;
+           app:layout_constraintTop_toTopOf=&quot;parent&quot;
+           app:layout_constraintVertical_bias=&quot;0.347&quot; /&gt;
+
+       &lt;Button
+           android:id=&quot;@+id/button&quot;
+           android:layout_width=&quot;wrap_content&quot;
+           android:layout_height=&quot;wrap_content&quot;
+           android:background=&quot;#858A8A&quot;
+           android:text=&quot;进入&quot;
+           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+           app:layout_constraintStart_toStartOf=&quot;parent&quot;
+           app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
+   &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+&lt;/layout&gt;</code></pre>
 <p>使用ConstraintLayout是为了方便进行在Design模式下进行摆放控件，上面说的所需的内容是variable中定义的，控件中就可以使用**@{定义的名称.调用方法}**</p>
 <ol start="2">
 <li><p>DetailFragment</p>
 <p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210104194213.png" alt="image-20210104194213106"></p>
 </li>
 </ol>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DetailFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding : FragmentDetailBinding</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> viewModel <span class="keyword">by</span> activityViewModels&lt;MyViewModel&gt;()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>, container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View &#123;</span><br><span class="line">        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail,container,<span class="literal">false</span>)</span><br><span class="line">        initView()</span><br><span class="line">        <span class="keyword">return</span> binding.root</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">initView</span><span class="params">()</span></span> &#123;</span><br><span class="line">        binding.<span class="keyword">data</span> = viewModel</span><br><span class="line">        binding.lifecycleOwner = activity</span><br><span class="line">        binding.button.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">val</span> controller : NavController = Navigation.findNavController(it)</span><br><span class="line">            controller.navigate(R.id.action_detailFragment_to_blankFragment)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class DetailFragment : Fragment() &#123;
+   private lateinit var binding : FragmentDetailBinding
+   private val viewModel by activityViewModels&lt;MyViewModel&gt;()
 
+   override fun onCreateView(
+       inflater: LayoutInflater, container: ViewGroup?,
+       savedInstanceState: Bundle?
+   ): View &#123;
+       binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail,container,false)
+       initView()
+       return binding.root
+   &#125;
+
+   private fun initView() &#123;
+       binding.data = viewModel
+       binding.lifecycleOwner = activity
+       binding.button.setOnClickListener &#123;
+           val controller : NavController = Navigation.findNavController(it)
+           controller.navigate(R.id.action_detailFragment_to_blankFragment)
+       &#125;
+   &#125;
+&#125;</code></pre>
 <p>和上面的Fragment功能差不多，多了两个按钮，进行<strong>增加</strong>和<strong>删除</strong></p>
 <p>xml:</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">layout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">variable</span></span></span><br><span class="line"><span class="tag">            <span class="attr">name</span>=<span class="string">&quot;data&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">type</span>=<span class="string">&quot;com.laboratory.navviewmodel.MyViewModel&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">data</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:context</span>=<span class="string">&quot;.DetailFragment&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/textView&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;@&#123;String.valueOf(data.number)&#125;&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;30sp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintHorizontal_bias</span>=<span class="string">&quot;0.498&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintVertical_bias</span>=<span class="string">&quot;0.192&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/add&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;+&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:onClick</span>=<span class="string">&quot;@&#123;()-&gt;data.add(1)&#125;&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;30sp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;@+id/reduce&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintHorizontal_bias</span>=<span class="string">&quot;0.5&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintStart_toEndOf</span>=<span class="string">&quot;@+id/reduce&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;@+id/reduce&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintVertical_bias</span>=<span class="string">&quot;0.0&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/reduce&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;-&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:onClick</span>=<span class="string">&quot;@&#123;()-&gt;data.add(-1)&#125;&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;30sp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintEnd_toStartOf</span>=<span class="string">&quot;@+id/add&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintHorizontal_bias</span>=<span class="string">&quot;0.5&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintVertical_bias</span>=<span class="string">&quot;0.391&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/button&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;返回&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintHorizontal_bias</span>=<span class="string">&quot;0.498&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintVertical_bias</span>=<span class="string">&quot;0.535&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">layout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+   xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+   xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
 
+   &lt;data&gt;
+       &lt;variable
+           name=&quot;data&quot;
+           type=&quot;com.laboratory.navviewmodel.MyViewModel&quot; /&gt;
+   &lt;/data&gt;
+
+   &lt;androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width=&quot;match_parent&quot;
+       android:layout_height=&quot;match_parent&quot;
+       tools:context=&quot;.DetailFragment&quot;&gt;
+
+       &lt;TextView
+           android:id=&quot;@+id/textView&quot;
+           android:layout_width=&quot;wrap_content&quot;
+           android:layout_height=&quot;wrap_content&quot;
+           android:text=&quot;@&#123;String.valueOf(data.number)&#125;&quot;
+           android:textSize=&quot;30sp&quot;
+           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+           app:layout_constraintHorizontal_bias=&quot;0.498&quot;
+           app:layout_constraintStart_toStartOf=&quot;parent&quot;
+           app:layout_constraintTop_toTopOf=&quot;parent&quot;
+           app:layout_constraintVertical_bias=&quot;0.192&quot; /&gt;
+
+       &lt;Button
+           android:id=&quot;@+id/add&quot;
+           android:layout_width=&quot;wrap_content&quot;
+           android:layout_height=&quot;wrap_content&quot;
+           android:text=&quot;+&quot;
+           android:onClick=&quot;@&#123;()-&gt;data.add(1)&#125;&quot;
+           android:textSize=&quot;30sp&quot;
+           app:layout_constraintBottom_toBottomOf=&quot;@+id/reduce&quot;
+           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+           app:layout_constraintHorizontal_bias=&quot;0.5&quot;
+           app:layout_constraintStart_toEndOf=&quot;@+id/reduce&quot;
+           app:layout_constraintTop_toTopOf=&quot;@+id/reduce&quot;
+           app:layout_constraintVertical_bias=&quot;0.0&quot; /&gt;
+
+       &lt;Button
+           android:id=&quot;@+id/reduce&quot;
+           android:layout_width=&quot;wrap_content&quot;
+           android:layout_height=&quot;wrap_content&quot;
+           android:text=&quot;-&quot;
+           android:onClick=&quot;@&#123;()-&gt;data.add(-1)&#125;&quot;
+           android:textSize=&quot;30sp&quot;
+           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+           app:layout_constraintEnd_toStartOf=&quot;@+id/add&quot;
+           app:layout_constraintHorizontal_bias=&quot;0.5&quot;
+           app:layout_constraintStart_toStartOf=&quot;parent&quot;
+           app:layout_constraintTop_toTopOf=&quot;parent&quot;
+           app:layout_constraintVertical_bias=&quot;0.391&quot; /&gt;
+
+       &lt;Button
+           android:id=&quot;@+id/button&quot;
+           android:layout_width=&quot;wrap_content&quot;
+           android:layout_height=&quot;wrap_content&quot;
+           android:text=&quot;返回&quot;
+           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+           app:layout_constraintHorizontal_bias=&quot;0.498&quot;
+           app:layout_constraintStart_toStartOf=&quot;parent&quot;
+           app:layout_constraintTop_toTopOf=&quot;parent&quot;
+           app:layout_constraintVertical_bias=&quot;0.535&quot; /&gt;
+   &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+&lt;/layout&gt;</code></pre>
 <p>在使用了dataBinding中，连点击事件都可以在xml中设置,只需要想 <strong>onClick=”@{()-&gt;对象.方法}”</strong> 这样去使用</p>
 </li>
 </ol>
 <p>这样全局都是使用统一的ViewModel来获取数据，也就可以进行数据共享</p>
 
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
-    
-    
-    <a class="pull-right" href="/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/">
-        Fragment懒加载 →
-    </a>
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/" data-id="cknialc850009a0me28pi8z3g" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ViewModel/" rel="tag">ViewModel</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/04/15/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      个人简历
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Fragment懒加载</div>
+  </a>
+  
 </nav>
 
-        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
-  /**
-   * 搜狐畅言
-   */
+  
 
-  /*
-  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+  
+  
+  
+  
 
-  window.onload = function () {
-    (function () {
-      var appid = 'cytXXXX';
-      var conf = 'prod_xxxxxxxxxxxxxxxxx';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      var loadJs = function (d, a, id) {
-        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-        var b = document.createElement("script");
-        b.setAttribute("type", "text/javascript");
-        b.setAttribute("charset", "UTF-8");
-        b.setAttribute("src", d);
-        if (id) {
-          b.setAttribute("id", id);
-        }
-        if (typeof a === "function") {
-          if (window.attachEvent) {
-            b.onreadystatechange = function () {
-              var e = b.readyState;
-              if (e === "loaded" || e === "complete") {
-                b.onreadystatechange = null;
-                a()
-              }
-            }
-          } else {
-            b.onload = a
-          }
-        }
-        c.appendChild(b)
-      };
-
-      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
-        window.changyan.api.config({
-          appid: appid,
-          conf: conf
-        })
-      });
-    })();
-  }
-  */
-
-</script>
-</div>
-    </div>
+</article>
 </section>
-
-
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
       
-<!-- ============================ Footer =========================== -->
-
-<footer>
-    <div class="container">
-            <div class="copy">
-                <p>
-                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Fuxinbo. All Rights Reserved.
-                </p>
-                <p>Theme By <a target="_blank" rel="noopener" href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
-            </div>
-            <div class="social">
-                <ul>
-                    
-                    <li><a href="https://github.com/brokes6" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
-                    
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
 </footer>
-
-<!-- ============================ END Footer =========================== -->
-      <!-- Load our scripts -->
-<!-- Resizable 'on-demand' full-height hero -->
-<script type="text/javascript">
-    var resizeHero = function () {
-        var hero = $(".cover,.heightblock"),
-            window1 = $(window);
-        hero.css({
-            "height": window1.height()
-        });
-    };
-
-    resizeHero();
-
-    $(window).resize(function () {
-        resizeHero();
-    });
-</script>
-<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
-<script src="/js/scripts.js"></script><!-- Theme scripts -->
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$('#intro').find('img').each(function(){
-  var alt = this.alt;
-
-  if (alt){
-    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
-  }
-
-  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
-});
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
-
-
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
       
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
 </body>
+
 </html>

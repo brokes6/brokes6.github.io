@@ -1,195 +1,75 @@
 <!DOCTYPE html>
-<!--[if lte IE 8 ]>
-<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<!--
-***************  *      *     *
-      8          *    *       *
-      8          *  *         *
-      8          **           *
-      8          *  *         *
-      8          *    *       *
-      8          *      *     *
-      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
--->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<!--<![endif]-->
+<html lang="en">
 
 <head>
-  <title>CoordinatorLayout的使用 | Fuxinbo博客</title>
-  <!-- Meta data -->
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="Fuxinbo博客">
-    <meta name="author" content="Fuxinbo">
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-
-    <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
-
-    <link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
-    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    CoordinatorLayout的使用 |
     
-    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
-    
-
-    <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
-    <![endif]-->
-
-    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
-
-    <!-- Load these in the <head> for quicker IE8+ load times -->
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="/js/html5shiv.min.js"></script>
-    <script src="/js/respond.min.js"></script>
-    <![endif]-->
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
   
   
-  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
 </head>
 
-<!--
-<body class="post-template">
--->
-<body id="index" class="lightnav animsition">
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-CoordinatorLayout的使用" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
 
-      <!-- ============================ Off-canvas navigation =========================== -->
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
 
-    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
-        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
-        </div>
-        <!-- Lists in Slidebars -->
-        <ul class="sb-menu">
-            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
-            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
-            <!-- Dropdown Menu -->
-			 
-            <li>
-                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
-                    
-                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
-                    
-                </ul>
-            </li>
-            
-            
-            
-            <li>
-                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                    <li><a target="_blank" rel="noopener" href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
-                    
-                    <li><a target="_blank" rel="noopener" href="http://domain.com/" class="animsition-link">Name</a></li>
-                    
-                </ul>
-            </li>
-            
-        </ul>
-        <!-- Lists in Slidebars -->
-        <ul class="sb-menu secondary">
-            
-            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
-            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
-        </ul>
+<h1 class="article-title" itemprop="name">
+  CoordinatorLayout的使用
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2020-09-21T12:44:00.000Z" itemprop="datePublished">2020-09-21</time>
+</a>
+      
     </div>
     
-    <!-- ============================ END Off-canvas navigation =========================== -->
 
-    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+    
+    
+<div class="tocbot"></div>
 
-    <div id="sb-site">
-        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+    
 
-        <!-- ============================ Header & Logo bar =========================== -->
-
-        <div id="navigation" class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <!-- Nav logo -->
-                    <div class="logo">
-                        <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
-                        </a>
-                    </div>
-                    <!-- // Nav logo -->
-                    <!-- Info-bar -->
-                    <nav>
-                        <ul class="nav">
-                            <li><a href="/" class="animsition-link">Fuxinbo博客</a></li>
-                            <li class="nolink"><span>Always </span>Creative.</li>
-                            
-                            <li><a href="https://github.com/brokes6" title="Github" target="_blank"><i class="icon-github"></i></a></li>
-                            
-                            
-                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
-                            
-                            
-                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
-                            
-                            
-                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
-                            
-                            
-                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
-                            
-                            <li class="nolink"><span>Welcome!</span></li>
-                        </ul>
-                    </nav>
-                    <!--// Info-bar -->
-                </div>
-                <!-- // .container -->
-                <div class="learnmore sb-toggle-right">More</div>
-                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar before"></span>
-                <span class="icon-bar main"></span>
-                <span class="icon-bar after"></span>
-                </button>
-            </div>
-            <!-- // .navbar-inner -->
-        </div>
-
-        <!-- ============================ Header & Logo bar =========================== -->
-
-
+    <div class="article-entry" itemprop="articleBody">
       
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2020-09-21T12:44:00.000Z" itemprop="datePublished">
-          2020-09-21
-      </time>
-    
-    
-    | 
-    <a href='/tags/View/'>View</a>,
-    
-    <a href='/tags/Android/'>Android</a>
-    
-    
-</span>
-                <h1>CoordinatorLayout的使用</h1>
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h1 id="CoordinatorLayout的使用"><a href="#CoordinatorLayout的使用" class="headerlink" title="CoordinatorLayout的使用"></a>CoordinatorLayout的使用</h1><h4 id="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"><a href="#本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果" class="headerlink" title="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"></a>本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果</h4><h6 id="讲解为什么要使用CoordinatorLayout："><a href="#讲解为什么要使用CoordinatorLayout：" class="headerlink" title="讲解为什么要使用CoordinatorLayout："></a>讲解为什么要使用CoordinatorLayout：</h6><ul>
+      
+      
+      <p>关于Android中的CoordinatorLayout的使用</p>
+<a id="more"></a>
+<h1 id="CoordinatorLayout的使用"><a href="#CoordinatorLayout的使用" class="headerlink" title="CoordinatorLayout的使用"></a>CoordinatorLayout的使用</h1><h4 id="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"><a href="#本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果" class="headerlink" title="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"></a>本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果</h4><h6 id="讲解为什么要使用CoordinatorLayout："><a href="#讲解为什么要使用CoordinatorLayout：" class="headerlink" title="讲解为什么要使用CoordinatorLayout："></a>讲解为什么要使用CoordinatorLayout：</h6><ul>
 <li>NestedScrollView角度:<ol>
 <li>首先一般想要嵌套滑动的地方都是嵌套RecyclerView来进行屏幕滑动，但是使用NestedScrollView嵌套RecyclerView会造成当进入页面的时候，RecyclerView会一次性全部展开。RecyclerView会失去复用性。在一些RecyclerView条目数量不多的时候，并不会造成多大的印象，但失去复用性会到时候RecyclerView滑出屏幕外无法被回收，数量一旦过多就会造成性能问题。</li>
 </ol>
@@ -207,8 +87,41 @@
 </blockquote>
 </li>
 <li><p>代码使用：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;androidx.coordinatorlayout.widget.CoordinatorLayout</span><br><span class="line">        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:layout_height&#x3D;&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;com.google.android.material.appbar.AppBarLayout</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;appbar&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            app:elevation&#x3D;&quot;0dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;com.youth.banner.Banner</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;Re_banner&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;200dp&quot;</span><br><span class="line">                android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                app:banner_indicator_gravity&#x3D;&quot;right&quot;</span><br><span class="line">                app:banner_indicator_marginBottom&#x3D;&quot;@dimen&#x2F;dp_7&quot;</span><br><span class="line">                app:banner_indicator_marginRight&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                app:banner_indicator_normal_color&#x3D;&quot;@color&#x2F;White&quot;</span><br><span class="line">                app:banner_indicator_selected_color&#x3D;&quot;@color&#x2F;Pink&quot;</span><br><span class="line">                app:layout_scrollFlags&#x3D;&quot;scroll&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;&#x2F;com.google.android.material.appbar.AppBarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;androidx.recyclerview.widget.RecyclerView</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;Re_recy&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            app:layout_behavior&#x3D;&quot;@string&#x2F;appbar_scrolling_view_behavior&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;&gt;
 
+        &lt;com.google.android.material.appbar.AppBarLayout
+            android:id=&quot;@+id/appbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            app:elevation=&quot;0dp&quot;&gt;
+
+            &lt;com.youth.banner.Banner
+                android:id=&quot;@+id/Re_banner&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;200dp&quot;
+                android:layout_marginLeft=&quot;@dimen/dp_10&quot;
+                android:layout_marginTop=&quot;@dimen/dp_10&quot;
+                android:layout_marginRight=&quot;@dimen/dp_10&quot;
+                app:banner_indicator_gravity=&quot;right&quot;
+                app:banner_indicator_marginBottom=&quot;@dimen/dp_7&quot;
+                app:banner_indicator_marginRight=&quot;@dimen/dp_15&quot;
+                app:banner_indicator_normal_color=&quot;@color/White&quot;
+                app:banner_indicator_selected_color=&quot;@color/Pink&quot;
+                app:layout_scrollFlags=&quot;scroll&quot; /&gt;
+
+        &lt;/com.google.android.material.appbar.AppBarLayout&gt;
+
+        &lt;androidx.recyclerview.widget.RecyclerView
+            android:id=&quot;@+id/Re_recy&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_marginLeft=&quot;@dimen/dp_5&quot;
+            android:layout_marginTop=&quot;@dimen/dp_5&quot;
+            android:layout_marginRight=&quot;@dimen/dp_5&quot;
+            app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot; /&gt;
+    &lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
 <p> 这里就是是哟CoordinatorLayou嵌套RecyclerView，将头部的Banner设置layout_scrollFlags=”scroll”，它将会跟随屏幕一起滑动，滑出屏幕外，而RecyclerView设置的layout_behavior=”@string/appbar_scrolling_view_behavior”将会把View设置在AppBarLayout的下方，并且不会随着屏幕的滑动而滑出屏幕之外。</p>
 </li>
 </ul>
@@ -216,158 +129,259 @@
 <li><p>CollapsingToolbarLayout</p>
 <ol>
 <li><p>吸附效果是需要CoordinatorLayout与CollapsingToolbarLayout一同使用，并且CollapsingToolbarLayout设置layout_scrollFlags=”scroll|snap”，代表被CollapsingToolbarLayout包裹的内容是需要吸附到屏幕顶部的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">&lt;androidx.coordinatorlayout.widget.CoordinatorLayout</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;TV_nestSc&quot;</span><br><span class="line">        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:background&#x3D;&quot;#FFFFFF&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;com.google.android.material.appbar.AppBarLayout</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;appbar&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            app:elevation&#x3D;&quot;0dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;com.google.android.material.appbar.CollapsingToolbarLayout</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;coll_layout&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">                android:fitsSystemWindows&#x3D;&quot;true&quot;</span><br><span class="line">                app:layout_scrollFlags&#x3D;&quot;scroll|snap&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;RelativeLayout</span><br><span class="line">                    android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                    android:layout_height&#x3D;&quot;wrap_content&quot;&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;LinearLayout</span><br><span class="line">                        android:id&#x3D;&quot;@+id&#x2F;Sy_text&quot;</span><br><span class="line">                        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                        android:layout_height&#x3D;&quot;@dimen&#x2F;dp_35&quot;</span><br><span class="line">                        android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                        android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                        android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                        android:layout_weight&#x3D;&quot;1&quot;</span><br><span class="line">                        android:background&#x3D;&quot;@drawable&#x2F;file_background_radius_30_while_gray&quot;</span><br><span class="line">                        android:gravity&#x3D;&quot;center_vertical&quot;</span><br><span class="line">                        android:orientation&#x3D;&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                        &lt;ImageView</span><br><span class="line">                            android:layout_width&#x3D;&quot;@dimen&#x2F;dp_24&quot;</span><br><span class="line">                            android:layout_height&#x3D;&quot;@dimen&#x2F;dp_24&quot;</span><br><span class="line">                            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                            android:src&#x3D;&quot;@drawable&#x2F;search_24_while&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">                        &lt;TextView</span><br><span class="line">                            android:layout_width&#x3D;&quot;0dp&quot;</span><br><span class="line">                            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">                            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">                            android:layout_weight&#x3D;&quot;1&quot;</span><br><span class="line">                            android:text&#x3D;&quot;查找精彩动态内容&quot;</span><br><span class="line">                            android:textColor&#x3D;&quot;#c1bfc0&quot;</span><br><span class="line">                            android:textSize&#x3D;&quot;16sp&quot; &#x2F;&gt;</span><br><span class="line">                    &lt;&#x2F;LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;TextView</span><br><span class="line">                        android:id&#x3D;&quot;@+id&#x2F;xian_2&quot;</span><br><span class="line">                        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                        android:layout_height&#x3D;&quot;@dimen&#x2F;dp_1&quot;</span><br><span class="line">                        android:layout_below&#x3D;&quot;@+id&#x2F;Sy_text&quot;</span><br><span class="line">                        android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                        android:background&#x3D;&quot;#e7e7e7&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;&#x2F;RelativeLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;&#x2F;com.google.android.material.appbar.CollapsingToolbarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;&#x2F;com.google.android.material.appbar.AppBarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:animateLayoutChanges&#x3D;&quot;true&quot;</span><br><span class="line">            android:orientation&#x3D;&quot;vertical&quot;</span><br><span class="line">            app:layout_behavior&#x3D;&quot;@string&#x2F;appbar_scrolling_view_behavior&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;androidx.recyclerview.widget.RecyclerView</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;Recy_dynamic&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:background&#x3D;&quot;#f4f4f4&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
+     android:id=&quot;@+id/TV_nestSc&quot;
+     android:layout_width=&quot;match_parent&quot;
+     android:layout_height=&quot;match_parent&quot;
+     android:background=&quot;#FFFFFF&quot;&gt;
+
+     &lt;com.google.android.material.appbar.AppBarLayout
+         android:id=&quot;@+id/appbar&quot;
+         android:layout_width=&quot;match_parent&quot;
+         android:layout_height=&quot;wrap_content&quot;
+         app:elevation=&quot;0dp&quot;&gt;
+
+         &lt;com.google.android.material.appbar.CollapsingToolbarLayout
+             android:id=&quot;@+id/coll_layout&quot;
+             android:layout_width=&quot;match_parent&quot;
+             android:layout_height=&quot;wrap_content&quot;
+             android:fitsSystemWindows=&quot;true&quot;
+             app:layout_scrollFlags=&quot;scroll|snap&quot;&gt;
+
+             &lt;RelativeLayout
+                 android:layout_width=&quot;match_parent&quot;
+                 android:layout_height=&quot;wrap_content&quot;&gt;
+
+                 &lt;LinearLayout
+                     android:id=&quot;@+id/Sy_text&quot;
+                     android:layout_width=&quot;match_parent&quot;
+                     android:layout_height=&quot;@dimen/dp_35&quot;
+                     android:layout_marginLeft=&quot;@dimen/dp_15&quot;
+                     android:layout_marginTop=&quot;@dimen/dp_10&quot;
+                     android:layout_marginRight=&quot;@dimen/dp_15&quot;
+                     android:layout_weight=&quot;1&quot;
+                     android:background=&quot;@drawable/file_background_radius_30_while_gray&quot;
+                     android:gravity=&quot;center_vertical&quot;
+                     android:orientation=&quot;horizontal&quot;&gt;
+
+                     &lt;ImageView
+                         android:layout_width=&quot;@dimen/dp_24&quot;
+                         android:layout_height=&quot;@dimen/dp_24&quot;
+                         android:layout_marginLeft=&quot;@dimen/dp_15&quot;
+                         android:src=&quot;@drawable/search_24_while&quot; /&gt;
+
+                     &lt;TextView
+                         android:layout_width=&quot;0dp&quot;
+                         android:layout_height=&quot;wrap_content&quot;
+                         android:layout_marginLeft=&quot;@dimen/dp_5&quot;
+                         android:layout_weight=&quot;1&quot;
+                         android:text=&quot;查找精彩动态内容&quot;
+                         android:textColor=&quot;#c1bfc0&quot;
+                         android:textSize=&quot;16sp&quot; /&gt;
+                 &lt;/LinearLayout&gt;
+
+                 &lt;TextView
+                     android:id=&quot;@+id/xian_2&quot;
+                     android:layout_width=&quot;match_parent&quot;
+                     android:layout_height=&quot;@dimen/dp_1&quot;
+                     android:layout_below=&quot;@+id/Sy_text&quot;
+                     android:layout_marginTop=&quot;@dimen/dp_10&quot;
+                     android:background=&quot;#e7e7e7&quot; /&gt;
+
+             &lt;/RelativeLayout&gt;
+
+         &lt;/com.google.android.material.appbar.CollapsingToolbarLayout&gt;
+
+     &lt;/com.google.android.material.appbar.AppBarLayout&gt;
+
+     &lt;LinearLayout
+         android:layout_width=&quot;match_parent&quot;
+         android:layout_height=&quot;match_parent&quot;
+         android:animateLayoutChanges=&quot;true&quot;
+         android:orientation=&quot;vertical&quot;
+         app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;&gt;
+
+         &lt;androidx.recyclerview.widget.RecyclerView
+             android:id=&quot;@+id/Recy_dynamic&quot;
+             android:layout_width=&quot;match_parent&quot;
+             android:layout_height=&quot;match_parent&quot;
+             android:background=&quot;#f4f4f4&quot; /&gt;
+     &lt;/LinearLayout&gt;
+
+ &lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
 <p>吸附效果就是在滑动屏幕的时候，被CollapsingToolbarLayout包裹的内容在接近屏幕顶端的时候会有个吸附效果，之后就会一直吸在屏幕顶端，除非下滑脱离。</p>
 </li>
 </ol>
 </li>
 </ul>
 
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
-    
-    <a class="pull-left" href="/2020/09/21/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" style="float: left;">
-        ← 依赖注入
-    </a>
-    
-    
-    <a class="pull-right" href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-        MVP 设计模式 →
-    </a>
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknialc830006a0me196l16eb" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/" rel="tag">View</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2020/09/21/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      依赖注入
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">MVP 设计模式</div>
+  </a>
+  
 </nav>
 
-        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
-  /**
-   * 搜狐畅言
-   */
+  
 
-  /*
-  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+  
+  
+  
+  
 
-  window.onload = function () {
-    (function () {
-      var appid = 'cytXXXX';
-      var conf = 'prod_xxxxxxxxxxxxxxxxx';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      var loadJs = function (d, a, id) {
-        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-        var b = document.createElement("script");
-        b.setAttribute("type", "text/javascript");
-        b.setAttribute("charset", "UTF-8");
-        b.setAttribute("src", d);
-        if (id) {
-          b.setAttribute("id", id);
-        }
-        if (typeof a === "function") {
-          if (window.attachEvent) {
-            b.onreadystatechange = function () {
-              var e = b.readyState;
-              if (e === "loaded" || e === "complete") {
-                b.onreadystatechange = null;
-                a()
-              }
-            }
-          } else {
-            b.onload = a
-          }
-        }
-        c.appendChild(b)
-      };
-
-      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
-        window.changyan.api.config({
-          appid: appid,
-          conf: conf
-        })
-      });
-    })();
-  }
-  */
-
-</script>
-</div>
-    </div>
+</article>
 </section>
-
-
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
       
-<!-- ============================ Footer =========================== -->
-
-<footer>
-    <div class="container">
-            <div class="copy">
-                <p>
-                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Fuxinbo. All Rights Reserved.
-                </p>
-                <p>Theme By <a target="_blank" rel="noopener" href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
-            </div>
-            <div class="social">
-                <ul>
-                    
-                    <li><a href="https://github.com/brokes6" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
-                    
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
 </footer>
-
-<!-- ============================ END Footer =========================== -->
-      <!-- Load our scripts -->
-<!-- Resizable 'on-demand' full-height hero -->
-<script type="text/javascript">
-    var resizeHero = function () {
-        var hero = $(".cover,.heightblock"),
-            window1 = $(window);
-        hero.css({
-            "height": window1.height()
-        });
-    };
-
-    resizeHero();
-
-    $(window).resize(function () {
-        resizeHero();
-    });
-</script>
-<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
-<script src="/js/scripts.js"></script><!-- Theme scripts -->
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$('#intro').find('img').each(function(){
-  var alt = this.alt;
-
-  if (alt){
-    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
-  }
-
-  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
-});
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
-
-
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
       
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
 </body>
+
 </html>

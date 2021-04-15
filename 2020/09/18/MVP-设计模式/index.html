@@ -1,380 +1,493 @@
 <!DOCTYPE html>
-<!--[if lte IE 8 ]>
-<html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
-<![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!-->
-<!--
-***************  *      *     *
-      8          *    *       *
-      8          *  *         *
-      8          **           *
-      8          *  *         *
-      8          *    *       *
-      8          *      *     *
-      8          *        *   ***********    -----Theme By Kieran(http://go.kieran.top)
--->
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
-<!--<![endif]-->
+<html lang="en">
 
 <head>
-  <title>MVP 设计模式 | Fuxinbo博客</title>
-  <!-- Meta data -->
-    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="generator" content="Fuxinbo博客">
-    <meta name="author" content="Fuxinbo">
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-
-    <!-- Favicon, (keep icon in root folder) -->
-    <link rel="Shortcut Icon" href="/img/favicon.ico" type="image/ico">
-
-    <link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
-    <link rel="stylesheet" href="/css/all.css" media="screen" type="text/css">
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    MVP 设计模式 |
     
-    <link rel="stylesheet" href="/highlightjs/vs.css" type="text/css">
-    
-
-    <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" href="/css/ie8.css" />
-    <![endif]-->
-
-    <!-- jQuery | Load our jQuery, with an alternative source fallback to a local version if request is unavailable -->
-    <script src="/js/jquery-1.11.1.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
-
-    <!-- Load these in the <head> for quicker IE8+ load times -->
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="/js/html5shiv.min.js"></script>
-    <script src="/js/respond.min.js"></script>
-    <![endif]-->
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
 
   
   
-  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
 
-  <style>.col-md-8.col-md-offset-2.opening-statement img{display:none;}</style>
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
 </head>
 
-<!--
-<body class="post-template">
--->
-<body id="index" class="lightnav animsition">
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-MVP-设计模式" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
 
-      <!-- ============================ Off-canvas navigation =========================== -->
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
 
-    <div class="sb-slidebar sb-right sb-style-overlay sb-momentum-scrolling">
-        <div class="sb-close" aria-label="Close Menu" aria-hidden="true">
-            <img src="/img/close.png" alt="Close"/>
-        </div>
-        <!-- Lists in Slidebars -->
-        <ul class="sb-menu">
-            <li><a href="/" class="animsition-link" title="Home">Home</a></li>
-            <li><a href="/archives" class="animsition-link" title="archive">archives</a></li>
-            <!-- Dropdown Menu -->
-			 
-            <li>
-                <a class="sb-toggle-submenu">Works<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                        <li><a href="/" target="_BLANK" class="animsition-link">AAA</a></li>
-                    
-                        <li><a href="/atom.xml" target="_BLANK" class="animsition-link">BBB</a></li>
-                    
-                </ul>
-            </li>
-            
-            
-            
-            <li>
-                <a class="sb-toggle-submenu">Links<span class="sb-caret"></span></a>
-                <ul class="sb-submenu">
-                    
-                    <li><a target="_blank" rel="noopener" href="http://go.kieran.top/" class="animsition-link">Kieran</a></li>
-                    
-                    <li><a target="_blank" rel="noopener" href="http://domain.com/" class="animsition-link">Name</a></li>
-                    
-                </ul>
-            </li>
-            
-        </ul>
-        <!-- Lists in Slidebars -->
-        <ul class="sb-menu secondary">
-            
-            <li><a href="/about.html" class="animsition-link" title="about">About</a></li>
-            <li><a href="/atom.xml" class="animsition-link" title="rss">RSS</a></li>
-        </ul>
+<h1 class="article-title" itemprop="name">
+  MVP 设计模式
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
+  <time datetime="2020-09-18T13:36:00.000Z" itemprop="datePublished">2020-09-18</time>
+</a>
+      
     </div>
     
-    <!-- ============================ END Off-canvas navigation =========================== -->
 
-    <!-- ============================ #sb-site Main Page Wrapper =========================== -->
+    
+    
+<div class="tocbot"></div>
 
-    <div id="sb-site">
-        <!-- #sb-site - All page content should be contained within this id, except the off-canvas navigation itself -->
+    
 
-        <!-- ============================ Header & Logo bar =========================== -->
-
-        <div id="navigation" class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <!-- Nav logo -->
-                    <div class="logo">
-                        <a href="/" title="Logo" class="animsition-link">
-                         <img src="/img/logo.png" alt="Logo" width="35px;"/> 
-                        </a>
-                    </div>
-                    <!-- // Nav logo -->
-                    <!-- Info-bar -->
-                    <nav>
-                        <ul class="nav">
-                            <li><a href="/" class="animsition-link">Fuxinbo博客</a></li>
-                            <li class="nolink"><span>Always </span>Creative.</li>
-                            
-                            <li><a href="https://github.com/brokes6" title="Github" target="_blank"><i class="icon-github"></i></a></li>
-                            
-                            
-                            <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a></li>
-                            
-                            
-                            <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a></li>
-                            
-                            
-                            <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a></li>
-                            
-                            
-                            <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a></li>
-                            
-                            <li class="nolink"><span>Welcome!</span></li>
-                        </ul>
-                    </nav>
-                    <!--// Info-bar -->
-                </div>
-                <!-- // .container -->
-                <div class="learnmore sb-toggle-right">More</div>
-                <button type="button" class="navbar-toggle menu-icon sb-toggle-right" title="More">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar before"></span>
-                <span class="icon-bar main"></span>
-                <span class="icon-bar after"></span>
-                </button>
-            </div>
-            <!-- // .navbar-inner -->
-        </div>
-
-        <!-- ============================ Header & Logo bar =========================== -->
-
-
+    <div class="article-entry" itemprop="articleBody">
       
-<section id="intro">
-    <div class="container">
-        <div class="row col-md-offset-2">
-            <div class="col-md-8">
-    			<span class="post-meta">
-      <time datetime="2020-09-18T13:36:00.000Z" itemprop="datePublished">
-          2020-09-18
-      </time>
-    
-    
-    | 
-    <a href='/tags/Android/'>Android</a>,
-    
-    <a href='/tags/MVP/'>MVP</a>
-    
-    
-</span>
-                <h1>MVP 设计模式</h1>
-            </div>
-        </div>
-        <div class="col-md-8 col-md-offset-2">
-      		<h3 id="MVP-设计模式"><a href="#MVP-设计模式" class="headerlink" title="MVP 设计模式"></a>MVP 设计模式</h3><h5 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h5><p>MVP是有MVC演变而来的，因为在Android中用MVC来写的时候，Activity到底是View层还是Controller层真的是傻傻分不去清楚，所以基本它就把这两层的活都自己一个人干了，这样一来Activity上的代码量会非常大，Controller层和View层没有实现解耦分离开来，如果后面这两层代码其中一层出了问题你就可能两层都的修改，代码是没什么重用性可言的。而MVP的出现就是为了解决这些问题的，MVP模式将Controller的工作抽取出来交给Presenter层，Presenter层负责控制处理业务逻辑，作为中间层建立起Model层和View层的联系，从而实现三层交互。这么说确实挺难让人理解的，下面就通过一个例子，在例子中夹杂着解释让我们掌握MVP的用法吧。</p>
+      
+      
+      <p>讲解设计模式</p>
+<a id="more"></a>
+<h3 id="MVP-设计模式"><a href="#MVP-设计模式" class="headerlink" title="MVP 设计模式"></a>MVP 设计模式</h3><h5 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h5><p>MVP是有MVC演变而来的，因为在Android中用MVC来写的时候，Activity到底是View层还是Controller层真的是傻傻分不去清楚，所以基本它就把这两层的活都自己一个人干了，这样一来Activity上的代码量会非常大，Controller层和View层没有实现解耦分离开来，如果后面这两层代码其中一层出了问题你就可能两层都的修改，代码是没什么重用性可言的。而MVP的出现就是为了解决这些问题的，MVP模式将Controller的工作抽取出来交给Presenter层，Presenter层负责控制处理业务逻辑，作为中间层建立起Model层和View层的联系，从而实现三层交互。这么说确实挺难让人理解的，下面就通过一个例子，在例子中夹杂着解释让我们掌握MVP的用法吧。</p>
 <h5 id="属性：（我就拿登录来当作例子）"><a href="#属性：（我就拿登录来当作例子）" class="headerlink" title="属性：（我就拿登录来当作例子）"></a>属性：（我就拿登录来当作例子）</h5><ul>
 <li>Model层：创建用于保存用户信息的实体类User（就是userbean）登录的时候用来保存用户信息，建议也保存到本地一份</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">    private String username;  &#x2F;&#x2F;用户的账号</span><br><span class="line">    private String password;  &#x2F;&#x2F;用户的密码</span><br><span class="line"></span><br><span class="line">    public String getUsername() &#123;</span><br><span class="line">        return username;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUsername(String username) &#123;</span><br><span class="line">        this.username &#x3D; username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password &#x3D; password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>public class User &#123;
+    private String username;  //用户的账号
+    private String password;  //用户的密码
+
+    public String getUsername() &#123;
+        return username;
+    &#125;
+    public void setUsername(String username) &#123;
+        this.username = username;
+    &#125;
+
+    public String getPassword() &#123;
+        return password;
+    &#125;
+    public void setPassword(String password) &#123;
+        this.password = password;
+    &#125;
+&#125;
+</code></pre>
 <ul>
 <li><p>结果回调接口：</p>
 <ol>
 <li>创建一个接口，用来通知登录是否成功（成功的话，就可以把获取到的userbean传递下去）或者 失败</li>
-<li>代码展示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    public interface OnLoginListener &#123;</span><br><span class="line">    &#x2F;&#x2F;登录成功的回调</span><br><span class="line">    void loginSuccess(User user);  &#x2F;&#x2F;登录成功后，将用户信息传递进去</span><br><span class="line">    &#x2F;&#x2F;登录失败的回调</span><br><span class="line">    void loginFailed();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>代码展示：<pre><code>public interface OnLoginListener &#123;
+//登录成功的回调
+void loginSuccess(User user);  //登录成功后，将用户信息传递进去
+//登录失败的回调
+void loginFailed();
+&#125;</code></pre>
+</li>
 </ol>
 </li>
 <li><p>定义业务接口:</p>
 <ol>
 <li>这里抽出一个接口的目的是为了降低一层耦合和便于复用。比如同一个网络请求业务你可以有OkHttp的实现，同时也可以有Retrofit的实现，这样一来就可以方便的做到网络框架的替换，当然你还可以有不同内容的实现。简单来说，就是将登录的这个功能抽取出来，成为一个接口，方便复用。</li>
-<li>代码展示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    public interface UserLogin&#123;</span><br><span class="line">    &#x2F;&#x2F;登录方法</span><br><span class="line">public void login(String username, String password, OnLoginListener loginListener);</span><br><span class="line">&#x2F;&#x2F;这里就传入用户输入的账号，密码，在传入一个登录状况判断的接口</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>代码展示：<pre><code>public interface UserLogin&#123;
+//登录方法
+public void login(String username, String password, OnLoginListener loginListener);
+//这里就传入用户输入的账号，密码，在传入一个登录状况判断的接口
+&#125;</code></pre>
 </li>
 </ol>
 </li>
 <li><p>具体Model的实现类:<br><br>创建一个具体的类，来实现UserLogin的接口，来实现里面的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class UserGo implements UserLogin &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void login(final String username, final String password, final OnLoginListener loginListener) &#123;</span><br><span class="line">        &#x2F;&#x2F;模拟网络请求耗时操作</span><br><span class="line">        new Thread() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                &#x2F;&#x2F;模拟了耗时                </span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(2000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                &#x2F;&#x2F;模拟登录成功</span><br><span class="line">                if (&quot;luoqiang&quot;.equals(username) &amp;&amp; &quot;108&quot;.equals(password)) &#123;</span><br><span class="line">                    User user &#x3D; new User();</span><br><span class="line">                    user.setUsername(username);</span><br><span class="line">                    user.setPassword(password);</span><br><span class="line">                    loginListener.loginSuccess(user);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    loginListener.loginFailed();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<pre><code>public class UserGo implements UserLogin &#123;
+  @Override
+  public void login(final String username, final String password, final OnLoginListener loginListener) &#123;
+      //模拟网络请求耗时操作
+      new Thread() &#123;
+          @Override
+          public void run() &#123;
+              //模拟了耗时                
+              try &#123;
+                  Thread.sleep(2000);
+              &#125; catch (InterruptedException e) &#123;
+                  e.printStackTrace();
+              &#125;
+              //模拟登录成功
+              if (&quot;luoqiang&quot;.equals(username) &amp;&amp; &quot;108&quot;.equals(password)) &#123;
+                  User user = new User();
+                  user.setUsername(username);
+                  user.setPassword(password);
+                  loginListener.loginSuccess(user);
+              &#125; else &#123;
+                  loginListener.loginFailed();
+              &#125;
+          &#125;
+      &#125;.start();
+  &#125;
+&#125;</code></pre>
+</li>
 <li><p>View层:</p>
 <ol>
 <li><p>View层不关心数据，不关心逻辑处理！只关心和用户的交互，那么这个登录界面应该有的操作就是：从输入框获取用户名，获取密码，清除用户名，清除密码，登录网络请求时显示进度条，隐藏进度条，登录成功跳转到对应界面，登录失败提示。接下来定义接口如下：</p>
 <blockquote>
 <p>这里并没有将activity来直接当作View层，原因也是为了方便复用，那个Fragment/Activity需要用到登录，就实现这个接口就行了。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    public interface UserLoginView &#123;</span><br><span class="line">        String getUserName();</span><br><span class="line">        &#x2F;&#x2F;获取用户输入的账号</span><br><span class="line">        String getPassword();</span><br><span class="line">        &#x2F;&#x2F;获取用户输入的密码</span><br><span class="line">        void clearUserName();</span><br><span class="line">        &#x2F;&#x2F;清除用户输入的账号</span><br><span class="line">        void clearPassword();</span><br><span class="line">        &#x2F;&#x2F;清除用户输入的密码</span><br><span class="line">        void showLoading();</span><br><span class="line">        &#x2F;&#x2F;显示加载（一般来说，我都会在BaseActivity&#x2F;BaseFragment中实现Loading的显示和隐藏，这里就没必要在写）</span><br><span class="line">        void hideLoading();</span><br><span class="line">        &#x2F;&#x2F;隐藏加载</span><br><span class="line">        void toMainActivity(User user);</span><br><span class="line">        &#x2F;&#x2F;跳转到主页，顺便传递用户信息</span><br><span class="line">        void showFaileTips();</span><br><span class="line">        &#x2F;&#x2F;登录失败的提示</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<pre><code>public interface UserLoginView &#123;
+ String getUserName();
+ //获取用户输入的账号
+ String getPassword();
+ //获取用户输入的密码
+ void clearUserName();
+ //清除用户输入的账号
+ void clearPassword();
+ //清除用户输入的密码
+ void showLoading();
+ //显示加载（一般来说，我都会在BaseActivity/BaseFragment中实现Loading的显示和隐藏，这里就没必要在写）
+ void hideLoading();
+ //隐藏加载
+ void toMainActivity(User user);
+ //跳转到主页，顺便传递用户信息
+ void showFaileTips();
+ //登录失败的提示
+&#125;
+</code></pre>
+</li>
 <li><p>具体的用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">    public class UserLoginActivity extends AppCompatActivity implements UserLoginView &#123;</span><br><span class="line">    private EditText mEtUsername, mEtPassword;</span><br><span class="line">    private Button mBtnLogin, mBtnClear;</span><br><span class="line">    private ProgressBar mPbLoading;</span><br><span class="line">    private UserLoginPresenter mUserLoginPresenter;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">	&#x2F;&#x2F;关于Presenter层，都可以写在BaseActivtiy&#x2F;BaseFragment中，没必要写在Activity中</span><br><span class="line">        mUserLoginPresenter &#x3D; new UserLoginPresenter(this);</span><br><span class="line">        &#x2F;&#x2F;获取Presenter层</span><br><span class="line">        initViews();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initViews() &#123;</span><br><span class="line">        mEtUsername &#x3D; findViewById(R.id.et_username);</span><br><span class="line">        mEtPassword &#x3D; findViewById(R.id.et_password);</span><br><span class="line">        mBtnClear &#x3D; findViewById(R.id.btn_clear);</span><br><span class="line">        mBtnLogin &#x3D; findViewById(R.id.btn_login);</span><br><span class="line">        mPbLoading &#x3D; findViewById(R.id.pb_loading);</span><br><span class="line">        mBtnLogin.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                mUserLoginPresenter.login();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        mBtnClear.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                mUserLoginPresenter.clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return mEtUsername.getText().toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return mEtPassword.getText().toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void clearUserName() &#123;</span><br><span class="line">        mEtUsername.setText(&quot;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void clearPassword() &#123;</span><br><span class="line">        mEtPassword.setText(&quot;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void showLoading() &#123;</span><br><span class="line">        mPbLoading.setVisibility(View.VISIBLE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void hideLoading() &#123;</span><br><span class="line">        mPbLoading.setVisibility(View.GONE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void toMainActivity(User user) &#123;</span><br><span class="line">        Toast.makeText(this, &quot;跳转到登录成功页面&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void showFaileTips() &#123;</span><br><span class="line">        Toast.makeText(this, &quot;登录失败&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDestroy() &#123;</span><br><span class="line">        super.onDestroy();</span><br><span class="line">        &#x2F;&#x2F;为了防止内存泄漏，解绑Presenter层对View层的引用，这里的将Presenter层置为空可以在BaseActivity&#x2F;BaseFragment中进行操作</span><br><span class="line">        mUserLoginPresenter.detachView();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>public class UserLoginActivity extends AppCompatActivity implements UserLoginView &#123;
+private EditText mEtUsername, mEtPassword;
+private Button mBtnLogin, mBtnClear;
+private ProgressBar mPbLoading;
+private UserLoginPresenter mUserLoginPresenter;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) &#123;
+ super.onCreate(savedInstanceState);
+ setContentView(R.layout.activity_main);
+//关于Presenter层，都可以写在BaseActivtiy/BaseFragment中，没必要写在Activity中
+ mUserLoginPresenter = new UserLoginPresenter(this);
+ //获取Presenter层
+ initViews();
+&#125;
+
+private void initViews() &#123;
+ mEtUsername = findViewById(R.id.et_username);
+ mEtPassword = findViewById(R.id.et_password);
+ mBtnClear = findViewById(R.id.btn_clear);
+ mBtnLogin = findViewById(R.id.btn_login);
+ mPbLoading = findViewById(R.id.pb_loading);
+ mBtnLogin.setOnClickListener(new View.OnClickListener() &#123;
+     @Override
+     public void onClick(View v) &#123;
+         mUserLoginPresenter.login();
+     &#125;
+ &#125;);
+ mBtnClear.setOnClickListener(new View.OnClickListener() &#123;
+     @Override
+     public void onClick(View v) &#123;
+         mUserLoginPresenter.clear();
+     &#125;
+ &#125;);
+&#125;
+
+@Override
+public String getUserName() &#123;
+ return mEtUsername.getText().toString();
+&#125;
+
+@Override
+public String getPassword() &#123;
+ return mEtPassword.getText().toString();
+&#125;
+
+@Override
+public void clearUserName() &#123;
+ mEtUsername.setText(&quot;&quot;);
+&#125;
+
+@Override
+public void clearPassword() &#123;
+ mEtPassword.setText(&quot;&quot;);
+&#125;
+
+@Override
+public void showLoading() &#123;
+ mPbLoading.setVisibility(View.VISIBLE);
+&#125;
+
+@Override
+public void hideLoading() &#123;
+ mPbLoading.setVisibility(View.GONE);
+&#125;
+
+@Override
+public void toMainActivity(User user) &#123;
+ Toast.makeText(this, &quot;跳转到登录成功页面&quot;, Toast.LENGTH_SHORT).show();
+&#125;
+
+@Override
+public void showFaileTips() &#123;
+ Toast.makeText(this, &quot;登录失败&quot;, Toast.LENGTH_SHORT).show();
+&#125;
+
+@Override
+protected void onDestroy() &#123;
+ super.onDestroy();
+ //为了防止内存泄漏，解绑Presenter层对View层的引用，这里的将Presenter层置为空可以在BaseActivity/BaseFragment中进行操作
+ mUserLoginPresenter.detachView();
+&#125;
+&#125;
+</code></pre>
 </li>
 </ol>
 </li>
 <li><p>Presenter层:</p>
 <ol>
-<li>Presenter的作用就是从View层获取用户的输入，传递到Model层进行处理，然后回调给View层，输出给用户！</li>
-<li>Presenter一般来说，就是将View和Mode集合在一起，进行操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">    public class UserLoginPresenter &#123;</span><br><span class="line">    private UserGo userGo;</span><br><span class="line">    private UserLoginView userLoginView;</span><br><span class="line">    private Handler mHandler &#x3D; new Handler();</span><br><span class="line">    &#x2F;&#x2F;对应视图页面销毁的标志位,当视图销毁后回调就不需要处理了</span><br><span class="line">    private boolean destroyFlag;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;Presenter必须要能拿到View和Model的实现类</span><br><span class="line">    public UserLoginPresenter(IUserLoginView userLoginView) &#123;</span><br><span class="line">        this.userLoginView &#x3D; userLoginView;</span><br><span class="line">        this. userGo &#x3D; new UserGo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void login() &#123;</span><br><span class="line">        userLoginView.showLoading();</span><br><span class="line">        userGo.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void loginSuccess(final User user) &#123;</span><br><span class="line">                if (!destroyFlag) &#123; &#x2F;&#x2F;View层销毁后不需要处理的判断</span><br><span class="line">                    &#x2F;&#x2F;需要在UI线程执行</span><br><span class="line">                    mHandler.post(new Runnable() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void run() &#123;</span><br><span class="line">                            userLoginView.toMainActivity(user);</span><br><span class="line">                            userLoginView.hideLoading();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void loginFailed() &#123;</span><br><span class="line">                if (!destroyFlag) &#123; &#x2F;&#x2F;View层销毁后不需要处理的判断</span><br><span class="line">                    &#x2F;&#x2F;需要在UI线程执行</span><br><span class="line">                    mHandler.post(new Runnable() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void run() &#123;</span><br><span class="line">                            userLoginView.showFaileTips();</span><br><span class="line">                            userLoginView.hideLoading();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void clear() &#123;</span><br><span class="line">        userLoginView.clearUserName();</span><br><span class="line">        userLoginView.clearPassword();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;解绑视图</span><br><span class="line">    public void detachView() &#123;</span><br><span class="line">        destroyFlag &#x3D; true;</span><br><span class="line">        this.userLoginView &#x3D; null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<li><p>Presenter的作用就是从View层获取用户的输入，传递到Model层进行处理，然后回调给View层，输出给用户！</p>
+</li>
+<li><p>Presenter一般来说，就是将View和Mode集合在一起，进行操作</p>
+<pre><code>public class UserLoginPresenter &#123;
+private UserGo userGo;
+private UserLoginView userLoginView;
+private Handler mHandler = new Handler();
+//对应视图页面销毁的标志位,当视图销毁后回调就不需要处理了
+private boolean destroyFlag;
 
+//Presenter必须要能拿到View和Model的实现类
+public UserLoginPresenter(IUserLoginView userLoginView) &#123;
+ this.userLoginView = userLoginView;
+ this. userGo = new UserGo();
+&#125;
 
+public void login() &#123;
+ userLoginView.showLoading();
+ userGo.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() &#123;
+     @Override
+     public void loginSuccess(final User user) &#123;
+         if (!destroyFlag) &#123; //View层销毁后不需要处理的判断
+             //需要在UI线程执行
+             mHandler.post(new Runnable() &#123;
+                 @Override
+                 public void run() &#123;
+                     userLoginView.toMainActivity(user);
+                     userLoginView.hideLoading();
+                 &#125;
+             &#125;);
+         &#125;
+     &#125;
 
+     @Override
+     public void loginFailed() &#123;
+         if (!destroyFlag) &#123; //View层销毁后不需要处理的判断
+             //需要在UI线程执行
+             mHandler.post(new Runnable() &#123;
+                 @Override
+                 public void run() &#123;
+                     userLoginView.showFaileTips();
+                     userLoginView.hideLoading();
+                 &#125;
+             &#125;);
+         &#125;
+     &#125;
+ &#125;);
+&#125;
+
+public void clear() &#123;
+ userLoginView.clearUserName();
+ userLoginView.clearPassword();
+&#125;
+
+//解绑视图
+public void detachView() &#123;
+ destroyFlag = true;
+ this.userLoginView = null;
+&#125;
+&#125;
+</code></pre>
 </li>
 </ol>
 </li>
 </ul>
 
-            <div class="clearfix"></div>
-            <hr class="nogutter">
-        </div>
-        <nav class="m-pagination col-md-8 col-md-offset-2 col-sm-24" role="pagination">
-    
-    <a class="pull-left" href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" style="float: left;">
-        ← CoordinatorLayout的使用
-    </a>
-    
-    
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cknialc89000ga0me80bhatgr" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      CoordinatorLayout的使用
+      
+    </div>
+  </a>
+  
+  
 </nav>
 
-        <div class="col-md-8 col-md-offset-2 col-sm-24"><script type="text/javascript">
-  /**
-   * 搜狐畅言
-   */
+  
 
-  /*
-  document.write('<div id="SOHUCS" sid="' + window.location.pathname.slice(1) + '" ></div>');
+  
+  
+  
+  
 
-  window.onload = function () {
-    (function () {
-      var appid = 'cytXXXX';
-      var conf = 'prod_xxxxxxxxxxxxxxxxx';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      var loadJs = function (d, a, id) {
-        var c = document.getElementsByTagName("head")[0] || document.head || document.documentElement;
-        var b = document.createElement("script");
-        b.setAttribute("type", "text/javascript");
-        b.setAttribute("charset", "UTF-8");
-        b.setAttribute("src", d);
-        if (id) {
-          b.setAttribute("id", id);
-        }
-        if (typeof a === "function") {
-          if (window.attachEvent) {
-            b.onreadystatechange = function () {
-              var e = b.readyState;
-              if (e === "loaded" || e === "complete") {
-                b.onreadystatechange = null;
-                a()
-              }
-            }
-          } else {
-            b.onload = a
-          }
-        }
-        c.appendChild(b)
-      };
-
-      loadJs("https://changyan.sohu.com/upload/changyan.js", function () {
-        window.changyan.api.config({
-          appid: appid,
-          conf: conf
-        })
-      });
-    })();
-  }
-  */
-
-</script>
-</div>
-    </div>
+</article>
 </section>
-
-
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
       
-<!-- ============================ Footer =========================== -->
-
-<footer>
-    <div class="container">
-            <div class="copy">
-                <p>
-                    &copy; 2014<script>new Date().getFullYear()>2010&&document.write("-"+new Date().getFullYear());</script>, Content By Fuxinbo. All Rights Reserved.
-                </p>
-                <p>Theme By <a target="_blank" rel="noopener" href="//go.kieran.top" style="color: #767D84">Kieran</a></p>
-            </div>
-            <div class="social">
-                <ul>
-                    
-                    <li><a href="https://github.com/brokes6" title="Github" target="_blank"><i class="icon-github"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://twitter.com/" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://www.facebook.com/" title="Facebook" target="_blank"><i class="icon-facebook"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="https://google.com/" title="Google-Plus" target="_blank"><i class="icon-google-plus"></i></a>&nbsp;</li>
-                    
-                    
-                    <li><a href="http://weibo.com/" title="Sina-Weibo" target="_blank"><i class="icon-sina-weibo"></i></a>&nbsp;</li>
-                    
-                </ul>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
 </footer>
-
-<!-- ============================ END Footer =========================== -->
-      <!-- Load our scripts -->
-<!-- Resizable 'on-demand' full-height hero -->
-<script type="text/javascript">
-    var resizeHero = function () {
-        var hero = $(".cover,.heightblock"),
-            window1 = $(window);
-        hero.css({
-            "height": window1.height()
-        });
-    };
-
-    resizeHero();
-
-    $(window).resize(function () {
-        resizeHero();
-    });
-</script>
-<script src="/js/plugins.min.js"></script><!-- Bootstrap core and concatenated plugins always load here -->
-<script src="/js/scripts.js"></script><!-- Theme scripts -->
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$('#intro').find('img').each(function(){
-  var alt = this.alt;
-
-  if (alt){
-    $(this).after('<span class="caption" style="display:none">' + alt + '</span>');
-  }
-
-  $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox" rel="gallery" />');
-});
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
-
-
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
       
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
 </body>
+
 </html>
