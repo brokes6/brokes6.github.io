@@ -134,9 +134,9 @@
     
     
     
-    <category term="View" scheme="http://example.com/tags/View/"/>
-    
     <category term="kotlin" scheme="http://example.com/tags/kotlin/"/>
+    
+    <category term="View" scheme="http://example.com/tags/View/"/>
     
   </entry>
   
