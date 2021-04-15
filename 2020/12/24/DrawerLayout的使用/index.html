@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
+  
+  <title>DrawerLayout的使用 - Hexo</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
   
 
-  
-  <title>DrawerLayout的使用 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="DrawerLayout的使用 本篇已Kotlin为主要语言  DrawerLayout也就是侧边栏 整体分析 DrawerLayout     –侧边栏的父容器 Fragment    –容器   NavigationView   –侧边栏  开始实现 首先创建3个Fragment ListFragment： 12345678910class ListFragment : Fragment()">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta name="description" content="DrawerLayout的使用 本篇已Kotlin为主要语言  DrawerLayout也就是侧边栏 整体分析 DrawerLayout     –侧边栏的父容器 Fragment    –容器   NavigationView   –侧边栏  开始实现 首先创建3个Fragment ListFragment： class ListFragment : Fragment() &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DrawerLayout的使用">
 <meta property="og:url" content="http://example.com/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="DrawerLayout的使用 本篇已Kotlin为主要语言  DrawerLayout也就是侧边栏 整体分析 DrawerLayout     –侧边栏的父容器 Fragment    –容器   NavigationView   –侧边栏  开始实现 首先创建3个Fragment ListFragment： 12345678910class ListFragment : Fragment()">
+<meta property="og:description" content="DrawerLayout的使用 本篇已Kotlin为主要语言  DrawerLayout也就是侧边栏 整体分析 DrawerLayout     –侧边栏的父容器 Fragment    –容器   NavigationView   –侧边栏  开始实现 首先创建3个Fragment ListFragment： class ListFragment : Fragment() &amp;#123;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="c:/Users/fuxinbo/AppData/Roaming/Typora/typora-user-images/image-20201223112423832.png">
 <meta property="og:image" content="c:/Users/fuxinbo/AppData/Roaming/Typora/typora-user-images/image-20201223112937398.png">
@@ -23,77 +28,127 @@
 <meta property="article:tag" content="Kotlin">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="c:/Users/fuxinbo/AppData/Roaming/Typora/typora-user-images/image-20201223112423832.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
+  <link rel="stylesheet" href="/css/style.css?v=1618458183800">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-DrawerLayout的使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time datetime="2020-12-24T07:58:00.000Z" itemprop="datePublished">2020-12-24</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+<body class="mdui-drawer-body-left">
   
-    <h1 class="article-title" itemprop="name">
-      DrawerLayout的使用
-    </h1>
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="John Doe">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>22</div>
+        <div><span>Tags</span>22</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
   
 
-      </header>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
+    </div>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="DrawerLayout的使用"><a href="#DrawerLayout的使用" class="headerlink" title="DrawerLayout的使用"></a>DrawerLayout的使用</h1><blockquote>
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 John Doe
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+            <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="DrawerLayout的使用" class="lazyload">
+            <h1>DrawerLayout的使用</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta nexmoe-rainbow-fill" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月24日</a>
+    <a><i class="nexmoefont icon-areachart"></i>841 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
+</div>
+
+    <h1 id="DrawerLayout的使用"><a href="#DrawerLayout的使用" class="headerlink" title="DrawerLayout的使用"></a>DrawerLayout的使用</h1><blockquote>
 <p>本篇已Kotlin为主要语言</p>
 </blockquote>
 <p>DrawerLayout也就是侧边栏</p>
@@ -107,31 +162,122 @@
 <h3 id="开始实现"><a href="#开始实现" class="headerlink" title="开始实现"></a>开始实现</h3><ol>
 <li><p>首先创建3个Fragment</p>
 <p>ListFragment：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>, container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View? &#123;</span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.fragment_list, container, <span class="literal">false</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class ListFragment : Fragment() &#123;
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? &#123;
+        return inflater.inflate(R.layout.fragment_list, container, false)
+    &#125;
+
+&#125;</code></pre>
 <p>TextFragment：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>, container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View? &#123;</span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.fragment_text, container, <span class="literal">false</span>)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class TextFragment : Fragment() &#123;
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? &#123;
+        return inflater.inflate(R.layout.fragment_text, container, false)
+    &#125;
+
+&#125;</code></pre>
 <p>PagerFragment：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PagerFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>, container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View? &#123;</span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.fragment_pager, container, <span class="literal">false</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class PagerFragment : Fragment() &#123;
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? &#123;
+        return inflater.inflate(R.layout.fragment_pager, container, false)
+    &#125;
+&#125;</code></pre>
 <p>点击 New 创建空白Framgnet即可</p>
-<p><img src="C:\Users\fuxinbo\AppData\Roaming\Typora\typora-user-images\image-20201223112423832.png" alt="image-20201223112423832"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="C:\Users\fuxinbo\AppData\Roaming\Typora\typora-user-images\image-20201223112423832.png" alt="image-20201223112423832" class="lazyload"></p>
 </li>
 <li><p>接下来在res文件中创建一个名为”navigation”的文件夹，在文件夹下创建navigation的xml文件</p>
-<p><img src="C:\Users\fuxinbo\AppData\Roaming\Typora\typora-user-images\image-20201223112937398.png" alt="image-20201223112937398"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="C:\Users\fuxinbo\AppData\Roaming\Typora\typora-user-images\image-20201223112937398.png" alt="image-20201223112937398" class="lazyload"></p>
 </li>
 <li><p>在navigation中编写3个Fragment，并将刚刚创建的3个Fragment传入</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">navigation</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/navigation&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:startDestination</span>=<span class="string">&quot;@id/textFragment&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/textFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;com.laboratory.drawerdome.TextFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:label</span>=<span class="string">&quot;@string/text_fragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:layout</span>=<span class="string">&quot;@layout/fragment_text&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/listFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;com.laboratory.drawerdome.ListFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:label</span>=<span class="string">&quot;@string/list_fragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:layout</span>=<span class="string">&quot;@layout/fragment_list&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">fragment</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/pagerFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;com.laboratory.drawerdome.PagerFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:label</span>=<span class="string">&quot;@string/pager_fragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">tools:layout</span>=<span class="string">&quot;@layout/fragment_pager&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">navigation</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;navigation xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:id=&quot;@+id/navigation&quot;
+    app:startDestination=&quot;@id/textFragment&quot;&gt;
+
+    &lt;fragment
+        android:id=&quot;@+id/textFragment&quot;
+        android:name=&quot;com.laboratory.drawerdome.TextFragment&quot;
+        android:label=&quot;@string/text_fragment&quot;
+        tools:layout=&quot;@layout/fragment_text&quot; /&gt;
+    &lt;fragment
+        android:id=&quot;@+id/listFragment&quot;
+        android:name=&quot;com.laboratory.drawerdome.ListFragment&quot;
+        android:label=&quot;@string/list_fragment&quot;
+        tools:layout=&quot;@layout/fragment_list&quot; /&gt;
+    &lt;fragment
+        android:id=&quot;@+id/pagerFragment&quot;
+        android:name=&quot;com.laboratory.drawerdome.PagerFragment&quot;
+        android:label=&quot;@string/pager_fragment&quot;
+        tools:layout=&quot;@layout/fragment_pager&quot; /&gt;
+&lt;/navigation&gt;</code></pre>
 </li>
 <li><p>继续在res下创建名为”menu”的文件夹，在文件夹下创建menu的xml</p>
 </li>
 <li><p>在menu中编写3个item，item的名字要与navigation中的fragment相同</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">menu</span> <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/textFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:icon</span>=<span class="string">&quot;@drawable/ic_baseline_one&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:title</span>=<span class="string">&quot;@string/text_fragment&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/listFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:icon</span>=<span class="string">&quot;@drawable/ic_baseline_two&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:title</span>=<span class="string">&quot;@string/list_fragment&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/pagerFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:icon</span>=<span class="string">&quot;@drawable/ic_baseline_three&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:title</span>=<span class="string">&quot;@string/pager_fragment&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">menu</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;menu xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
+
+    &lt;item
+        android:id=&quot;@+id/textFragment&quot;
+        android:icon=&quot;@drawable/ic_baseline_one&quot;
+        android:title=&quot;@string/text_fragment&quot; /&gt;
+    &lt;item
+        android:id=&quot;@+id/listFragment&quot;
+        android:icon=&quot;@drawable/ic_baseline_two&quot;
+        android:title=&quot;@string/list_fragment&quot; /&gt;
+    &lt;item
+        android:id=&quot;@+id/pagerFragment&quot;
+        android:icon=&quot;@drawable/ic_baseline_three&quot;
+        android:title=&quot;@string/pager_fragment&quot; /&gt;
+&lt;/menu&gt;</code></pre>
 </li>
 <li><p>接下来就是在activity_main中进行设置</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.drawerlayout.widget.DrawerLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/drawerLayout&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">&quot;.MainActivity&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:openDrawer</span>=<span class="string">&quot;start&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">fragment</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/fragment&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:name</span>=<span class="string">&quot;androidx.navigation.fragment.NavHostFragment&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:defaultNavHost</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:navGraph</span>=<span class="string">&quot;@navigation/navigation&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.google.android.material.navigation.NavigationView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/navigation&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_gravity</span>=<span class="string">&quot;start&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:headerLayout</span>=<span class="string">&quot;@layout/navigation_header&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:menu</span>=<span class="string">&quot;@menu/menu&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.drawerlayout.widget.DrawerLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;androidx.drawerlayout.widget.DrawerLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+    android:id=&quot;@+id/drawerLayout&quot;
+    android:layout_width=&quot;match_parent&quot;
+    android:layout_height=&quot;match_parent&quot;
+    tools:context=&quot;.MainActivity&quot;
+    tools:openDrawer=&quot;start&quot;&gt;
 
+    &lt;androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;&gt;
+
+        &lt;fragment
+            android:id=&quot;@+id/fragment&quot;
+            android:name=&quot;androidx.navigation.fragment.NavHostFragment&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;
+            app:defaultNavHost=&quot;true&quot;
+            app:navGraph=&quot;@navigation/navigation&quot; /&gt;
+
+    &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
+
+    &lt;com.google.android.material.navigation.NavigationView
+        android:id=&quot;@+id/navigation&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        android:layout_gravity=&quot;start&quot;
+        app:headerLayout=&quot;@layout/navigation_header&quot;
+        app:menu=&quot;@menu/menu&quot; /&gt;
+&lt;/androidx.drawerlayout.widget.DrawerLayout&gt;</code></pre>
 <p>将menu设置给NavigationView，fragment设置侧边栏NavigationView</p>
 <blockquote>
 <p>android:layout_gravity=”start”   意思为设置侧边栏是从左到右，一定要写</p>
@@ -139,152 +285,112 @@
 </blockquote>
 </li>
 <li><p>最后在Activity中设置</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="comment">//drawerLayout与导航栏的中继器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> appBerConfiguration: AppBarConfiguration</span><br><span class="line">    <span class="comment">//导航栏控制器</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> navController: NavController</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="comment">//获取Fragment容器</span></span><br><span class="line">        navController = findNavController(R.id.fragment)</span><br><span class="line">        <span class="comment">//将drawerLayout和获取到导航栏图表相连</span></span><br><span class="line">        appBerConfiguration = AppBarConfiguration(navController.graph, drawerLayout)</span><br><span class="line">        <span class="comment">//设置将由appBerConfiguration来控制navController</span></span><br><span class="line">        setupActionBarWithNavController(navController, appBerConfiguration)</span><br><span class="line">        <span class="comment">//给Navigation设置控制器</span></span><br><span class="line">        navigation.setupWithNavController(navController)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//将顶部栏与navigation进行连接</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onSupportNavigateUp</span><span class="params">()</span></span>: <span class="built_in">Boolean</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> navController.navigateUp(appBerConfiguration) || <span class="keyword">super</span>.onSupportNavigateUp()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="kotlin">class MainActivity : AppCompatActivity() &#123;
+    //drawerLayout与导航栏的中继器
+    private lateinit var appBerConfiguration: AppBarConfiguration
+    //导航栏控制器
+    private lateinit var navController: NavController
 
+    override fun onCreate(savedInstanceState: Bundle?) &#123;
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        //获取Fragment容器
+        navController = findNavController(R.id.fragment)
+        //将drawerLayout和获取到导航栏图表相连
+        appBerConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
+        //设置将由appBerConfiguration来控制navController
+        setupActionBarWithNavController(navController, appBerConfiguration)
+        //给Navigation设置控制器
+        navigation.setupWithNavController(navController)
+    &#125;
+
+    //将顶部栏与navigation进行连接
+    override fun onSupportNavigateUp(): Boolean &#123;
+        return navController.navigateUp(appBerConfiguration) || super.onSupportNavigateUp()
+    &#125;
+&#125;</code></pre>
 </li>
 </ol>
 <p>以上效果就完成了</p>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknialc820005a0me08b76408" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/" rel="tag">View</a></li></ul>
+  </article>
 
-    </footer>
-  </div>
   
     
-<nav id="article-nav">
-  
-    <a href="/2020/12/24/Collapsing%E4%B8%8ENavigation/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Collapsing与Navigation
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/12/24/PicGo%E4%B8%8ETypora-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">PicGo与Typora 上传图片</div>
-    </a>
-  
-</nav>
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>John Doe<br>
+    <strong>Link：</strong><a href="http://example.com/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" title="http:&#x2F;&#x2F;example.com&#x2F;2020&#x2F;12&#x2F;24&#x2F;DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2020&#x2F;12&#x2F;24&#x2F;DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
 
   
-</article>
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Kotlin/" rel="tag">Kotlin</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/View/" rel="tag">View</a>
+    
+</div>
 
+  <div class="nexmoe-post-footer">
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
 </section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/" rel="tag">Fragment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Function/" rel="tag">Function</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/" rel="tag">Glide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Money/" rel="tag">Money</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoLimits/" rel="tag">NoLimits</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recycler/" rel="tag">Recycler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/" rel="tag">Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sql/" rel="tag">Sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/" rel="tag">Thread</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/" rel="tag">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewModel/" rel="tag">ViewModel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/" rel="tag">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/syntax/" rel="tag">syntax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" rel="tag">屏幕适配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+  </div>
+</div>
+        <div class="nexmoe-post-right">
+          <div class="nexmoe-fixed">
+            <div class="nexmoe-tool">
+              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
-    </div>
-  </div>
+<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+ 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li></ul>
-    </div>
-  </div>
+<script src="/js/app.js?v=1618458183800"></script>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/">Kotlin中使用ViewModel的数据共享</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/">Fragment懒加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">关于Glide各种问题的解决方案集合（不断更新）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/AndroidStudio%E9%94%99%E8%AF%AF%E7%BB%9F%E8%AE%A1/">AndroidStudio错误统计</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/">关于Android的各个View的介绍</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
 
   
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2021 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
-<script src="/js/script.js"></script>
 
-
-
-
-  </div>
 </body>
+
 </html>

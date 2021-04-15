@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
+  
+  <title>Android面试题笔记 - Hexo</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
   
 
-  
-  <title>Android面试题笔记 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
   <meta name="description" content="Android面试题笔记 面试题的笔记与自己的看法  数据结构 数组  是由同一种数据类型组成  存储在连续的内存中  可以使用索引来查找数组中的元素地址  通常有一维数组（也是最常用的，也是最简单的数据结构），多维数组  时间复杂度：    算法 平均复杂度    空间 O(n)   查找 O(n)   插入 O(n)   删除 O(n)        链表  链表整体看起来是个树型，而不是数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android面试题笔记">
@@ -23,77 +28,127 @@
 <meta property="article:tag" content="面试题">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2021/02/16/QnCLmVgM7TbdjD2.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
+  <link rel="stylesheet" href="/css/style.css?v=1618458183795">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-Android面试题笔记" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time datetime="2021-02-18T02:43:00.000Z" itemprop="datePublished">2021-02-18</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+<body class="mdui-drawer-body-left">
   
-    <h1 class="article-title" itemprop="name">
-      Android面试题笔记
-    </h1>
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="John Doe">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>22</div>
+        <div><span>Tags</span>22</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
   
 
-      </header>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
+    </div>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android面试题笔记"><a href="#Android面试题笔记" class="headerlink" title="Android面试题笔记"></a>Android面试题笔记</h1><blockquote>
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 John Doe
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+
+  <div class="nexmoe-post-right">
+    
+  </div>
+
+  <article>
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+            <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="Android面试题笔记" class="lazyload">
+            <h1>Android面试题笔记</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta nexmoe-rainbow-fill" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2021年02月18日</a>
+    <a><i class="nexmoefont icon-areachart"></i>7.8k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 33 分钟</a>
+</div>
+
+    <h1 id="Android面试题笔记"><a href="#Android面试题笔记" class="headerlink" title="Android面试题笔记"></a>Android面试题笔记</h1><blockquote>
 <p>面试题的笔记与自己的看法</p>
 </blockquote>
 <h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ol>
@@ -387,7 +442,7 @@
 <li><p>区别</p>
 <ul>
 <li><p>它们三者的关系为：JDK包含JRE包含JVM</p>
-<p><img src="https://i.loli.net/2021/02/16/QnCLmVgM7TbdjD2.png" alt="image-20210216113540235"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://i.loli.net/2021/02/16/QnCLmVgM7TbdjD2.png" alt="image-20210216113540235" class="lazyload"></p>
 </li>
 </ul>
 </li>
@@ -533,28 +588,97 @@
 <li><p>静态内部类</p>
 <ul>
 <li><p>定义方式为 static class。静态内部类可以直接访问外部类的静态属性和方法，但是不可以访问外部类的实例属性和方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticOutter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Integer outterNum = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outStatic</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;run out static&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInner</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStaticInner</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;调用外部类的静态方法&quot;</span>);</span><br><span class="line">            outStatic();</span><br><span class="line">            System.out.println(<span class="string">&quot;调用外部类的静态属性&quot;</span>);</span><br><span class="line">            System.out.println(outterNum);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class StaticOutter &#123;
+    private static Integer outterNum = 1;
+
+    private static void outStatic()&#123;
+        System.out.println(&quot;run out static&quot;);
+    &#125;
+
+    public static class StaticInner&#123;
+
+        public void testStaticInner()&#123;
+            System.out.println(&quot;调用外部类的静态方法&quot;);
+            outStatic();
+            System.out.println(&quot;调用外部类的静态属性&quot;);
+            System.out.println(outterNum);
+        &#125;
+
+    &#125;
+
+&#125;</code></pre>
 </li>
 </ul>
 </li>
 <li><p>成员内部类</p>
 <ul>
 <li><p>定义方式为 class。成员内部类除了可以访问外部类的静态属性和方法，还可以访问实例属性和方法，但不可以定义静态变量和静态方法。这里可以吧成员内部类看作一个比较特殊的<strong>实例方法</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer outterNum = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">outterMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行外部方法......&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;outterNum:&quot;</span>+outterNum);</span><br><span class="line">            System.out.println(<span class="string">&quot;运行outter的方法&quot;</span>);</span><br><span class="line">            outterMethod();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class Outter &#123;
+    private Integer outterNum = 1;
+
+    private void outterMethod()&#123;
+        System.out.println(&quot;运行外部方法......&quot;);
+    &#125;
+
+    public class Inner&#123;
+
+        public void innerMethod()&#123;
+            System.out.println(&quot;outterNum:&quot;+outterNum);
+            System.out.println(&quot;运行outter的方法&quot;);
+            outterMethod();
+        &#125;
+
+    &#125;
+&#125;</code></pre>
 </li>
 </ul>
 </li>
 <li><p>方法内部类</p>
 <ul>
 <li><p>定义方式为 class。方法内部类就是在一个方法中定义的一个类，方法内部类只能在定义的方法中使用。方法内部类可以直接调用定义方法的参数和方法内部的属性，也可以调用外部类中的静态属性和方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodOutter</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> Integer outter = <span class="number">10</span>;</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMethod</span><span class="params">(Integer param)</span></span>&#123;</span><br><span class="line">         String local = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">         <span class="class"><span class="keyword">class</span> <span class="title">MethodInner</span></span>&#123;</span><br><span class="line">             <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">                 System.out.println(<span class="string">&quot;MethodOutter outter:&quot;</span>+outter);</span><br><span class="line">                 System.out.println(<span class="string">&quot;param:&quot;</span>+param);</span><br><span class="line">                 System.out.println(<span class="string">&quot;local:&quot;</span>+local);</span><br><span class="line">             &#125;</span><br><span class="line">             </span><br><span class="line">         &#125;</span><br><span class="line">         MethodInner inner = <span class="keyword">new</span> MethodInner();</span><br><span class="line">         inner.innerMethod();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         MethodOutter out = <span class="keyword">new</span> MethodOutter();</span><br><span class="line">         out.testMethod(<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code class="java">public class MethodOutter &#123;
+    private Integer outter = 10;
+
+    public void testMethod(Integer param)&#123;
+        String local = &quot;hello&quot;;
+        class MethodInner&#123;
+            public void innerMethod()&#123;
+                System.out.println(&quot;MethodOutter outter:&quot;+outter);
+                System.out.println(&quot;param:&quot;+param);
+                System.out.println(&quot;local:&quot;+local);
+            &#125;
+
+        &#125;
+        MethodInner inner = new MethodInner();
+        inner.innerMethod();
+    &#125;
+
+    public static void main(String[] args) &#123;
+        MethodOutter out = new MethodOutter();
+        out.testMethod(1);
+    &#125;
+&#125;
+</code></pre>
 </li>
 </ul>
 </li>
 <li><p>匿名内部类</p>
 <ul>
 <li><p>匿名内部类只能使用一次，它没有名字，没有构造方法，但它可以根据参数调用父类的构造方法。和方法内部类一样，匿名内部类可以访问外部类的属性和方法，也可以访问局部变量和参数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestInteface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String param)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnonymousTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> TestInteface() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String param)</span> </span>&#123;</span><br><span class="line">                System.out.println(param);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="java">public interface TestInteface &#123;
+   public void show(String param);
+&#125;
+
+public class AnonymousTest &#123;
+   public void test()&#123;
+       new TestInteface() &#123;
+           @Override
+           public void show(String param) &#123;
+               System.out.println(param);
+           &#125;
+       &#125;;
+   &#125;
+&#125;</code></pre>
 </li>
 </ul>
 </li>
@@ -573,8 +697,11 @@
 </ul>
 </li>
 <li><p>例子</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAutoBox</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Float&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    list.add(<span class="number">1.0f</span>);</span><br><span class="line">    <span class="keyword">float</span> firstElement = list.get(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="java">public void testAutoBox() &#123;
+    List&lt;Float&gt; list = new ArrayList&lt;&gt;();
+    list.add(1.0f);
+    float firstElement = list.get(0);
+&#125;</code></pre>
 <p>在第二行中，创建了一个存放Float类型的List，然后往里添加1.0f(float基础类型)，在将结果返回给float（这里List取出的结果是为Float）</p>
 <p>所以结果很明显了，以float和Float为例，装箱就是调用Float的<strong>valueOf</strong>方法new一个Float并赋值，拆箱就是调用Float对象的<strong>floatValue</strong>方法并赋值返回给float。其他基础类型都是大同小异的，具体可以查看源码。</p>
 </li>
@@ -868,10 +995,16 @@
 <li><p>广播的两种注册形式</p>
 <ul>
 <li><p>静态注册（在AndroidManifest中进行注册）在AndroidManifest中进行注册后，不管改应用程序是否处于活动状态，都会进行监听。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver android:name=<span class="string">&quot;.IncomingSMSReceiver&quot;</span>&gt;  </span><br><span class="line">    &lt;intent-filter&gt;  </span><br><span class="line">         &lt;action android:name=<span class="string">&quot;android.provider.Telephony.SMS_RECEIVED&quot;</span>/&gt;  </span><br><span class="line">    &lt;/intent-filter&gt;  </span><br><span class="line">&lt;/receiver&gt;  </span><br></pre></td></tr></table></figure>
+<pre><code class="java">&lt;receiver android:name=&quot;.IncomingSMSReceiver&quot;&gt;  
+    &lt;intent-filter&gt;  
+         &lt;action android:name=&quot;android.provider.Telephony.SMS_RECEIVED&quot;/&gt;  
+    &lt;/intent-filter&gt;  
+&lt;/receiver&gt;  </code></pre>
 </li>
 <li><p>动态注册</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(<span class="string">&quot;android.provider.Telephony.SMS_RECEIVED&quot;</span>);  </span><br><span class="line">IncomingSMSReceiver receiver = <span class="keyword">new</span> IncomingSMSReceiver();  </span><br><span class="line">registerReceiver(receiver, filter);  </span><br></pre></td></tr></table></figure>
+<pre><code class="java">IntentFilter filter = new IntentFilter(&quot;android.provider.Telephony.SMS_RECEIVED&quot;);  
+IncomingSMSReceiver receiver = new IncomingSMSReceiver();  
+registerReceiver(receiver, filter);  </code></pre>
 </li>
 </ul>
 </li>
@@ -918,7 +1051,7 @@
 </ol>
 </li>
 </ul>
-<p><img src="https://uploadfiles.nowcoder.com/images/20170308/8698685_1488963422551_58DC97016985EB4A658556EF1A13A275" alt="img"></p>
+<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://uploadfiles.nowcoder.com/images/20170308/8698685_1488963422551_58DC97016985EB4A658556EF1A13A275" alt="img" class="lazyload"></p>
 </li>
 <li><p>VideoView</p>
 <ul>
@@ -1003,146 +1136,84 @@
 </li>
 </ol>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/" data-id="cknialc8z002ua0medbjn8kyk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+  </article>
 
-    </footer>
-  </div>
   
     
-<nav id="article-nav">
-  
-    <a href="/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Kotlin的一些语法
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/12/24/Collapsing%E4%B8%8ENavigation/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Collapsing与Navigation</div>
-    </a>
-  
-</nav>
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>John Doe<br>
+    <strong>Link：</strong><a href="http://example.com/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;02&#x2F;18&#x2F;Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;02&#x2F;18&#x2F;Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
 
   
-</article>
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Android/" rel="tag">Android</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a>
+    
+</div>
 
+  <div class="nexmoe-post-footer">
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
 </section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/" rel="tag">Fragment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Function/" rel="tag">Function</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/" rel="tag">Glide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Money/" rel="tag">Money</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoLimits/" rel="tag">NoLimits</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recycler/" rel="tag">Recycler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/" rel="tag">Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sql/" rel="tag">Sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/" rel="tag">Thread</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/" rel="tag">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewModel/" rel="tag">ViewModel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/" rel="tag">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/syntax/" rel="tag">syntax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" rel="tag">屏幕适配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+  </div>
+</div>
+        <div class="nexmoe-post-right">
+          <div class="nexmoe-fixed">
+            <div class="nexmoe-tool">
+              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
-    </div>
-  </div>
+<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+ 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li></ul>
-    </div>
-  </div>
+<script src="/js/app.js?v=1618458183797"></script>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/">Kotlin中使用ViewModel的数据共享</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/">Fragment懒加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">关于Glide各种问题的解决方案集合（不断更新）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/AndroidStudio%E9%94%99%E8%AF%AF%E7%BB%9F%E8%AE%A1/">AndroidStudio错误统计</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/">关于Android的各个View的介绍</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
 
   
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2021 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
-<script src="/js/script.js"></script>
 
-
-
-
-  </div>
 </body>
+
 </html>

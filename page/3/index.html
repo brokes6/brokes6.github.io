@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
 
+<html lang="en">
+
+<head>
   
   <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://example.com/page/3/index.html">
@@ -14,79 +19,127 @@
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
+  <link rel="stylesheet" href="/css/style.css?v=1618458184016">
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
+       </div>
     </div>
   </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-CoordinatorLayout的使用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" class="article-date">
-  <time datetime="2020-09-21T12:44:00.000Z" itemprop="datePublished">2020-09-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="John Doe">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>22</div>
+        <div><span>Tags</span>22</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
         
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/">CoordinatorLayout的使用</a>
-    </h1>
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+  
   
 
-      </header>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
+    </div>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="CoordinatorLayout的使用"><a href="#CoordinatorLayout的使用" class="headerlink" title="CoordinatorLayout的使用"></a>CoordinatorLayout的使用</h1><h4 id="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"><a href="#本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果" class="headerlink" title="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"></a>本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果</h4><h6 id="讲解为什么要使用CoordinatorLayout："><a href="#讲解为什么要使用CoordinatorLayout：" class="headerlink" title="讲解为什么要使用CoordinatorLayout："></a>讲解为什么要使用CoordinatorLayout：</h6><ul>
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 John Doe
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <section class="nexmoe-posts">
+    
+    <div class="nexmoe-post">
+        <a href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="CoordinatorLayout的使用" class="lazyload">
+                    <h1>CoordinatorLayout的使用</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月21日</a>
+            <a><i class="nexmoefont icon-areachart"></i>1.1k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+        </div>
+
+        <article>
+            
+                <h1 id="CoordinatorLayout的使用"><a href="#CoordinatorLayout的使用" class="headerlink" title="CoordinatorLayout的使用"></a>CoordinatorLayout的使用</h1><h4 id="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"><a href="#本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果" class="headerlink" title="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"></a>本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果</h4><h6 id="讲解为什么要使用CoordinatorLayout："><a href="#讲解为什么要使用CoordinatorLayout：" class="headerlink" title="讲解为什么要使用CoordinatorLayout："></a>讲解为什么要使用CoordinatorLayout：</h6><ul>
 <li>NestedScrollView角度:<ol>
 <li>首先一般想要嵌套滑动的地方都是嵌套RecyclerView来进行屏幕滑动，但是使用NestedScrollView嵌套RecyclerView会造成当进入页面的时候，RecyclerView会一次性全部展开。RecyclerView会失去复用性。在一些RecyclerView条目数量不多的时候，并不会造成多大的印象，但失去复用性会到时候RecyclerView滑出屏幕外无法被回收，数量一旦过多就会造成性能问题。</li>
 </ol>
@@ -104,8 +157,41 @@
 </blockquote>
 </li>
 <li><p>代码使用：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;androidx.coordinatorlayout.widget.CoordinatorLayout</span><br><span class="line">        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:layout_height&#x3D;&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;com.google.android.material.appbar.AppBarLayout</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;appbar&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            app:elevation&#x3D;&quot;0dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;com.youth.banner.Banner</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;Re_banner&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;200dp&quot;</span><br><span class="line">                android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                app:banner_indicator_gravity&#x3D;&quot;right&quot;</span><br><span class="line">                app:banner_indicator_marginBottom&#x3D;&quot;@dimen&#x2F;dp_7&quot;</span><br><span class="line">                app:banner_indicator_marginRight&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                app:banner_indicator_normal_color&#x3D;&quot;@color&#x2F;White&quot;</span><br><span class="line">                app:banner_indicator_selected_color&#x3D;&quot;@color&#x2F;Pink&quot;</span><br><span class="line">                app:layout_scrollFlags&#x3D;&quot;scroll&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;&#x2F;com.google.android.material.appbar.AppBarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;androidx.recyclerview.widget.RecyclerView</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;Re_recy&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            app:layout_behavior&#x3D;&quot;@string&#x2F;appbar_scrolling_view_behavior&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;&gt;
 
+        &lt;com.google.android.material.appbar.AppBarLayout
+            android:id=&quot;@+id/appbar&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            app:elevation=&quot;0dp&quot;&gt;
+
+            &lt;com.youth.banner.Banner
+                android:id=&quot;@+id/Re_banner&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;200dp&quot;
+                android:layout_marginLeft=&quot;@dimen/dp_10&quot;
+                android:layout_marginTop=&quot;@dimen/dp_10&quot;
+                android:layout_marginRight=&quot;@dimen/dp_10&quot;
+                app:banner_indicator_gravity=&quot;right&quot;
+                app:banner_indicator_marginBottom=&quot;@dimen/dp_7&quot;
+                app:banner_indicator_marginRight=&quot;@dimen/dp_15&quot;
+                app:banner_indicator_normal_color=&quot;@color/White&quot;
+                app:banner_indicator_selected_color=&quot;@color/Pink&quot;
+                app:layout_scrollFlags=&quot;scroll&quot; /&gt;
+
+        &lt;/com.google.android.material.appbar.AppBarLayout&gt;
+
+        &lt;androidx.recyclerview.widget.RecyclerView
+            android:id=&quot;@+id/Re_recy&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;wrap_content&quot;
+            android:layout_marginLeft=&quot;@dimen/dp_5&quot;
+            android:layout_marginTop=&quot;@dimen/dp_5&quot;
+            android:layout_marginRight=&quot;@dimen/dp_5&quot;
+            app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot; /&gt;
+    &lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
 <p> 这里就是是哟CoordinatorLayou嵌套RecyclerView，将头部的Banner设置layout_scrollFlags=”scroll”，它将会跟随屏幕一起滑动，滑出屏幕外，而RecyclerView设置的layout_behavior=”@string/appbar_scrolling_view_behavior”将会把View设置在AppBarLayout的下方，并且不会随着屏幕的滑动而滑出屏幕之外。</p>
 </li>
 </ul>
@@ -113,223 +199,418 @@
 <li><p>CollapsingToolbarLayout</p>
 <ol>
 <li><p>吸附效果是需要CoordinatorLayout与CollapsingToolbarLayout一同使用，并且CollapsingToolbarLayout设置layout_scrollFlags=”scroll|snap”，代表被CollapsingToolbarLayout包裹的内容是需要吸附到屏幕顶部的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">&lt;androidx.coordinatorlayout.widget.CoordinatorLayout</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;TV_nestSc&quot;</span><br><span class="line">        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:background&#x3D;&quot;#FFFFFF&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;com.google.android.material.appbar.AppBarLayout</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;appbar&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            app:elevation&#x3D;&quot;0dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;com.google.android.material.appbar.CollapsingToolbarLayout</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;coll_layout&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">                android:fitsSystemWindows&#x3D;&quot;true&quot;</span><br><span class="line">                app:layout_scrollFlags&#x3D;&quot;scroll|snap&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;RelativeLayout</span><br><span class="line">                    android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                    android:layout_height&#x3D;&quot;wrap_content&quot;&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;LinearLayout</span><br><span class="line">                        android:id&#x3D;&quot;@+id&#x2F;Sy_text&quot;</span><br><span class="line">                        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                        android:layout_height&#x3D;&quot;@dimen&#x2F;dp_35&quot;</span><br><span class="line">                        android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                        android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                        android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                        android:layout_weight&#x3D;&quot;1&quot;</span><br><span class="line">                        android:background&#x3D;&quot;@drawable&#x2F;file_background_radius_30_while_gray&quot;</span><br><span class="line">                        android:gravity&#x3D;&quot;center_vertical&quot;</span><br><span class="line">                        android:orientation&#x3D;&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                        &lt;ImageView</span><br><span class="line">                            android:layout_width&#x3D;&quot;@dimen&#x2F;dp_24&quot;</span><br><span class="line">                            android:layout_height&#x3D;&quot;@dimen&#x2F;dp_24&quot;</span><br><span class="line">                            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                            android:src&#x3D;&quot;@drawable&#x2F;search_24_while&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">                        &lt;TextView</span><br><span class="line">                            android:layout_width&#x3D;&quot;0dp&quot;</span><br><span class="line">                            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">                            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">                            android:layout_weight&#x3D;&quot;1&quot;</span><br><span class="line">                            android:text&#x3D;&quot;查找精彩动态内容&quot;</span><br><span class="line">                            android:textColor&#x3D;&quot;#c1bfc0&quot;</span><br><span class="line">                            android:textSize&#x3D;&quot;16sp&quot; &#x2F;&gt;</span><br><span class="line">                    &lt;&#x2F;LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;TextView</span><br><span class="line">                        android:id&#x3D;&quot;@+id&#x2F;xian_2&quot;</span><br><span class="line">                        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                        android:layout_height&#x3D;&quot;@dimen&#x2F;dp_1&quot;</span><br><span class="line">                        android:layout_below&#x3D;&quot;@+id&#x2F;Sy_text&quot;</span><br><span class="line">                        android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                        android:background&#x3D;&quot;#e7e7e7&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;&#x2F;RelativeLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;&#x2F;com.google.android.material.appbar.CollapsingToolbarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;&#x2F;com.google.android.material.appbar.AppBarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:animateLayoutChanges&#x3D;&quot;true&quot;</span><br><span class="line">            android:orientation&#x3D;&quot;vertical&quot;</span><br><span class="line">            app:layout_behavior&#x3D;&quot;@string&#x2F;appbar_scrolling_view_behavior&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;androidx.recyclerview.widget.RecyclerView</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;Recy_dynamic&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:background&#x3D;&quot;#f4f4f4&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
+     android:id=&quot;@+id/TV_nestSc&quot;
+     android:layout_width=&quot;match_parent&quot;
+     android:layout_height=&quot;match_parent&quot;
+     android:background=&quot;#FFFFFF&quot;&gt;
+
+     &lt;com.google.android.material.appbar.AppBarLayout
+         android:id=&quot;@+id/appbar&quot;
+         android:layout_width=&quot;match_parent&quot;
+         android:layout_height=&quot;wrap_content&quot;
+         app:elevation=&quot;0dp&quot;&gt;
+
+         &lt;com.google.android.material.appbar.CollapsingToolbarLayout
+             android:id=&quot;@+id/coll_layout&quot;
+             android:layout_width=&quot;match_parent&quot;
+             android:layout_height=&quot;wrap_content&quot;
+             android:fitsSystemWindows=&quot;true&quot;
+             app:layout_scrollFlags=&quot;scroll|snap&quot;&gt;
+
+             &lt;RelativeLayout
+                 android:layout_width=&quot;match_parent&quot;
+                 android:layout_height=&quot;wrap_content&quot;&gt;
+
+                 &lt;LinearLayout
+                     android:id=&quot;@+id/Sy_text&quot;
+                     android:layout_width=&quot;match_parent&quot;
+                     android:layout_height=&quot;@dimen/dp_35&quot;
+                     android:layout_marginLeft=&quot;@dimen/dp_15&quot;
+                     android:layout_marginTop=&quot;@dimen/dp_10&quot;
+                     android:layout_marginRight=&quot;@dimen/dp_15&quot;
+                     android:layout_weight=&quot;1&quot;
+                     android:background=&quot;@drawable/file_background_radius_30_while_gray&quot;
+                     android:gravity=&quot;center_vertical&quot;
+                     android:orientation=&quot;horizontal&quot;&gt;
+
+                     &lt;ImageView
+                         android:layout_width=&quot;@dimen/dp_24&quot;
+                         android:layout_height=&quot;@dimen/dp_24&quot;
+                         android:layout_marginLeft=&quot;@dimen/dp_15&quot;
+                         android:src=&quot;@drawable/search_24_while&quot; /&gt;
+
+                     &lt;TextView
+                         android:layout_width=&quot;0dp&quot;
+                         android:layout_height=&quot;wrap_content&quot;
+                         android:layout_marginLeft=&quot;@dimen/dp_5&quot;
+                         android:layout_weight=&quot;1&quot;
+                         android:text=&quot;查找精彩动态内容&quot;
+                         android:textColor=&quot;#c1bfc0&quot;
+                         android:textSize=&quot;16sp&quot; /&gt;
+                 &lt;/LinearLayout&gt;
+
+                 &lt;TextView
+                     android:id=&quot;@+id/xian_2&quot;
+                     android:layout_width=&quot;match_parent&quot;
+                     android:layout_height=&quot;@dimen/dp_1&quot;
+                     android:layout_below=&quot;@+id/Sy_text&quot;
+                     android:layout_marginTop=&quot;@dimen/dp_10&quot;
+                     android:background=&quot;#e7e7e7&quot; /&gt;
+
+             &lt;/RelativeLayout&gt;
+
+         &lt;/com.google.android.material.appbar.CollapsingToolbarLayout&gt;
+
+     &lt;/com.google.android.material.appbar.AppBarLayout&gt;
+
+     &lt;LinearLayout
+         android:layout_width=&quot;match_parent&quot;
+         android:layout_height=&quot;match_parent&quot;
+         android:animateLayoutChanges=&quot;true&quot;
+         android:orientation=&quot;vertical&quot;
+         app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;&gt;
+
+         &lt;androidx.recyclerview.widget.RecyclerView
+             android:id=&quot;@+id/Recy_dynamic&quot;
+             android:layout_width=&quot;match_parent&quot;
+             android:layout_height=&quot;match_parent&quot;
+             android:background=&quot;#f4f4f4&quot; /&gt;
+     &lt;/LinearLayout&gt;
+
+ &lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
 <p>吸附效果就是在滑动屏幕的时候，被CollapsingToolbarLayout包裹的内容在接近屏幕顶端的时候会有个吸附效果，之后就会一直吸在屏幕顶端，除非下滑脱离。</p>
 </li>
 </ol>
 </li>
 </ul>
 
-      
+            
+        </article>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknialc830006a0me196l16eb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/" rel="tag">View</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-MVP-设计模式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time datetime="2020-09-18T13:36:00.000Z" itemprop="datePublished">2020-09-18</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">MVP 设计模式</a>
-    </h1>
-  
+    <div class="nexmoe-post">
+        <a href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="MVP 设计模式" class="lazyload">
+                    <h1>MVP 设计模式</h1>
+                </div>
+            
+        </a>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="MVP-设计模式"><a href="#MVP-设计模式" class="headerlink" title="MVP 设计模式"></a>MVP 设计模式</h3><h5 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h5><p>MVP是有MVC演变而来的，因为在Android中用MVC来写的时候，Activity到底是View层还是Controller层真的是傻傻分不去清楚，所以基本它就把这两层的活都自己一个人干了，这样一来Activity上的代码量会非常大，Controller层和View层没有实现解耦分离开来，如果后面这两层代码其中一层出了问题你就可能两层都的修改，代码是没什么重用性可言的。而MVP的出现就是为了解决这些问题的，MVP模式将Controller的工作抽取出来交给Presenter层，Presenter层负责控制处理业务逻辑，作为中间层建立起Model层和View层的联系，从而实现三层交互。这么说确实挺难让人理解的，下面就通过一个例子，在例子中夹杂着解释让我们掌握MVP的用法吧。</p>
+        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月18日</a>
+            <a><i class="nexmoefont icon-areachart"></i>1.5k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 7 分钟</a>
+        </div>
+
+        <article>
+            
+                <h3 id="MVP-设计模式"><a href="#MVP-设计模式" class="headerlink" title="MVP 设计模式"></a>MVP 设计模式</h3><h5 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h5><p>MVP是有MVC演变而来的，因为在Android中用MVC来写的时候，Activity到底是View层还是Controller层真的是傻傻分不去清楚，所以基本它就把这两层的活都自己一个人干了，这样一来Activity上的代码量会非常大，Controller层和View层没有实现解耦分离开来，如果后面这两层代码其中一层出了问题你就可能两层都的修改，代码是没什么重用性可言的。而MVP的出现就是为了解决这些问题的，MVP模式将Controller的工作抽取出来交给Presenter层，Presenter层负责控制处理业务逻辑，作为中间层建立起Model层和View层的联系，从而实现三层交互。这么说确实挺难让人理解的，下面就通过一个例子，在例子中夹杂着解释让我们掌握MVP的用法吧。</p>
 <h5 id="属性：（我就拿登录来当作例子）"><a href="#属性：（我就拿登录来当作例子）" class="headerlink" title="属性：（我就拿登录来当作例子）"></a>属性：（我就拿登录来当作例子）</h5><ul>
 <li>Model层：创建用于保存用户信息的实体类User（就是userbean）登录的时候用来保存用户信息，建议也保存到本地一份</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">    private String username;  &#x2F;&#x2F;用户的账号</span><br><span class="line">    private String password;  &#x2F;&#x2F;用户的密码</span><br><span class="line"></span><br><span class="line">    public String getUsername() &#123;</span><br><span class="line">        return username;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUsername(String username) &#123;</span><br><span class="line">        this.username &#x3D; username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password &#x3D; password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>public class User &#123;
+    private String username;  //用户的账号
+    private String password;  //用户的密码
+
+    public String getUsername() &#123;
+        return username;
+    &#125;
+    public void setUsername(String username) &#123;
+        this.username = username;
+    &#125;
+
+    public String getPassword() &#123;
+        return password;
+    &#125;
+    public void setPassword(String password) &#123;
+        this.password = password;
+    &#125;
+&#125;
+</code></pre>
 <ul>
 <li><p>结果回调接口：</p>
 <ol>
 <li>创建一个接口，用来通知登录是否成功（成功的话，就可以把获取到的userbean传递下去）或者 失败</li>
-<li>代码展示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    public interface OnLoginListener &#123;</span><br><span class="line">    &#x2F;&#x2F;登录成功的回调</span><br><span class="line">    void loginSuccess(User user);  &#x2F;&#x2F;登录成功后，将用户信息传递进去</span><br><span class="line">    &#x2F;&#x2F;登录失败的回调</span><br><span class="line">    void loginFailed();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>代码展示：<pre><code>public interface OnLoginListener &#123;
+//登录成功的回调
+void loginSuccess(User user);  //登录成功后，将用户信息传递进去
+//登录失败的回调
+void loginFailed();
+&#125;</code></pre>
+</li>
 </ol>
 </li>
 <li><p>定义业务接口:</p>
 <ol>
 <li>这里抽出一个接口的目的是为了降低一层耦合和便于复用。比如同一个网络请求业务你可以有OkHttp的实现，同时也可以有Retrofit的实现，这样一来就可以方便的做到网络框架的替换，当然你还可以有不同内容的实现。简单来说，就是将登录的这个功能抽取出来，成为一个接口，方便复用。</li>
-<li>代码展示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    public interface UserLogin&#123;</span><br><span class="line">    &#x2F;&#x2F;登录方法</span><br><span class="line">public void login(String username, String password, OnLoginListener loginListener);</span><br><span class="line">&#x2F;&#x2F;这里就传入用户输入的账号，密码，在传入一个登录状况判断的接口</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>代码展示：<pre><code>public interface UserLogin&#123;
+//登录方法
+public void login(String username, String password, OnLoginListener loginListener);
+//这里就传入用户输入的账号，密码，在传入一个登录状况判断的接口
+&#125;</code></pre>
 </li>
 </ol>
 </li>
 <li><p>具体Model的实现类:<br><br>创建一个具体的类，来实现UserLogin的接口，来实现里面的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class UserGo implements UserLogin &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void login(final String username, final String password, final OnLoginListener loginListener) &#123;</span><br><span class="line">        &#x2F;&#x2F;模拟网络请求耗时操作</span><br><span class="line">        new Thread() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                &#x2F;&#x2F;模拟了耗时                </span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(2000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                &#x2F;&#x2F;模拟登录成功</span><br><span class="line">                if (&quot;luoqiang&quot;.equals(username) &amp;&amp; &quot;108&quot;.equals(password)) &#123;</span><br><span class="line">                    User user &#x3D; new User();</span><br><span class="line">                    user.setUsername(username);</span><br><span class="line">                    user.setPassword(password);</span><br><span class="line">                    loginListener.loginSuccess(user);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    loginListener.loginFailed();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<pre><code>public class UserGo implements UserLogin &#123;
+  @Override
+  public void login(final String username, final String password, final OnLoginListener loginListener) &#123;
+      //模拟网络请求耗时操作
+      new Thread() &#123;
+          @Override
+          public void run() &#123;
+              //模拟了耗时                
+              try &#123;
+                  Thread.sleep(2000);
+              &#125; catch (InterruptedException e) &#123;
+                  e.printStackTrace();
+              &#125;
+              //模拟登录成功
+              if (&quot;luoqiang&quot;.equals(username) &amp;&amp; &quot;108&quot;.equals(password)) &#123;
+                  User user = new User();
+                  user.setUsername(username);
+                  user.setPassword(password);
+                  loginListener.loginSuccess(user);
+              &#125; else &#123;
+                  loginListener.loginFailed();
+              &#125;
+          &#125;
+      &#125;.start();
+  &#125;
+&#125;</code></pre>
+</li>
 <li><p>View层:</p>
 <ol>
 <li><p>View层不关心数据，不关心逻辑处理！只关心和用户的交互，那么这个登录界面应该有的操作就是：从输入框获取用户名，获取密码，清除用户名，清除密码，登录网络请求时显示进度条，隐藏进度条，登录成功跳转到对应界面，登录失败提示。接下来定义接口如下：</p>
 <blockquote>
 <p>这里并没有将activity来直接当作View层，原因也是为了方便复用，那个Fragment/Activity需要用到登录，就实现这个接口就行了。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    public interface UserLoginView &#123;</span><br><span class="line">        String getUserName();</span><br><span class="line">        &#x2F;&#x2F;获取用户输入的账号</span><br><span class="line">        String getPassword();</span><br><span class="line">        &#x2F;&#x2F;获取用户输入的密码</span><br><span class="line">        void clearUserName();</span><br><span class="line">        &#x2F;&#x2F;清除用户输入的账号</span><br><span class="line">        void clearPassword();</span><br><span class="line">        &#x2F;&#x2F;清除用户输入的密码</span><br><span class="line">        void showLoading();</span><br><span class="line">        &#x2F;&#x2F;显示加载（一般来说，我都会在BaseActivity&#x2F;BaseFragment中实现Loading的显示和隐藏，这里就没必要在写）</span><br><span class="line">        void hideLoading();</span><br><span class="line">        &#x2F;&#x2F;隐藏加载</span><br><span class="line">        void toMainActivity(User user);</span><br><span class="line">        &#x2F;&#x2F;跳转到主页，顺便传递用户信息</span><br><span class="line">        void showFaileTips();</span><br><span class="line">        &#x2F;&#x2F;登录失败的提示</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<pre><code>public interface UserLoginView &#123;
+ String getUserName();
+ //获取用户输入的账号
+ String getPassword();
+ //获取用户输入的密码
+ void clearUserName();
+ //清除用户输入的账号
+ void clearPassword();
+ //清除用户输入的密码
+ void showLoading();
+ //显示加载（一般来说，我都会在BaseActivity/BaseFragment中实现Loading的显示和隐藏，这里就没必要在写）
+ void hideLoading();
+ //隐藏加载
+ void toMainActivity(User user);
+ //跳转到主页，顺便传递用户信息
+ void showFaileTips();
+ //登录失败的提示
+&#125;
+</code></pre>
+</li>
 <li><p>具体的用法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">    public class UserLoginActivity extends AppCompatActivity implements UserLoginView &#123;</span><br><span class="line">    private EditText mEtUsername, mEtPassword;</span><br><span class="line">    private Button mBtnLogin, mBtnClear;</span><br><span class="line">    private ProgressBar mPbLoading;</span><br><span class="line">    private UserLoginPresenter mUserLoginPresenter;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">	&#x2F;&#x2F;关于Presenter层，都可以写在BaseActivtiy&#x2F;BaseFragment中，没必要写在Activity中</span><br><span class="line">        mUserLoginPresenter &#x3D; new UserLoginPresenter(this);</span><br><span class="line">        &#x2F;&#x2F;获取Presenter层</span><br><span class="line">        initViews();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initViews() &#123;</span><br><span class="line">        mEtUsername &#x3D; findViewById(R.id.et_username);</span><br><span class="line">        mEtPassword &#x3D; findViewById(R.id.et_password);</span><br><span class="line">        mBtnClear &#x3D; findViewById(R.id.btn_clear);</span><br><span class="line">        mBtnLogin &#x3D; findViewById(R.id.btn_login);</span><br><span class="line">        mPbLoading &#x3D; findViewById(R.id.pb_loading);</span><br><span class="line">        mBtnLogin.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                mUserLoginPresenter.login();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        mBtnClear.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                mUserLoginPresenter.clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return mEtUsername.getText().toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return mEtPassword.getText().toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void clearUserName() &#123;</span><br><span class="line">        mEtUsername.setText(&quot;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void clearPassword() &#123;</span><br><span class="line">        mEtPassword.setText(&quot;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void showLoading() &#123;</span><br><span class="line">        mPbLoading.setVisibility(View.VISIBLE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void hideLoading() &#123;</span><br><span class="line">        mPbLoading.setVisibility(View.GONE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void toMainActivity(User user) &#123;</span><br><span class="line">        Toast.makeText(this, &quot;跳转到登录成功页面&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void showFaileTips() &#123;</span><br><span class="line">        Toast.makeText(this, &quot;登录失败&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDestroy() &#123;</span><br><span class="line">        super.onDestroy();</span><br><span class="line">        &#x2F;&#x2F;为了防止内存泄漏，解绑Presenter层对View层的引用，这里的将Presenter层置为空可以在BaseActivity&#x2F;BaseFragment中进行操作</span><br><span class="line">        mUserLoginPresenter.detachView();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>public class UserLoginActivity extends AppCompatActivity implements UserLoginView &#123;
+private EditText mEtUsername, mEtPassword;
+private Button mBtnLogin, mBtnClear;
+private ProgressBar mPbLoading;
+private UserLoginPresenter mUserLoginPresenter;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) &#123;
+ super.onCreate(savedInstanceState);
+ setContentView(R.layout.activity_main);
+//关于Presenter层，都可以写在BaseActivtiy/BaseFragment中，没必要写在Activity中
+ mUserLoginPresenter = new UserLoginPresenter(this);
+ //获取Presenter层
+ initViews();
+&#125;
+
+private void initViews() &#123;
+ mEtUsername = findViewById(R.id.et_username);
+ mEtPassword = findViewById(R.id.et_password);
+ mBtnClear = findViewById(R.id.btn_clear);
+ mBtnLogin = findViewById(R.id.btn_login);
+ mPbLoading = findViewById(R.id.pb_loading);
+ mBtnLogin.setOnClickListener(new View.OnClickListener() &#123;
+     @Override
+     public void onClick(View v) &#123;
+         mUserLoginPresenter.login();
+     &#125;
+ &#125;);
+ mBtnClear.setOnClickListener(new View.OnClickListener() &#123;
+     @Override
+     public void onClick(View v) &#123;
+         mUserLoginPresenter.clear();
+     &#125;
+ &#125;);
+&#125;
+
+@Override
+public String getUserName() &#123;
+ return mEtUsername.getText().toString();
+&#125;
+
+@Override
+public String getPassword() &#123;
+ return mEtPassword.getText().toString();
+&#125;
+
+@Override
+public void clearUserName() &#123;
+ mEtUsername.setText(&quot;&quot;);
+&#125;
+
+@Override
+public void clearPassword() &#123;
+ mEtPassword.setText(&quot;&quot;);
+&#125;
+
+@Override
+public void showLoading() &#123;
+ mPbLoading.setVisibility(View.VISIBLE);
+&#125;
+
+@Override
+public void hideLoading() &#123;
+ mPbLoading.setVisibility(View.GONE);
+&#125;
+
+@Override
+public void toMainActivity(User user) &#123;
+ Toast.makeText(this, &quot;跳转到登录成功页面&quot;, Toast.LENGTH_SHORT).show();
+&#125;
+
+@Override
+public void showFaileTips() &#123;
+ Toast.makeText(this, &quot;登录失败&quot;, Toast.LENGTH_SHORT).show();
+&#125;
+
+@Override
+protected void onDestroy() &#123;
+ super.onDestroy();
+ //为了防止内存泄漏，解绑Presenter层对View层的引用，这里的将Presenter层置为空可以在BaseActivity/BaseFragment中进行操作
+ mUserLoginPresenter.detachView();
+&#125;
+&#125;
+</code></pre>
 </li>
 </ol>
 </li>
 <li><p>Presenter层:</p>
 <ol>
-<li>Presenter的作用就是从View层获取用户的输入，传递到Model层进行处理，然后回调给View层，输出给用户！</li>
-<li>Presenter一般来说，就是将View和Mode集合在一起，进行操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">    public class UserLoginPresenter &#123;</span><br><span class="line">    private UserGo userGo;</span><br><span class="line">    private UserLoginView userLoginView;</span><br><span class="line">    private Handler mHandler &#x3D; new Handler();</span><br><span class="line">    &#x2F;&#x2F;对应视图页面销毁的标志位,当视图销毁后回调就不需要处理了</span><br><span class="line">    private boolean destroyFlag;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;Presenter必须要能拿到View和Model的实现类</span><br><span class="line">    public UserLoginPresenter(IUserLoginView userLoginView) &#123;</span><br><span class="line">        this.userLoginView &#x3D; userLoginView;</span><br><span class="line">        this. userGo &#x3D; new UserGo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void login() &#123;</span><br><span class="line">        userLoginView.showLoading();</span><br><span class="line">        userGo.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void loginSuccess(final User user) &#123;</span><br><span class="line">                if (!destroyFlag) &#123; &#x2F;&#x2F;View层销毁后不需要处理的判断</span><br><span class="line">                    &#x2F;&#x2F;需要在UI线程执行</span><br><span class="line">                    mHandler.post(new Runnable() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void run() &#123;</span><br><span class="line">                            userLoginView.toMainActivity(user);</span><br><span class="line">                            userLoginView.hideLoading();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void loginFailed() &#123;</span><br><span class="line">                if (!destroyFlag) &#123; &#x2F;&#x2F;View层销毁后不需要处理的判断</span><br><span class="line">                    &#x2F;&#x2F;需要在UI线程执行</span><br><span class="line">                    mHandler.post(new Runnable() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void run() &#123;</span><br><span class="line">                            userLoginView.showFaileTips();</span><br><span class="line">                            userLoginView.hideLoading();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void clear() &#123;</span><br><span class="line">        userLoginView.clearUserName();</span><br><span class="line">        userLoginView.clearPassword();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;解绑视图</span><br><span class="line">    public void detachView() &#123;</span><br><span class="line">        destroyFlag &#x3D; true;</span><br><span class="line">        this.userLoginView &#x3D; null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<li><p>Presenter的作用就是从View层获取用户的输入，传递到Model层进行处理，然后回调给View层，输出给用户！</p>
+</li>
+<li><p>Presenter一般来说，就是将View和Mode集合在一起，进行操作</p>
+<pre><code>public class UserLoginPresenter &#123;
+private UserGo userGo;
+private UserLoginView userLoginView;
+private Handler mHandler = new Handler();
+//对应视图页面销毁的标志位,当视图销毁后回调就不需要处理了
+private boolean destroyFlag;
 
+//Presenter必须要能拿到View和Model的实现类
+public UserLoginPresenter(IUserLoginView userLoginView) &#123;
+ this.userLoginView = userLoginView;
+ this. userGo = new UserGo();
+&#125;
 
+public void login() &#123;
+ userLoginView.showLoading();
+ userGo.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() &#123;
+     @Override
+     public void loginSuccess(final User user) &#123;
+         if (!destroyFlag) &#123; //View层销毁后不需要处理的判断
+             //需要在UI线程执行
+             mHandler.post(new Runnable() &#123;
+                 @Override
+                 public void run() &#123;
+                     userLoginView.toMainActivity(user);
+                     userLoginView.hideLoading();
+                 &#125;
+             &#125;);
+         &#125;
+     &#125;
 
+     @Override
+     public void loginFailed() &#123;
+         if (!destroyFlag) &#123; //View层销毁后不需要处理的判断
+             //需要在UI线程执行
+             mHandler.post(new Runnable() &#123;
+                 @Override
+                 public void run() &#123;
+                     userLoginView.showFaileTips();
+                     userLoginView.hideLoading();
+                 &#125;
+             &#125;);
+         &#125;
+     &#125;
+ &#125;);
+&#125;
+
+public void clear() &#123;
+ userLoginView.clearUserName();
+ userLoginView.clearPassword();
+&#125;
+
+//解绑视图
+public void detachView() &#123;
+ destroyFlag = true;
+ this.userLoginView = null;
+&#125;
+&#125;
+</code></pre>
 </li>
 </ol>
 </li>
 </ul>
 
-      
+            
+        </article>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cknialc89000ga0me80bhatgr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
-
 </section>
-        
-          <aside id="sidebar">
-  
-    
 
+    <nav class="nexmoe-page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/"><i class="nexmoefont icon-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    </nav>
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Context/" rel="tag">Context</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error/" rel="tag">Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/" rel="tag">Fragment</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Function/" rel="tag">Function</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/" rel="tag">Glide</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MVP/" rel="tag">MVP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Money/" rel="tag">Money</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NoLimits/" rel="tag">NoLimits</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Recycler/" rel="tag">Recycler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Service/" rel="tag">Service</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sql/" rel="tag">Sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Thread/" rel="tag">Thread</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View/" rel="tag">View</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewModel/" rel="tag">ViewModel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kotlin/" rel="tag">kotlin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/syntax/" rel="tag">syntax</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" rel="tag">屏幕适配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">面试题</a></li></ul>
+        <div class="nexmoe-post-right">
+          <div class="nexmoe-fixed">
+            <div class="nexmoe-tool">
+              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+            </div>
+          </div>
+        </div>
     </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
-    </div>
-  </div>
+<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+ 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li></ul>
-    </div>
-  </div>
+<script src="/js/app.js?v=1618458184017"></script>
 
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/">Kotlin中使用ViewModel的数据共享</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/">Fragment懒加载</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">关于Glide各种问题的解决方案集合（不断更新）</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/AndroidStudio%E9%94%99%E8%AF%AF%E7%BB%9F%E8%AE%A1/">AndroidStudio错误统计</a>
-          </li>
-        
-          <li>
-            <a href="/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/">关于Android的各个View的介绍</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
 
   
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2021 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-  
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
 
 
-<script src="/js/script.js"></script>
 
-
-
-
-  </div>
 </body>
+
 </html>
