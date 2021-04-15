@@ -1,446 +1,276 @@
-<!DOCTYPE html>
 
-<html lang="en">
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
 
 <head>
-  
-  <title>Archive：2020/11 - Hexo</title>
   <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="author" content="Fuxinbo">
+  <meta name="keywords" content="">
   
-  
+  <title>归档 - Fuxinbo博客</title>
 
-  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/2020/11/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css?v=1618458183984">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<body class="mdui-drawer-body-left">
-  
-  <div id="nexmoe-background">
-    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
-    <div class="mdui-appbar mdui-shadow-0">
-      <div class="mdui-toolbar">
-        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
-        <div class="mdui-toolbar-spacer"></div>
-        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
-       </div>
-    </div>
-  </div>
-  <div id="nexmoe-header">
-      <div class="nexmoe-drawer mdui-drawer" id="drawer">
-    <div class="nexmoe-avatar mdui-ripple">
-        <a href="/" title="John Doe">
-            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
-        </a>
-    </div>
-    <div class="nexmoe-count">
-        <div><span>Articles</span>22</div>
-        <div><span>Tags</span>22</div>
-        <div><span>Categories</span>0</div>
-    </div>
-    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
-            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
-            <div class="mdui-list-item-content">
-                回到首页
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
-            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
-            <div class="mdui-list-item-content">
-                关于博客
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
-            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
-            <div class="mdui-list-item-content">
-                我的朋友
-            </div>
-        </a>
-        
-    </div>
-    <aside id="nexmoe-sidebar">
-  
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-search">
-        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
-            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
-        </form>
-    </div>
-</div>
-  
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-social">
-        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
-            <i class="nexmoefont icon-QQ"></i>
-        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
-            <i class="nexmoefont icon-bilibili"></i>
-        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
-            <i class="nexmoefont icon-github"></i>
-        </a>
-    </div>
-</div>
-  
-  
 
-  
-  
-  <div class="nexmoe-widget-wrap">
-    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
-    </div>
-    
-  </div>
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
-  
-</aside>
-    <div class="nexmoe-copyright">
-        &copy; 2021 John Doe
-        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-</div><!-- .nexmoe-drawer -->
   </div>
-  <div id="nexmoe-content">
-    <div class="nexmoe-primary">
-        <section class="nexmoe-posts">
-    
-    <div class="nexmoe-post">
-        <a href="/2020/11/21/Room%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="归档">
+              
+            </span>
+
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="Room数据库的使用" class="lazyload">
-                    <h1>Room数据库的使用</h1>
-                </div>
-            
-        </a>
+          </div>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年11月21日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.6k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 8 分钟</a>
+          
         </div>
-
-        <article>
-            
-                <h2 id="关于Android官方的Room数据库框架的使用"><a href="#关于Android官方的Room数据库框架的使用" class="headerlink" title="关于Android官方的Room数据库框架的使用"></a>关于Android官方的Room数据库框架的使用</h2><h6 id="关于Room"><a href="#关于Room" class="headerlink" title="关于Room"></a>关于Room</h6><p> Room是一个对象关系映射(ORM)库。Room抽象了SQLite的使用，可以在充分利用SQLite的同时访问流畅的数据库。<br> Room由三个重要的组件组成：Database、Entity、DAO</p>
-<ul>
-<li>Database：包含数据库持有者，并作为与应用持久关联数据的底层连接的主要访问点。而且Database对应的类必须满足下面几个条件：<br> 1. 必须是abstract类而且的extends RoomDatabase。<ol start="2">
-<li>必须在类头的注释中包含与数据库关联的实体列表(Entity对应的类)。</li>
-<li>包含一个具有0个参数的抽象方法，并返回用@Dao注解的类。</li>
-<li>在运行时，你可以通过Room.databaseBuilder() 或者 Room.inMemoryDatabaseBuilder()获取Database实例。</li>
-</ol>
-</li>
-<li>Entity：代表数据库中某个表的实体类。</li>
-<li>DAO：包含用于访问数据库的方法。</li>
-</ul>
-<h5 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h5><pre><code>def room_version = &quot;2.2.5&quot;
-implementation &quot;androidx.room:room-runtime:$room_version&quot;
-annotationProcessor &quot;androidx.room:room-compiler:$room_version&quot;</code></pre>
-<h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><ol>
-<li><p>首先创建一个Bean类，用来做为数据库的表</p>
-<pre><code>@Entity(indices = &#123;@Index(&quot;BookName&quot;)&#125;)
-public class BookBean &#123;
-
- public BookBean()&#123; &#125;
-
- public BookBean(String name,String autohor,Data data)&#123;
-     this.BookName = name;
-     this.BookAuthor = autohor;
-     this.data = data;
- &#125;
-
- @PrimaryKey(autoGenerate = true)
- private int BookId;
-
- private String BookName;
- private String BookAuthor;
- private static Data data;
-
- public int getBookId() &#123;
-     return BookId;
- &#125;
-
- public void setBookId(int bookId) &#123;
-     BookId = bookId;
- &#125;
-
- public String getBookName() &#123;
-     return BookName;
- &#125;
-
- public void setBookName(String bookName) &#123;
-     BookName = bookName;
- &#125;
-
- public String getBookAuthor() &#123;
-     return BookAuthor;
- &#125;
-
- public void setBookAuthor(String bookAuthor) &#123;
-     BookAuthor = bookAuthor;
- &#125;
-
- public static class Data&#123;
-     private String userName;
-     private int userId;
-
-     public String getUserName() &#123;
-         return userName;
-     &#125;
-
-     public void setUserName(String userName) &#123;
-         this.userName = userName;
-     &#125;
-
-     public int getUserId() &#123;
-         return userId;
-     &#125;
-
-     public void setUserId(int userId) &#123;
-         this.userId = userId;
-     &#125;
- &#125;
-&#125;</code></pre>
-<ul>
-<li>@Entityd的注释代表数据库中某个表的实体类。默认情况下Room会把Entity里面所有的字段对应到表上的每一列。如果需要制定某个字段不作为表中的一列需要添加@Ignore注解。</li>
-<li>@Index(“BookName”)代表设置数据库中的索引</li>
-<li>@PrimaryKey的注释代表数据库中的主键</li>
-<li>@PrimaryKey的（autoGenerate = true）表示主键自增</li>
-</ul>
-</li>
-<li><p>接下来就是创建数据库管理类</p>
-<pre><code>@Database(entities = &#123;BookBean.class&#125;, version = 1)
-public abstract class AppDatabase extends RoomDatabase &#123;
- public abstract BookDao userDao();
-
- static final Migration MIGRATION_1_2 = new Migration(1, 2) &#123;
-     @Override
-     public void migrate(SupportSQLiteDatabase database) &#123;
-        database.execSQL(&quot;ALTER TABLE bookBean ADD COLUMN  index_name&#39;BookName&#39; &quot;);
-     &#125;
- &#125;;
-&#125;</code></pre>
-<ul>
-<li>@Database表示当前类为数据库管理类</li>
-<li>entities = {BookBean.class}表示数据库相关的所有Entity实体类，他们会转化成数据库里面的表。</li>
-<li>version = 1表示当前数据库的版本（每当数据库更新时，版本号也要对应增加）</li>
-<li>public abstract BookDao userDao() 这个则是对应数据库的操作类</li>
-<li>static final Migration MIGRATION_1_2 = new Migration(1, 2) 这个是指当数据库升级时，从版本1升级到版本2的升级过程</li>
-</ul>
-</li>
-<li><p>之后就是创建数据库的操作类</p>
-<pre><code>@Dao
-public interface BookDao &#123;
-
- @Query(&quot;SELECT * FROM bookbean&quot;)
- Flowable&lt;List&lt;BookBean&gt;&gt; getAll();
-
- @Query(&quot;SELECT * FROM bookbean WHERE BookId IN (:userIds)&quot;)
- List&lt;BookBean&gt; loadAllByIds(int[] userIds);
-
- @Query(&quot;update bookbean set bookauthor = :value&quot;)
- void setBookAuthor(boolean value);
-
- @Insert
- Completable insertAll(BookBean... users);
-
- @Delete
- Completable delete(BookBean user);
-
- @Update
- Completable updateUsers(BookBean... users);
-&#125;</code></pre>
-<ul>
-<li>@Dao 表示这个组件代表了作为DAO的类或者接口。DAO是Room的主要组件，负责定义访问数据库的方法。Room使用过程中一般使用抽象DAO类来定义数据库的CRUD操作。DAO可以是一个接口也可以是一个抽象类。如果它是一个抽象类，它可以有一个构造函数，它将RoomDatabase作为其唯一参数。Room在编译时创建每个DAO实。</li>
-<li>@Query对应数据库的查询，后接查询语句</li>
-<li>@Insert对应数据库的插入</li>
-<li>@Delete对应数据库的删除</li>
-<li>@Update对应数据库的更新，每次更新都会将没有涉及到的值进行重置</li>
-<li>Completable返回值是为了和RxJava一起使用，如果不使用RxJava则写成void或者对应类型</li>
-<li>Flowable也是一样，不过这个返回类型是支持背压</li>
-</ul>
-</li>
-<li><p>在Activity/Fragment中使用</p>
-<ol>
-<li><p>首先为了防止重复创建数据库，我们创建一个类继承Application</p>
-<pre><code>public class MyApplication extends Application &#123;
-private static AppDatabase db;
-
-@Override
-public void onCreate() &#123;
-    super.onCreate();
-    db = Room.databaseBuilder(getApplicationContext(),
-            AppDatabase.class, &quot;database-name&quot;)
-            //.addMigrations(MIGRATION_1_2)
-            .build();
-    //.allowMainThreadQueries()//允许在主线程中查询
-&#125;
-
-public static AppDatabase getDatabase()&#123;
-    return db;
-&#125;
-&#125;</code></pre>
-</li>
-<li><p>在需要的Activity/Fragment中获取数据库实例</p>
-<pre><code>public class MainActivity extends AppCompatActivity &#123;
-private ActivityMainBinding binding;
-private AppDatabase db;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) &#123;
-  super.onCreate(savedInstanceState);
-  binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-  db = MyApplication.getDatabase();
-&#125;
-</code></pre>
-</li>
-</ol>
-<pre><code>##### RxJava+Room
-一般来说对数据库进行操作是不运行在主线程中执行的，因为当进行大量数据库操作时，可能会堵塞主线程，所以可以配合RxJava来使用
-</code></pre>
-</li>
-</ol>
-<h5 id="添加依赖-1"><a href="#添加依赖-1" class="headerlink" title="添加依赖"></a>添加依赖</h5><pre><code> // RxJava support for Room
-    implementation &quot;androidx.room:room-rxjava2:2.2.5&quot;
-
-    implementation &#39;io.reactivex.rxjava2:rxjava:2.0.6&#39;
-    implementation &#39;io.reactivex.rxjava2:rxandroid:2.0.1&#39;</code></pre>
-<h5 id="使用RxJava来进行数据库操作"><a href="#使用RxJava来进行数据库操作" class="headerlink" title="使用RxJava来进行数据库操作"></a>使用RxJava来进行数据库操作</h5><ul>
-<li><p>增</p>
-<pre><code>Completable completable = db.userDao().insertAll(new BookBean(&quot;HTML(&quot; + i + &quot;)&quot;, &quot;jjj&quot;, data));
-                  completable.subscribeOn(Schedulers.io())
-                          .subscribe(new CompletableObserver() &#123;
-                              @Override
-                              public void onSubscribe(Disposable d) &#123;&#125;
-
-                              @Override
-                              public void onComplete() &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 插入成功&quot;);
-                              &#125;
-
-                              @Override
-                              public void onError(Throwable e) &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 插入失败&quot; + e);
-                              &#125;
-                          &#125;);</code></pre>
-<p>上述操作是往数据库中添加了”一本”书的信息</p>
-</li>
-<li><p>删</p>
-<pre><code>Completable comparable = db.userDao().delete(bean);
-                  comparable.subscribeOn(Schedulers.io())
-                          .subscribe(new CompletableObserver() &#123;
-                              @Override
-                              public void onSubscribe(Disposable d) &#123;
-                              &#125;
-
-                              @Override
-                              public void onComplete() &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 删除数据成功&quot;);
-                              &#125;
-
-                              @Override
-                              public void onError(Throwable e) &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 删除数据失败&quot; + e);
-                              &#125;
-                          &#125;);</code></pre>
-<p>上述操作是往数据库中删除了”全部”书的信息</p>
-</li>
-<li><p>改</p>
-<pre><code>for (BookBean bean : bookBean) &#123;
-                  bean.setBookName(&quot;JAVA&quot;);
-                  Completable completable = db.userDao().updateUsers(bean);
-                  completable.subscribeOn(Schedulers.io())
-                          .subscribe(new CompletableObserver() &#123;
-                              @Override
-                              public void onSubscribe(Disposable d) &#123;
-                              &#125;
-
-                              @Override
-                              public void onComplete() &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 更新数据成功&quot;);
-                              &#125;
-
-                              @Override
-                              public void onError(Throwable e) &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 更新数据失败&quot; + e);
-                              &#125;
-                          &#125;);
-              &#125;</code></pre>
-<p>上述操作是将查询到的数据循环改变BookName的值，在通过数据库操作来更新”全部”数据</p>
-</li>
-<li><p>查</p>
-<pre><code>db.userDao().getAll()
-                      .subscribeOn(Schedulers.io())
-                      .observeOn(AndroidSchedulers.mainThread())
-                      .subscribe(new Consumer&lt;List&lt;BookBean&gt;&gt;() &#123;
-                          @Override
-                          public void accept(List&lt;BookBean&gt; bookBeans) throws Exception &#123;
-                              bookBean = bookBeans;
-                              for (BookBean bean : bookBeans) &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 查询成功,数据为&quot; + bean.toString());
-                              &#125;
-                          &#125;
-                      &#125;);</code></pre>
-<p>上述操作是将查询到的数据”全部”保存起来</p>
-</li>
-</ul>
-<blockquote>
-<p>以上就是全部内容</p>
-</blockquote>
-
-            
-        </article>
+      </div>
     </div>
-    
-</section>
+  </header>
 
-        <div class="nexmoe-post-right">
-          <div class="nexmoe-fixed">
-            <div class="nexmoe-tool">
-              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+  <main>
+    
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 22 篇文章</p>
+  <hr>
+  
+  
+    
+      
+      <p class="h5">2020</p>
+    
+    <a href="/2020/11/21/Room%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Room数据库的使用</span>
+      <time style="float: right;">11-21</time>
+    </a>
+  
+</div>
+
+
+
+
+
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script>
-	hljs.initHighlightingOnLoad();
-</script>
+</div>
+    
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
 
 
-<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- 
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
-<script src="/js/app.js?v=1618458183985"></script>
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
-<script>
-	$(".justified-gallery").justifiedGallery({
-		rowHeight: 160,
-		margins: 10,
-	});
-</script>
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
 
   
 
@@ -448,6 +278,60 @@ protected void onCreate(Bundle savedInstanceState) &#123;
 
 
 
-</body>
 
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
 </html>

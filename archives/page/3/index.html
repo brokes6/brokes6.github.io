@@ -1,609 +1,288 @@
-<!DOCTYPE html>
 
-<html lang="en">
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
 
 <head>
-  
-  <title>Archive - Hexo</title>
   <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="author" content="Fuxinbo">
+  <meta name="keywords" content="">
   
-  
+  <title>归档 - Fuxinbo博客</title>
 
-  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/page/3/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css?v=1618458183978">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<body class="mdui-drawer-body-left">
-  
-  <div id="nexmoe-background">
-    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
-    <div class="mdui-appbar mdui-shadow-0">
-      <div class="mdui-toolbar">
-        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
-        <div class="mdui-toolbar-spacer"></div>
-        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
-       </div>
-    </div>
-  </div>
-  <div id="nexmoe-header">
-      <div class="nexmoe-drawer mdui-drawer" id="drawer">
-    <div class="nexmoe-avatar mdui-ripple">
-        <a href="/" title="John Doe">
-            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
-        </a>
-    </div>
-    <div class="nexmoe-count">
-        <div><span>Articles</span>22</div>
-        <div><span>Tags</span>22</div>
-        <div><span>Categories</span>0</div>
-    </div>
-    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
-            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
-            <div class="mdui-list-item-content">
-                回到首页
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
-            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
-            <div class="mdui-list-item-content">
-                关于博客
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
-            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
-            <div class="mdui-list-item-content">
-                我的朋友
-            </div>
-        </a>
-        
-    </div>
-    <aside id="nexmoe-sidebar">
-  
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-search">
-        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
-            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
-        </form>
-    </div>
-</div>
-  
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-social">
-        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
-            <i class="nexmoefont icon-QQ"></i>
-        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
-            <i class="nexmoefont icon-bilibili"></i>
-        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
-            <i class="nexmoefont icon-github"></i>
-        </a>
-    </div>
-</div>
-  
-  
 
-  
-  
-  <div class="nexmoe-widget-wrap">
-    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
-    </div>
-    
-  </div>
+<body>
+  <header style="height: 60vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
-  
-</aside>
-    <div class="nexmoe-copyright">
-        &copy; 2021 John Doe
-        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-</div><!-- .nexmoe-drawer -->
   </div>
-  <div id="nexmoe-content">
-    <div class="nexmoe-primary">
-        <section class="nexmoe-posts">
-    
-    <div class="nexmoe-post">
-        <a href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/">
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="归档">
+              
+            </span>
+
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="CoordinatorLayout的使用" class="lazyload">
-                    <h1>CoordinatorLayout的使用</h1>
-                </div>
-            
-        </a>
+          </div>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月21日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.1k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+          
         </div>
-
-        <article>
-            
-                <h1 id="CoordinatorLayout的使用"><a href="#CoordinatorLayout的使用" class="headerlink" title="CoordinatorLayout的使用"></a>CoordinatorLayout的使用</h1><h4 id="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"><a href="#本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果" class="headerlink" title="本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果"></a>本篇是讲解CoordinatorLayout的使用，主要目的是用来替代NestedScrollView，使用CoordinatorLayout来达到NestedScrollView嵌套滑动的效果</h4><h6 id="讲解为什么要使用CoordinatorLayout："><a href="#讲解为什么要使用CoordinatorLayout：" class="headerlink" title="讲解为什么要使用CoordinatorLayout："></a>讲解为什么要使用CoordinatorLayout：</h6><ul>
-<li>NestedScrollView角度:<ol>
-<li>首先一般想要嵌套滑动的地方都是嵌套RecyclerView来进行屏幕滑动，但是使用NestedScrollView嵌套RecyclerView会造成当进入页面的时候，RecyclerView会一次性全部展开。RecyclerView会失去复用性。在一些RecyclerView条目数量不多的时候，并不会造成多大的印象，但失去复用性会到时候RecyclerView滑出屏幕外无法被回收，数量一旦过多就会造成性能问题。</li>
-</ol>
-</li>
-<li>CoordinatorLayout角度：<ol>
-<li>使用CoordinatorLayout嵌套RecyclerView也可以达到跟随屏幕一起滑动的效果，并不会造成什么性能问题，并不会丢失特性。</li>
-</ol>
-</li>
-</ul>
-<h6 id="讲解如何使用CoordinatorLayout嵌套RecyclerView："><a href="#讲解如何使用CoordinatorLayout嵌套RecyclerView：" class="headerlink" title="讲解如何使用CoordinatorLayout嵌套RecyclerView："></a>讲解如何使用CoordinatorLayout嵌套RecyclerView：</h6><p>首先CoordinatorLayout是要与AppBarLayout一起使用才能做出许多效果。</p>
-<ul>
-<li><p>AppBarLayout：<br>  1.AppBarLayout用来规划需要要滑出屏幕的控件，被AppBarLayout包裹的控件需要添加（layout_scrollFlags=”scroll”）的属性</p>
-<blockquote>
-<p>layout_scrollFlags=”scroll”：当它滚动的时候，AppBarLayout会回调触发内部设置了layout_scrollFlags=””的控件的滚动行为。<br>scroll：跟随屏幕一起滑动<br>enterAlways：使用enterAlways，必须要带上scroll,否则没有效果，同样使用后面哪一个都要有scroll;使用要两个一块使用,enterAlways决定向下滚动时Scrolling View和Child View之间的滚动优先级问题。<br>enterAlwaysCollapsed：这里涉及到Child View的高度和最小高度，向下滚动时，<br>Child View先向下滚动最小高度值，然后Scrolling View开始滚动，到达边界时，Child View再向下滚动，直至显示完全。</p>
-</blockquote>
-</li>
-<li><p>代码使用：</p>
-<pre><code>&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;&gt;
-
-        &lt;com.google.android.material.appbar.AppBarLayout
-            android:id=&quot;@+id/appbar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            app:elevation=&quot;0dp&quot;&gt;
-
-            &lt;com.youth.banner.Banner
-                android:id=&quot;@+id/Re_banner&quot;
-                android:layout_width=&quot;match_parent&quot;
-                android:layout_height=&quot;200dp&quot;
-                android:layout_marginLeft=&quot;@dimen/dp_10&quot;
-                android:layout_marginTop=&quot;@dimen/dp_10&quot;
-                android:layout_marginRight=&quot;@dimen/dp_10&quot;
-                app:banner_indicator_gravity=&quot;right&quot;
-                app:banner_indicator_marginBottom=&quot;@dimen/dp_7&quot;
-                app:banner_indicator_marginRight=&quot;@dimen/dp_15&quot;
-                app:banner_indicator_normal_color=&quot;@color/White&quot;
-                app:banner_indicator_selected_color=&quot;@color/Pink&quot;
-                app:layout_scrollFlags=&quot;scroll&quot; /&gt;
-
-        &lt;/com.google.android.material.appbar.AppBarLayout&gt;
-
-        &lt;androidx.recyclerview.widget.RecyclerView
-            android:id=&quot;@+id/Re_recy&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:layout_marginLeft=&quot;@dimen/dp_5&quot;
-            android:layout_marginTop=&quot;@dimen/dp_5&quot;
-            android:layout_marginRight=&quot;@dimen/dp_5&quot;
-            app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot; /&gt;
-    &lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
-<p> 这里就是是哟CoordinatorLayou嵌套RecyclerView，将头部的Banner设置layout_scrollFlags=”scroll”，它将会跟随屏幕一起滑动，滑出屏幕外，而RecyclerView设置的layout_behavior=”@string/appbar_scrolling_view_behavior”将会把View设置在AppBarLayout的下方，并且不会随着屏幕的滑动而滑出屏幕之外。</p>
-</li>
-</ul>
-<h6 id="CoordinatorLayou吸附效果："><a href="#CoordinatorLayou吸附效果：" class="headerlink" title="CoordinatorLayou吸附效果："></a>CoordinatorLayou吸附效果：</h6><ul>
-<li><p>CollapsingToolbarLayout</p>
-<ol>
-<li><p>吸附效果是需要CoordinatorLayout与CollapsingToolbarLayout一同使用，并且CollapsingToolbarLayout设置layout_scrollFlags=”scroll|snap”，代表被CollapsingToolbarLayout包裹的内容是需要吸附到屏幕顶部的</p>
-<pre><code>&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
-     android:id=&quot;@+id/TV_nestSc&quot;
-     android:layout_width=&quot;match_parent&quot;
-     android:layout_height=&quot;match_parent&quot;
-     android:background=&quot;#FFFFFF&quot;&gt;
-
-     &lt;com.google.android.material.appbar.AppBarLayout
-         android:id=&quot;@+id/appbar&quot;
-         android:layout_width=&quot;match_parent&quot;
-         android:layout_height=&quot;wrap_content&quot;
-         app:elevation=&quot;0dp&quot;&gt;
-
-         &lt;com.google.android.material.appbar.CollapsingToolbarLayout
-             android:id=&quot;@+id/coll_layout&quot;
-             android:layout_width=&quot;match_parent&quot;
-             android:layout_height=&quot;wrap_content&quot;
-             android:fitsSystemWindows=&quot;true&quot;
-             app:layout_scrollFlags=&quot;scroll|snap&quot;&gt;
-
-             &lt;RelativeLayout
-                 android:layout_width=&quot;match_parent&quot;
-                 android:layout_height=&quot;wrap_content&quot;&gt;
-
-                 &lt;LinearLayout
-                     android:id=&quot;@+id/Sy_text&quot;
-                     android:layout_width=&quot;match_parent&quot;
-                     android:layout_height=&quot;@dimen/dp_35&quot;
-                     android:layout_marginLeft=&quot;@dimen/dp_15&quot;
-                     android:layout_marginTop=&quot;@dimen/dp_10&quot;
-                     android:layout_marginRight=&quot;@dimen/dp_15&quot;
-                     android:layout_weight=&quot;1&quot;
-                     android:background=&quot;@drawable/file_background_radius_30_while_gray&quot;
-                     android:gravity=&quot;center_vertical&quot;
-                     android:orientation=&quot;horizontal&quot;&gt;
-
-                     &lt;ImageView
-                         android:layout_width=&quot;@dimen/dp_24&quot;
-                         android:layout_height=&quot;@dimen/dp_24&quot;
-                         android:layout_marginLeft=&quot;@dimen/dp_15&quot;
-                         android:src=&quot;@drawable/search_24_while&quot; /&gt;
-
-                     &lt;TextView
-                         android:layout_width=&quot;0dp&quot;
-                         android:layout_height=&quot;wrap_content&quot;
-                         android:layout_marginLeft=&quot;@dimen/dp_5&quot;
-                         android:layout_weight=&quot;1&quot;
-                         android:text=&quot;查找精彩动态内容&quot;
-                         android:textColor=&quot;#c1bfc0&quot;
-                         android:textSize=&quot;16sp&quot; /&gt;
-                 &lt;/LinearLayout&gt;
-
-                 &lt;TextView
-                     android:id=&quot;@+id/xian_2&quot;
-                     android:layout_width=&quot;match_parent&quot;
-                     android:layout_height=&quot;@dimen/dp_1&quot;
-                     android:layout_below=&quot;@+id/Sy_text&quot;
-                     android:layout_marginTop=&quot;@dimen/dp_10&quot;
-                     android:background=&quot;#e7e7e7&quot; /&gt;
-
-             &lt;/RelativeLayout&gt;
-
-         &lt;/com.google.android.material.appbar.CollapsingToolbarLayout&gt;
-
-     &lt;/com.google.android.material.appbar.AppBarLayout&gt;
-
-     &lt;LinearLayout
-         android:layout_width=&quot;match_parent&quot;
-         android:layout_height=&quot;match_parent&quot;
-         android:animateLayoutChanges=&quot;true&quot;
-         android:orientation=&quot;vertical&quot;
-         app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;&gt;
-
-         &lt;androidx.recyclerview.widget.RecyclerView
-             android:id=&quot;@+id/Recy_dynamic&quot;
-             android:layout_width=&quot;match_parent&quot;
-             android:layout_height=&quot;match_parent&quot;
-             android:background=&quot;#f4f4f4&quot; /&gt;
-     &lt;/LinearLayout&gt;
-
- &lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
-<p>吸附效果就是在滑动屏幕的时候，被CollapsingToolbarLayout包裹的内容在接近屏幕顶端的时候会有个吸附效果，之后就会一直吸在屏幕顶端，除非下滑脱离。</p>
-</li>
-</ol>
-</li>
-</ul>
-
-            
-        </article>
+      </div>
     </div>
+  </header>
+
+  <main>
     
-    <div class="nexmoe-post">
-        <a href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="MVP 设计模式" class="lazyload">
-                    <h1>MVP 设计模式</h1>
-                </div>
-            
-        </a>
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年09月18日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.5k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 7 分钟</a>
-        </div>
-
-        <article>
-            
-                <h3 id="MVP-设计模式"><a href="#MVP-设计模式" class="headerlink" title="MVP 设计模式"></a>MVP 设计模式</h3><h5 id="原理："><a href="#原理：" class="headerlink" title="原理："></a>原理：</h5><p>MVP是有MVC演变而来的，因为在Android中用MVC来写的时候，Activity到底是View层还是Controller层真的是傻傻分不去清楚，所以基本它就把这两层的活都自己一个人干了，这样一来Activity上的代码量会非常大，Controller层和View层没有实现解耦分离开来，如果后面这两层代码其中一层出了问题你就可能两层都的修改，代码是没什么重用性可言的。而MVP的出现就是为了解决这些问题的，MVP模式将Controller的工作抽取出来交给Presenter层，Presenter层负责控制处理业务逻辑，作为中间层建立起Model层和View层的联系，从而实现三层交互。这么说确实挺难让人理解的，下面就通过一个例子，在例子中夹杂着解释让我们掌握MVP的用法吧。</p>
-<h5 id="属性：（我就拿登录来当作例子）"><a href="#属性：（我就拿登录来当作例子）" class="headerlink" title="属性：（我就拿登录来当作例子）"></a>属性：（我就拿登录来当作例子）</h5><ul>
-<li>Model层：创建用于保存用户信息的实体类User（就是userbean）登录的时候用来保存用户信息，建议也保存到本地一份</li>
-</ul>
-<pre><code>public class User &#123;
-    private String username;  //用户的账号
-    private String password;  //用户的密码
-
-    public String getUsername() &#123;
-        return username;
-    &#125;
-    public void setUsername(String username) &#123;
-        this.username = username;
-    &#125;
-
-    public String getPassword() &#123;
-        return password;
-    &#125;
-    public void setPassword(String password) &#123;
-        this.password = password;
-    &#125;
-&#125;
-</code></pre>
-<ul>
-<li><p>结果回调接口：</p>
-<ol>
-<li>创建一个接口，用来通知登录是否成功（成功的话，就可以把获取到的userbean传递下去）或者 失败</li>
-<li>代码展示：<pre><code>public interface OnLoginListener &#123;
-//登录成功的回调
-void loginSuccess(User user);  //登录成功后，将用户信息传递进去
-//登录失败的回调
-void loginFailed();
-&#125;</code></pre>
-</li>
-</ol>
-</li>
-<li><p>定义业务接口:</p>
-<ol>
-<li>这里抽出一个接口的目的是为了降低一层耦合和便于复用。比如同一个网络请求业务你可以有OkHttp的实现，同时也可以有Retrofit的实现，这样一来就可以方便的做到网络框架的替换，当然你还可以有不同内容的实现。简单来说，就是将登录的这个功能抽取出来，成为一个接口，方便复用。</li>
-<li>代码展示：<pre><code>public interface UserLogin&#123;
-//登录方法
-public void login(String username, String password, OnLoginListener loginListener);
-//这里就传入用户输入的账号，密码，在传入一个登录状况判断的接口
-&#125;</code></pre>
-</li>
-</ol>
-</li>
-<li><p>具体Model的实现类:<br><br>创建一个具体的类，来实现UserLogin的接口，来实现里面的方法</p>
-<pre><code>public class UserGo implements UserLogin &#123;
-  @Override
-  public void login(final String username, final String password, final OnLoginListener loginListener) &#123;
-      //模拟网络请求耗时操作
-      new Thread() &#123;
-          @Override
-          public void run() &#123;
-              //模拟了耗时                
-              try &#123;
-                  Thread.sleep(2000);
-              &#125; catch (InterruptedException e) &#123;
-                  e.printStackTrace();
-              &#125;
-              //模拟登录成功
-              if (&quot;luoqiang&quot;.equals(username) &amp;&amp; &quot;108&quot;.equals(password)) &#123;
-                  User user = new User();
-                  user.setUsername(username);
-                  user.setPassword(password);
-                  loginListener.loginSuccess(user);
-              &#125; else &#123;
-                  loginListener.loginFailed();
-              &#125;
-          &#125;
-      &#125;.start();
-  &#125;
-&#125;</code></pre>
-</li>
-<li><p>View层:</p>
-<ol>
-<li><p>View层不关心数据，不关心逻辑处理！只关心和用户的交互，那么这个登录界面应该有的操作就是：从输入框获取用户名，获取密码，清除用户名，清除密码，登录网络请求时显示进度条，隐藏进度条，登录成功跳转到对应界面，登录失败提示。接下来定义接口如下：</p>
-<blockquote>
-<p>这里并没有将activity来直接当作View层，原因也是为了方便复用，那个Fragment/Activity需要用到登录，就实现这个接口就行了。</p>
-</blockquote>
-<pre><code>public interface UserLoginView &#123;
- String getUserName();
- //获取用户输入的账号
- String getPassword();
- //获取用户输入的密码
- void clearUserName();
- //清除用户输入的账号
- void clearPassword();
- //清除用户输入的密码
- void showLoading();
- //显示加载（一般来说，我都会在BaseActivity/BaseFragment中实现Loading的显示和隐藏，这里就没必要在写）
- void hideLoading();
- //隐藏加载
- void toMainActivity(User user);
- //跳转到主页，顺便传递用户信息
- void showFaileTips();
- //登录失败的提示
-&#125;
-</code></pre>
-</li>
-<li><p>具体的用法：</p>
-<pre><code>public class UserLoginActivity extends AppCompatActivity implements UserLoginView &#123;
-private EditText mEtUsername, mEtPassword;
-private Button mBtnLogin, mBtnClear;
-private ProgressBar mPbLoading;
-private UserLoginPresenter mUserLoginPresenter;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) &#123;
- super.onCreate(savedInstanceState);
- setContentView(R.layout.activity_main);
-//关于Presenter层，都可以写在BaseActivtiy/BaseFragment中，没必要写在Activity中
- mUserLoginPresenter = new UserLoginPresenter(this);
- //获取Presenter层
- initViews();
-&#125;
-
-private void initViews() &#123;
- mEtUsername = findViewById(R.id.et_username);
- mEtPassword = findViewById(R.id.et_password);
- mBtnClear = findViewById(R.id.btn_clear);
- mBtnLogin = findViewById(R.id.btn_login);
- mPbLoading = findViewById(R.id.pb_loading);
- mBtnLogin.setOnClickListener(new View.OnClickListener() &#123;
-     @Override
-     public void onClick(View v) &#123;
-         mUserLoginPresenter.login();
-     &#125;
- &#125;);
- mBtnClear.setOnClickListener(new View.OnClickListener() &#123;
-     @Override
-     public void onClick(View v) &#123;
-         mUserLoginPresenter.clear();
-     &#125;
- &#125;);
-&#125;
-
-@Override
-public String getUserName() &#123;
- return mEtUsername.getText().toString();
-&#125;
-
-@Override
-public String getPassword() &#123;
- return mEtPassword.getText().toString();
-&#125;
-
-@Override
-public void clearUserName() &#123;
- mEtUsername.setText(&quot;&quot;);
-&#125;
-
-@Override
-public void clearPassword() &#123;
- mEtPassword.setText(&quot;&quot;);
-&#125;
-
-@Override
-public void showLoading() &#123;
- mPbLoading.setVisibility(View.VISIBLE);
-&#125;
-
-@Override
-public void hideLoading() &#123;
- mPbLoading.setVisibility(View.GONE);
-&#125;
-
-@Override
-public void toMainActivity(User user) &#123;
- Toast.makeText(this, &quot;跳转到登录成功页面&quot;, Toast.LENGTH_SHORT).show();
-&#125;
-
-@Override
-public void showFaileTips() &#123;
- Toast.makeText(this, &quot;登录失败&quot;, Toast.LENGTH_SHORT).show();
-&#125;
-
-@Override
-protected void onDestroy() &#123;
- super.onDestroy();
- //为了防止内存泄漏，解绑Presenter层对View层的引用，这里的将Presenter层置为空可以在BaseActivity/BaseFragment中进行操作
- mUserLoginPresenter.detachView();
-&#125;
-&#125;
-</code></pre>
-</li>
-</ol>
-</li>
-<li><p>Presenter层:</p>
-<ol>
-<li><p>Presenter的作用就是从View层获取用户的输入，传递到Model层进行处理，然后回调给View层，输出给用户！</p>
-</li>
-<li><p>Presenter一般来说，就是将View和Mode集合在一起，进行操作</p>
-<pre><code>public class UserLoginPresenter &#123;
-private UserGo userGo;
-private UserLoginView userLoginView;
-private Handler mHandler = new Handler();
-//对应视图页面销毁的标志位,当视图销毁后回调就不需要处理了
-private boolean destroyFlag;
-
-//Presenter必须要能拿到View和Model的实现类
-public UserLoginPresenter(IUserLoginView userLoginView) &#123;
- this.userLoginView = userLoginView;
- this. userGo = new UserGo();
-&#125;
-
-public void login() &#123;
- userLoginView.showLoading();
- userGo.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() &#123;
-     @Override
-     public void loginSuccess(final User user) &#123;
-         if (!destroyFlag) &#123; //View层销毁后不需要处理的判断
-             //需要在UI线程执行
-             mHandler.post(new Runnable() &#123;
-                 @Override
-                 public void run() &#123;
-                     userLoginView.toMainActivity(user);
-                     userLoginView.hideLoading();
-                 &#125;
-             &#125;);
-         &#125;
-     &#125;
-
-     @Override
-     public void loginFailed() &#123;
-         if (!destroyFlag) &#123; //View层销毁后不需要处理的判断
-             //需要在UI线程执行
-             mHandler.post(new Runnable() &#123;
-                 @Override
-                 public void run() &#123;
-                     userLoginView.showFaileTips();
-                     userLoginView.hideLoading();
-                 &#125;
-             &#125;);
-         &#125;
-     &#125;
- &#125;);
-&#125;
-
-public void clear() &#123;
- userLoginView.clearUserName();
- userLoginView.clearPassword();
-&#125;
-
-//解绑视图
-public void detachView() &#123;
- destroyFlag = true;
- this.userLoginView = null;
-&#125;
-&#125;
-</code></pre>
-</li>
-</ol>
-</li>
-</ul>
-
-            
-        </article>
-    </div>
-    
-</section>
-
-    <nav class="nexmoe-page-nav">
-      <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="nexmoefont icon-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-    </nav>
+<div class="list-group">
+  <p class="h4">共计 22 篇文章</p>
+  <hr>
   
-        <div class="nexmoe-post-right">
-          <div class="nexmoe-fixed">
-            <div class="nexmoe-tool">
-              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+  
+    
+      
+      <p class="h5">2020</p>
+    
+    <a href="/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">CoordinatorLayout的使用</span>
+      <time style="float: right;">09-21</time>
+    </a>
+  
+    
+    <a href="/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">MVP 设计模式</span>
+      <time style="float: right;">09-18</time>
+    </a>
+  
+</div>
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/archives/page/2/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/#board">2</a><span class="page-number current">3</span>
+    </span>
+  </nav>
+
+
+
+
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script>
-	hljs.initHighlightingOnLoad();
-</script>
+</div>
+    
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
 
 
-<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- 
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
-<script src="/js/app.js?v=1618458183978"></script>
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
-<script>
-	$(".justified-gallery").justifiedGallery({
-		rowHeight: 160,
-		margins: 10,
-	});
-</script>
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
 
   
 
@@ -611,6 +290,60 @@ public void detachView() &#123;
 
 
 
-</body>
 
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
 </html>

@@ -1,319 +1,459 @@
-<!DOCTYPE html>
 
-<html lang="en">
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
 
 <head>
-  
-  <title>广播通知强制下线 - Hexo</title>
   <meta charset="UTF-8">
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Fuxinbo">
+  <meta name="keywords" content="">
+  
+  <title>广播通知强制下线 - Fuxinbo博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
   
 
-  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta name="description" content="关于使用广播通知强制下线的功能关于在那里创建广播接收器例子：一个账号已经登录，在另一个手机上再一次登录这个账号，这时候就需要提醒用户“账号有在别处登录，请重新登录”，强制下线，跳转到登录界面。  个人认为应该在Base类中创建广播接收器，并销毁，这样就可以在任何地方响应广播 广播类型应该为动态添加  下面我将在BaseActivity中创建  private JudgeLoginReceiver">
-<meta property="og:type" content="article">
-<meta property="og:title" content="广播通知强制下线">
-<meta property="og:url" content="http://example.com/2020/10/21/%E5%B9%BF%E6%92%AD%E9%80%9A%E7%9F%A5%E5%BC%BA%E5%88%B6%E4%B8%8B%E7%BA%BF/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="关于使用广播通知强制下线的功能关于在那里创建广播接收器例子：一个账号已经登录，在另一个手机上再一次登录这个账号，这时候就需要提醒用户“账号有在别处登录，请重新登录”，强制下线，跳转到登录界面。  个人认为应该在Base类中创建广播接收器，并销毁，这样就可以在任何地方响应广播 广播类型应该为动态添加  下面我将在BaseActivity中创建  private JudgeLoginReceiver">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-10-21T10:06:00.000Z">
-<meta property="article:modified_time" content="2020-10-21T11:05:47.155Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Android">
-<meta property="article:tag" content="Function">
-<meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1618458183809">
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<body class="mdui-drawer-body-left">
-  
-  <div id="nexmoe-background">
-    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
-    <div class="mdui-appbar mdui-shadow-0">
-      <div class="mdui-toolbar">
-        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
-        <div class="mdui-toolbar-spacer"></div>
-        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
-       </div>
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
   </div>
-  <div id="nexmoe-header">
-      <div class="nexmoe-drawer mdui-drawer" id="drawer">
-    <div class="nexmoe-avatar mdui-ripple">
-        <a href="/" title="John Doe">
-            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
-        </a>
-    </div>
-    <div class="nexmoe-count">
-        <div><span>Articles</span>22</div>
-        <div><span>Tags</span>22</div>
-        <div><span>Categories</span>0</div>
-    </div>
-    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
-            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
-            <div class="mdui-list-item-content">
-                回到首页
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
-            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
-            <div class="mdui-list-item-content">
-                关于博客
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
-            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
-            <div class="mdui-list-item-content">
-                我的朋友
-            </div>
-        </a>
-        
-    </div>
-    <aside id="nexmoe-sidebar">
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="广播通知强制下线">
+              
+            </span>
+
+            
+              <div class="mt-3">
   
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-search">
-        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
-            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
-        </form>
-    </div>
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-10-21 18:06" pubdate>
+        2020年10月21日 晚上
+      </time>
+    </span>
+  
 </div>
+
+<div class="mt-1">
   
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-social">
-        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
-            <i class="nexmoefont icon-QQ"></i>
-        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
-            <i class="nexmoefont icon-bilibili"></i>
-        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
-            <i class="nexmoefont icon-github"></i>
-        </a>
-    </div>
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      591 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8
+       分钟
+    </span>
+  
+
+  
+  
 </div>
-  
-  
 
-  
-  
-  <div class="nexmoe-widget-wrap">
-    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
-    </div>
-    
-  </div>
+            
+          </div>
 
-  
-</aside>
-    <div class="nexmoe-copyright">
-        &copy; 2021 John Doe
-        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
-        
-    </div>
-</div><!-- .nexmoe-drawer -->
-  </div>
-  <div id="nexmoe-content">
-    <div class="nexmoe-primary">
-        <div class="nexmoe-post">
-
-  <div class="nexmoe-post-right">
-    
-  </div>
-
-  <article>
-    
-        <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
-            <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="广播通知强制下线" class="lazyload">
-            <h1>广播通知强制下线</h1>
+          
         </div>
-    
-    
-    <div class="nexmoe-post-meta nexmoe-rainbow-fill" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2020年10月21日</a>
-    <a><i class="nexmoefont icon-areachart"></i>584 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
-</div>
+      </div>
+    </div>
+  </header>
 
-    <h2 id="关于使用广播通知强制下线的功能"><a href="#关于使用广播通知强制下线的功能" class="headerlink" title="关于使用广播通知强制下线的功能"></a>关于使用广播通知强制下线的功能</h2><h5 id="关于在那里创建广播接收器"><a href="#关于在那里创建广播接收器" class="headerlink" title="关于在那里创建广播接收器"></a>关于在那里创建广播接收器</h5><p>例子：一个账号已经登录，在另一个手机上再一次登录这个账号，这时候就需要提醒用户“账号有在别处登录，请重新登录”，强制下线，跳转到登录界面。</p>
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">广播通知强制下线</h1>
+            
+            <div class="markdown-body">
+              <h2 id="关于使用广播通知强制下线的功能"><a href="#关于使用广播通知强制下线的功能" class="headerlink" title="关于使用广播通知强制下线的功能"></a>关于使用广播通知强制下线的功能</h2><h5 id="关于在那里创建广播接收器"><a href="#关于在那里创建广播接收器" class="headerlink" title="关于在那里创建广播接收器"></a>关于在那里创建广播接收器</h5><p>例子：一个账号已经登录，在另一个手机上再一次登录这个账号，这时候就需要提醒用户“账号有在别处登录，请重新登录”，强制下线，跳转到登录界面。</p>
 <ul>
 <li>个人认为应该在Base类中创建广播接收器，并销毁，这样就可以在任何地方响应广播</li>
 <li>广播类型应该为动态添加</li>
 </ul>
 <p>下面我将在BaseActivity中创建</p>
-<pre><code> private JudgeLoginReceiver judgeLoginReceiver;
- public static String signInAction = &quot;LOGIN.DilDil.ACTION&quot;;
-
- @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) &#123;
-        super.onCreate(savedInstanceState);
-        onCreateView(savedInstanceState);
-            ...
-        initBroadcastReceiver();
-    &#125;
-
-    private void initBroadcastReceiver() &#123;
-        if (judgeLoginReceiver != null) &#123;
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(signInAction);
-            registerReceiver(judgeLoginReceiver, intentFilter);
-        &#125; else &#123;
-            judgeLoginReceiver = new JudgeLoginReceiver();
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(signInAction);
-            registerReceiver(judgeLoginReceiver, intentFilter);
-        &#125;
-    &#125;
-
-     @Override
-    protected void onDestroy() &#123;
-        if (judgeLoginReceiver != null) &#123;
-            unregisterReceiver(judgeLoginReceiver);
-        &#125;
-        super.onDestroy();
-    &#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private JudgeLoginReceiver judgeLoginReceiver;</span><br><span class="line">public static String signInAction &#x3D; &quot;LOGIN.DilDil.ACTION&quot;;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">   protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</span><br><span class="line">       super.onCreate(savedInstanceState);</span><br><span class="line">       onCreateView(savedInstanceState);</span><br><span class="line">   		...</span><br><span class="line">       initBroadcastReceiver();</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   private void initBroadcastReceiver() &#123;</span><br><span class="line">       if (judgeLoginReceiver !&#x3D; null) &#123;</span><br><span class="line">           IntentFilter intentFilter &#x3D; new IntentFilter();</span><br><span class="line">           intentFilter.addAction(signInAction);</span><br><span class="line">           registerReceiver(judgeLoginReceiver, intentFilter);</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           judgeLoginReceiver &#x3D; new JudgeLoginReceiver();</span><br><span class="line">           IntentFilter intentFilter &#x3D; new IntentFilter();</span><br><span class="line">           intentFilter.addAction(signInAction);</span><br><span class="line">           registerReceiver(judgeLoginReceiver, intentFilter);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">    @Override</span><br><span class="line">   protected void onDestroy() &#123;</span><br><span class="line">       if (judgeLoginReceiver !&#x3D; null) &#123;</span><br><span class="line">           unregisterReceiver(judgeLoginReceiver);</span><br><span class="line">       &#125;</span><br><span class="line">       super.onDestroy();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>上面的代码中，我首先创建了要响应的Action（signInAction），之后在onCreate中初始化广播。<br>在initBroadcastReceiver中，为了防止反复创建，于是判断是否已经存在，没有就创建，有就直接注册。别忘了要在onDestroy取消注册</p>
 <h5 id="接下来还需要创建一个类来继承BroadcastReceiver"><a href="#接下来还需要创建一个类来继承BroadcastReceiver" class="headerlink" title="接下来还需要创建一个类来继承BroadcastReceiver"></a>接下来还需要创建一个类来继承BroadcastReceiver</h5><p>那么创建一个名为JudgeLoginReceiver的类来继承BroadcastReceiver</p>
-<pre><code>private static class JudgeLoginReceiver extends BroadcastReceiver &#123;
-
-        @Override
-        public void onReceive(Context context, Intent intent) &#123;
-            new MaterialDialog.Builder(context)
-                    .title(R.string.loginWarning)
-                    .content(R.string.thisAccountHasSigned)
-                    .positiveText(R.string.determine)
-                    .cancelable(false)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() &#123;
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) &#123;
-                            ApiService apiService = ApiEngine.getInstance().getApiService();
-                            apiService.Logout()
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(new Observer&lt;LogoutBean&gt;() &#123;
-                                        @Override
-                                        public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) &#123;
-
-                                        &#125;
-
-                                        @Override
-                                        public void onNext(@io.reactivex.annotations.NonNull LogoutBean logoutBean) &#123;
-                                            SharePreferenceUtil.getInstance(context).remove(&quot;cookie&quot;);
-                                            ActivityUtils.startActivity(LoginActivity.class);
-                                        &#125;
-
-                                        @Override
-                                        public void onError(@io.reactivex.annotations.NonNull Throwable e) &#123;
-                                            XToastUtils.error(R.string.networkError);
-                                        &#125;
-
-                                        @Override
-                                        public void onComplete() &#123;
-
-                                        &#125;
-                                    &#125;);
-                        &#125;
-                    &#125;)
-                    .show();
-        &#125;
-    &#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">private static class JudgeLoginReceiver extends BroadcastReceiver &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">            new MaterialDialog.Builder(context)</span><br><span class="line">                    .title(R.string.loginWarning)</span><br><span class="line">                    .content(R.string.thisAccountHasSigned)</span><br><span class="line">                    .positiveText(R.string.determine)</span><br><span class="line">                    .cancelable(false)</span><br><span class="line">                    .onPositive(new MaterialDialog.SingleButtonCallback() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) &#123;</span><br><span class="line">                            ApiService apiService &#x3D; ApiEngine.getInstance().getApiService();</span><br><span class="line">                            apiService.Logout()</span><br><span class="line">                                    .subscribeOn(Schedulers.io())</span><br><span class="line">                                    .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                                    .subscribe(new Observer&lt;LogoutBean&gt;() &#123;</span><br><span class="line">                                        @Override</span><br><span class="line">                                        public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) &#123;</span><br><span class="line"></span><br><span class="line">                                        &#125;</span><br><span class="line"></span><br><span class="line">                                        @Override</span><br><span class="line">                                        public void onNext(@io.reactivex.annotations.NonNull LogoutBean logoutBean) &#123;</span><br><span class="line">                                            SharePreferenceUtil.getInstance(context).remove(&quot;cookie&quot;);</span><br><span class="line">                                            ActivityUtils.startActivity(LoginActivity.class);</span><br><span class="line">                                        &#125;</span><br><span class="line"></span><br><span class="line">                                        @Override</span><br><span class="line">                                        public void onError(@io.reactivex.annotations.NonNull Throwable e) &#123;</span><br><span class="line">                                            XToastUtils.error(R.string.networkError);</span><br><span class="line">                                        &#125;</span><br><span class="line"></span><br><span class="line">                                        @Override</span><br><span class="line">                                        public void onComplete() &#123;</span><br><span class="line"></span><br><span class="line">                                        &#125;</span><br><span class="line">                                    &#125;);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;)</span><br><span class="line">                    .show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>继承BroadcastReceiver之后需要重写onReceive方法，这个方法是用来处理接收到广播之后的行为。<br>我在onReceive中创建了一个提示框。</p>
-<pre><code>title 是提示框的标题
-content 是内容
-positiveText 是确定按钮的文字
-cancelable 是指是否可以点击外面退出
-onPositive 是指确实按钮的点击监听
-不写取消按钮就默认没有取消按钮</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title 是提示框的标题</span><br><span class="line">content 是内容</span><br><span class="line">positiveText 是确定按钮的文字</span><br><span class="line">cancelable 是指是否可以点击外面退出</span><br><span class="line">onPositive 是指确实按钮的点击监听</span><br><span class="line">不写取消按钮就默认没有取消按钮</span><br></pre></td></tr></table></figure>
+
 <p>接下来，我在点击事件中获取Api接口，调用了退出登录的方法，并处理结果。</p>
 
-  </article>
-
-  
-    
-  <div class="nexmoe-post-copyright">
-    <strong>Author：</strong>John Doe<br>
-    <strong>Link：</strong><a href="http://example.com/2020/10/21/%E5%B9%BF%E6%92%AD%E9%80%9A%E7%9F%A5%E5%BC%BA%E5%88%B6%E4%B8%8B%E7%BA%BF/" title="http:&#x2F;&#x2F;example.com&#x2F;2020&#x2F;10&#x2F;21&#x2F;%E5%B9%BF%E6%92%AD%E9%80%9A%E7%9F%A5%E5%BC%BA%E5%88%B6%E4%B8%8B%E7%BA%BF&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2020&#x2F;10&#x2F;21&#x2F;%E5%B9%BF%E6%92%AD%E9%80%9A%E7%9F%A5%E5%BC%BA%E5%88%B6%E4%B8%8B%E7%BA%BF&#x2F;</a><br>
-    
-      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
-    
-  </div>
-
-
-  
-  
-  <div class="nexmoe-post-meta nexmoe-rainbow">
-    
-    
-        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Android/" rel="tag">Android</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Function/" rel="tag">Function</a>
-    
-</div>
-
-  <div class="nexmoe-post-footer">
-    <section class="nexmoe-comment">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
-<div id="gitalk"></div>
-<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
-<script type="text/javascript">
-    var gitalk = new Gitalk({
-        clientID: '80b2453b6d5f37ad6225',
-        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
-        id: window.location.pathname,
-        repo: 'nexmoe.github.io',
-        owner: 'nexmoe',
-        admin: 'nexmoe'
-    })
-    gitalk.render('gitalk')
-</script>
-</section>
-  </div>
-</div>
-        <div class="nexmoe-post-right">
-          <div class="nexmoe-fixed">
-            <div class="nexmoe-tool">
-              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Android/">Android</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Function/">Function</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2020/11/21/Room%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Room数据库的使用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/10/10/%E5%85%B3%E4%BA%8EDanmakuVideoPlayer%E7%9A%84%E4%BD%BF%E7%94%A8/">
+                        <span class="hidden-mobile">关于DanmakuVideoPlayer的使用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script>
-	hljs.initHighlightingOnLoad();
-</script>
+</div>
+    
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
 
 
-<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- 
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
-<script src="/js/app.js?v=1618458183810"></script>
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
-<script>
-	$(".justified-gallery").justifiedGallery({
-		rowHeight: 160,
-		margins: 10,
-	});
-</script>
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
 
   
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
 
 
 </body>
-
 </html>

@@ -1,2595 +1,861 @@
-<!DOCTYPE html>
 
-<html lang="en">
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
 
 <head>
-  
-  <title>Hexo</title>
   <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  <meta name="author" content="Fuxinbo">
+  <meta name="keywords" content="">
   
-  
+  <title>Fuxinbo博客</title>
 
-  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,gh/theme-nexmoe/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css?v=233" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css">
-  
-  <link rel="stylesheet" href="/css/style.css?v=1618458184011">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.9-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.2.0"></head>
 
-<body class="mdui-drawer-body-left">
-  
-  <div id="nexmoe-background">
-    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
-    <div class="mdui-appbar mdui-shadow-0">
-      <div class="mdui-toolbar">
-        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
-        <div class="mdui-toolbar-spacer"></div>
-        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-        <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
-       </div>
-    </div>
-  </div>
-  <div id="nexmoe-header">
-      <div class="nexmoe-drawer mdui-drawer" id="drawer">
-    <div class="nexmoe-avatar mdui-ripple">
-        <a href="/" title="John Doe">
-            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
-        </a>
-    </div>
-    <div class="nexmoe-count">
-        <div><span>Articles</span>22</div>
-        <div><span>Tags</span>22</div>
-        <div><span>Categories</span>0</div>
-    </div>
-    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
-            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
-            <div class="mdui-list-item-content">
-                回到首页
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
-            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
-            <div class="mdui-list-item-content">
-                关于博客
-            </div>
-        </a>
-        
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
-            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
-            <div class="mdui-list-item-content">
-                我的朋友
-            </div>
-        </a>
-        
-    </div>
-    <aside id="nexmoe-sidebar">
-  
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-search">
-        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
-            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
-        </form>
-    </div>
-</div>
-  
-  <div class="nexmoe-widget-wrap">
-    <div class="nexmoe-widget nexmoe-social">
-        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
-            <i class="nexmoefont icon-QQ"></i>
-        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
-            <i class="nexmoefont icon-bilibili"></i>
-        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
-            <i class="nexmoefont icon-github"></i>
-        </a>
-    </div>
-</div>
-  
-  
 
-  
-  
-  <div class="nexmoe-widget-wrap">
-    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Context/" style="font-size: 10px;">Context</a> <a href="/tags/Error/" style="font-size: 12px;">Error</a> <a href="/tags/Fragment/" style="font-size: 10px;">Fragment</a> <a href="/tags/Function/" style="font-size: 10px;">Function</a> <a href="/tags/Glide/" style="font-size: 10px;">Glide</a> <a href="/tags/Java/" style="font-size: 12px;">Java</a> <a href="/tags/Kotlin/" style="font-size: 16px;">Kotlin</a> <a href="/tags/MVP/" style="font-size: 10px;">MVP</a> <a href="/tags/Money/" style="font-size: 10px;">Money</a> <a href="/tags/NoLimits/" style="font-size: 10px;">NoLimits</a> <a href="/tags/Recycler/" style="font-size: 10px;">Recycler</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Service/" style="font-size: 10px;">Service</a> <a href="/tags/Sql/" style="font-size: 10px;">Sql</a> <a href="/tags/Thread/" style="font-size: 12px;">Thread</a> <a href="/tags/View/" style="font-size: 18px;">View</a> <a href="/tags/ViewModel/" style="font-size: 10px;">ViewModel</a> <a href="/tags/kotlin/" style="font-size: 14px;">kotlin</a> <a href="/tags/syntax/" style="font-size: 10px;">syntax</a> <a href="/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/" style="font-size: 10px;">屏幕适配</a> <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" style="font-size: 10px;">面试题</a>
-    </div>
-    
-  </div>
+<body>
+  <header style="height: 100vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
 
-  
-</aside>
-    <div class="nexmoe-copyright">
-        &copy; 2021 John Doe
-        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
         
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-</div><!-- .nexmoe-drawer -->
   </div>
-  <div id="nexmoe-content">
-    <div class="nexmoe-primary">
-        <section class="nexmoe-posts">
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Fuxinbo的Android博客">
+              
+            </span>
+
+            
+          </div>
+
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
     
-    <div class="nexmoe-post">
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          style=margin-top:0>
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/">Kotlin中使用ViewModel的数据共享</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="Kotlin中使用ViewModel的数据共享" class="lazyload">
-                    <h1>Kotlin中使用ViewModel的数据共享</h1>
-                </div>
-            
+          
+          Kotlin中使用ViewModel的数据共享
+本篇已Kotlin为主要语言
+
+本篇将讲述对于使用ViewModel来进行Fragment之间的数据共享，使用的技术为ViewModel，dataBinding
+依赖对于ViewModel是属于Androidx包下的JetPack组件，所以只需要项目使用了Androidx，就可直接使用，无需引入额外依赖包
+代码教程在进行编码之前想要做一些准备工作，给
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年04月15日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.4k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 7 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-15 10:53" pubdate>
+              2021-04-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="Kotlin中使用ViewModel的数据共享"><a href="#Kotlin中使用ViewModel的数据共享" class="headerlink" title="Kotlin中使用ViewModel的数据共享"></a>Kotlin中使用ViewModel的数据共享</h1><blockquote>
-<p>本篇已Kotlin为主要语言</p>
-</blockquote>
-<p>本篇将讲述对于使用ViewModel来进行Fragment之间的数据共享，使用的技术为ViewModel，dataBinding</p>
-<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>对于ViewModel是属于Androidx包下的JetPack组件，所以只需要项目使用了Androidx，就可直接使用，无需引入额外依赖包</p>
-<h3 id="代码教程"><a href="#代码教程" class="headerlink" title="代码教程"></a>代码教程</h3><p>在进行编码之前想要做一些准备工作，给项目开启dataBinding，在项目级的build.gradle中，defaultConfig闭包下</p>
-<pre><code class="java">defaultConfig&#123;
-    ...
-    dataBinding.enabled = true 
-    ...
-&#125;</code></pre>
-<p>这样就开启了dataBinding了</p>
-<ol>
-<li><p>创建ViewModel</p>
-<pre><code class="kotlin">class MyViewModel : ViewModel() &#123;
-    var number: MutableLiveData&lt;Int&gt; = MutableLiveData(0)
-
-    fun get(): MutableLiveData&lt;Int&gt; &#123;
-        return number
-    &#125;
-
-    fun add(value: Int) &#123;
-        number.value = number.value?.plus(value)
-    &#125;
-
-    fun set(value: Int) &#123;
-        number.value = value
-    &#125;
-&#125;</code></pre>
-<p>创建一个继承ViewModel的类，在这个类中创建一个MutableLiveData的变量，并给他设置获取和设置值的方法</p>
-</li>
-<li><p>在Activity中获取ViewModel</p>
-<pre><code class="kotlin">class MainActivity : AppCompatActivity() &#123;
-   private lateinit var viewModel: MyViewModel
-
-   override fun onCreate(savedInstanceState: Bundle?) &#123;
-       super.onCreate(savedInstanceState)
-       setContentView(R.layout.activity_main)
-       viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
-   &#125;
-&#125;</code></pre>
-<p>获取ViewModel是通过<strong>ViewModelProvider</strong>(this).get(刚刚创建的ViewModel::class.java)</p>
-<blockquote>
-<p>这里原本可以使用<strong>ViewModelProviders</strong>.of(Activity).get(刚刚创建的ViewModel::class.java)，但是ViewModelProviders已经被淘汰了</p>
-</blockquote>
-</li>
-<li><p>接下来就是创建2个Fragment，并在Fragment中获取Activity的ViewModel</p>
-<ol>
-<li><p>BlankFragment</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210104194138.png" alt="image-20210104194137046" class="lazyload"></p>
-</li>
-</ol>
-<pre><code class="kotlin">class BlankFragment : Fragment() &#123;
-   //这里创建了一个变量，将它的值设置为ActivityViewModel，括号里面只需要输入ViewModel类型即可
-   private val viewModel by activityViewModels&lt;MyViewModel&gt;()
-   //这个技就是当前项目的dataBinding（lateinit 代表等下进行初始化）
-   private lateinit var binding: FragmentBlankBinding
-
-   override fun onCreateView(
-       inflater: LayoutInflater, container: ViewGroup?,
-       savedInstanceState: Bundle?
-   ): View &#123;
-       //在这里进行dataBinding的初始化
-       binding = DataBindingUtil.inflate(inflater, R.layout.fragment_blank, container, false)
-       initView()
-       return binding.root
-   &#125;
-
-   private fun initView() &#123;
-       //将获取完的ViewModel传给dataBinding（是因为xml文件设置了属性）
-       binding.data = viewModel
-       //设置统一的生命周期管理为父类Activity
-       binding.lifecycleOwner = activity
-       //点击按钮进行切换Fragment，是通过Navigation进行切换
-       binding.button.setOnClickListener &#123;
-           val controller: NavController = Navigation.findNavController(it)
-           controller.navigate(R.id.action_blankFragment_to_detailFragment)
-       &#125;
-       //下面的？.let&#123;&#125;代表当前对象不为空的时候才会执行&#123;&#125;内的内容
-       viewModel.number.value?.let &#123; binding.seekBar.progress = it &#125;
-       binding.seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener &#123;
-           override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) &#123;//如果插件的值变了
-               viewModel.number.value = p1
-           &#125;
-
-           override fun onStartTrackingTouch(p0: SeekBar?) &#123;//刚开始触摸的时候
-           &#125;
-
-           override fun onStopTrackingTouch(p0: SeekBar?) &#123;//结束触摸
-           &#125;
-
-       &#125;)
-   &#125;
-&#125;</code></pre>
-<p>​    xml：</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-   xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;&gt;
-
-   &lt;data&gt;
-
-       &lt;variable
-           name=&quot;data&quot;
-           type=&quot;com.laboratory.navviewmodel.MyViewModel&quot; /&gt;
-   &lt;/data&gt;
-
-   &lt;androidx.constraintlayout.widget.ConstraintLayout
-       android:id=&quot;@+id/frameLayout&quot;
-       android:layout_width=&quot;match_parent&quot;
-       android:layout_height=&quot;match_parent&quot;&gt;
-
-       &lt;TextView
-           android:id=&quot;@+id/Title&quot;
-           android:layout_width=&quot;wrap_content&quot;
-           android:layout_height=&quot;wrap_content&quot;
-           android:text=&quot;@&#123;String.valueOf(data.get())&#125;&quot;
-           android:textSize=&quot;30sp&quot;
-           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
-           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
-           app:layout_constraintHorizontal_bias=&quot;0.498&quot;
-           app:layout_constraintStart_toStartOf=&quot;parent&quot;
-           app:layout_constraintTop_toTopOf=&quot;parent&quot;
-           app:layout_constraintVertical_bias=&quot;0.222&quot; /&gt;
-
-       &lt;SeekBar
-           android:id=&quot;@+id/seekBar&quot;
-           android:layout_width=&quot;0dp&quot;
-           android:layout_height=&quot;wrap_content&quot;
-           android:layout_margin=&quot;10dp&quot;
-           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
-           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
-           app:layout_constraintHorizontal_bias=&quot;1.0&quot;
-           app:layout_constraintStart_toStartOf=&quot;parent&quot;
-           app:layout_constraintTop_toTopOf=&quot;parent&quot;
-           app:layout_constraintVertical_bias=&quot;0.347&quot; /&gt;
-
-       &lt;Button
-           android:id=&quot;@+id/button&quot;
-           android:layout_width=&quot;wrap_content&quot;
-           android:layout_height=&quot;wrap_content&quot;
-           android:background=&quot;#858A8A&quot;
-           android:text=&quot;进入&quot;
-           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
-           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
-           app:layout_constraintStart_toStartOf=&quot;parent&quot;
-           app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
-   &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
-&lt;/layout&gt;</code></pre>
-<p>使用ConstraintLayout是为了方便进行在Design模式下进行摆放控件，上面说的所需的内容是variable中定义的，控件中就可以使用**@{定义的名称.调用方法}**</p>
-<ol start="2">
-<li><p>DetailFragment</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210104194213.png" alt="image-20210104194213106" class="lazyload"></p>
-</li>
-</ol>
-<pre><code class="kotlin">class DetailFragment : Fragment() &#123;
-   private lateinit var binding : FragmentDetailBinding
-   private val viewModel by activityViewModels&lt;MyViewModel&gt;()
-
-   override fun onCreateView(
-       inflater: LayoutInflater, container: ViewGroup?,
-       savedInstanceState: Bundle?
-   ): View &#123;
-       binding = DataBindingUtil.inflate(inflater,R.layout.fragment_detail,container,false)
-       initView()
-       return binding.root
-   &#125;
-
-   private fun initView() &#123;
-       binding.data = viewModel
-       binding.lifecycleOwner = activity
-       binding.button.setOnClickListener &#123;
-           val controller : NavController = Navigation.findNavController(it)
-           controller.navigate(R.id.action_detailFragment_to_blankFragment)
-       &#125;
-   &#125;
-&#125;</code></pre>
-<p>和上面的Fragment功能差不多，多了两个按钮，进行<strong>增加</strong>和<strong>删除</strong></p>
-<p>xml:</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;layout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-   xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-   xmlns:tools=&quot;http://schemas.android.com/tools&quot;&gt;
-
-   &lt;data&gt;
-       &lt;variable
-           name=&quot;data&quot;
-           type=&quot;com.laboratory.navviewmodel.MyViewModel&quot; /&gt;
-   &lt;/data&gt;
-
-   &lt;androidx.constraintlayout.widget.ConstraintLayout
-       android:layout_width=&quot;match_parent&quot;
-       android:layout_height=&quot;match_parent&quot;
-       tools:context=&quot;.DetailFragment&quot;&gt;
-
-       &lt;TextView
-           android:id=&quot;@+id/textView&quot;
-           android:layout_width=&quot;wrap_content&quot;
-           android:layout_height=&quot;wrap_content&quot;
-           android:text=&quot;@&#123;String.valueOf(data.number)&#125;&quot;
-           android:textSize=&quot;30sp&quot;
-           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
-           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
-           app:layout_constraintHorizontal_bias=&quot;0.498&quot;
-           app:layout_constraintStart_toStartOf=&quot;parent&quot;
-           app:layout_constraintTop_toTopOf=&quot;parent&quot;
-           app:layout_constraintVertical_bias=&quot;0.192&quot; /&gt;
-
-       &lt;Button
-           android:id=&quot;@+id/add&quot;
-           android:layout_width=&quot;wrap_content&quot;
-           android:layout_height=&quot;wrap_content&quot;
-           android:text=&quot;+&quot;
-           android:onClick=&quot;@&#123;()-&gt;data.add(1)&#125;&quot;
-           android:textSize=&quot;30sp&quot;
-           app:layout_constraintBottom_toBottomOf=&quot;@+id/reduce&quot;
-           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
-           app:layout_constraintHorizontal_bias=&quot;0.5&quot;
-           app:layout_constraintStart_toEndOf=&quot;@+id/reduce&quot;
-           app:layout_constraintTop_toTopOf=&quot;@+id/reduce&quot;
-           app:layout_constraintVertical_bias=&quot;0.0&quot; /&gt;
-
-       &lt;Button
-           android:id=&quot;@+id/reduce&quot;
-           android:layout_width=&quot;wrap_content&quot;
-           android:layout_height=&quot;wrap_content&quot;
-           android:text=&quot;-&quot;
-           android:onClick=&quot;@&#123;()-&gt;data.add(-1)&#125;&quot;
-           android:textSize=&quot;30sp&quot;
-           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
-           app:layout_constraintEnd_toStartOf=&quot;@+id/add&quot;
-           app:layout_constraintHorizontal_bias=&quot;0.5&quot;
-           app:layout_constraintStart_toStartOf=&quot;parent&quot;
-           app:layout_constraintTop_toTopOf=&quot;parent&quot;
-           app:layout_constraintVertical_bias=&quot;0.391&quot; /&gt;
-
-       &lt;Button
-           android:id=&quot;@+id/button&quot;
-           android:layout_width=&quot;wrap_content&quot;
-           android:layout_height=&quot;wrap_content&quot;
-           android:text=&quot;返回&quot;
-           app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
-           app:layout_constraintEnd_toEndOf=&quot;parent&quot;
-           app:layout_constraintHorizontal_bias=&quot;0.498&quot;
-           app:layout_constraintStart_toStartOf=&quot;parent&quot;
-           app:layout_constraintTop_toTopOf=&quot;parent&quot;
-           app:layout_constraintVertical_bias=&quot;0.535&quot; /&gt;
-   &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
-&lt;/layout&gt;</code></pre>
-<p>在使用了dataBinding中，连点击事件都可以在xml中设置,只需要想 <strong>onClick=”@{()-&gt;对象.方法}”</strong> 这样去使用</p>
-</li>
-</ol>
-<p>这样全局都是使用统一的ViewModel来获取数据，也就可以进行数据共享</p>
-
+              <a href="/tags/Kotlin/">Kotlin</a>
             
-        </article>
-    </div>
+              <a href="/tags/Android/">Android</a>
+            
+              <a href="/tags/ViewModel/">ViewModel</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/">Fragment懒加载</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="Fragment懒加载" class="lazyload">
-                    <h1>Fragment懒加载</h1>
-                </div>
-            
+          
+          Fragment懒加载
+本篇已Kotlin为主要语言
+
+介绍：懒加载就顾名思义，也就是当前Fragment处于可见的状态时，才会去进行加载，这种情况很适合Fragment嵌套Fragment，下面介绍原因
+
+Activity嵌套Fragment：
+
+
+
+这样当Activity进行创建完Fragment时，这3个Fragment都会运行，执行他们的生命周期。
+
+
+Activity嵌套Fragment
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年04月15日</a>
-            <a><i class="nexmoefont icon-areachart"></i>579 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-15 10:51" pubdate>
+              2021-04-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="Fragment懒加载"><a href="#Fragment懒加载" class="headerlink" title="Fragment懒加载"></a>Fragment懒加载</h1><blockquote>
-<p>本篇已Kotlin为主要语言</p>
-</blockquote>
-<p><strong>介绍</strong>：懒加载就顾名思义，也就是当前Fragment处于可见的状态时，才会去进行加载，这种情况很适合Fragment嵌套Fragment，下面介绍原因</p>
-<ul>
-<li>Activity嵌套Fragment：</li>
-</ul>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201228152428.png" alt="image-20201228152427313" class="lazyload"></p>
-<blockquote>
-<p>这样当Activity进行创建完Fragment时，这3个Fragment都会运行，执行他们的生命周期。</p>
-</blockquote>
-<ul>
-<li>Activity嵌套Fragment嵌套Fragment：</li>
-</ul>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201228152444.png" alt="image-20201228152443555" class="lazyload"></p>
-<blockquote>
-<p>这种情况下，但Fragment_1进行添加并创建Fragment_a,Fragment_b,Fragment_c时，Fragment_b中又会继续创建Fragment_d，Fragment_e，Fragment_f，所以这样会在很多不可见的Fragment中浪费内存和网络。</p>
-</blockquote>
-<blockquote>
-<p>因此我们想要进行Fragment懒加载，只让处于显示状态的Fragment进行加载。</p>
-</blockquote>
-<ul>
-<li>Activity嵌套ViewPager嵌套Fragment</li>
-</ul>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201228153210.png" alt="image-20201228153209898" class="lazyload"></p>
-<blockquote>
-<p>观察上图，我们能发现 ViePager 初始化时，默认会调用其内部 Fragment 的 setUserVisibleHint 方法，因为其预缓存 Fragment 个数为 <code>1</code> 的原因，所以只有 Fragment_1 与 Fragment_2 的生命周期函数被调用。</p>
-</blockquote>
-<h3 id="ViewPager-Fragment模式下的懒加载"><a href="#ViewPager-Fragment模式下的懒加载" class="headerlink" title="ViewPager+Fragment模式下的懒加载"></a>ViewPager+Fragment模式下的懒加载</h3><blockquote>
-<p>在Andoirdx中，之前的setUserVisibleHint 已经无法使用，现在只需要给适配器传递BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT即可，这样，Fragment在重复创建时，则会调用onResume方法</p>
-</blockquote>
-<ol>
-<li><p>创建ViewPager的适配器</p>
-<pre><code class="kotlin">class ViewPagerAdapter(
-    fm: FragmentManager,
-    private val titles: MutableList&lt;String&gt;,
-    private val fragments: MutableList&lt;Fragment&gt;
-) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) &#123;
-
-    override fun getCount(): Int &#123;
-        fragments.size
-    &#125;
-
-    override fun getItem(position: Int): Fragment &#123;
-        return fragments[position]
-    &#125;
-
-    override fun getPageTitle(position: Int): CharSequence? &#123;
-        return titles[position]
-    &#125;
-&#125;</code></pre>
-<p>传入3个参数，一个是Fragment管理器，Fragment集合，Fragment标题，然后将behavior值设置为”BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT”</p>
-<blockquote>
-<p>使用了 <code>BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</code> 后，只有当前可见的 Fragment 才能调用 onResume 方法。</p>
-</blockquote>
-</li>
-<li><p>之后还需要创建一个继承Fragment的类来进行懒加载</p>
-<pre><code class="kotlin">abstract class BaseFragment : Fragment() &#123;
-    /**
-     * 是否执行懒加载
-     */
-    private var isLoaded = false
-    private var mView: View? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-    &#125;
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? &#123;
-        if (mView == null) &#123;
-            mView = initView(inflater, container, savedInstanceState)
-        &#125;
-        return mView
-    &#125;
-
-    abstract fun initView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View
-
-    abstract fun initData()
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) &#123;
-        super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleUser = isVisibleToUser
-        lazyLoad()
-    &#125;
-
-     override fun onResume() &#123;
-        super.onResume()
-        //增加了Fragment是否可见的判断
-        if (!isLoaded &amp;&amp; !isHidden) &#123;
-            initData()
-            isLoaded = true
-        &#125;
-    &#125;
-
-    //在Fragment销毁View的时候，重置状态
-    override fun onDestroyView() &#123;
-        super.onDestroyView()
-        isLoaded = false
-    &#125;
-&#125;</code></pre>
-<p>这样，只有处于可见状态下的Fragment才能触发onResume方法，才可以进行加载数据</p>
-</li>
-</ol>
-<h3 id="ViewPager2-Fragment模式下的懒加载"><a href="#ViewPager2-Fragment模式下的懒加载" class="headerlink" title="ViewPager2+Fragment模式下的懒加载"></a>ViewPager2+Fragment模式下的懒加载</h3>
+              <a href="/tags/View/">View</a>
             
-        </article>
-    </div>
+              <a href="/tags/Android/">Android</a>
+            
+              <a href="/tags/Fragment/">Fragment</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">关于Glide各种问题的解决方案集合（不断更新）</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="关于Glide各种问题的解决方案集合（不断更新）" class="lazyload">
-                    <h1>关于Glide各种问题的解决方案集合（不断更新）</h1>
-                </div>
-            
+          
+          关于Glide各种问题的解决方案集合（不断更新）
+本篇已Java为主要语言
+
+Glide使用
+添加依赖
+12implementation &#x27;com.github.bumptech.glide:glide:4.11.0&#x27;annotationProcessor &#x27;com.github.bumptech.glide:compiler:4.11.0&#x27;
+
+
+
+关于Gl
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年04月15日</a>
-            <a><i class="nexmoefont icon-areachart"></i>243 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-15 10:51" pubdate>
+              2021-04-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="关于Glide各种问题的解决方案集合（不断更新）"><a href="#关于Glide各种问题的解决方案集合（不断更新）" class="headerlink" title="关于Glide各种问题的解决方案集合（不断更新）"></a>关于Glide各种问题的解决方案集合（不断更新）</h1><blockquote>
-<p>本篇已Java为主要语言</p>
-</blockquote>
-<h3 id="Glide使用"><a href="#Glide使用" class="headerlink" title="Glide使用"></a>Glide使用</h3><ol>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/bumptech/glide">添加依赖</a></p>
-<pre><code class="java"> implementation &#39;com.github.bumptech.glide:glide:4.11.0&#39;
- annotationProcessor &#39;com.github.bumptech.glide:compiler:4.11.0&#39;</code></pre>
-</li>
-</ol>
-<h3 id="关于GlideModule的问题"><a href="#关于GlideModule的问题" class="headerlink" title="关于GlideModule的问题"></a>关于GlideModule的问题</h3><ol>
-<li><p>在项目中创建一个<strong>class</strong>文件</p>
-</li>
-<li><p>继承AppGlideModule</p>
-</li>
-<li><p>添加注解@GlideModule</p>
-<pre><code class="java">@GlideModule
-public class MyGlideModule extends AppGlideModule &#123;
-&#125;
-</code></pre>
-</li>
-<li><p>里面并不需要填写内容</p>
-</li>
-</ol>
-<h3 id="替换Glide的请求方式"><a href="#替换Glide的请求方式" class="headerlink" title="替换Glide的请求方式"></a>替换Glide的请求方式</h3><ol>
-<li><p>添加依赖</p>
-<pre><code class="java">implementation &quot;com.github.bumptech.glide:okhttp3-integration:4.11.0&quot;
-implementation &#39;com.squareup.okhttp3:okhttp:4.7.2&#39;</code></pre>
-</li>
-<li><p>在项目中创建一个<strong>class</strong>文件</p>
-</li>
-<li><p>继承AppGlideModule</p>
-</li>
-<li><p>添加注解@GlideModule</p>
-</li>
-<li><p>重写*<strong>registerComponents**<em>和</em></strong>isManifestParsingEnabled***方法</p>
-</li>
-<li><p>在**<em>registerComponents**</em>方法中替换为OkHttp</p>
-<pre><code class="java">@GlideModule
-public class MyGlideModule extends AppGlideModule &#123;
-    @Override
-    public void applyOptions(Context context, GlideBuilder builder) &#123;
-
-    &#125;
-
-    @Override
-    public void registerComponents(Context context, @NotNull Glide glide, Registry registry) &#123;
-        //Glide 底层默认使用 HttpConnection 进行网络请求,这里替换为 Okhttp
-        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(ProgressManager.getInstance().with(new OkHttpClient.Builder()).build()));
-    &#125;
-
-    @Override
-    public boolean isManifestParsingEnabled() &#123;
-        return false;
-    &#125;
-&#125;</code></pre>
-</li>
-</ol>
-
+              <a href="/tags/Error/">Error</a>
             
-        </article>
-    </div>
+              <a href="/tags/Android/">Android</a>
+            
+              <a href="/tags/Glide/">Glide</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/15/AndroidStudio%E9%94%99%E8%AF%AF%E7%BB%9F%E8%AE%A1/">AndroidStudio错误统计</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2021/04/15/AndroidStudio%E9%94%99%E8%AF%AF%E7%BB%9F%E8%AE%A1/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="AndroidStudio错误统计" class="lazyload">
-                    <h1>AndroidStudio错误统计</h1>
-                </div>
-            
+          
+          AndroidStudio错误统计AndroidStudio Canary
+在项目级中的build.gradle中添加项目依赖库，会报错
+123456allprojects &#123;    repositories &#123;        maven &#123; url &#x27;https://maven.google.com&#x27; &#125;        maven &#
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年04月15日</a>
-            <a><i class="nexmoefont icon-areachart"></i>490 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-15 10:49" pubdate>
+              2021-04-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="AndroidStudio错误统计"><a href="#AndroidStudio错误统计" class="headerlink" title="AndroidStudio错误统计"></a>AndroidStudio错误统计</h1><h3 id="AndroidStudio-Canary"><a href="#AndroidStudio-Canary" class="headerlink" title="AndroidStudio Canary"></a>AndroidStudio Canary</h3><ol>
-<li><p>在项目级中的build.gradle中添加项目依赖库，会报错</p>
-<pre><code class="kotlin">allprojects &#123;
-    repositories &#123;
-        maven &#123; url &#39;https://maven.google.com&#39; &#125;
-        maven &#123; url &quot;https://jitpack.io&quot; &#125;
-    &#125;
-&#125;</code></pre>
-<ul>
-<li><p>大概是因为在项目级的gradle中添加的gradle版本过高，取消了allprojects{}引用</p>
-<pre><code class="kotlin">buildscript &#123;
-    ext.kotlin_version = &quot;1.4.31&quot;
-    repositories &#123;
-        google()
-        jcenter()
-    &#125;
-    dependencies &#123;
-        //这里的gradle版本过高
-        classpath &quot;com.android.tools.build:gradle:7.0.0&quot;
-        classpath &quot;org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version&quot;
-    &#125;
-&#125;
-//无法使用
-//allprojects &#123;
-//    repositories &#123;
-//        google()
-//        jcenter()
-//        maven &#123; url &quot;https://jitpack.io&quot; &#125;
-//    &#125;
-//&#125;
-task clean(type: Delete) &#123;
-    delete rootProject.buildDir
-&#125;</code></pre>
-</li>
-</ul>
-</li>
-<li><p>AndroidStudio Canary 可与 AndroidStuid共存</p>
-<ul>
-<li>最好两个都下载，稳定版用来正常开发项目，测试版用来体验新功能</li>
-</ul>
-</li>
-<li><p>ViewPager子页面中开启一个新的Activity，在返回会导致Fragment页面空白</p>
-<blockquote>
-<p>应该是因为View初始化不在onCreateView中，会导致重复初始化View，导致出错</p>
-</blockquote>
-<ul>
-<li><p>把Fragment开启懒加载，把View初始化放在onCreateView中，数据加载放在懒加载中</p>
-<pre><code class="kotlin">abstract class BaseFragment : Fragment() &#123;
-
-    private var isFirstLoad = true
-    private var mView: View? = null
-
-    protected abstract fun createView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View
-
-    protected abstract fun initView()
-
-    protected abstract fun initData()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? &#123;
-        if (mView == null) &#123;
-            mView = createView(inflater, container, savedInstanceState)
-            initView()
-        &#125;
-        return mView
-    &#125;
-
-    override fun onResume() &#123;
-        super.onResume()
-        if (isFirstLoad) &#123;
-            initData()
-            isFirstLoad = false
-        &#125;
-    &#125;
-
-    override fun onDestroyView() &#123;
-        super.onDestroyView()
-        isFirstLoad = true
-    &#125;
-
-&#125;</code></pre>
-</li>
-</ul>
-</li>
-<li><p>采用RecyclerView+GSYVideoPlayer来实现抖音效果时，无法控制和销毁视频</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>在kolitn中使用Room。在创建数据库实体类(appDataBase)的时候，导入相应的实体类时，应使用**::class**</p>
-<pre><code class="kotlin">@Database(entities = [xxx::class], version = 1)
-abstract class AppDatabase : RoomDatabase() &#123;
-&#125;</code></pre>
-</li>
-</ol>
-<ol start="6">
-<li><p>多个Fragment使用Fragment中ViewModel(相同的ViewModel)快捷创建的ViewModel并不是同一个</p>
-<p>这样创建的viewModel是重新创建了一个，并不是使用之前创建的viewModel</p>
-<pre><code class="kotlin">private val viewModel by viewModels&lt;PhotoDetailViewModel&gt;()</code></pre>
-<p>必须要这样创建才可以获取相同的viewModel</p>
-<pre><code class="kotlin">private lateinit var viewModel : PhotoDetailViewModel
- viewModel = ViewModelProvider(activity as PhotoDetailActivity).get(PhotoDetailViewModel::class.java)</code></pre>
-</li>
-</ol>
-<ol start="7">
-<li></li>
-</ol>
-
+              <a href="/tags/Error/">Error</a>
             
-        </article>
-    </div>
+              <a href="/tags/kotlin/">kotlin</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/">关于Android的各个View的介绍</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="关于Android的各个View的介绍" class="lazyload">
-                    <h1>关于Android的各个View的介绍</h1>
-                </div>
-            
+          
+          关于Android的各个View的介绍
+本篇已Kotlin为主要语言
+介绍的功能皆为最新功能
+
+
+Toolbar
+
+设置标题
+1app:title&#x3D;&quot;这里是标题&quot;
+
+设置标题前的图标
+1app:navigationIcon&#x3D;&quot;@drawable&#x2F;ic_baseline_arrow_back&quot;
+
+
+
+是否选择在当前的布局当时是否以
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年04月15日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.1k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-15 10:49" pubdate>
+              2021-04-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="关于Android的各个View的介绍"><a href="#关于Android的各个View的介绍" class="headerlink" title="关于Android的各个View的介绍"></a>关于Android的各个View的介绍</h1><blockquote>
-<p>本篇已Kotlin为主要语言</p>
-<p>介绍的功能皆为最新功能</p>
-</blockquote>
-<ol>
-<li><p><strong><em>Toolbar</em></strong></p>
-<ul>
-<li><p>设置标题</p>
-<pre><code> app:title=&quot;这里是标题&quot;</code></pre>
-</li>
-<li><p>设置标题前的图标</p>
-<pre><code>app:navigationIcon=&quot;@drawable/ic_baseline_arrow_back&quot;</code></pre>
-<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210407182013.png"></p>
-</li>
-<li><p>是否选择在当前的布局当时是否以“视差”的方式来跟随滚动</p>
-<pre><code>app:layout_collapseMode=&quot;pin&quot;</code></pre>
-<blockquote>
-<p>其实就是让这个View的滚动的速度比其他正常滚动的View速度稍微慢一点</p>
-</blockquote>
-<h5 id="关于CollapsingToolbarLayout与Toolbar联动使用"><a href="#关于CollapsingToolbarLayout与Toolbar联动使用" class="headerlink" title="关于CollapsingToolbarLayout与Toolbar联动使用"></a>关于CollapsingToolbarLayout与Toolbar联动使用</h5><ul>
-<li><p>设置上滑到Toolbar高度时，Toolbar的背景以及过度颜色</p>
-<pre><code>app:contentScrim=”?attr/colorPrimary”</code></pre>
-<blockquote>
-<p>当上滑到toolbar 高度期间直到达到toolbar高度时，给toolbar设置的背景色，以及过渡颜色。<em>当然，这里不仅仅可以设置颜色，也可以设置图片。</em> 如果不设置该属性，标题栏会过渡为以之前的图片为背景</p>
-</blockquote>
-</li>
-<li><p>设置Toolbar Title位置</p>
-<pre><code>app:expandedTitleGravity=”center_horizontal”</code></pre>
-</li>
-<li><p>设置Toolbar Title距离开始位置的边距</p>
-<pre><code>app:expandedTitleMarginStart=”50dp”</code></pre>
-</li>
-<li></li>
-</ul>
-</li>
-<li><p>设置Toolbar文字颜色 </p>
-</li>
-</ul>
-</li>
-<li><p><strong>Activity跳转动画</strong></p>
-<ul>
-<li><p>overridePendingTransition()</p>
-<blockquote>
-<p>这个方法用来覆盖即将到来的跳转动画，也就是说使用这个方法可以替换原本的跳转动画</p>
-</blockquote>
-</li>
-<li><p>overridePendingTransition()的调用时机 </p>
-<p>这个方法需要在startActivity()或者finish()之后立即调用</p>
-<pre><code class="kotlin">val intent = Intent(activity, MainActivity::class.java)
-        activity.startActivity(intent)
-        activity.overridePendingTransition(
-            R.anim.anim_slide_enter_bottom,
-            R.anim.anim_no_anim
-        )</code></pre>
-<blockquote>
-<p>overridePendingTransition()需要传入两个参数，第一个为进入动画，第二个为退出动画</p>
-<p>这些资源都需要在anim文件夹中创建</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p><strong>ObjectAnimator</strong></p>
-<ul>
-<li><p>ObjectAnimator派生自ValueAnimator,所以ValueAnimator能用的方法，ObjectAnimator都能用, ObjectAnimator 是ValueAnimator的子类。</p>
-</li>
-<li><p>例子展示</p>
-<pre><code class="kotlin">private val objectAnimator: ObjectAnimator by lazy &#123;
-        ObjectAnimator.ofFloat(binding.ivCover, ANIMATION_PROPERTY_NAME, 0f, 360f).apply &#123;
-            interpolator = LinearInterpolator()
-            duration = DURATION_CD//设置动画时间
-            repeatCount = ANIMATION_REPEAT_COUNTS
-            start()
-        &#125;
-    &#125;</code></pre>
-<blockquote>
-<p><strong>ObjectAnimator.ofFloat</strong>接收4个参数</p>
-<p>第一个：进行动画的View</p>
-<p>第二个：需要进行动画的属性</p>
-<p>第三个：起始值</p>
-<p>第四个：结束值</p>
-</blockquote>
-</li>
-<li><p><em>ObjectAnimator的函数</em></p>
-<ol>
-<li>改变旋转度数 rotation、rotationX、rotationY<ul>
-<li>rotation:表示围绕 Z 旋转,rotation 表示旋转度数</li>
-<li>rotationX:表示围绕X旋转,rotationX表示旋转度数</li>
-<li>rotationY:表示微软Y旋转,rotationY表示旋转度数</li>
-</ul>
-</li>
-<li>移动 translationX、translationY<ul>
-<li>float translationX:表示在X轴上移动的距离，以当前控件为原点，向右为正方向，参数 translationX 表示移动的距离</li>
-<li>float translationY:表示在Y轴上移动的距离，以当前控件为原点，向下位正方向，参数 translationY 表示移动的距离</li>
-</ul>
-</li>
-<li>缩放 scaleX、scaleY<ul>
-<li>float scaleX:在X轴上缩放，scaleX表示缩放倍数</li>
-<li>float scaleY:在Y轴上缩放，scaleY表示缩放倍数</li>
-</ul>
-</li>
-<li>改变透明度 alpha<ul>
-<li>float alpha:控制View的透明度</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p><em>自定义ObjectAnimator的属性</em></p>
-<ul>
-<li><p>只需要确保View需要改变属性有公开的 <strong>set’()</strong> / <strong>get()</strong> 方法即可</p>
-<pre><code class="kotlin">class Circle(  //圆的半径
-    var radius: Int
-)</code></pre>
-<p>接下来只需要给它创建一个set/get方法</p>
-<pre><code class="kotlin">class MyPointView(context: Context?, attrs: AttributeSet?) : View(context, attrs) &#123;
-    private val mCircle: Circle? = Circle(0)
-    protected fun onDraw(canvas: Canvas) &#123;
-        if (mCircle != null) &#123;
-            val paint = Paint()
-            paint.setAntiAlias(true)
-            paint.setColor(Color.RED)
-            paint.setStyle(Paint.Style.FILL)
-            canvas.drawCircle(400, 500, mCircle.getRadius(), paint)
-        &#125;
-        super.onDraw(canvas)
-    &#125;
-
-    //set函数
-    //get函数
-    var circleRadius: Int
-        get() = 800
-        set(radius) &#123;
-            mCircle.setRadius(radius)
-            invalidate()//invalidate()请求重绘View树，也就是刷新View
-        &#125;
-
-&#125; </code></pre>
-<p>在Activity中使用</p>
-<pre><code class="kotlin">val animator = ObjectAnimator.ofInt(view, &quot;circleRadius&quot;, 40, 400)
-        animator.interpolator = BounceInterpolator()
-        animator.duration = 2000
-        animator.start()</code></pre>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>DataBingding与ViewBinding</strong></p>
-<ul>
-<li><p>dataBinding</p>
-<ol>
-<li><p>在Model的build.gradle中开启dataBinding</p>
-<pre><code class="kotlin">android&#123;
-    buildFeatures&#123;
-        dataBinding = true
-    &#125;
-&#125;</code></pre>
-<blockquote>
-<p>在Android Stuio 4.0以上时，只能使用<strong>buildFeatures</strong>来进行管理</p>
-</blockquote>
-</li>
-<li><p>在Xml中开启</p>
-<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210414100322.png"></p>
-<blockquote>
-<p>将光标移到第一行第一位，按下键盘”ALT+ENTER”选择第一个创建binding layout即可</p>
-</blockquote>
-</li>
-<li><p>在Activity中引入</p>
-<pre><code class="kotlin">class MainActivity : BaseActivity(), View.OnClickListener &#123;
-    //先申明为延迟初始化
-    private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-        //使用DataBindingUtil来进行载入布局
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-    &#125;
-&#125;</code></pre>
-</li>
-<li><p>使用</p>
-<pre><code class="kotlin">binding.randomText.text = &quot;当前随机参数为:$&#123;it?.get(0)?.randomName&#125;&quot;
-binding.randomCountLast.text = &quot;随机次数为:$&#123;it?.get(0)?.randomNum&#125;&quot;</code></pre>
-<p>直接使用<em>binding.xxx</em>来引用View</p>
-</li>
-</ol>
-</li>
-<li><p>viewBinding</p>
-<ol>
-<li><p>在Model的build.gradle中开启dataBinding</p>
-<pre><code class="kotlin">android &#123;
-        ...
-        buildFeatures&#123;
-        viewBinding = true
-    &#125;
-&#125; </code></pre>
-</li>
-<li><p>开启之后，系统将会自动的生成绑定类</p>
-</li>
-<li><p>在Activity中使用</p>
-<pre><code class="kotlin">class MainActivity : BaseActivity(), View.OnClickListener &#123;
-    //先申明为延迟初始化
-    private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-        //将不需要指明Layout文件
-        binding = ActivityMainBinding.inflate(layoutInflater)
-    &#125;
-&#125;</code></pre>
-<p>剩下的与dataBinding一致</p>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li></li>
-</ol>
-
+              <a href="/tags/View/">View</a>
             
-        </article>
-    </div>
+              <a href="/tags/kotlin/">kotlin</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/">Kotlin的一些语法</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="Kotlin的一些语法" class="lazyload">
-                    <h1>Kotlin的一些语法</h1>
-                </div>
-            
+          
+          Kotlin的一些语法
+本篇已Kotlin为主要语言
+
+Int
+数组
+
+创建指定大小的空数组
+1var dp = IntArray(n)
+
+创建数组
+1var dp = arrayOf(1,2,3)//相当于 int[1,2,3]
+
+
+
+
+
+
+For
+对一个数字进行循环
+
+循环到那个数字（不包括）
+1for(i in 1 until n)//n就是输入的数字
+
+循环到那个数字（包括）
+1for(i
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年04月15日</a>
-            <a><i class="nexmoefont icon-areachart"></i>540 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-15 10:48" pubdate>
+              2021-04-15
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="Kotlin的一些语法"><a href="#Kotlin的一些语法" class="headerlink" title="Kotlin的一些语法"></a>Kotlin的一些语法</h1><blockquote>
-<p>本篇已Kotlin为主要语言</p>
-</blockquote>
-<h2 id="Int"><a href="#Int" class="headerlink" title="Int"></a><em>Int</em></h2><ul>
-<li><p>数组</p>
-<ul>
-<li><p>创建指定大小的空数组</p>
-<pre><code class="kotlin"> var dp = IntArray(n)</code></pre>
-</li>
-<li><p>创建数组</p>
-<pre><code class="kotlin"> var dp = arrayOf(1,2,3)//相当于 int[1,2,3]</code></pre>
-</li>
-<li></li>
-</ul>
-</li>
-<li></li>
-</ul>
-<h2 id="For"><a href="#For" class="headerlink" title="For"></a><em>For</em></h2><ul>
-<li><p>对一个数字进行循环</p>
-<ul>
-<li><p>循环到那个数字（不包括）</p>
-<pre><code class="kotlin">for(i in 1 until n)//n就是输入的数字</code></pre>
-</li>
-<li><p>循环到那个数字（包括）</p>
-<pre><code class="kotlin">for(i in 1..n)//n就是输入的数字</code></pre>
-</li>
-<li></li>
-</ul>
-</li>
-<li></li>
-</ul>
-<h2 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a><em>Lambda</em></h2><ul>
-<li><p>内联扩展函数</p>
-<ul>
-<li><p><strong>let</strong> </p>
-<pre><code class="kotlin">object.let&#123;
-    //默认是it来代表，可以通过it来访问其公有的属性和方法
-    it.todo()
-&#125;</code></pre>
-<p>使用场景</p>
-<blockquote>
-<p><strong>场景一:</strong> 最常用的场景就是使用let函数处理需要针对一个可null的对象统一做判空处理。</p>
-<p><strong>场景二:</strong> 然后就是需要去明确一个变量所处特定的作用域范围内可以使用 </p>
-</blockquote>
-<pre><code class="kotlin">object?.let &#123;
-       it.todo()
-       it.todo1()
-       it.todo2()
-&#125;</code></pre>
-</li>
-<li><p><strong>with</strong></p>
-<p>是将某对象作为函数的参数，在函数块内可以通过 this 指代该对象。返回值为函数块的最后一行或指定return表达式。</p>
-<pre><code class="kotlin">with(object)&#123;
-   //todo
- &#125;</code></pre>
-<p>例子展示</p>
-<pre><code class="kotlin">override fun onBindViewHolder(holder: ViewHolder, position: Int)&#123;
-   val item = getItem(position)?: return
-
-   with(item)&#123;
-      holder.tvNewsTitle.text = titleEn//这里省略了this.(原本为this.titleEn)
-      holder.tvNewsSummary.text = summary
-      holder.tvExtraInf.text = &quot;难度：$gradeInfo | 单词数：$length | 读后感: $numReviews&quot;
-       ...   
-   &#125;
-&#125;</code></pre>
-<blockquote>
-<p>可以直接调用with(object)的公有属性</p>
-</blockquote>
-</li>
-<li><p><strong>run</strong></p>
-<pre><code class="kotlin">object.run&#123;
-    //todo
-&#125;</code></pre>
-<blockquote>
-<p>run可以说是let和with的结合体，它既可以方便调用，又以最后一行为返回值(或指定的return值)</p>
-</blockquote>
-<p>例子展示</p>
-<pre><code class="kotlin">override fun onBindViewHolder(holder: ViewHolder, position: Int)&#123;
-
-  getItem(position)?.run&#123;
-      holder.tvNewsTitle.text = titleEn
-      holder.tvNewsSummary.text = summary
-       ...   
-   &#125;
-
-&#125;</code></pre>
-<blockquote>
-<p>这里是对上面的with进行改变</p>
-</blockquote>
-</li>
-<li><p><strong>apply</strong> </p>
-<pre><code class="kotlin">object.apply&#123;
-    //todo
-&#125;</code></pre>
-<blockquote>
-<p><strong>apply</strong>和<strong>run</strong>很像，<strong>run</strong>是返回最后一行或者指定返回结果。而<strong>apply</strong>则是对本身进行修改，返回自己</p>
-</blockquote>
-</li>
-<li><p>例子展示</p>
-<pre><code class="kotlin">user.apply&#123;
-    //这些name都是user中的公有属性
-    name = &quot;xxx&quot;
-    age = 10
-    ...
-&#125;</code></pre>
-</li>
-<li><p><strong>also</strong></p>
-<pre><code class="kotlin">object.also&#123;
-    //todo
-&#125;</code></pre>
-<blockquote>
-<p><strong>also</strong>和<strong>let</strong>很像,<strong>also</strong>是返回它本身，<strong>let</strong>是返回最后一行</p>
-</blockquote>
-<p>例子展示</p>
-<pre><code class="kotlin">val adapter = DetailAdapter().also &#123;
-            binding.userRandomList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            binding.userRandomList.adapter = it
-        &#125;</code></pre>
-</li>
-</ul>
-</li>
-<li></li>
-</ul>
-<h2 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a><em>高阶函数</em></h2>
+              <a href="/tags/kotlin/">kotlin</a>
             
-        </article>
-    </div>
+              <a href="/tags/syntax/">syntax</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/">Android面试题笔记</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="Android面试题笔记" class="lazyload">
-                    <h1>Android面试题笔记</h1>
-                </div>
-            
+          
+          Android面试题笔记
+面试题的笔记与自己的看法
+
+数据结构
+数组
+
+是由同一种数据类型组成
+
+存储在连续的内存中
+
+可以使用索引来查找数组中的元素地址
+
+通常有一维数组（也是最常用的，也是最简单的数据结构），多维数组
+
+时间复杂度：
+
+
+
+算法
+平均复杂度
+
+
+
+空间
+O(n)
+
+
+查找
+O(n)
+
+
+插入
+O(n)
+
+
+删除
+O(n)
+
+
+
+
+
+
+
+链表
+
+链表整体看起来是个树型，而不是数组
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年02月18日</a>
-            <a><i class="nexmoefont icon-areachart"></i>7.8k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 33 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-02-18 10:43" pubdate>
+              2021-02-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="Android面试题笔记"><a href="#Android面试题笔记" class="headerlink" title="Android面试题笔记"></a>Android面试题笔记</h1><blockquote>
-<p>面试题的笔记与自己的看法</p>
-</blockquote>
-<h3 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h3><ol>
-<li><p>数组</p>
-<ul>
-<li><p>是由同一种数据类型组成</p>
-</li>
-<li><p>存储在连续的内存中</p>
-</li>
-<li><p>可以使用索引来查找数组中的元素地址</p>
-</li>
-<li><p>通常有一维数组（也是最常用的，也是最简单的数据结构），多维数组</p>
-</li>
-<li><p>时间复杂度：</p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>平均复杂度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>空间</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>查找</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>插入</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>删除</td>
-<td>O(n)</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-</ol>
-<ol start="2">
-<li><p>链表</p>
-<ul>
-<li><p>链表整体看起来是个树型，而不是数组</p>
-</li>
-<li><p>每一个节点都包括一个数组和一个指针</p>
-</li>
-<li><p>节点中的数据类型可以为任意类型 </p>
-</li>
-<li><p>指针就是指向下一节点的引用</p>
-</li>
-<li><p>每个链表都包含一个头节点和一个尾节点</p>
-</li>
-<li><p>头节点就是链表中的第一个节点。尾节点就是链表中最后一个节点</p>
-</li>
-<li><p>头节点和尾节点并不相连，尾节点的指针下一个是结尾（也就是指向空），并不是一个循环数据结构</p>
-</li>
-<li><p>时间复杂度：</p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>平均复杂度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>空间</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>查找</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>插入</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>删除</td>
-<td>O(1)</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>双向链表</p>
-<ul>
-<li><p>一个双向链表首先是一个链表</p>
-</li>
-<li><p>一个双向链表中有一个前驱指针和一个后继指针</p>
-</li>
-<li><p>前驱指针是指向前驱结点（也就是前一个节点）</p>
-</li>
-<li><p>后继指针是指向后继结点（也就是后一个结点）</p>
-</li>
-<li><p>在双向链表中也有一个头结点，头结点是指向第一个节点，最后一个结点指向空</p>
-</li>
-<li><p>如果最后一个结点指向第一个结点，那么这就变成了双向循环链表</p>
-</li>
-<li><p>双向循环链表可以很容易从每个结点查找到它的前驱节点和后继节点</p>
-</li>
-<li><p>时间复杂度：</p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>平均复杂度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>空间</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>查找</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>插入</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>删除</td>
-<td>O(1)</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>栈</p>
-<ul>
-<li><p>是一个有着【后进先出】特性的数据结构</p>
-</li>
-<li><p>也就是最后进栈的元素也是第一个出栈的元素</p>
-</li>
-<li><p>想要得到栈中第一个元素（也就是最下面的元素），就必须要把后面（上面）所有的元素都先出栈，才可以取出第一个元素</p>
-</li>
-<li><p>向栈中添加一个元素的操作被称作Push(入栈)</p>
-</li>
-<li><p>从栈中取出一个元素的操作被称为Pop(出栈)</p>
-</li>
-<li><p>查看且不删除栈中最后一个入栈的元素（也就是最上方的元素）的操作被称为Top</p>
-</li>
-<li><p>时间复杂度：</p>
-<table>
-<thead>
-<tr>
-<th>算法</th>
-<th>平均复杂度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>空间</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>查找</td>
-<td>O(n)</td>
-</tr>
-<tr>
-<td>入栈(Push)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>出栈(Pop)</td>
-<td>O(1)</td>
-</tr>
-<tr>
-<td>查看栈顶(Top)</td>
-<td>O(1)</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>队列</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li></li>
-<li><p>贪婪算法</p>
-<ul>
-<li>贪婪算法也就是在求解一个问题的时候，做出当前最好的解决，而不是全局最好的解决</li>
-<li>这种算法的实现都是在某一方面上局部最优解</li>
-<li>贪婪算法也是不可回退的</li>
-<li>贪婪算法在最优子结构问题中尤为有效，最优子结构也就是局部最优能决定全局最优（问题能分成多个小问题，每个小问题的最优解决能递推到最终问题的最优解）</li>
-<li>当一个问题可以通过贪婪算法解决时，那么贪婪算法一般是解决这个问题的最好解决办法</li>
-</ul>
-</li>
-<li></li>
-</ol>
-<h3 id="Java核心"><a href="#Java核心" class="headerlink" title="Java核心"></a>Java核心</h3><ol>
-<li><p>基本数据类型</p>
-<ul>
-<li><p>byte（数据类型为8位，有符号，以而进程补码的整数，默认值是”0”）</p>
-</li>
-<li><p>short（数据类型位16位，有符号，以二进程补码的整数，默认值是”0”）</p>
-</li>
-<li><p>int（数据类型为32位，有符号，以二进程补码表示的整数，默认值是”0”）</p>
-</li>
-<li><p>long（数据类型为64位，有符号，以二进程补码的整数，默认值是”0L”(L是不区分大小写，为了书写规范，最好写成大写)）</p>
-</li>
-<li><p>float（数据类型为单精度，32位的浮点数，默认值是”0f”）</p>
-</li>
-<li><p>double（数据类型为双精度，64位的浮点数，默认值是”0d”）</p>
-</li>
-<li><p>boolean（数据类型为表示一位的信息，默认值只有两种”true”,”false”）</p>
-</li>
-<li><p>char（数据类型为一个单一的16位Unicode字符，可以存储任意字符）</p>
-<blockquote>
-<p>Unicode是全球统一的字符编码</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>抽象类的概念</p>
-<ul>
-<li>在面向对象的概念中，所有的对象都是用类来描述，但是并不是所有的类都是来描述对象的，当一个类没有足够多的信息来描绘一个对象时，这个类就是一个抽象类</li>
-</ul>
-</li>
-<li><p>抽象的概念</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>继承</p>
-<ul>
-<li>继承可以使子类别具有父类别的各种属性和方法，而不需要去在重复编写相同代码。子类在继承父类的同时，也可以去重新定义某些属性，并重写某些方法，来覆盖父类别的原有属性和方法，使获取和父类别不同的功能。当遇到需要多重继承的时候，可以使用实现接口来实现多继承相似的效果</li>
-</ul>
-</li>
-<li><p>封装</p>
-<ul>
-<li>从字面意思上来讲就是包装的意思，是指利用抽象数据类型，将数据和有关数据操作都封装起来，使它变成一个不可分割的独立体。用户不知道对象内部的细节，但是可以通过该对象提供的接口来进行访问对象。好处是：减少耦合性，方便未来修改</li>
-</ul>
-</li>
-<li><p>多态</p>
-<ul>
-<li>多态就是指一个行为有多个不同的表现形式或形态的能力。多态就是一个接口，使用不同的实例而执行不同的操作（比如说定义了一个接口，它有两个不同的实例对象，使用不同的实例化就可以使用不同的效果）</li>
-</ul>
-</li>
-<li><p>面向对象的三个基本元素和五个原则</p>
-<ol>
-<li>元素<ul>
-<li>继承</li>
-<li>多态</li>
-<li>封装</li>
-</ul>
-</li>
-<li>原则<ul>
-<li>单一职责</li>
-<li>开闭原则</li>
-<li>里氏替换</li>
-<li>依赖倒置</li>
-<li>接口隔离</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>什么是线程，什么是进程？</p>
-<ol>
-<li>进程<ul>
-<li>进程就是程序一次运行的过程，是系统运行程序的基本单位，因此进程是动态的。在java中，当我们运行main函数，其实也就是开启了一个JVM进程</li>
-</ul>
-</li>
-<li>线程<ul>
-<li>线程于进程类似，是一个比进程更小的执行单位，一个进程在执行过程中可以开启多个线程。当运行main函数时，main函数所在的线程就是进程中的一个线程，也就是主线程</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>JDK &amp; JVM &amp; JRE分别是什么以及它们的区别？</p>
-<ol>
-<li><p>JDK</p>
-<ul>
-<li>JDK是整个JAVA开发的核心，是面向开发者使用的SDK，它提供了JAVA的开发环境和运行环境</li>
-</ul>
-</li>
-<li><p>JRE</p>
-<ul>
-<li>JRE就是运行时环境（它主要包含两个部分，JVM的标准实现，JAVA的一些基本类库）</li>
-</ul>
-</li>
-<li><p>JVM</p>
-<ul>
-<li>JVM是JAVA虚拟机，也就是因为它，所以JAVA才拥有跨平台性</li>
-</ul>
-</li>
-<li><p>区别</p>
-<ul>
-<li><p>它们三者的关系为：JDK包含JRE包含JVM</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://i.loli.net/2021/02/16/QnCLmVgM7TbdjD2.png" alt="image-20210216113540235" class="lazyload"></p>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>什么是面向过程 &amp; 什么是面向对象 &amp; 区别？</p>
-<ol>
-<li><p>面向对象</p>
-<ul>
-<li>面向对象是一种对<strong>现实世界理解和抽象</strong>的方法</li>
-</ul>
-</li>
-<li><p>面向过程</p>
-</li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>是一种 <strong>以过程为中心</strong> 的编程思想。这些都是以什么正在发生为主要目标进行编程，不同于面向对象的是谁在受影响。每个过程有一个阶段性的目标，依次完成这些过程，才能得到结果</li>
-</ul>
-<ol start="11">
-<li><p>给我说说Java面向对象的特征</p>
-<ol>
-<li>特点<ul>
-<li>对象具有属性和行为</li>
-<li>对象具有变化和形态</li>
-<li>对象具有唯一性</li>
-<li>对象都是某个类别的实例</li>
-<li>一切皆为对象，真实世界中的所有事物都可以视为对象</li>
-</ul>
-</li>
-<li>三大基本特征<ul>
-<li>继承</li>
-<li>多态</li>
-<li>封装</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>什么是重载 &amp; 什么是重写 &amp; 区别</p>
-<ol>
-<li><p>重载</p>
-<ul>
-<li>重载就是指在同一个类中，方法名相同，而参数不同，返回类型可以相同，也可以不相同</li>
-</ul>
-</li>
-<li><p>重写</p>
-<ul>
-<li>重写是指在方法名相同时，参数也相同，返回类型也相同，但方法内部实现操作不同（一般表示子类与父类之间的关系）</li>
-</ul>
-</li>
-<li><p>区别</p>
-<table>
-<thead>
-<tr>
-<th>区别点</th>
-<th>重载方法</th>
-<th>重写方法</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>参数列表</td>
-<td>必须修改</td>
-<td>一定不能修改</td>
-</tr>
-<tr>
-<td>返回类型</td>
-<td>必须修改</td>
-<td>一定不能修改</td>
-</tr>
-<tr>
-<td>访问修饰符</td>
-<td>不能比父类更严格</td>
-<td>一定不能修改</td>
-</tr>
-<tr>
-<td>方法名</td>
-<td>一致</td>
-<td>一致</td>
-</tr>
-<tr>
-<td>异常</td>
-<td>可以修改</td>
-<td>可以减少或删除，一定不能抛出新的或者更</td>
-</tr>
-<tr>
-<td>访问</td>
-<td>可以修改</td>
-<td>一定不能做更严格的限制（可以降低限制）</td>
-</tr>
-</tbody></table>
-</li>
-</ol>
-</li>
-<li><p>谈谈你对this和super的认识</p>
-<ol>
-<li>this<ul>
-<li>this就是指当前方法的调用者（也就是指当前使用的对象）</li>
-</ul>
-</li>
-<li>super<ul>
-<li>super只是编译期中的一个指示符（也就是被看作是调用父类中被重写的方法，但实际上调用者还是子类对象）</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>接口和抽象类的区别</p>
-<ol>
-<li>接口<ul>
-<li>接口是公开的，不能有私有的变量和方法，接口中的所有方法都<strong>没有方法体</strong>，通过关键字<strong>interface</strong>实现。接口也可以被看做抽象类的变体，接口中所有的方法都是抽象的，可以通过接口来实现多重继承</li>
-</ul>
-</li>
-<li>抽象类<ul>
-<li>抽象类可以拥有私有的方法和变量，通过<strong>abstract</strong>来声明一个类是一个抽象类，被声明为抽象方法<strong>不能包含方法体</strong>。抽象类的子类为父类中<strong>所有抽象方法的具体实现</strong>，否则也是抽象类</li>
-</ul>
-</li>
-<li>相同点<ul>
-<li>都不能被实例化</li>
-<li>接口的实现类或者抽象类的子类都只有实现了<strong>接口或者抽象类中的方法</strong>后才能实例化</li>
-</ul>
-</li>
-<li>不同点<ul>
-<li>接口只能定义，不能有方法的实现。抽象类可以定义也可以实现方法</li>
-<li>实现接口的关键字为implements，继承抽象类的关键字为extends。一个类可以实现多个接口，但只能继承一个抽象类</li>
-<li>接口强调特定功能的实现，抽象类强调所属关系</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>给我说说权限修饰符特性</p>
-<ol>
-<li>public 公开的</li>
-<li>private 类内部使用，外部没有访问权</li>
-<li>protected 继承权限，子类继承父类后，子类有权限访问父类，在不同的包下都可以访问</li>
-<li>default 默认访问权限，在同个包下都可以访问</li>
-</ol>
-</li>
-<li><p>给我谈谈Java中的内部类</p>
-<blockquote>
-<p>在Java中允许在类的内部在创建一个类，这个定义在类内部的类就被称作内部类，包含内部类的类就被称作外部类。内部类可以方便的访问外部类私有属性和方法</p>
-</blockquote>
-<ol>
-<li><p>静态内部类</p>
-<ul>
-<li><p>定义方式为 static class。静态内部类可以直接访问外部类的静态属性和方法，但是不可以访问外部类的实例属性和方法</p>
-<pre><code class="java">public class StaticOutter &#123;
-    private static Integer outterNum = 1;
-
-    private static void outStatic()&#123;
-        System.out.println(&quot;run out static&quot;);
-    &#125;
-
-    public static class StaticInner&#123;
-
-        public void testStaticInner()&#123;
-            System.out.println(&quot;调用外部类的静态方法&quot;);
-            outStatic();
-            System.out.println(&quot;调用外部类的静态属性&quot;);
-            System.out.println(outterNum);
-        &#125;
-
-    &#125;
-
-&#125;</code></pre>
-</li>
-</ul>
-</li>
-<li><p>成员内部类</p>
-<ul>
-<li><p>定义方式为 class。成员内部类除了可以访问外部类的静态属性和方法，还可以访问实例属性和方法，但不可以定义静态变量和静态方法。这里可以吧成员内部类看作一个比较特殊的<strong>实例方法</strong></p>
-<pre><code class="java">public class Outter &#123;
-    private Integer outterNum = 1;
-
-    private void outterMethod()&#123;
-        System.out.println(&quot;运行外部方法......&quot;);
-    &#125;
-
-    public class Inner&#123;
-
-        public void innerMethod()&#123;
-            System.out.println(&quot;outterNum:&quot;+outterNum);
-            System.out.println(&quot;运行outter的方法&quot;);
-            outterMethod();
-        &#125;
-
-    &#125;
-&#125;</code></pre>
-</li>
-</ul>
-</li>
-<li><p>方法内部类</p>
-<ul>
-<li><p>定义方式为 class。方法内部类就是在一个方法中定义的一个类，方法内部类只能在定义的方法中使用。方法内部类可以直接调用定义方法的参数和方法内部的属性，也可以调用外部类中的静态属性和方法</p>
-<pre><code class="java">public class MethodOutter &#123;
-    private Integer outter = 10;
-
-    public void testMethod(Integer param)&#123;
-        String local = &quot;hello&quot;;
-        class MethodInner&#123;
-            public void innerMethod()&#123;
-                System.out.println(&quot;MethodOutter outter:&quot;+outter);
-                System.out.println(&quot;param:&quot;+param);
-                System.out.println(&quot;local:&quot;+local);
-            &#125;
-
-        &#125;
-        MethodInner inner = new MethodInner();
-        inner.innerMethod();
-    &#125;
-
-    public static void main(String[] args) &#123;
-        MethodOutter out = new MethodOutter();
-        out.testMethod(1);
-    &#125;
-&#125;
-</code></pre>
-</li>
-</ul>
-</li>
-<li><p>匿名内部类</p>
-<ul>
-<li><p>匿名内部类只能使用一次，它没有名字，没有构造方法，但它可以根据参数调用父类的构造方法。和方法内部类一样，匿名内部类可以访问外部类的属性和方法，也可以访问局部变量和参数</p>
-<pre><code class="java">public interface TestInteface &#123;
-   public void show(String param);
-&#125;
-
-public class AnonymousTest &#123;
-   public void test()&#123;
-       new TestInteface() &#123;
-           @Override
-           public void show(String param) &#123;
-               System.out.println(param);
-           &#125;
-       &#125;;
-   &#125;
-&#125;</code></pre>
-</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>什么是拆箱 &amp; 装箱，能给我举栗子吗？</p>
-<ol>
-<li><p>Java中基础数据类型与它们的包装类进行运算时，编译器会自动帮我们进行转换，转换过程对程序员是透明的，这就是装箱和拆箱，装箱和拆箱可以让我们的代码更简洁易懂</p>
-</li>
-<li><p>在那些情况下会进行操作</p>
-<ul>
-<li>进行‘=’赋值操作（装箱或拆箱）</li>
-<li>进行’ + , - , * , / ‘混合运算（拆箱）</li>
-<li>进行’ &gt; , &lt; , ==’比较运算（拆箱）</li>
-<li>进行’equals’进行比较（装箱）</li>
-</ul>
-</li>
-<li><p>例子</p>
-<pre><code class="java">public void testAutoBox() &#123;
-    List&lt;Float&gt; list = new ArrayList&lt;&gt;();
-    list.add(1.0f);
-    float firstElement = list.get(0);
-&#125;</code></pre>
-<p>在第二行中，创建了一个存放Float类型的List，然后往里添加1.0f(float基础类型)，在将结果返回给float（这里List取出的结果是为Float）</p>
-<p>所以结果很明显了，以float和Float为例，装箱就是调用Float的<strong>valueOf</strong>方法new一个Float并赋值，拆箱就是调用Float对象的<strong>floatValue</strong>方法并赋值返回给float。其他基础类型都是大同小异的，具体可以查看源码。</p>
-</li>
-</ol>
-</li>
-<li><p>static关键字的作用？</p>
-<p>在Java中主要有3种使用情况</p>
-<ol>
-<li><p>static成员变量</p>
-<blockquote>
-<p>（Java类提供了两种类型的变量：用static关键字修饰的静态变量和不用static关键字修饰的实例变量）</p>
-</blockquote>
-<ul>
-<li>静态变量属于类，在内存中只有一个复制，只要静态变量所在的类被加载，这个静态变量就会被分配空间，因此就可以被使用了。对静态变量的引用有两种方式，分别是“类.静态变量”和”对象.静态变量”</li>
-<li>实例变量属于对象，只有对象被创建后，实例变量才会被分配内存空间，才能被使用，它在内存中存在多个复制，只有用“对象.实例变量”的方式来引用</li>
-</ul>
-</li>
-<li><p>static成员方法</p>
-<blockquote>
-<p>Java中提供了static方法和非static方法</p>
-</blockquote>
-<ul>
-<li>static方法是类的方法，不需要创建对象就可以被调用</li>
-<li>而非static方法是对象的方法，只有对象被创建出来后才可以被使用（static方法中不能使用this和super关键字，不能调用非static方法）</li>
-</ul>
-</li>
-<li><p>static代码块</p>
-<ul>
-<li>static代码块在类中是独立于成员变量和成员函数的代码块的。注意： 这些static代码块只会被执行一次</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>final关键字的作用</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>说说Java异常体系主要用来干什么的 &amp; 异常体系？</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>Error和Exception的区别？</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>说说运行时异常和非运行时异常的区别？</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>如何自定义一个异常？</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>5个常见的运行时异常</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>软引用和弱引用的区别？</p>
-<ul>
-<li>软引用关联的对象只有在内存不足时才会被回收，而被弱引用关联的对象在JVM进行垃圾回收时总会被回收。（也就是说 弱引用在每次进行垃圾回收的时候都会被回收，软引用只会在内存不足的时候回收）</li>
-</ul>
-</li>
-<li><p>Socket的定义</p>
-<ul>
-<li>即套接字，<strong>是应用层 与 <code>TCP/IP</code> 协议族通信的中间软件抽象层，表现为一个封装了 TCP / IP协议族 的编程接口（API）</strong></li>
-</ul>
-</li>
-<li><p>给我说说线程的生命周期</p>
-</li>
-<li><p>线程死锁的原因 &amp; 举个栗子 &amp; 如何避免死锁</p>
-</li>
-<li><p>如何停止掉一个线程？</p>
-</li>
-<li><p>wait()和sleep()的区别？</p>
-</li>
-<li><p>Java中创建线程的2种方式 &amp; 区别？</p>
-</li>
-<li><p><code>StringBuffer</code> 和<code>StringBuilder</code> 的区别在哪里?</p>
-<p>StringBuffer和StringBuilder和String基本都是一样的，都是用来存放字符串的。</p>
-<ul>
-<li>string：但string是不可变的，任何对string的改变都会重新创建新的string，而StringBuffer和StringBuilder是可变的的</li>
-<li>StringBuffer：区别在StringBuffer支持并发操作，是线性安全的，适合在多线程中使用。</li>
-<li>StringBuilder：不支持并发操作，线性不安全的，所以不合适在多线程中使用，但StringBuilder在单线程中性能比StringBuffer更高</li>
-</ul>
-</li>
-<li></li>
-</ol>
-<h3 id="Android核心"><a href="#Android核心" class="headerlink" title="Android核心"></a>Android核心</h3><ol>
-<li><p>Activity生命周期（具体可以去Activity的讲解里查看）</p>
-<ul>
-<li>onCreate(在活动第一次启动时，触发该方法)</li>
-<li>onStart(该方法表示活动将被展现给用户)</li>
-<li>onResume（该方法表示活动准备好与用户进行交互）</li>
-<li>onPause（该方法表示活动因为其他原因，被其他Activity，全屏的Dialog覆盖）</li>
-<li>onStop（该方法表示活动不在想要展示给用户，如果内存不足则会进行回收）</li>
-<li>onRestart （该方法表示活动从停止状态再次想要展示给用户）</li>
-<li>onDestory（该方法表示活动被销毁，可能会有一定延迟才会被回收）</li>
-</ul>
-</li>
-<li><p>Android四大组件</p>
-<ul>
-<li>活动 Activity（是所有程序的根本）</li>
-<li>服务 Service（Android组件中的一种，不可以自己运行，只能后台运行，可以与其他组件进行交互）</li>
-<li>广播 BroadcastReceiver（是一种在应用程序之间传递信息的一种机制，也可以在应用内部进行传递信息）</li>
-<li>内容提供者 Content Provider（Android提供第三方应用数据访问的机制）</li>
-</ul>
-</li>
-<li><p>Service与IntentService的区别</p>
-<ul>
-<li>Android中的Service是用于后台服务的，它不是一个独立的进程，也不是一个独立的线程，它是依赖与程序的主线程，也就是说它是运行来主线程上的，不推荐在Service中编写耗时操作</li>
-<li>但是如果必须要在Service中编写耗时操作，那么就需要使用IntentService</li>
-<li>IntentService是继承Service的，它包含了Service的全部特性，生命周期</li>
-<li>IntentService与Service不同的是，在IntentService进行onCreate的时候，内部开启了一个线程，可以去执行耗时操作</li>
-</ul>
-</li>
-<li><p>Android 应用的结构</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>Android 应用中保存数据</p>
-<ul>
-<li>sharedPreference（用xml来保存应用中的数据，本地）</li>
-<li>SQL（将应用数据保存到应用本地数据库中，应用本地）</li>
-<li>File（将应用数据保存到创建的txt文件中，本地）</li>
-</ul>
-</li>
-<li><p>在 Android 应用中执行耗时操作</p>
-<ul>
-<li>使用Thread执行耗时操作（也就是在子线程中进行耗时操作，在将结果通过Handler传回主线程）</li>
-<li>使用AsyncTask执行耗时操作（也就是在子线程中进行耗时操作，可通过<strong>onProgressUpdate</strong>方法来修改UI）</li>
-</ul>
-</li>
-<li><p>两个 Fragment 之间进行通信</p>
-<ul>
-<li>使用接口来进行两个Fragment之间的通信，通过宿主Activity中转一下</li>
-<li>使用广播</li>
-</ul>
-</li>
-<li><p>Android 的通知系统</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>Android启动模式</p>
-<ul>
-<li>standard（那里调用就去那里，可多次堆叠，可以创建多个相同的Activity）</li>
-<li>singleTop（可多次实例化，但不可堆叠，当栈顶为相同的Activity则会调用onNewIntent()方法）</li>
-<li>singleTask（当已被实例化，再次创建则会将自己以上的所有Activity全部销毁，在调用onNewIntent()，如没被实例化，那将会创建新的Task并实例化后在入栈）</li>
-<li>singleInstance（存在于单独的栈中，在这个栈中，只有也仅有它一个）</li>
-</ul>
-</li>
-<li><p>什么是Fragment</p>
-<ul>
-<li>Fragment相当于是Activity中的模块，它有着自己的布局，生命周期，单独处理自己的输入输出</li>
-</ul>
-</li>
-<li><p>Fragment 的生命周期</p>
-<ul>
-<li>onAttch（当Fragment与Activity发生关联时调用）</li>
-<li>onCreate（创建Fragment时回调，如果想要保存Fragment基本组件，则在这里初始化）</li>
-<li>onCreateView（首次绘制页面时调用，在此可以创建View。这里不能进行耗时操作）</li>
-<li>onActivityCreated（在onCreate方法完成后返回，这里可以进行与Activity交互UI操作，不能在此之前与Activity进行交互）</li>
-<li>onStart（启动Fragment时回调，此时Fragment可见，只是没有显示在前台，不能和用户进行交互）</li>
-<li>onResume（Fragment在前台处于可见状态时返回，可以与用户交互）</li>
-<li>onPause（Fragment处于暂停状态时返回，处于可见状态，但不能和用户交互）</li>
-<li>onStop（停止Fragment时回调，处于完全不可见）</li>
-<li>onDestoryView（销毁有关Fragment的视图，但还未与Activity解除绑定）</li>
-<li>onDestory（销毁Fragment时回调）</li>
-<li>onDetach（与Activity的关联被取消时调用）</li>
-</ul>
-</li>
-<li><p>Android 的 Dialog</p>
-</li>
-</ol>
-<pre><code>- </code></pre>
-<ol start="13">
-<li><p>Android 的 View </p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>Fragment 和 Activity 有什么区别？它们之间又有什么关系？</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>解释一下 Android 中的 Intent </p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li><p>onSaveInstanceState方法会在什么时候被执行？</p>
-<ul>
-<li>按下Home键时，因为系统不知道你在按下Home键之后要运行多少个程序，自然也不知道当前的Activity会不会销毁，所以系统则会调用onSaveInstanceState来保存那些非永久性的数据</li>
-<li>关闭屏幕</li>
-<li>从当前Activity开启另一个Activity</li>
-<li>屏幕方向发生变化时</li>
-</ul>
-<blockquote>
-<p>onSaveInstanceState() 这个方法是用来保存UI状态的，可以使用它来保存当前UI和你所想保存的东西</p>
-</blockquote>
-</li>
-<li><p>简述View Touch事件传递机制。</p>
-<ol>
-<li>过程<ul>
-<li>dispatchTouchEvent -&gt; onInterceptTouchEvent（该方法只在ViewGroup中有） -&gt; onTouchEvent</li>
-</ul>
-</li>
-<li>dispatchTouchEvent （进行事件分发，返回值是Boolean）</li>
-<li>onInterceptTouchEvent （进行事件拦截，该方法只在ViewGroup中有，View中是没此方法，一旦拦截，则执行ViewGroup的onTouchEvent，在ViewGroup中处理事件，而不会接着分发给View，且只调用一次，所以后面的事件都会交给ViewGroup来处理）</li>
-<li>onTouchEvent（进行事件处理）</li>
-</ol>
-</li>
-<li><p>为什么在子线程中执行 new Handler() 会抛出异常?</p>
-<ul>
-<li>是因为在创建Handler时，会先获取当前线程的Looper，如果Looper为空，则会异常</li>
-</ul>
-</li>
-<li><p>invalidate()和postInvalidate()的区别？</p>
-<ul>
-<li>invalidate和postInvalidate都是用来刷新View的，但是invalidate是用于主线程刷新，如果在子线程则需要配合Handler。而postInvalidate可以在子线程中直接调用</li>
-</ul>
-<blockquote>
-<p>invalidate() 请求重绘View树，即draw()过程，即用来刷新View的（谁调用他，谁就刷新）</p>
-</blockquote>
-</li>
-<li><p>res目录和assets目录的区别？</p>
-<ul>
-<li>res/raw中的文件是会被映射到R.java中的，可以直接使用资源ID，不可以有目录结构</li>
-<li>assets中的文件是不会映射到R.java中的，如果需要使用则需要AssetsManager类来进行访问，可以创建子文件夹</li>
-</ul>
-</li>
-<li><p>onTouch()、onTouchEvent()和onClick()关系？</p>
-<ul>
-<li>优先度 onTouch -&gt; onTouchEvent -&gt; onClick</li>
-<li>因此onTouchListener的onTouch会先触发，如果onTouch返回为false才会接着触发onTouchEvent</li>
-<li>onClick内部是通过onTouchEvent来实现的</li>
-</ul>
-</li>
-<li><p>为什么子线程不能更新UI？</p>
-<ul>
-<li>只有创建视图层次结构的原始线程才能更新这个视图，也就是说只有主线程才有权力去更新UI</li>
-<li>假如允许多线程更新<code>UI</code>，但是访问<code>UI</code>是没有加锁的，一旦多线程抢占了资源，那么界面将会乱套更新了</li>
-<li>其实还是可以在子线程中更新UI的，前提是它要拥有自己的ViewRoot，ViewRoot是在onResume中的addView()创建的。一般来说在onCreate中通过子线程更新UI是可行的，但不推荐，因为Android UI操作并不是线程安全</li>
-</ul>
-</li>
-<li><p>在 onCreate中 runOnUiTherad -&gt; onHandler(Looper.getMainLooper()).post -&gt; Thread(runOnUiTherad) -&gt; View.post</p>
-<blockquote>
-<p>runOnUiTherad （调用此方法就可以在主线程中执行）</p>
-<p>onHandler(Looper.getMainLooper())（创建Handler时传递了主线程的Looper，这样onHandler就会在主线程中运行）</p>
-<p>View.post（View.post() 的内部也是调用了 Handler）</p>
-</blockquote>
-</li>
-<li><p>SharedPreference的apply和commit的区别?</p>
-<ul>
-<li>apply（首先apply是没有返回结果的，其次apply是将修改的数据提交给内存，然后在异步提交给硬盘）</li>
-<li>commit（commit是会返回一个Boolean，表明是否修改成功。commit是将数据同步提交给硬盘）</li>
-</ul>
-</li>
-<li><p>ScrollView下嵌套一个ListView通常会出现什么问题？如何解决？</p>
-<ul>
-<li>问题：当ScrollView嵌套ListView时，ListView的高度设置为wrap_content时会产生，一般情况下ListView只显示的第一个Item。</li>
-<li>解决<ol>
-<li>手动设置ListView高度，只需要在给ListView设置完Adapter之后在实际测量高度并赋值</li>
-<li>停止使用ScrollView嵌套ListView，改用ListView多Item</li>
-<li>自定义可适应ScrollView的ListView，也就是重写ListView中的onMeasure方法</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>什么是OOM？检测OOM的机制是什么？如何避免？</p>
-<ul>
-<li>OOM是内存泄漏</li>
-<li><strong>WeakReference</strong>与<strong>ReferenceQueue</strong>联合使用，在弱引用关联的对象被回收后，会将引用添加到<strong>ReferenceQueue</strong>；清空后，可以根据是否继续含有该引用来判定是否被回收；判定回收， 手动GC, 再次判定回收，采用双重判定来确保当前引用是否被回收的状态正确性；如果两次都未回收，则确定为泄漏对象。</li>
-<li>如何避免内存泄露：<ol>
-<li>使用缓存技术，比如Recache、DiskLruCache、对象重复并且频繁调用可以考虑对象池</li>
-<li>对于引用生命周期不一样的对象，可以用软引用或弱引用SoftReferner WeakReferner</li>
-<li>对于资源对象 使用finally 强制关闭</li>
-<li>内存压力过大就要统一的管理内存</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>广播的两种注册形式</p>
-<ul>
-<li><p>静态注册（在AndroidManifest中进行注册）在AndroidManifest中进行注册后，不管改应用程序是否处于活动状态，都会进行监听。</p>
-<pre><code class="java">&lt;receiver android:name=&quot;.IncomingSMSReceiver&quot;&gt;  
-    &lt;intent-filter&gt;  
-         &lt;action android:name=&quot;android.provider.Telephony.SMS_RECEIVED&quot;/&gt;  
-    &lt;/intent-filter&gt;  
-&lt;/receiver&gt;  </code></pre>
-</li>
-<li><p>动态注册</p>
-<pre><code class="java">IntentFilter filter = new IntentFilter(&quot;android.provider.Telephony.SMS_RECEIVED&quot;);  
-IncomingSMSReceiver receiver = new IncomingSMSReceiver();  
-registerReceiver(receiver, filter);  </code></pre>
-</li>
-</ul>
-</li>
-<li><p>如何设计开发一个图片轮播组件？简述要点或写代码。</p>
-<ol>
-<li><p>整个组件采用ViewPager</p>
-</li>
-<li><p>适配器继承自PagerAdapter</p>
-</li>
-<li><p>重写getCount()，isViewFromObject(View arg0, Object arg1)，destroyItem(ViewGroup container, int position, Object object)，instantiateItem(ViewGroup container, int position)四个方法。</p>
-<blockquote>
-<p>getCount（获取当前界面个数）</p>
-<p>isViewFromObject（判断是否由对象生成页面）</p>
-<p>destroyItem（回收Item）</p>
-<p>instantiateItem（加载Item）</p>
-</blockquote>
-</li>
-<li><p>getCount代表返回的条目，要实现无限轮播，这里就要给出一个很大的值，我们可以采Integer.MAX_VALUE。其他的和普通ViewPager开发一样，在isViewFromObject返回arg0 == arg1，在destroyItem中摧毁滑出的View,container.removeView((View) object),在instantiateItem中添加对应的item,记得添加item,container.addView(child)。里面的postion都要做取余处理，避免数组越界。</p>
-</li>
-<li><p>最后，可以使用一个handler实现自动轮播，重写onTouchEvent来对自动轮播控制。</p>
-</li>
-</ol>
-</li>
-<li><p>Kotlin中协程和线程的区别？</p>
-<ol>
-<li>线程<ul>
-<li>线程的目的是为了提高CPU的资源使用率，使多个任务可以并行运行，是服务于机器的。线程的调度是系统来完成的，一般是抢占式的，根据优先级来分配</li>
-</ul>
-</li>
-<li>协程<ul>
-<li>协程的目的是为了让多个任务之间更好的协作，是服务于人的。协程为了确保代码逻辑是顺序，所以调度是由开发者来定制的</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>从架构图看，android分为几个层?</p>
-<ul>
-<li>5层<ol>
-<li>:Linux Kernel(Linux内核)</li>
-<li>Hardware Abstraction Layer(硬件抽象层)</li>
-<li>Libraries(系统运行库或者是c/c++ 核心库)</li>
-<li>Application Framework(开发框架包 )</li>
-<li>Applications(核心应用程序)</li>
-</ol>
-</li>
-</ul>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://uploadfiles.nowcoder.com/images/20170308/8698685_1488963422551_58DC97016985EB4A658556EF1A13A275" alt="img" class="lazyload"></p>
-</li>
-<li><p>VideoView</p>
-<ul>
-<li>不可以控制大小（这里的大小就是指View的大小，给他设置高宽是不会生效的）</li>
-<li>VideoView实际的尺寸可能并不是这个尺寸设置的大小. VideoView在测量自身的尺寸时会依据视频的真实尺寸来调整自己的大小。</li>
-</ul>
-</li>
-<li><p>使用SimpleAdapter作为 ListView的适配器，行布局中支持下列哪些组件？</p>
-<ul>
-<li>实现Checkable接口的View</li>
-<li>TextView</li>
-<li>ImageView</li>
-</ul>
-</li>
-<li><p>如何在任意位置关掉应用所有Activity &amp; 如何在任意位置关掉指定的Activity？</p>
-</li>
-<li><p>Activity任务栈是什么？在项目中有用到它吗？说给我听听</p>
-</li>
-<li><p>什么情况下Activity不走onDestory?</p>
-<ul>
-<li>System.exit(0)（使用此方法来退出应用时，是不会触发onDestory）</li>
-<li>栈里面的第一个没有销毁的activity会执行onDestroy方法，其他的不会执行（从MainActivity跳转到activity-A（或者继续从activity-A再跳转到activity-B），这时候，从后台强杀，只会执行mainActivity的onDestroy方法，activity-A（以及activity-B）的onDestroy方法都不会执行）</li>
-</ul>
-</li>
-<li><p>什么情况下Activity会单独执行onPause?</p>
-<ul>
-<li>当Activity被一个透明的Dialog或者别的东西覆盖时，此时它依然与窗口管理器依然保持连接，系统继续维护其内部状态，所以它仍然可见，但它已经失去了焦点故不可与用户交互，所以被覆盖的Activity并不会执行onStop()方法，只会执行onPause</li>
-</ul>
-</li>
-<li><p>隐式 Intent 和 显式 Intent</p>
-<ul>
-<li>使用显式Intent时，我们需要指定启动那一个Activity</li>
-<li>使用隐式Intent时，只用告诉系统想做什么，系统会自动的找到符合的Activity来启动</li>
-</ul>
-</li>
-<li><p>什么是 Loader ？</p>
-</li>
-<li><p>什么是 NDK ，为什么它是有用的？</p>
-</li>
-<li><p>如何理解严格模式（StrictMode）</p>
-</li>
-<li><p>什么是 Lint ？它的用途是什么？</p>
-</li>
-<li><p>ListView 和 RecyclerView 有什么区别？</p>
-</li>
-<li><p>如何理解上下文（Context）。怎么使用它？</p>
-</li>
-<li><p>为什么 Bundle 被用来传递数据，为什么不能使用简单的 HashMap 数据结构？</p>
-<blockquote>
-<p>Bundle本质上也是用ArrayMap来进行存储，所以也就是问为什么要用ArrayMap来进行存储。</p>
-</blockquote>
-<ul>
-<li>ArrayMap：适合小数据存储，在数据量较大的时候，性能将退化。</li>
-<li>HashMap ：内部是使用数组+链表的结果，在数据量大的时候性能不错，但在数据小的时候，它的Entry Array比ArrayMap占更多的空间</li>
-</ul>
-<p>在Android中，多数传递都是较小的数据，所以使用Bundle （ArrayMap）更好。而且如果使用Intent来传递数据，Bundle的Parcelable序列化比HashMap 的Serializable性能更好</p>
-</li>
-<li><p>如何理解 Android 的 Dialog ？</p>
-<ul>
-<li>要在Activity中创建一个Dialog，可以在onCreate中调用showDialog(id)，之后会回调onCreateDialog(int id,Bundle rags)这里返回的id就是showDiolog中传入的id，用来表示Dialog，之后就来在onCreateDialog中创建你自己的Dialog。最后还会调用onPrepareDialog()，之后就创建完毕。下次在调用（当前Activity不销毁）showDialog就不会允许onCreatesDialog，只会调用onPrepareDoalog</li>
-</ul>
-</li>
-<li><p>什么是 ViewGroup ，它与 View 的区别在哪里？</p>
-</li>
-<li><p>谈谈 Serializable 接口和 Parcelable 接口的区别。在 Android 中最好使用哪种接口？</p>
-</li>
-<li><p>当 Bitmap 占用较多内存时，你是怎么处理的？</p>
-</li>
-<li><p>AsyncTask 的生命周期和(它所属的) Activity 的生命周期有什么关系？这种关系可能会导致什么样的问题？ 如何避免这些问题发生？ </p>
-</li>
-<li><p>什么是 NDK ，为什么它是有用的？</p>
-</li>
-<li><p>如何理解严格模式（StrictMode）</p>
-</li>
-<li><p>什么是 SurfaceView ？</p>
-</li>
-<li><p>你知道什么是视图树(View Tree)吗？怎样优化它的深度？</p>
-</li>
-<li><p>阐述一下 Android 中的 HashMap , ArrayMap 和 SparseArray</p>
-</li>
-<li><p>阐述一下 Looper, Handler 和 HandlerThread</p>
-</li>
-</ol>
-
+              <a href="/tags/Android/">Android</a>
             
-        </article>
-    </div>
+              <a href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/">面试题</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/12/24/Collapsing%E4%B8%8ENavigation/">Collapsing与Navigation</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2020/12/24/Collapsing%E4%B8%8ENavigation/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="Collapsing与Navigation" class="lazyload">
-                    <h1>Collapsing与Navigation</h1>
-                </div>
-            
+          
+          Collapsing与Navigation
+本篇已Kotlin为主要语言
+
+关于Navigation的部分，上篇有，这里就不作多介绍了
+布局
+将activity_main中的 “ConstraintLayout”抽取出来，方便操作：左键选中区域，单机右键选择Refactor，在选择 Layout进行抽取，这里我命名为（layout_constraiont）
+
+在原本的ConstraintLayou
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月24日</a>
-            <a><i class="nexmoefont icon-areachart"></i>731 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 3 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-24 15:59" pubdate>
+              2020-12-24
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="Collapsing与Navigation"><a href="#Collapsing与Navigation" class="headerlink" title="Collapsing与Navigation"></a>Collapsing与Navigation</h1><blockquote>
-<p>本篇已Kotlin为主要语言</p>
-</blockquote>
-<p>关于Navigation的部分，上篇有，这里就不作多介绍了</p>
-<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><ol>
-<li><p>将activity_main中的 “ConstraintLayout”抽取出来，方便操作：左键选中区域，单机右键选择Refactor，在选择 Layout进行抽取，这里我命名为（layout_constraiont）</p>
-</li>
-<li><p>在原本的ConstraintLayout的布局中添加层级</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;&gt;
-
-    &lt;com.google.android.material.appbar.AppBarLayout
-        android:id=&quot;@+id/appbar&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;192dp&quot;&gt;
-
-        &lt;com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id=&quot;@+id/collTpplabar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;match_parent&quot;
-            app:contentScrim=&quot;?attr/colorPrimary&quot;
-            app:layout_scrollFlags=&quot;scroll|exitUntilCollapsed&quot;
-            app:toolbarId=&quot;@+id/toolbar&quot;&gt;
-         &lt;!-- 这里的lCollapsingToolbarLayout也就是可滑动的Toolbar，在滑动过程中进行变化的就是它 --&gt;
-
-            &lt;androidx.appcompat.widget.Toolbar
-                android:id=&quot;@+id/toolbar&quot;
-                android:layout_width=&quot;match_parent&quot;
-                android:layout_height=&quot;?attr/actionBarSize&quot;
-                app:layout_collapseMode=&quot;pin&quot; /&gt;
-            &lt;!-- 这里的layout_collapseMode设置为pin 是为了将Tooblar进行固定住，不让他上滑移出屏幕 --&gt;
-
-        &lt;/com.google.android.material.appbar.CollapsingToolbarLayout&gt;
-    &lt;/com.google.android.material.appbar.AppBarLayout&gt;
-
-    &lt;androidx.core.widget.NestedScrollView
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-     app:layout_behavior=&quot;com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior&quot;&gt;
-        &lt;!-- NestedScrollView只允许有一个子类，尽量减少嵌套RecyclerView，原因可查看(CoordinatorLayout嵌套RecyclerView)文章 --&gt;
-
-        &lt;androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;match_parent&quot;
-            tools:context=&quot;.MainActivity&quot;
-            tools:showIn=&quot;@layout/activity_main&quot;&gt;
-
-            &lt;fragment
-                android:id=&quot;@+id/fragment&quot;
-                android:name=&quot;androidx.navigation.fragment.NavHostFragment&quot;
-                android:layout_width=&quot;match_parent&quot;
-                android:layout_height=&quot;match_parent&quot;
-                app:defaultNavHost=&quot;true&quot;
-                app:navGraph=&quot;@navigation/navigation&quot; /&gt;
-
-        &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
-
-    &lt;/androidx.core.widget.NestedScrollView&gt;
-
-&lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
-<p>层级如下:</p>
-<ul>
-<li>CoordinatorLayout<ul>
-<li>AppBarLayout<em>（AppBarLayout要与CoordinatorLayout一同使用）</em><ul>
-<li>CollapsingToolbarLayout<em>（可滑动Toolbar）</em></li>
-<li>Toolbar <em>（最终固定的Toolbar）</em></li>
-</ul>
-</li>
-<li>NestedScrollView<em>（滑动布局）</em><ul>
-<li>ConstraintLayout<em>（约束布局）</em><ul>
-<li>fragment</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>因为需要将顶部通知栏进行覆盖，所以将原本的ActionBar取消掉，也就是将当前theme主题设置为 NoActionBar 即可</p>
-<pre><code class="xml">  &lt;application
-        android:allowBackup=&quot;true&quot;
-        android:icon=&quot;@mipmap/ic_launcher&quot;
-        android:label=&quot;@string/app_name&quot;
-        android:roundIcon=&quot;@mipmap/ic_launcher_round&quot;
-        android:supportsRtl=&quot;true&quot;
-        android:theme=&quot;@style/Theme.AppCompat.NoActionBar&quot;&gt;
-        &lt;activity android:name=&quot;.MainActivity&quot;&gt;
-            &lt;intent-filter&gt;
-                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
-
-                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
-            &lt;/intent-filter&gt;
-        &lt;/activity&gt;
-    &lt;/application&gt;</code></pre>
-</li>
-<li><p>既然取消了ActionBar，那么需要自己设置一个ActionBar，在第二部中，我们创建了Toolbar，所以我们将它设置为ActionBar</p>
-<pre><code class="kotlin">   super.onCreate(savedInstanceState)
-   setContentView(R.layout.activity_main)
-   setSupportActionBar(toolbar)</code></pre>
-<p>别的代码不需要改动</p>
-</li>
-<li><p>在各个Fragment中需要进行设置CollapsingToolbarLayout.title的值</p>
-<pre><code class="kotlin">class TextFragment : Fragment() &#123;
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? &#123;
-        requireActivity().collTpplabar.title = getString(R.string.text_fragment)
-        //直接使用requireActivity()来访问到Activity的CollapsingToolbarLayout，并为它设置Title
-        return inflater.inflate(R.layout.fragment_text, container, false)
-    &#125;
-&#125;</code></pre>
-<p>就完成效果了</p>
-</li>
-</ol>
-
+              <a href="/tags/View/">View</a>
             
-        </article>
-    </div>
+              <a href="/tags/Kotlin/">Kotlin</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/">DrawerLayout的使用</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="DrawerLayout的使用" class="lazyload">
-                    <h1>DrawerLayout的使用</h1>
-                </div>
-            
+          
+          DrawerLayout的使用
+本篇已Kotlin为主要语言
+
+DrawerLayout也就是侧边栏
+整体分析
+DrawerLayout     –侧边栏的父容器
+Fragment    –容器
+
+
+NavigationView   –侧边栏
+
+开始实现
+首先创建3个Fragment
+ListFragment：
+12345678910class ListFragment : Fragment() 
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月24日</a>
-            <a><i class="nexmoefont icon-areachart"></i>841 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-24 15:58" pubdate>
+              2020-12-24
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="DrawerLayout的使用"><a href="#DrawerLayout的使用" class="headerlink" title="DrawerLayout的使用"></a>DrawerLayout的使用</h1><blockquote>
-<p>本篇已Kotlin为主要语言</p>
-</blockquote>
-<p>DrawerLayout也就是侧边栏</p>
-<h3 id="整体分析"><a href="#整体分析" class="headerlink" title="整体分析"></a>整体分析</h3><ul>
-<li>DrawerLayout     –侧边栏的父容器<ul>
-<li>Fragment    –容器</li>
-</ul>
-</li>
-<li>NavigationView   –侧边栏</li>
-</ul>
-<h3 id="开始实现"><a href="#开始实现" class="headerlink" title="开始实现"></a>开始实现</h3><ol>
-<li><p>首先创建3个Fragment</p>
-<p>ListFragment：</p>
-<pre><code class="kotlin">class ListFragment : Fragment() &#123;
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? &#123;
-        return inflater.inflate(R.layout.fragment_list, container, false)
-    &#125;
-
-&#125;</code></pre>
-<p>TextFragment：</p>
-<pre><code class="kotlin">class TextFragment : Fragment() &#123;
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? &#123;
-        return inflater.inflate(R.layout.fragment_text, container, false)
-    &#125;
-
-&#125;</code></pre>
-<p>PagerFragment：</p>
-<pre><code class="kotlin">class PagerFragment : Fragment() &#123;
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? &#123;
-        return inflater.inflate(R.layout.fragment_pager, container, false)
-    &#125;
-&#125;</code></pre>
-<p>点击 New 创建空白Framgnet即可</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="C:\Users\fuxinbo\AppData\Roaming\Typora\typora-user-images\image-20201223112423832.png" alt="image-20201223112423832" class="lazyload"></p>
-</li>
-<li><p>接下来在res文件中创建一个名为”navigation”的文件夹，在文件夹下创建navigation的xml文件</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="C:\Users\fuxinbo\AppData\Roaming\Typora\typora-user-images\image-20201223112937398.png" alt="image-20201223112937398" class="lazyload"></p>
-</li>
-<li><p>在navigation中编写3个Fragment，并将刚刚创建的3个Fragment传入</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;navigation xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:id=&quot;@+id/navigation&quot;
-    app:startDestination=&quot;@id/textFragment&quot;&gt;
-
-    &lt;fragment
-        android:id=&quot;@+id/textFragment&quot;
-        android:name=&quot;com.laboratory.drawerdome.TextFragment&quot;
-        android:label=&quot;@string/text_fragment&quot;
-        tools:layout=&quot;@layout/fragment_text&quot; /&gt;
-    &lt;fragment
-        android:id=&quot;@+id/listFragment&quot;
-        android:name=&quot;com.laboratory.drawerdome.ListFragment&quot;
-        android:label=&quot;@string/list_fragment&quot;
-        tools:layout=&quot;@layout/fragment_list&quot; /&gt;
-    &lt;fragment
-        android:id=&quot;@+id/pagerFragment&quot;
-        android:name=&quot;com.laboratory.drawerdome.PagerFragment&quot;
-        android:label=&quot;@string/pager_fragment&quot;
-        tools:layout=&quot;@layout/fragment_pager&quot; /&gt;
-&lt;/navigation&gt;</code></pre>
-</li>
-<li><p>继续在res下创建名为”menu”的文件夹，在文件夹下创建menu的xml</p>
-</li>
-<li><p>在menu中编写3个item，item的名字要与navigation中的fragment相同</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;menu xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;
-
-    &lt;item
-        android:id=&quot;@+id/textFragment&quot;
-        android:icon=&quot;@drawable/ic_baseline_one&quot;
-        android:title=&quot;@string/text_fragment&quot; /&gt;
-    &lt;item
-        android:id=&quot;@+id/listFragment&quot;
-        android:icon=&quot;@drawable/ic_baseline_two&quot;
-        android:title=&quot;@string/list_fragment&quot; /&gt;
-    &lt;item
-        android:id=&quot;@+id/pagerFragment&quot;
-        android:icon=&quot;@drawable/ic_baseline_three&quot;
-        android:title=&quot;@string/pager_fragment&quot; /&gt;
-&lt;/menu&gt;</code></pre>
-</li>
-<li><p>接下来就是在activity_main中进行设置</p>
-<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;androidx.drawerlayout.widget.DrawerLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
-    xmlns:tools=&quot;http://schemas.android.com/tools&quot;
-    android:id=&quot;@+id/drawerLayout&quot;
-    android:layout_width=&quot;match_parent&quot;
-    android:layout_height=&quot;match_parent&quot;
-    tools:context=&quot;.MainActivity&quot;
-    tools:openDrawer=&quot;start&quot;&gt;
-
-    &lt;androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;&gt;
-
-        &lt;fragment
-            android:id=&quot;@+id/fragment&quot;
-            android:name=&quot;androidx.navigation.fragment.NavHostFragment&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;match_parent&quot;
-            app:defaultNavHost=&quot;true&quot;
-            app:navGraph=&quot;@navigation/navigation&quot; /&gt;
-
-    &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;
-
-    &lt;com.google.android.material.navigation.NavigationView
-        android:id=&quot;@+id/navigation&quot;
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;
-        android:layout_gravity=&quot;start&quot;
-        app:headerLayout=&quot;@layout/navigation_header&quot;
-        app:menu=&quot;@menu/menu&quot; /&gt;
-&lt;/androidx.drawerlayout.widget.DrawerLayout&gt;</code></pre>
-<p>将menu设置给NavigationView，fragment设置侧边栏NavigationView</p>
-<blockquote>
-<p>android:layout_gravity=”start”   意思为设置侧边栏是从左到右，一定要写</p>
-<p>DrawerLayout的openDrawer，是设置显示效果</p>
-</blockquote>
-</li>
-<li><p>最后在Activity中设置</p>
-<pre><code class="kotlin">class MainActivity : AppCompatActivity() &#123;
-    //drawerLayout与导航栏的中继器
-    private lateinit var appBerConfiguration: AppBarConfiguration
-    //导航栏控制器
-    private lateinit var navController: NavController
-
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        //获取Fragment容器
-        navController = findNavController(R.id.fragment)
-        //将drawerLayout和获取到导航栏图表相连
-        appBerConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
-        //设置将由appBerConfiguration来控制navController
-        setupActionBarWithNavController(navController, appBerConfiguration)
-        //给Navigation设置控制器
-        navigation.setupWithNavController(navController)
-    &#125;
-
-    //将顶部栏与navigation进行连接
-    override fun onSupportNavigateUp(): Boolean &#123;
-        return navController.navigateUp(appBerConfiguration) || super.onSupportNavigateUp()
-    &#125;
-&#125;</code></pre>
-</li>
-</ol>
-<p>以上效果就完成了</p>
-
+              <a href="/tags/View/">View</a>
             
-        </article>
-    </div>
+              <a href="/tags/Kotlin/">Kotlin</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
     
-    <div class="nexmoe-post">
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2020/12/24/PicGo%E4%B8%8ETypora-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">PicGo与Typora 上传图片</a>
+      </h1>
+
+      <p class="index-excerpt">
         <a href="/2020/12/24/PicGo%E4%B8%8ETypora-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/">
+          
+          
             
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="PicGo与Typora 上传图片" class="lazyload">
-                    <h1>PicGo与Typora 上传图片</h1>
-                </div>
-            
+          
+          PicGo的设置与Typora上传图片
+需要花钱的哈
+
+首先需要进行下面两个操作
+
+阿里OSS存储的购买（为了方便，这里以阿里为例子）
+PicGo的下载与设置
+
+阿里OSS
+打开阿里云
+
+
+选择对象存储OSS
+
+点击则扣套餐进行购买（40G，1年，8.7元很香）
+
+购买完成后，打开控制台，在左边栏中选择Bucket列表
+
+点击创建Bucket
+
+地区选择离你最近的地方，版本控制器看需求来开，一般来
         </a>
+      </p>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow-fill">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2020年12月24日</a>
-            <a><i class="nexmoefont icon-areachart"></i>465 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-        </div>
-
-        <article>
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-12-24 15:57" pubdate>
+              2020-12-24
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
             
-                <h1 id="PicGo的设置与Typora上传图片"><a href="#PicGo的设置与Typora上传图片" class="headerlink" title="PicGo的设置与Typora上传图片"></a>PicGo的设置与Typora上传图片</h1><blockquote>
-<p>需要花钱的哈</p>
-</blockquote>
-<p><strong>首先需要进行下面两个操作</strong></p>
-<ol>
-<li>阿里OSS存储的购买（为了方便，这里以阿里为例子）</li>
-<li>PicGo的下载与设置</li>
-</ol>
-<h3 id="阿里OSS"><a href="#阿里OSS" class="headerlink" title="阿里OSS"></a>阿里OSS</h3><ol>
-<li><p><a target="_blank" rel="noopener" href="https://www.aliyun.com/">打开阿里云</a></p>
-</li>
-<li><p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201224151334.png"></p>
-<p>选择对象存储OSS</p>
-</li>
-<li><p>点击则扣套餐进行购买（40G，1年，8.7元很香）</p>
-</li>
-<li><p>购买完成后，打开控制台，在左边栏中选择Bucket列表</p>
-</li>
-<li><p>点击创建Bucket</p>
-<ul>
-<li><p>地区选择离你最近的地方，版本控制器看需求来开，一般来说是不须要开启的（不会花额外的钱，但是会占用你的空间）</p>
-</li>
-<li><p>读写权限改为公共读（不然别人访问不了你的图片）</p>
-</li>
-<li><p>别的都是并不开通</p>
-</li>
-</ul>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201224151726.png" alt="image-20201224151723354" class="lazyload"></p>
-</li>
-<li><p>接下来创建AccessKey，点击Access Key</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201224152803.png" alt="image-20201224152801998" class="lazyload"></p>
-</li>
-<li><p>点击创建Access Key，将创建好的Access Key保存到本地</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="http://gosspublic.alicdn.com/oss-browser/1.9.4/oss-browser-win32-x64.zip">下载安装OSS Browser客户端</a>（OSS Browser是阿里云官方的客户端工具，可以使用拥有OSS权限的用户登录，从而免去登录官网控制台的麻烦。）</p>
-</li>
-<li><p>下载安装好之后打开，用刚刚创建好的Access Key来进行登录,Endpoint选择公共云，之后就可以在里面看见上传的图片，文件之类的</p>
-</li>
-</ol>
-<h3 id="PicGo"><a href="#PicGo" class="headerlink" title="PicGo"></a>PicGo</h3><p>PicGo是一个支持多种图床的客户端图片上传工具，可以实现快速上传图片到指定图床，并将链接保存到剪贴板。</p>
-<ol>
-<li><p><a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo/releases">下载PicGo</a></p>
-</li>
-<li><p>下载安装好之后，点击图床设置，选择阿里云</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201224153500.png" alt="image-20201224153459239" class="lazyload"></p>
-</li>
-<li><p>选择PicGo设置，修改快捷键，设置你喜欢的快捷键</p>
-</li>
-<li><p>其余设置如下</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201224153701.png" alt="image-20201224153700790" class="lazyload"></p>
-</li>
-</ol>
-<h3 id="Typora上传图片"><a href="#Typora上传图片" class="headerlink" title="Typora上传图片"></a>Typora上传图片</h3><ol>
-<li><p>打开Typora的设置</p>
-</li>
-<li><p>进行如下的设置</p>
-<p><img data-fancybox="gallery" data-sizes="auto" data-src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20201224153821.png" alt="image-20201224153820513" class="lazyload"></p>
-</li>
-</ol>
-<h3 id="使用教学"><a href="#使用教学" class="headerlink" title="使用教学"></a>使用教学</h3><p>Win10的截图快捷键为（win+shift+s）进行选择截图，截完图片之后，粘贴进Typora，选择上传图片 即可</p>
-
+              <a href="/tags/Service/">Service</a>
             
-        </article>
-    </div>
-    
-</section>
+              <a href="/tags/Money/">Money</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
-    <nav class="nexmoe-page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="nexmoefont icon-right"></i></a>
-    </nav>
-  
-        <div class="nexmoe-post-right">
-          <div class="nexmoe-fixed">
-            <div class="nexmoe-tool">
-              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+
+
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
+
+
+
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script>
-	hljs.initHighlightingOnLoad();
-</script>
+</div>
+    
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
 
 
-<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
- 
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
-<script src="/js/app.js?v=1618458184012"></script>
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
 
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
-<script>
-	$(".justified-gallery").justifiedGallery({
-		rowHeight: 160,
-		margins: 10,
-	});
-</script>
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
 
   
 
@@ -2597,6 +863,60 @@ registerReceiver(receiver, filter);  </code></pre>
 
 
 
-</body>
 
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
 </html>
