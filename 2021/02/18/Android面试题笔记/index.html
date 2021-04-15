@@ -1,133 +1,212 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en ">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="theme-color" content="#3367D6"/>
-  <link rel="apple-touch-icon" href="/icons-192.png">
-  <link rel="manifest" href="/manifest.json">
-
-  
-
-  
-
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexo || Android面试题笔记</title>
     <meta name="author" content="John Doe">
-  
-
-  
-
-  
-
-  <title>Android面试题笔记 | Hexo</title>
-
-  
-
-  
-    <link rel="icon" href="/favicon.ico">
-  
-
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-    <link href="https://cdn.bootcss.com/highlight.js/9.15.6/styles/default.min.css" rel="stylesheet">
-  
-
-  
-<link rel="stylesheet" href="/css/style.css">
-
-<meta name="generator" content="Hexo 5.2.0"></head>
-<body>
-  <div class="root-container">
-    <!-- navbar -->
-<nav class="navbar">
-  <div class="navbar-content">
-    <!-- logo -->
-    <div class="navbar-logo">
-      <a href="/">
-        
-          Hexo
-        
-      </a>
-    </div>
-    <!-- link -->
-    <div class="navbar-link">
-      <div class="navbar-btn">
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <ul class="navbar-list">
-        
-          <li class="navbar-list-item"><a href="/">HOME</a></li>
-        
-          <li class="navbar-list-item"><a href="/about">ABOUT</a></li>
-        
-          <li class="navbar-list-item"><a href="/links">LINK</a></li>
-        
-          <li class="navbar-list-item"><a href="/tags">TAGS</a></li>
-        
-          <li class="navbar-list-item"><a href="/categories">CATEGORIES</a></li>
-        
-      </ul>
-    </div>
-  </div>
-</nav>
-
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/images/avatar.png">
+    <link rel="stylesheet" href="/css/antd.min.css">
     
-<!-- header container -->
-<header class="header-container post">
+    <link rel="stylesheet" href="/css/maiden-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
 
-  
-  
+<body>
 
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-    <div class="header-content">
-      <div class="post-image" style="background-image: url(https://qiniu.miiiku.xyz/src/images/banner.jpg)"></div>
-      <div class="post-text">
-        <div class="type-wrap">
-          
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
         </div>
-        <h1 class="title-wrap">Android面试题笔记</h1>
-        <h2 class="title-sub-wrap">
-          <strong>Fuxinbo</strong>
-          <span>发布于</span>
-          
-  <a href="javascript:;" class="article-date">
-    <time datetime="2021-02-18T02:43:00.000Z" itemprop="datePublished">2021-02-18</time>
-  </a>
-
-        </h2>
-      </div>
     </div>
-  
 
-  
-  
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Hexo</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/about">
+            <span>
+                <a-icon type="idcard" theme="filled" />
+            </span>
+            <span>about</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/like/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/like/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="https://en.korilin.com">
+            <span>
+                <a-icon type="compass" theme="filled" />
+            </span>
+            <span>英文博客</span>
+        </a>
+        
+    </div>
 
-  </header>
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Hexo</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="idcard" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/like/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/like/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+            <a target="_blank" rel="noopener" href="https://en.korilin.com">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="compass" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">英文博客</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
 
-    <!-- 文章 -->
+</nav>
+                </div>
 
-<!-- 文章内容 -->
+                <div id="main">
+                     
+<link rel="stylesheet" href="/css/post-body.css">
+<div class="article">
+    <div>
+        <h1>Android面试题笔记 </h1>
+    </div>
+    <div class="info">
+        <span class="date">
+            <span class="icon">
+                <a-icon type="calendar" theme="filled" />
+            </span>
+            2021/2/18
+        </span>
 
-<div class="body-container">
-  <article class="content-container article-container">
-    <div class="article-content">
-      
-      
+        
 
-      <section class="article-entry">
+        
+
+        <span class="tags">
+            <span class="icon">
+                <a-icon type="tags" theme="filled" />
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/Android" style=color:#00bcd4>
+                    Android
+                </a>
+            </span>
+            
+            <span class="tag">
+                
+                <a href="/tags/面试题" style=color:#879cff>
+                    面试题
+                </a>
+            </span>
+            
+        </span>
+        
+    </div>
+
+    <div class="content" v-pre>
         <h1 id="Android面试题笔记"><a href="#Android面试题笔记" class="headerlink" title="Android面试题笔记"></a>Android面试题笔记</h1><blockquote>
 <p>面试题的笔记与自己的看法</p>
 </blockquote>
@@ -178,7 +257,7 @@
 </li>
 <li><p>每一个节点都包括一个数组和一个指针</p>
 </li>
-<li><p>节点中的数据类型可以为任意类型</p>
+<li><p>节点中的数据类型可以为任意类型 </p>
 </li>
 <li><p>指针就是指向下一节点的引用</p>
 </li>
@@ -347,9 +426,14 @@
 </li>
 </ul>
 </li>
-<li><p>抽象的概念</p>
+<li><p>抽象类的概念</p>
 <ul>
 <li>在面向对象的概念中，所有的对象都是用类来描述，但是并不是所有的类都是来描述对象的，当一个类没有足够多的信息来描绘一个对象时，这个类就是一个抽象类</li>
+</ul>
+</li>
+<li><p>抽象的概念</p>
+<ul>
+<li></li>
 </ul>
 </li>
 <li><p>继承</p>
@@ -425,16 +509,20 @@
 </li>
 <li><p>什么是面向过程 &amp; 什么是面向对象 &amp; 区别？</p>
 <ol>
-<li>面向对象<ul>
+<li><p>面向对象</p>
+<ul>
 <li>面向对象是一种对<strong>现实世界理解和抽象</strong>的方法</li>
 </ul>
 </li>
-<li>面向过程<ul>
-<li>是一种 <strong>以过程为中心</strong> 的编程思想。这些都是以什么正在发生为主要目标进行编程，不同于面向对象的是谁在受影响。每个过程有一个阶段性的目标，依次完成这些过程，才能得到结果</li>
-</ul>
+<li><p>面向过程</p>
 </li>
 </ol>
 </li>
+</ol>
+<ul>
+<li>是一种 <strong>以过程为中心</strong> 的编程思想。这些都是以什么正在发生为主要目标进行编程，不同于面向对象的是谁在受影响。每个过程有一个阶段性的目标，依次完成这些过程，才能得到结果</li>
+</ul>
+<ol start="11">
 <li><p>给我说说Java面向对象的特征</p>
 <ol>
 <li>特点<ul>
@@ -547,7 +635,7 @@
 <ol>
 <li>public 公开的</li>
 <li>private 类内部使用，外部没有访问权</li>
-<li>protected 继承权限，子类继承父类后，子类有权限访问父类，在同个包下都可以访问</li>
+<li>protected 继承权限，子类继承父类后，子类有权限访问父类，在不同的包下都可以访问</li>
 <li>default 默认访问权限，在同个包下都可以访问</li>
 </ol>
 </li>
@@ -587,14 +675,52 @@
 </ol>
 </li>
 <li><p>什么是拆箱 &amp; 装箱，能给我举栗子吗？</p>
+<ol>
+<li><p>Java中基础数据类型与它们的包装类进行运算时，编译器会自动帮我们进行转换，转换过程对程序员是透明的，这就是装箱和拆箱，装箱和拆箱可以让我们的代码更简洁易懂</p>
+</li>
+<li><p>在那些情况下会进行操作</p>
 <ul>
-<li></li>
+<li>进行‘=’赋值操作（装箱或拆箱）</li>
+<li>进行’ + , - , * , / ‘混合运算（拆箱）</li>
+<li>进行’ &gt; , &lt; , ==’比较运算（拆箱）</li>
+<li>进行’equals’进行比较（装箱）</li>
 </ul>
 </li>
+<li><p>例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAutoBox</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Float&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    list.add(<span class="number">1.0f</span>);</span><br><span class="line">    <span class="keyword">float</span> firstElement = list.get(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在第二行中，创建了一个存放Float类型的List，然后往里添加1.0f(float基础类型)，在将结果返回给float（这里List取出的结果是为Float）</p>
+<p>所以结果很明显了，以float和Float为例，装箱就是调用Float的<strong>valueOf</strong>方法new一个Float并赋值，拆箱就是调用Float对象的<strong>floatValue</strong>方法并赋值返回给float。其他基础类型都是大同小异的，具体可以查看源码。</p>
+</li>
+</ol>
+</li>
 <li><p>static关键字的作用？</p>
+<p>在Java中主要有3种使用情况</p>
+<ol>
+<li><p>static成员变量</p>
+<blockquote>
+<p>（Java类提供了两种类型的变量：用static关键字修饰的静态变量和不用static关键字修饰的实例变量）</p>
+</blockquote>
 <ul>
-<li></li>
+<li>静态变量属于类，在内存中只有一个复制，只要静态变量所在的类被加载，这个静态变量就会被分配空间，因此就可以被使用了。对静态变量的引用有两种方式，分别是“类.静态变量”和”对象.静态变量”</li>
+<li>实例变量属于对象，只有对象被创建后，实例变量才会被分配内存空间，才能被使用，它在内存中存在多个复制，只有用“对象.实例变量”的方式来引用</li>
 </ul>
+</li>
+<li><p>static成员方法</p>
+<blockquote>
+<p>Java中提供了static方法和非static方法</p>
+</blockquote>
+<ul>
+<li>static方法是类的方法，不需要创建对象就可以被调用</li>
+<li>而非static方法是对象的方法，只有对象被创建出来后才可以被使用（static方法中不能使用this和super关键字，不能调用非static方法）</li>
+</ul>
+</li>
+<li><p>static代码块</p>
+<ul>
+<li>static代码块在类中是独立于成员变量和成员函数的代码块的。注意： 这些static代码块只会被执行一次</li>
+</ul>
+</li>
+</ol>
 </li>
 <li><p>final关键字的作用</p>
 <ul>
@@ -624,6 +750,34 @@
 <li><p>5个常见的运行时异常</p>
 <ul>
 <li></li>
+</ul>
+</li>
+<li><p>软引用和弱引用的区别？</p>
+<ul>
+<li>软引用关联的对象只有在内存不足时才会被回收，而被弱引用关联的对象在JVM进行垃圾回收时总会被回收。（也就是说 弱引用在每次进行垃圾回收的时候都会被回收，软引用只会在内存不足的时候回收）</li>
+</ul>
+</li>
+<li><p>Socket的定义</p>
+<ul>
+<li>即套接字，<strong>是应用层 与 <code>TCP/IP</code> 协议族通信的中间软件抽象层，表现为一个封装了 TCP / IP协议族 的编程接口（API）</strong></li>
+</ul>
+</li>
+<li><p>给我说说线程的生命周期</p>
+</li>
+<li><p>线程死锁的原因 &amp; 举个栗子 &amp; 如何避免死锁</p>
+</li>
+<li><p>如何停止掉一个线程？</p>
+</li>
+<li><p>wait()和sleep()的区别？</p>
+</li>
+<li><p>Java中创建线程的2种方式 &amp; 区别？</p>
+</li>
+<li><p><code>StringBuffer</code> 和<code>StringBuilder</code> 的区别在哪里?</p>
+<p>StringBuffer和StringBuilder和String基本都是一样的，都是用来存放字符串的。</p>
+<ul>
+<li>string：但string是不可变的，任何对string的改变都会重新创建新的string，而StringBuffer和StringBuilder是可变的的</li>
+<li>StringBuffer：区别在StringBuffer支持并发操作，是线性安全的，适合在多线程中使用。</li>
+<li>StringBuilder：不支持并发操作，线性不安全的，所以不合适在多线程中使用，但StringBuilder在单线程中性能比StringBuffer更高</li>
 </ul>
 </li>
 <li></li>
@@ -714,10 +868,10 @@
 </ul>
 </li>
 <li><p>Android 的 Dialog</p>
-<ul>
-<li></li>
-</ul>
 </li>
+</ol>
+<pre><code>- </code></pre>
+<ol start="13">
 <li><p>Android 的 View </p>
 <ul>
 <li></li>
@@ -776,201 +930,282 @@
 </li>
 <li><p>onTouch()、onTouchEvent()和onClick()关系？</p>
 <ul>
-<li></li>
+<li>优先度 onTouch -&gt; onTouchEvent -&gt; onClick</li>
+<li>因此onTouchListener的onTouch会先触发，如果onTouch返回为false才会接着触发onTouchEvent</li>
+<li>onClick内部是通过onTouchEvent来实现的</li>
 </ul>
 </li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
+<li><p>为什么子线程不能更新UI？</p>
+<ul>
+<li>只有创建视图层次结构的原始线程才能更新这个视图，也就是说只有主线程才有权力去更新UI</li>
+<li>假如允许多线程更新<code>UI</code>，但是访问<code>UI</code>是没有加锁的，一旦多线程抢占了资源，那么界面将会乱套更新了</li>
+<li>其实还是可以在子线程中更新UI的，前提是它要拥有自己的ViewRoot，ViewRoot是在onResume中的addView()创建的。一般来说在onCreate中通过子线程更新UI是可行的，但不推荐，因为Android UI操作并不是线程安全</li>
+</ul>
+</li>
+<li><p>在 onCreate中 runOnUiTherad -&gt; onHandler(Looper.getMainLooper()).post -&gt; Thread(runOnUiTherad) -&gt; View.post</p>
+<blockquote>
+<p>runOnUiTherad （调用此方法就可以在主线程中执行）</p>
+<p>onHandler(Looper.getMainLooper())（创建Handler时传递了主线程的Looper，这样onHandler就会在主线程中运行）</p>
+<p>View.post（View.post() 的内部也是调用了 Handler）</p>
+</blockquote>
+</li>
+<li><p>SharedPreference的apply和commit的区别?</p>
+<ul>
+<li>apply（首先apply是没有返回结果的，其次apply是将修改的数据提交给内存，然后在异步提交给硬盘）</li>
+<li>commit（commit是会返回一个Boolean，表明是否修改成功。commit是将数据同步提交给硬盘）</li>
+</ul>
+</li>
+<li><p>ScrollView下嵌套一个ListView通常会出现什么问题？如何解决？</p>
+<ul>
+<li>问题：当ScrollView嵌套ListView时，ListView的高度设置为wrap_content时会产生，一般情况下ListView只显示的第一个Item。</li>
+<li>解决<ol>
+<li>手动设置ListView高度，只需要在给ListView设置完Adapter之后在实际测量高度并赋值</li>
+<li>停止使用ScrollView嵌套ListView，改用ListView多Item</li>
+<li>自定义可适应ScrollView的ListView，也就是重写ListView中的onMeasure方法</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>什么是OOM？检测OOM的机制是什么？如何避免？</p>
+<ul>
+<li>OOM是内存泄漏</li>
+<li><strong>WeakReference</strong>与<strong>ReferenceQueue</strong>联合使用，在弱引用关联的对象被回收后，会将引用添加到<strong>ReferenceQueue</strong>；清空后，可以根据是否继续含有该引用来判定是否被回收；判定回收， 手动GC, 再次判定回收，采用双重判定来确保当前引用是否被回收的状态正确性；如果两次都未回收，则确定为泄漏对象。</li>
+<li>如何避免内存泄露：<ol>
+<li>使用缓存技术，比如Recache、DiskLruCache、对象重复并且频繁调用可以考虑对象池</li>
+<li>对于引用生命周期不一样的对象，可以用软引用或弱引用SoftReferner WeakReferner</li>
+<li>对于资源对象 使用finally 强制关闭</li>
+<li>内存压力过大就要统一的管理内存</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>广播的两种注册形式</p>
+<ul>
+<li><p>静态注册（在AndroidManifest中进行注册）在AndroidManifest中进行注册后，不管改应用程序是否处于活动状态，都会进行监听。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver android:name=<span class="string">&quot;.IncomingSMSReceiver&quot;</span>&gt;  </span><br><span class="line">    &lt;intent-filter&gt;  </span><br><span class="line">         &lt;action android:name=<span class="string">&quot;android.provider.Telephony.SMS_RECEIVED&quot;</span>/&gt;  </span><br><span class="line">    &lt;/intent-filter&gt;  </span><br><span class="line">&lt;/receiver&gt;  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态注册</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(<span class="string">&quot;android.provider.Telephony.SMS_RECEIVED&quot;</span>);  </span><br><span class="line">IncomingSMSReceiver receiver = <span class="keyword">new</span> IncomingSMSReceiver();  </span><br><span class="line">registerReceiver(receiver, filter);  </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>如何设计开发一个图片轮播组件？简述要点或写代码。</p>
+<ol>
+<li><p>整个组件采用ViewPager</p>
+</li>
+<li><p>适配器继承自PagerAdapter</p>
+</li>
+<li><p>重写getCount()，isViewFromObject(View arg0, Object arg1)，destroyItem(ViewGroup container, int position, Object object)，instantiateItem(ViewGroup container, int position)四个方法。</p>
+<blockquote>
+<p>getCount（获取当前界面个数）</p>
+<p>isViewFromObject（判断是否由对象生成页面）</p>
+<p>destroyItem（回收Item）</p>
+<p>instantiateItem（加载Item）</p>
+</blockquote>
+</li>
+<li><p>getCount代表返回的条目，要实现无限轮播，这里就要给出一个很大的值，我们可以采Integer.MAX_VALUE。其他的和普通ViewPager开发一样，在isViewFromObject返回arg0 == arg1，在destroyItem中摧毁滑出的View,container.removeView((View) object),在instantiateItem中添加对应的item,记得添加item,container.addView(child)。里面的postion都要做取余处理，避免数组越界。</p>
+</li>
+<li><p>最后，可以使用一个handler实现自动轮播，重写onTouchEvent来对自动轮播控制。</p>
+</li>
+</ol>
+</li>
+<li><p>Kotlin中协程和线程的区别？</p>
+<ol>
+<li>线程<ul>
+<li>线程的目的是为了提高CPU的资源使用率，使多个任务可以并行运行，是服务于机器的。线程的调度是系统来完成的，一般是抢占式的，根据优先级来分配</li>
+</ul>
+</li>
+<li>协程<ul>
+<li>协程的目的是为了让多个任务之间更好的协作，是服务于人的。协程为了确保代码逻辑是顺序，所以调度是由开发者来定制的</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>从架构图看，android分为几个层?</p>
+<ul>
+<li>5层<ol>
+<li>:Linux Kernel(Linux内核)</li>
+<li>Hardware Abstraction Layer(硬件抽象层)</li>
+<li>Libraries(系统运行库或者是c/c++ 核心库)</li>
+<li>Application Framework(开发框架包 )</li>
+<li>Applications(核心应用程序)</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://uploadfiles.nowcoder.com/images/20170308/8698685_1488963422551_58DC97016985EB4A658556EF1A13A275" alt="img"></p>
+</li>
+<li><p>VideoView</p>
+<ul>
+<li>不可以控制大小（这里的大小就是指View的大小，给他设置高宽是不会生效的）</li>
+<li>VideoView实际的尺寸可能并不是这个尺寸设置的大小. VideoView在测量自身的尺寸时会依据视频的真实尺寸来调整自己的大小。</li>
+</ul>
+</li>
+<li><p>使用SimpleAdapter作为 ListView的适配器，行布局中支持下列哪些组件？</p>
+<ul>
+<li>实现Checkable接口的View</li>
+<li>TextView</li>
+<li>ImageView</li>
+</ul>
+</li>
+<li><p>如何在任意位置关掉应用所有Activity &amp; 如何在任意位置关掉指定的Activity？</p>
+</li>
+<li><p>Activity任务栈是什么？在项目中有用到它吗？说给我听听</p>
+</li>
+<li><p>什么情况下Activity不走onDestory?</p>
+<ul>
+<li>System.exit(0)（使用此方法来退出应用时，是不会触发onDestory）</li>
+<li>栈里面的第一个没有销毁的activity会执行onDestroy方法，其他的不会执行（从MainActivity跳转到activity-A（或者继续从activity-A再跳转到activity-B），这时候，从后台强杀，只会执行mainActivity的onDestroy方法，activity-A（以及activity-B）的onDestroy方法都不会执行）</li>
+</ul>
+</li>
+<li><p>什么情况下Activity会单独执行onPause?</p>
+<ul>
+<li>当Activity被一个透明的Dialog或者别的东西覆盖时，此时它依然与窗口管理器依然保持连接，系统继续维护其内部状态，所以它仍然可见，但它已经失去了焦点故不可与用户交互，所以被覆盖的Activity并不会执行onStop()方法，只会执行onPause</li>
+</ul>
+</li>
+<li><p>隐式 Intent 和 显式 Intent</p>
+<ul>
+<li>使用显式Intent时，我们需要指定启动那一个Activity</li>
+<li>使用隐式Intent时，只用告诉系统想做什么，系统会自动的找到符合的Activity来启动</li>
+</ul>
+</li>
+<li><p>什么是 Loader ？</p>
+</li>
+<li><p>什么是 NDK ，为什么它是有用的？</p>
+</li>
+<li><p>如何理解严格模式（StrictMode）</p>
+</li>
+<li><p>什么是 Lint ？它的用途是什么？</p>
+</li>
+<li><p>ListView 和 RecyclerView 有什么区别？</p>
+</li>
+<li><p>如何理解上下文（Context）。怎么使用它？</p>
+</li>
+<li><p>为什么 Bundle 被用来传递数据，为什么不能使用简单的 HashMap 数据结构？</p>
+<blockquote>
+<p>Bundle本质上也是用ArrayMap来进行存储，所以也就是问为什么要用ArrayMap来进行存储。</p>
+</blockquote>
+<ul>
+<li>ArrayMap：适合小数据存储，在数据量较大的时候，性能将退化。</li>
+<li>HashMap ：内部是使用数组+链表的结果，在数据量大的时候性能不错，但在数据小的时候，它的Entry Array比ArrayMap占更多的空间</li>
+</ul>
+<p>在Android中，多数传递都是较小的数据，所以使用Bundle （ArrayMap）更好。而且如果使用Intent来传递数据，Bundle的Parcelable序列化比HashMap 的Serializable性能更好</p>
+</li>
+<li><p>如何理解 Android 的 Dialog ？</p>
+<ul>
+<li>要在Activity中创建一个Dialog，可以在onCreate中调用showDialog(id)，之后会回调onCreateDialog(int id,Bundle rags)这里返回的id就是showDiolog中传入的id，用来表示Dialog，之后就来在onCreateDialog中创建你自己的Dialog。最后还会调用onPrepareDialog()，之后就创建完毕。下次在调用（当前Activity不销毁）showDialog就不会允许onCreatesDialog，只会调用onPrepareDoalog</li>
+</ul>
+</li>
+<li><p>什么是 ViewGroup ，它与 View 的区别在哪里？</p>
+</li>
+<li><p>谈谈 Serializable 接口和 Parcelable 接口的区别。在 Android 中最好使用哪种接口？</p>
+</li>
+<li><p>当 Bitmap 占用较多内存时，你是怎么处理的？</p>
+</li>
+<li><p>AsyncTask 的生命周期和(它所属的) Activity 的生命周期有什么关系？这种关系可能会导致什么样的问题？ 如何避免这些问题发生？ </p>
+</li>
+<li><p>什么是 NDK ，为什么它是有用的？</p>
+</li>
+<li><p>如何理解严格模式（StrictMode）</p>
+</li>
+<li><p>什么是 SurfaceView ？</p>
+</li>
+<li><p>你知道什么是视图树(View Tree)吗？怎样优化它的深度？</p>
+</li>
+<li><p>阐述一下 Android 中的 HashMap , ArrayMap 和 SparseArray</p>
+</li>
+<li><p>阐述一下 Looper, Handler 和 HandlerThread</p>
+</li>
 </ol>
 
-      </section>
-
-      <section class="article-footer">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">#Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">#面试题</a></li></ul>
-      </section>
-
-      <section class="article-navs">
-        
-<nav class="card-container card-article-nav">
-  <div class="card-wrap">
-    
-    
-      <div id="article-nav-older" class="card-item">
-        <article>
-          
-          <a class="card-link article-nav-link" href="/2020/12/24/Collapsing%E4%B8%8ENavigation/"></a>
-          <strong class="article-nav-caption">Older</strong>
-          <p class="article-nav-title">
-            
-              Collapsing与Navigation
-            
-          </p>
-        </article>
-      </div>
-    
-  </div>
-</nav>
-
-      </section>
-
-      
-
-  
-  
-
-  
-  
-
-
     </div>
-  </article>
+
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <div id="comment">
+        <div id="gitalk-container">
+        </div>
+    </div>
+    
 </div>
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2018 - 2021 Hexo
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @John Doe
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
 
-    <!-- footer container -->
-<footer id="footer" class="footer">
-  <div class="footer-container">
-     
-    <p>&copy; 2021 <a href="/" target="_blank">John Doe</a></p>
-
-    
-      <p id="hitokoto"></p>
-      <script src="https://v1.hitokoto.cn/?c=a&amp;encode=js&select=%23hitokoto" defer></script>
-    
-
-    
-
-    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
-  </div>
 </footer>
-  </div>
 
-  <div class="back-to-top-fixed">
-    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
-  <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
-  <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
-  <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
-</svg> 
-  </div>
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
 
-  
-  
-
-
-  <!-- aplayer 音频 start -->
-  <link rel="stylesheet" href="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.css">
-  <script type="text/javascript" src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
-  <script type="text/javascript">
-    const aplayer = document.querySelectorAll(".aplayer");
-    aplayer && initaplayer(aplayer);
-    function initaplayer(els) {
-      let elsArr = Array.from(els);
-      elsArr.forEach(el => {
-        new APlayer({
-          container: el,
-          audio: { ...el.dataset },
-          theme: "#b7daff",
-          lrcType: 3,
-          autoplay: false,
-          loop: false,
-          mutex: true,
-        });
-      });
-    }
-  </script>
-  <!-- aplayer 音频 end -->
-  
-
-<!-- dplayer 视频 start -->
-<script type="text/javascript" src="https://unpkg.com/dplayer@1.25.1/dist/DPlayer.min.js"></script>
-<script type="text/javascript">
-  const dplayer = document.querySelectorAll(".dplayer");
-  dplayer && initDPlayer(dplayer);
-  function initDPlayer(els) {
-    let elsArr = Array.from(els);
-    elsArr.forEach(el => {
-      let url = el.dataset.url;
-      let cover = el.dataset.cover;
-      let subtitle = el.dataset.subtitle;
-
-      let options = {
-        container: el,
-        video: { url: url, pic: cover },
-        theme: "#b7daff",
-        autoplay: false,
-        loop: false,
-        mutex: true,
-      }
-
-      if (subtitle) {
-        options.subtitle = {
-          url: el.dataset.subtitle,
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
         }
-      }
-      new DPlayer(options);
-    });
-  }
+    })
 </script>
-<!-- dplayer 视频 end -->
 
-
-<!-- waterfall 瀑布流 start -->
-
-<script src="/lib/waterfall.min.js"></script>
-
-<script type="text/javascript">
-
-const waterfalls = document.querySelectorAll(".waterfall-container");
-
-if (waterfalls && waterfalls.length > 0) {
-  waterfalls.forEach((waterfall, index) => {
-    let cls = "waterfall-container-" + index;
-    waterfall.classList.add(cls);
-    initWaterfall(cls, waterfall);
-  });
-}
-
-function initWaterfall(selector, el) {
-  const options = {};
-  if (Object.keys(el.dataset).length > 0) {
-    for (let k in el.dataset) {
-      options[k] = el.dataset[k];
-    }
-  }
-  waterfall(`.${selector}`, options);
-}
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: 'hexo-theme-particle',      // The repository of store comments,
+        owner: 'korilin',
+        admin: ['korilin'],
+        language: 'en',
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: true  // Facebook-like distraction free mode
+    })
+    gitalk.render('gitalk-container')
 </script>
-<!-- waterfall 瀑布流 end -->
-
-
-  <!-- zoom start -->
-  
-<script src="/lib/zoom.min.js"></script>
-
-  <script type="text/javascript">
-    document.querySelector(".article-content") && zoom(".article-content");
-  </script>
-  <!-- zoom end -->
-  
-
-
-
-  
-
-
-  
-
-
-  
-
-
-
-
-<script src="/js/script.js"></script>
-
-  
-  <!-- 尾部用户自定义相关内容 -->
 
 </body>
+
 </html>

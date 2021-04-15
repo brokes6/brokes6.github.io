@@ -1,0 +1,1081 @@
+
+<!DOCTYPE html>
+<html lang="en ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hexo || </title>
+    <meta name="author" content="John Doe">
+    <meta name="description" content=" ">
+    <meta name="keywords" content=" ">
+    <link rel="icon" href="/images/avatar.png">
+    <link rel="stylesheet" href="/css/antd.min.css">
+    
+    <link rel="stylesheet" href="/css/maiden-theme.css">
+    
+    <script src="/js/vue.js"></script>
+    <script src="/js/antd.min.js"></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+
+    <div id="loading"
+        style="height: 100vh; width: 100%; position: fixed;display: flex;z-index: 200; justify-content: space-between;">
+        <div id="loadleft" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div id="loadright" style="width: 50%;background-color: #ffffff;transition: width 0.6s ease-out;"></div>
+        <div
+            style="position: fixed; height: 100vh; width: 100%;display: flex;justify-content: center;align-items: center;">
+            <div id="loadcontent"
+                style="width:400px;height:400px;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px#a3ddfb; text-align:center;opacity:1;transition:opacity 0.3s ease-out;">
+                <div>
+                    <h2>LOADING...</h2>
+                    <p>加载过慢请开启缓存(浏览器默认开启)</p>
+                    <div>
+                        <img src="/dancingkitty.gif" alt="loading">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="layout">
+        <transition name="into">
+            <div v-show="show_page" style="display: none;">
+                <div id="menu_show">
+                     
+<nav id="menu">
+    <div class="desktop-menu">
+        <a href="/">
+            <span class="title">Hexo</span>
+        </a>
+        
+        <a href="/">
+            <span>
+                <a-icon type="home" theme="filled" />
+            </span>
+            <span>home</span>
+        </a>
+        
+        <a href="/about">
+            <span>
+                <a-icon type="idcard" theme="filled" />
+            </span>
+            <span>about</span>
+        </a>
+        
+        <a href="/archives">
+            <span>
+                <a-icon type="folder" theme="filled" />
+            </span>
+            <span>archives</span>
+        </a>
+        
+        <a href="/like/categories">
+            <span>
+                <a-icon type="book" theme="filled" />
+            </span>
+            <span>categories</span>
+        </a>
+        
+        <a href="/like/tags">
+            <span>
+                <a-icon type="tags" theme="filled" />
+            </span>
+            <span>tags</span>
+        </a>
+        
+        <a target="_blank" rel="noopener" href="https://en.korilin.com">
+            <span>
+                <a-icon type="compass" theme="filled" />
+            </span>
+            <span>英文博客</span>
+        </a>
+        
+    </div>
+
+    <div :class="'phone-menu ' + menu_show" id="phone-menu">
+        <div :class="'title'" @click="menu_show=!menu_show">
+            <span style="margin-right: 10px;">
+                <a-icon type="appstore" theme="filled" />
+            </span>
+            <span>Hexo</span>
+        </div>
+        <div class="items" v-show="menu_show">
+            
+            <a href="/">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="home" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">home</div>
+                </div>
+            </a>
+            
+            <a href="/about">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="idcard" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">about</div>
+                </div>
+            </a>
+            
+            <a href="/archives">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="folder" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">archives</div>
+                </div>
+            </a>
+            
+            <a href="/like/categories">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="book" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">categories</div>
+                </div>
+            </a>
+            
+            <a href="/like/tags">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="tags" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">tags</div>
+                </div>
+            </a>
+            
+            <a target="_blank" rel="noopener" href="https://en.korilin.com">
+                <div class="item">
+                    <div style="min-width:20px; max-width:50px; width: 10%">
+                        <a-icon type="compass" theme="filled" />
+                    </div>
+                    <div style="min-width:100px;max-width: 150%;width: 20%;">英文博客</div>
+                </div>
+            </a>
+            
+        </div>
+        <div class="curtain" v-show="menu_show"></div>
+    </div>
+
+</nav>
+                </div>
+
+                <div id="main">
+                    
+<div id="archives">
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2021/4/15" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2021/4/15</div>
+                <a href="/2021/04/15/Kotlin中使用ViewModel的数据共享/">
+                    <h3>Kotlin中使用ViewModel的数据共享</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#1bccbc>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Kotlin" style=color:#00bcd4>
+                                Kotlin
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/ViewModel" style=color:#00bcd4>
+                                ViewModel
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2021/4/15" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2021/4/15</div>
+                <a href="/2021/04/15/Fragment懒加载/">
+                    <h3>Fragment懒加载</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#879cff>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/View" style=color:#ff7d73>
+                                View
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Fragment" style=color:#879cff>
+                                Fragment
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2021/4/15" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2021/4/15</div>
+                <a href="/2021/04/15/关于Glide各种问题的解决方案集合（不断更新）/">
+                    <h3>关于Glide各种问题的解决方案集合（不断更新）</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#1bccbc>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Error" style=color:#1bccbc>
+                                Error
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Glide" style=color:#ffa2c4>
+                                Glide
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2021/4/15" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2021/4/15</div>
+                <a href="/2021/04/15/关于Android的各个View的介绍/">
+                    <h3>关于Android的各个View的介绍</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/View" style=color:#879cff>
+                                View
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/kotlin" style=color:#1bccbc>
+                                kotlin
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2021/4/15" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2021/4/15</div>
+                <a href="/2021/04/15/AndroidStudio错误统计/">
+                    <h3>AndroidStudio错误统计</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/kotlin" style=color:#ff7d73>
+                                kotlin
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Error" style=color:#ff7d73>
+                                Error
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2021/4/15" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2021/4/15</div>
+                <a href="/2021/04/15/Kotlin的一些语法/">
+                    <h3>Kotlin的一些语法</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/kotlin" style=color:#ffa2c4>
+                                kotlin
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/syntax" style=color:#1bccbc>
+                                syntax
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2021/2/18" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2021/2/18</div>
+                <a href="/2021/02/18/Android面试题笔记/">
+                    <h3>Android面试题笔记</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#00bcd4>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/面试题" style=color:#ff7d73>
+                                面试题
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/12/24" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/12/24</div>
+                <a href="/2020/12/24/Collapsing与Navigation/">
+                    <h3>Collapsing与Navigation</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/View" style=color:#879cff>
+                                View
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Kotlin" style=color:#ffa2c4>
+                                Kotlin
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/12/24" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/12/24</div>
+                <a href="/2020/12/24/DrawerLayout的使用/">
+                    <h3>DrawerLayout的使用</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/View" style=color:#00bcd4>
+                                View
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Kotlin" style=color:#ffa2c4>
+                                Kotlin
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/12/24" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/12/24</div>
+                <a href="/2020/12/24/WorkManager后台任务/">
+                    <h3>WorkManager后台任务</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Thread" style=color:#ff7d73>
+                                Thread
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Kotlin" style=color:#879cff>
+                                Kotlin
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/12/24" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/12/24</div>
+                <a href="/2020/12/24/PicGo与Typora-上传图片/">
+                    <h3>PicGo与Typora 上传图片</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Service" style=color:#879cff>
+                                Service
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Money" style=color:#879cff>
+                                Money
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/12/24" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/12/24</div>
+                <a href="/2020/12/24/Room在项目中的使用/">
+                    <h3>Room在项目中的使用</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Java" style=color:#879cff>
+                                Java
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Sql" style=color:#ff7d73>
+                                Sql
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/12/17" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/12/17</div>
+                <a href="/2020/12/17/SmallestWidth-限定符/">
+                    <h3>SmallestWidth 限定符</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/屏幕适配" style=color:#879cff>
+                                屏幕适配
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/NoLimits" style=color:#1bccbc>
+                                NoLimits
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/12/17" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/12/17</div>
+                <a href="/2020/12/17/Andorid的多线程操作-UI/">
+                    <h3>Andorid的多线程操作/UI</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Thread" style=color:#ffa2c4>
+                                Thread
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Java" style=color:#1bccbc>
+                                Java
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/11/21" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/11/21</div>
+                <a href="/2020/11/21/Room数据库的使用/">
+                    <h3>Room数据库的使用</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#879cff>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/SQL" style=color:#1bccbc>
+                                SQL
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/10/21" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/10/21</div>
+                <a href="/2020/10/21/广播通知强制下线/">
+                    <h3>广播通知强制下线</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#ffa2c4>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Function" style=color:#00bcd4>
+                                Function
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/10/10" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/10/10</div>
+                <a href="/2020/10/10/关于DanmakuVideoPlayer的使用/">
+                    <h3>关于DanmakuVideoPlayer的使用</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#00bcd4>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/View" style=color:#879cff>
+                                View
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/10/9" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/10/9</div>
+                <a href="/2020/10/09/XUI的BaseRecyclerAdapter/">
+                    <h3>XUI的BaseRecyclerAdapter</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#ff7d73>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/View" style=color:#ff7d73>
+                                View
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Recycler" style=color:#ffa2c4>
+                                Recycler
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/9/22" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/9/22</div>
+                <a href="/2020/09/22/SmartRefreshLayout的使用/">
+                    <h3>SmartRefreshLayout的使用</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#1bccbc>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/View" style=color:#ffa2c4>
+                                View
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/9/21" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/9/21</div>
+                <a href="/2020/09/21/依赖注入/">
+                    <h3>依赖注入</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#ffa2c4>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Context" style=color:#ff7d73>
+                                Context
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/9/21" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/9/21</div>
+                <a href="/2020/09/21/CoordinatorLayout的使用/">
+                    <h3>CoordinatorLayout的使用</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#ff7d73>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/View" style=color:#00bcd4>
+                                View
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+    <a-timeline>
+        <a-timeline-item timestamp="2020/9/18" placement="top" color="#a5c2f5">
+            <a-card hoverable>
+                <div class="item-time">2020/9/18</div>
+                <a href="/2020/09/18/MVP-设计模式/">
+                    <h3>MVP 设计模式</h3>
+                </a>
+                <div class="info">
+                    
+
+                    
+                    <span class="tags">
+                        <span class="icon">
+                            <a-icon type="tags" />
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/Android" style=color:#00bcd4>
+                                Android
+                            </a>
+                        </span>
+                        
+                        <span class="tag">
+                            
+                            <a href="/tags/MVP" style=color:#ffa2c4>
+                                MVP
+                            </a>
+                        </span>
+                        
+                    </span>
+                    
+                </div>
+            </a-card>
+        </a-timeline-item>
+    </a-timeline>
+    
+</div>
+
+                     
+<footer id="footer">
+    <div class="footer-wrap">
+        <div>
+            © 2018 - 2021 Hexo
+            <span class="footer-icon">
+                <a-icon type="flag" theme="filled" /></span>
+            @John Doe
+        </div>
+        <div></div>
+        <div>Based on the <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo Engine</a> & <a
+                target="_blank" rel="noopener" href="https://github.com/korilin/hexo-theme-particle">Particle Theme</a></div>
+        
+    </div>
+
+</footer>
+
+<script src="/js/highlight.min.js"></script>
+<script src="/js/particle.js"></script>
+                </div>
+            </div>
+        </transition>
+    </div>
+
+    <script>
+    new Vue({
+        el: "#layout",
+        data: {
+            show_page: false,
+            onload_menu: false,
+            menu_show: false,
+            card_top: 100
+        },
+        created: function () {
+            var that = this
+            window.onload = function () {
+                that.show_page = true
+                document.getElementById("loadcontent").style.opacity = 0
+                setTimeout(function () {
+                    document.getElementById("loadleft").style.width = 0
+                    document.getElementById("loadright").style.width = 0
+                }, 300)
+                setTimeout(function () {
+                    document.getElementById("loading").style = "display:none"
+                }, 600)
+            }
+        },
+        mounted: function () {
+            var that = this
+            window.addEventListener('scroll', function (e) {
+                that.menu_show = false
+            })
+        },
+        methods: {
+            home_click: function () {
+                window.scrollTo({
+                    top: window.innerHeight - 80,
+                    behavior: "smooth",
+                });
+            }
+        }
+    })
+</script>
+
+</body>
+
+</html>
