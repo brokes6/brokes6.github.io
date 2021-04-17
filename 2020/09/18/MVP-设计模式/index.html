@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     MVP 设计模式 |
@@ -73,255 +75,39 @@
 <h5 id="属性：（我就拿登录来当作例子）"><a href="#属性：（我就拿登录来当作例子）" class="headerlink" title="属性：（我就拿登录来当作例子）"></a>属性：（我就拿登录来当作例子）</h5><ul>
 <li>Model层：创建用于保存用户信息的实体类User（就是userbean）登录的时候用来保存用户信息，建议也保存到本地一份</li>
 </ul>
-<pre><code>public class User &#123;
-    private String username;  //用户的账号
-    private String password;  //用户的密码
-
-    public String getUsername() &#123;
-        return username;
-    &#125;
-    public void setUsername(String username) &#123;
-        this.username = username;
-    &#125;
-
-    public String getPassword() &#123;
-        return password;
-    &#125;
-    public void setPassword(String password) &#123;
-        this.password = password;
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class User &#123;</span><br><span class="line">    private String username;  &#x2F;&#x2F;用户的账号</span><br><span class="line">    private String password;  &#x2F;&#x2F;用户的密码</span><br><span class="line"></span><br><span class="line">    public String getUsername() &#123;</span><br><span class="line">        return username;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUsername(String username) &#123;</span><br><span class="line">        this.username &#x3D; username;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password &#x3D; password;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>结果回调接口：</p>
 <ol>
 <li>创建一个接口，用来通知登录是否成功（成功的话，就可以把获取到的userbean传递下去）或者 失败</li>
-<li>代码展示：<pre><code>public interface OnLoginListener &#123;
-//登录成功的回调
-void loginSuccess(User user);  //登录成功后，将用户信息传递进去
-//登录失败的回调
-void loginFailed();
-&#125;</code></pre>
-</li>
+<li>代码展示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    public interface OnLoginListener &#123;</span><br><span class="line">    &#x2F;&#x2F;登录成功的回调</span><br><span class="line">    void loginSuccess(User user);  &#x2F;&#x2F;登录成功后，将用户信息传递进去</span><br><span class="line">    &#x2F;&#x2F;登录失败的回调</span><br><span class="line">    void loginFailed();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 <li><p>定义业务接口:</p>
 <ol>
 <li>这里抽出一个接口的目的是为了降低一层耦合和便于复用。比如同一个网络请求业务你可以有OkHttp的实现，同时也可以有Retrofit的实现，这样一来就可以方便的做到网络框架的替换，当然你还可以有不同内容的实现。简单来说，就是将登录的这个功能抽取出来，成为一个接口，方便复用。</li>
-<li>代码展示：<pre><code>public interface UserLogin&#123;
-//登录方法
-public void login(String username, String password, OnLoginListener loginListener);
-//这里就传入用户输入的账号，密码，在传入一个登录状况判断的接口
-&#125;</code></pre>
+<li>代码展示：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    public interface UserLogin&#123;</span><br><span class="line">    &#x2F;&#x2F;登录方法</span><br><span class="line">public void login(String username, String password, OnLoginListener loginListener);</span><br><span class="line">&#x2F;&#x2F;这里就传入用户输入的账号，密码，在传入一个登录状况判断的接口</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
 <li><p>具体Model的实现类:<br><br>创建一个具体的类，来实现UserLogin的接口，来实现里面的方法</p>
-<pre><code>public class UserGo implements UserLogin &#123;
-  @Override
-  public void login(final String username, final String password, final OnLoginListener loginListener) &#123;
-      //模拟网络请求耗时操作
-      new Thread() &#123;
-          @Override
-          public void run() &#123;
-              //模拟了耗时                
-              try &#123;
-                  Thread.sleep(2000);
-              &#125; catch (InterruptedException e) &#123;
-                  e.printStackTrace();
-              &#125;
-              //模拟登录成功
-              if (&quot;luoqiang&quot;.equals(username) &amp;&amp; &quot;108&quot;.equals(password)) &#123;
-                  User user = new User();
-                  user.setUsername(username);
-                  user.setPassword(password);
-                  loginListener.loginSuccess(user);
-              &#125; else &#123;
-                  loginListener.loginFailed();
-              &#125;
-          &#125;
-      &#125;.start();
-  &#125;
-&#125;</code></pre>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class UserGo implements UserLogin &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void login(final String username, final String password, final OnLoginListener loginListener) &#123;</span><br><span class="line">        &#x2F;&#x2F;模拟网络请求耗时操作</span><br><span class="line">        new Thread() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                &#x2F;&#x2F;模拟了耗时                </span><br><span class="line">                try &#123;</span><br><span class="line">                    Thread.sleep(2000);</span><br><span class="line">                &#125; catch (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                &#x2F;&#x2F;模拟登录成功</span><br><span class="line">                if (&quot;luoqiang&quot;.equals(username) &amp;&amp; &quot;108&quot;.equals(password)) &#123;</span><br><span class="line">                    User user &#x3D; new User();</span><br><span class="line">                    user.setUsername(username);</span><br><span class="line">                    user.setPassword(password);</span><br><span class="line">                    loginListener.loginSuccess(user);</span><br><span class="line">                &#125; else &#123;</span><br><span class="line">                    loginListener.loginFailed();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li><p>View层:</p>
 <ol>
 <li><p>View层不关心数据，不关心逻辑处理！只关心和用户的交互，那么这个登录界面应该有的操作就是：从输入框获取用户名，获取密码，清除用户名，清除密码，登录网络请求时显示进度条，隐藏进度条，登录成功跳转到对应界面，登录失败提示。接下来定义接口如下：</p>
 <blockquote>
 <p>这里并没有将activity来直接当作View层，原因也是为了方便复用，那个Fragment/Activity需要用到登录，就实现这个接口就行了。</p>
 </blockquote>
-<pre><code>public interface UserLoginView &#123;
- String getUserName();
- //获取用户输入的账号
- String getPassword();
- //获取用户输入的密码
- void clearUserName();
- //清除用户输入的账号
- void clearPassword();
- //清除用户输入的密码
- void showLoading();
- //显示加载（一般来说，我都会在BaseActivity/BaseFragment中实现Loading的显示和隐藏，这里就没必要在写）
- void hideLoading();
- //隐藏加载
- void toMainActivity(User user);
- //跳转到主页，顺便传递用户信息
- void showFaileTips();
- //登录失败的提示
-&#125;
-</code></pre>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    public interface UserLoginView &#123;</span><br><span class="line">        String getUserName();</span><br><span class="line">        &#x2F;&#x2F;获取用户输入的账号</span><br><span class="line">        String getPassword();</span><br><span class="line">        &#x2F;&#x2F;获取用户输入的密码</span><br><span class="line">        void clearUserName();</span><br><span class="line">        &#x2F;&#x2F;清除用户输入的账号</span><br><span class="line">        void clearPassword();</span><br><span class="line">        &#x2F;&#x2F;清除用户输入的密码</span><br><span class="line">        void showLoading();</span><br><span class="line">        &#x2F;&#x2F;显示加载（一般来说，我都会在BaseActivity&#x2F;BaseFragment中实现Loading的显示和隐藏，这里就没必要在写）</span><br><span class="line">        void hideLoading();</span><br><span class="line">        &#x2F;&#x2F;隐藏加载</span><br><span class="line">        void toMainActivity(User user);</span><br><span class="line">        &#x2F;&#x2F;跳转到主页，顺便传递用户信息</span><br><span class="line">        void showFaileTips();</span><br><span class="line">        &#x2F;&#x2F;登录失败的提示</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li><p>具体的用法：</p>
-<pre><code>public class UserLoginActivity extends AppCompatActivity implements UserLoginView &#123;
-private EditText mEtUsername, mEtPassword;
-private Button mBtnLogin, mBtnClear;
-private ProgressBar mPbLoading;
-private UserLoginPresenter mUserLoginPresenter;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) &#123;
- super.onCreate(savedInstanceState);
- setContentView(R.layout.activity_main);
-//关于Presenter层，都可以写在BaseActivtiy/BaseFragment中，没必要写在Activity中
- mUserLoginPresenter = new UserLoginPresenter(this);
- //获取Presenter层
- initViews();
-&#125;
-
-private void initViews() &#123;
- mEtUsername = findViewById(R.id.et_username);
- mEtPassword = findViewById(R.id.et_password);
- mBtnClear = findViewById(R.id.btn_clear);
- mBtnLogin = findViewById(R.id.btn_login);
- mPbLoading = findViewById(R.id.pb_loading);
- mBtnLogin.setOnClickListener(new View.OnClickListener() &#123;
-     @Override
-     public void onClick(View v) &#123;
-         mUserLoginPresenter.login();
-     &#125;
- &#125;);
- mBtnClear.setOnClickListener(new View.OnClickListener() &#123;
-     @Override
-     public void onClick(View v) &#123;
-         mUserLoginPresenter.clear();
-     &#125;
- &#125;);
-&#125;
-
-@Override
-public String getUserName() &#123;
- return mEtUsername.getText().toString();
-&#125;
-
-@Override
-public String getPassword() &#123;
- return mEtPassword.getText().toString();
-&#125;
-
-@Override
-public void clearUserName() &#123;
- mEtUsername.setText(&quot;&quot;);
-&#125;
-
-@Override
-public void clearPassword() &#123;
- mEtPassword.setText(&quot;&quot;);
-&#125;
-
-@Override
-public void showLoading() &#123;
- mPbLoading.setVisibility(View.VISIBLE);
-&#125;
-
-@Override
-public void hideLoading() &#123;
- mPbLoading.setVisibility(View.GONE);
-&#125;
-
-@Override
-public void toMainActivity(User user) &#123;
- Toast.makeText(this, &quot;跳转到登录成功页面&quot;, Toast.LENGTH_SHORT).show();
-&#125;
-
-@Override
-public void showFaileTips() &#123;
- Toast.makeText(this, &quot;登录失败&quot;, Toast.LENGTH_SHORT).show();
-&#125;
-
-@Override
-protected void onDestroy() &#123;
- super.onDestroy();
- //为了防止内存泄漏，解绑Presenter层对View层的引用，这里的将Presenter层置为空可以在BaseActivity/BaseFragment中进行操作
- mUserLoginPresenter.detachView();
-&#125;
-&#125;
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">    public class UserLoginActivity extends AppCompatActivity implements UserLoginView &#123;</span><br><span class="line">    private EditText mEtUsername, mEtPassword;</span><br><span class="line">    private Button mBtnLogin, mBtnClear;</span><br><span class="line">    private ProgressBar mPbLoading;</span><br><span class="line">    private UserLoginPresenter mUserLoginPresenter;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line">	&#x2F;&#x2F;关于Presenter层，都可以写在BaseActivtiy&#x2F;BaseFragment中，没必要写在Activity中</span><br><span class="line">        mUserLoginPresenter &#x3D; new UserLoginPresenter(this);</span><br><span class="line">        &#x2F;&#x2F;获取Presenter层</span><br><span class="line">        initViews();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initViews() &#123;</span><br><span class="line">        mEtUsername &#x3D; findViewById(R.id.et_username);</span><br><span class="line">        mEtPassword &#x3D; findViewById(R.id.et_password);</span><br><span class="line">        mBtnClear &#x3D; findViewById(R.id.btn_clear);</span><br><span class="line">        mBtnLogin &#x3D; findViewById(R.id.btn_login);</span><br><span class="line">        mPbLoading &#x3D; findViewById(R.id.pb_loading);</span><br><span class="line">        mBtnLogin.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                mUserLoginPresenter.login();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        mBtnClear.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onClick(View v) &#123;</span><br><span class="line">                mUserLoginPresenter.clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return mEtUsername.getText().toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return mEtPassword.getText().toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void clearUserName() &#123;</span><br><span class="line">        mEtUsername.setText(&quot;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void clearPassword() &#123;</span><br><span class="line">        mEtPassword.setText(&quot;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void showLoading() &#123;</span><br><span class="line">        mPbLoading.setVisibility(View.VISIBLE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void hideLoading() &#123;</span><br><span class="line">        mPbLoading.setVisibility(View.GONE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void toMainActivity(User user) &#123;</span><br><span class="line">        Toast.makeText(this, &quot;跳转到登录成功页面&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void showFaileTips() &#123;</span><br><span class="line">        Toast.makeText(this, &quot;登录失败&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDestroy() &#123;</span><br><span class="line">        super.onDestroy();</span><br><span class="line">        &#x2F;&#x2F;为了防止内存泄漏，解绑Presenter层对View层的引用，这里的将Presenter层置为空可以在BaseActivity&#x2F;BaseFragment中进行操作</span><br><span class="line">        mUserLoginPresenter.detachView();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
 <li><p>Presenter层:</p>
 <ol>
-<li><p>Presenter的作用就是从View层获取用户的输入，传递到Model层进行处理，然后回调给View层，输出给用户！</p>
-</li>
-<li><p>Presenter一般来说，就是将View和Mode集合在一起，进行操作</p>
-<pre><code>public class UserLoginPresenter &#123;
-private UserGo userGo;
-private UserLoginView userLoginView;
-private Handler mHandler = new Handler();
-//对应视图页面销毁的标志位,当视图销毁后回调就不需要处理了
-private boolean destroyFlag;
-
-//Presenter必须要能拿到View和Model的实现类
-public UserLoginPresenter(IUserLoginView userLoginView) &#123;
- this.userLoginView = userLoginView;
- this. userGo = new UserGo();
-&#125;
-
-public void login() &#123;
- userLoginView.showLoading();
- userGo.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() &#123;
-     @Override
-     public void loginSuccess(final User user) &#123;
-         if (!destroyFlag) &#123; //View层销毁后不需要处理的判断
-             //需要在UI线程执行
-             mHandler.post(new Runnable() &#123;
-                 @Override
-                 public void run() &#123;
-                     userLoginView.toMainActivity(user);
-                     userLoginView.hideLoading();
-                 &#125;
-             &#125;);
-         &#125;
-     &#125;
-
-     @Override
-     public void loginFailed() &#123;
-         if (!destroyFlag) &#123; //View层销毁后不需要处理的判断
-             //需要在UI线程执行
-             mHandler.post(new Runnable() &#123;
-                 @Override
-                 public void run() &#123;
-                     userLoginView.showFaileTips();
-                     userLoginView.hideLoading();
-                 &#125;
-             &#125;);
-         &#125;
-     &#125;
- &#125;);
-&#125;
-
-public void clear() &#123;
- userLoginView.clearUserName();
- userLoginView.clearPassword();
-&#125;
-
-//解绑视图
-public void detachView() &#123;
- destroyFlag = true;
- this.userLoginView = null;
-&#125;
-&#125;
-</code></pre>
-</li>
+<li>Presenter的作用就是从View层获取用户的输入，传递到Model层进行处理，然后回调给View层，输出给用户！</li>
+<li>Presenter一般来说，就是将View和Mode集合在一起，进行操作<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">    public class UserLoginPresenter &#123;</span><br><span class="line">    private UserGo userGo;</span><br><span class="line">    private UserLoginView userLoginView;</span><br><span class="line">    private Handler mHandler &#x3D; new Handler();</span><br><span class="line">    &#x2F;&#x2F;对应视图页面销毁的标志位,当视图销毁后回调就不需要处理了</span><br><span class="line">    private boolean destroyFlag;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;Presenter必须要能拿到View和Model的实现类</span><br><span class="line">    public UserLoginPresenter(IUserLoginView userLoginView) &#123;</span><br><span class="line">        this.userLoginView &#x3D; userLoginView;</span><br><span class="line">        this. userGo &#x3D; new UserGo();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void login() &#123;</span><br><span class="line">        userLoginView.showLoading();</span><br><span class="line">        userGo.login(userLoginView.getUserName(), userLoginView.getPassword(), new OnLoginListener() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void loginSuccess(final User user) &#123;</span><br><span class="line">                if (!destroyFlag) &#123; &#x2F;&#x2F;View层销毁后不需要处理的判断</span><br><span class="line">                    &#x2F;&#x2F;需要在UI线程执行</span><br><span class="line">                    mHandler.post(new Runnable() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void run() &#123;</span><br><span class="line">                            userLoginView.toMainActivity(user);</span><br><span class="line">                            userLoginView.hideLoading();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void loginFailed() &#123;</span><br><span class="line">                if (!destroyFlag) &#123; &#x2F;&#x2F;View层销毁后不需要处理的判断</span><br><span class="line">                    &#x2F;&#x2F;需要在UI线程执行</span><br><span class="line">                    mHandler.post(new Runnable() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void run() &#123;</span><br><span class="line">                            userLoginView.showFaileTips();</span><br><span class="line">                            userLoginView.hideLoading();</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void clear() &#123;</span><br><span class="line">        userLoginView.clearUserName();</span><br><span class="line">        userLoginView.clearPassword();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;解绑视图</span><br><span class="line">    public void detachView() &#123;</span><br><span class="line">        destroyFlag &#x3D; true;</span><br><span class="line">        this.userLoginView &#x3D; null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ul>
@@ -329,7 +115,7 @@ public void detachView() &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cknkfim1f000dekmeges8f4op" class="article-share-link">
+      <a data-url="http://example.com/2020/09/18/MVP-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" data-id="cknl50gjy000dkkmeg2q9fthw" class="article-share-link">
         分享
       </a>
       
@@ -359,6 +145,23 @@ public void detachView() &#123;
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -469,6 +272,7 @@ public void detachView() &#123;
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

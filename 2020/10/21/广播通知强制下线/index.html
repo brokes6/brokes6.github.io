@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     广播通知强制下线 |
@@ -75,95 +77,19 @@
 <li>广播类型应该为动态添加</li>
 </ul>
 <p>下面我将在BaseActivity中创建</p>
-<pre><code> private JudgeLoginReceiver judgeLoginReceiver;
- public static String signInAction = &quot;LOGIN.DilDil.ACTION&quot;;
-
- @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) &#123;
-        super.onCreate(savedInstanceState);
-        onCreateView(savedInstanceState);
-            ...
-        initBroadcastReceiver();
-    &#125;
-
-    private void initBroadcastReceiver() &#123;
-        if (judgeLoginReceiver != null) &#123;
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(signInAction);
-            registerReceiver(judgeLoginReceiver, intentFilter);
-        &#125; else &#123;
-            judgeLoginReceiver = new JudgeLoginReceiver();
-            IntentFilter intentFilter = new IntentFilter();
-            intentFilter.addAction(signInAction);
-            registerReceiver(judgeLoginReceiver, intentFilter);
-        &#125;
-    &#125;
-
-     @Override
-    protected void onDestroy() &#123;
-        if (judgeLoginReceiver != null) &#123;
-            unregisterReceiver(judgeLoginReceiver);
-        &#125;
-        super.onDestroy();
-    &#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private JudgeLoginReceiver judgeLoginReceiver;</span><br><span class="line">public static String signInAction &#x3D; &quot;LOGIN.DilDil.ACTION&quot;;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">   protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</span><br><span class="line">       super.onCreate(savedInstanceState);</span><br><span class="line">       onCreateView(savedInstanceState);</span><br><span class="line">   		...</span><br><span class="line">       initBroadcastReceiver();</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   private void initBroadcastReceiver() &#123;</span><br><span class="line">       if (judgeLoginReceiver !&#x3D; null) &#123;</span><br><span class="line">           IntentFilter intentFilter &#x3D; new IntentFilter();</span><br><span class="line">           intentFilter.addAction(signInAction);</span><br><span class="line">           registerReceiver(judgeLoginReceiver, intentFilter);</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           judgeLoginReceiver &#x3D; new JudgeLoginReceiver();</span><br><span class="line">           IntentFilter intentFilter &#x3D; new IntentFilter();</span><br><span class="line">           intentFilter.addAction(signInAction);</span><br><span class="line">           registerReceiver(judgeLoginReceiver, intentFilter);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">    @Override</span><br><span class="line">   protected void onDestroy() &#123;</span><br><span class="line">       if (judgeLoginReceiver !&#x3D; null) &#123;</span><br><span class="line">           unregisterReceiver(judgeLoginReceiver);</span><br><span class="line">       &#125;</span><br><span class="line">       super.onDestroy();</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 <p>上面的代码中，我首先创建了要响应的Action（signInAction），之后在onCreate中初始化广播。<br>在initBroadcastReceiver中，为了防止反复创建，于是判断是否已经存在，没有就创建，有就直接注册。别忘了要在onDestroy取消注册</p>
 <h5 id="接下来还需要创建一个类来继承BroadcastReceiver"><a href="#接下来还需要创建一个类来继承BroadcastReceiver" class="headerlink" title="接下来还需要创建一个类来继承BroadcastReceiver"></a>接下来还需要创建一个类来继承BroadcastReceiver</h5><p>那么创建一个名为JudgeLoginReceiver的类来继承BroadcastReceiver</p>
-<pre><code>private static class JudgeLoginReceiver extends BroadcastReceiver &#123;
-
-        @Override
-        public void onReceive(Context context, Intent intent) &#123;
-            new MaterialDialog.Builder(context)
-                    .title(R.string.loginWarning)
-                    .content(R.string.thisAccountHasSigned)
-                    .positiveText(R.string.determine)
-                    .cancelable(false)
-                    .onPositive(new MaterialDialog.SingleButtonCallback() &#123;
-                        @Override
-                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) &#123;
-                            ApiService apiService = ApiEngine.getInstance().getApiService();
-                            apiService.Logout()
-                                    .subscribeOn(Schedulers.io())
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe(new Observer&lt;LogoutBean&gt;() &#123;
-                                        @Override
-                                        public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) &#123;
-
-                                        &#125;
-
-                                        @Override
-                                        public void onNext(@io.reactivex.annotations.NonNull LogoutBean logoutBean) &#123;
-                                            SharePreferenceUtil.getInstance(context).remove(&quot;cookie&quot;);
-                                            ActivityUtils.startActivity(LoginActivity.class);
-                                        &#125;
-
-                                        @Override
-                                        public void onError(@io.reactivex.annotations.NonNull Throwable e) &#123;
-                                            XToastUtils.error(R.string.networkError);
-                                        &#125;
-
-                                        @Override
-                                        public void onComplete() &#123;
-
-                                        &#125;
-                                    &#125;);
-                        &#125;
-                    &#125;)
-                    .show();
-        &#125;
-    &#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">private static class JudgeLoginReceiver extends BroadcastReceiver &#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">            new MaterialDialog.Builder(context)</span><br><span class="line">                    .title(R.string.loginWarning)</span><br><span class="line">                    .content(R.string.thisAccountHasSigned)</span><br><span class="line">                    .positiveText(R.string.determine)</span><br><span class="line">                    .cancelable(false)</span><br><span class="line">                    .onPositive(new MaterialDialog.SingleButtonCallback() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) &#123;</span><br><span class="line">                            ApiService apiService &#x3D; ApiEngine.getInstance().getApiService();</span><br><span class="line">                            apiService.Logout()</span><br><span class="line">                                    .subscribeOn(Schedulers.io())</span><br><span class="line">                                    .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                                    .subscribe(new Observer&lt;LogoutBean&gt;() &#123;</span><br><span class="line">                                        @Override</span><br><span class="line">                                        public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) &#123;</span><br><span class="line"></span><br><span class="line">                                        &#125;</span><br><span class="line"></span><br><span class="line">                                        @Override</span><br><span class="line">                                        public void onNext(@io.reactivex.annotations.NonNull LogoutBean logoutBean) &#123;</span><br><span class="line">                                            SharePreferenceUtil.getInstance(context).remove(&quot;cookie&quot;);</span><br><span class="line">                                            ActivityUtils.startActivity(LoginActivity.class);</span><br><span class="line">                                        &#125;</span><br><span class="line"></span><br><span class="line">                                        @Override</span><br><span class="line">                                        public void onError(@io.reactivex.annotations.NonNull Throwable e) &#123;</span><br><span class="line">                                            XToastUtils.error(R.string.networkError);</span><br><span class="line">                                        &#125;</span><br><span class="line"></span><br><span class="line">                                        @Override</span><br><span class="line">                                        public void onComplete() &#123;</span><br><span class="line"></span><br><span class="line">                                        &#125;</span><br><span class="line">                                    &#125;);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;)</span><br><span class="line">                    .show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>继承BroadcastReceiver之后需要重写onReceive方法，这个方法是用来处理接收到广播之后的行为。<br>我在onReceive中创建了一个提示框。</p>
-<pre><code>title 是提示框的标题
-content 是内容
-positiveText 是确定按钮的文字
-cancelable 是指是否可以点击外面退出
-onPositive 是指确实按钮的点击监听
-不写取消按钮就默认没有取消按钮</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title 是提示框的标题</span><br><span class="line">content 是内容</span><br><span class="line">positiveText 是确定按钮的文字</span><br><span class="line">cancelable 是指是否可以点击外面退出</span><br><span class="line">onPositive 是指确实按钮的点击监听</span><br><span class="line">不写取消按钮就默认没有取消按钮</span><br></pre></td></tr></table></figure>
+
 <p>接下来，我在点击事件中获取Api接口，调用了退出登录的方法，并处理结果。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/21/%E5%B9%BF%E6%92%AD%E9%80%9A%E7%9F%A5%E5%BC%BA%E5%88%B6%E4%B8%8B%E7%BA%BF/" data-id="cknkfim1s0015ekme23rff6qu" class="article-share-link">
+      <a data-url="http://example.com/2020/10/21/%E5%B9%BF%E6%92%AD%E9%80%9A%E7%9F%A5%E5%BC%BA%E5%88%B6%E4%B8%8B%E7%BA%BF/" data-id="cknl50gkc0014kkme1yj70zbv" class="article-share-link">
         分享
       </a>
       
@@ -198,6 +124,23 @@ onPositive 是指确实按钮的点击监听
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -308,6 +251,7 @@ onPositive 是指确实按钮的点击监听
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

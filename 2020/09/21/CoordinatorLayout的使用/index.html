@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     CoordinatorLayout的使用 |
@@ -87,41 +89,8 @@
 </blockquote>
 </li>
 <li><p>代码使用：</p>
-<pre><code>&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width=&quot;match_parent&quot;
-        android:layout_height=&quot;match_parent&quot;&gt;
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;androidx.coordinatorlayout.widget.CoordinatorLayout</span><br><span class="line">        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:layout_height&#x3D;&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;com.google.android.material.appbar.AppBarLayout</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;appbar&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            app:elevation&#x3D;&quot;0dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;com.youth.banner.Banner</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;Re_banner&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;200dp&quot;</span><br><span class="line">                android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                app:banner_indicator_gravity&#x3D;&quot;right&quot;</span><br><span class="line">                app:banner_indicator_marginBottom&#x3D;&quot;@dimen&#x2F;dp_7&quot;</span><br><span class="line">                app:banner_indicator_marginRight&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                app:banner_indicator_normal_color&#x3D;&quot;@color&#x2F;White&quot;</span><br><span class="line">                app:banner_indicator_selected_color&#x3D;&quot;@color&#x2F;Pink&quot;</span><br><span class="line">                app:layout_scrollFlags&#x3D;&quot;scroll&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;&#x2F;com.google.android.material.appbar.AppBarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;androidx.recyclerview.widget.RecyclerView</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;Re_recy&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">            app:layout_behavior&#x3D;&quot;@string&#x2F;appbar_scrolling_view_behavior&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</span><br></pre></td></tr></table></figure>
 
-        &lt;com.google.android.material.appbar.AppBarLayout
-            android:id=&quot;@+id/appbar&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            app:elevation=&quot;0dp&quot;&gt;
-
-            &lt;com.youth.banner.Banner
-                android:id=&quot;@+id/Re_banner&quot;
-                android:layout_width=&quot;match_parent&quot;
-                android:layout_height=&quot;200dp&quot;
-                android:layout_marginLeft=&quot;@dimen/dp_10&quot;
-                android:layout_marginTop=&quot;@dimen/dp_10&quot;
-                android:layout_marginRight=&quot;@dimen/dp_10&quot;
-                app:banner_indicator_gravity=&quot;right&quot;
-                app:banner_indicator_marginBottom=&quot;@dimen/dp_7&quot;
-                app:banner_indicator_marginRight=&quot;@dimen/dp_15&quot;
-                app:banner_indicator_normal_color=&quot;@color/White&quot;
-                app:banner_indicator_selected_color=&quot;@color/Pink&quot;
-                app:layout_scrollFlags=&quot;scroll&quot; /&gt;
-
-        &lt;/com.google.android.material.appbar.AppBarLayout&gt;
-
-        &lt;androidx.recyclerview.widget.RecyclerView
-            android:id=&quot;@+id/Re_recy&quot;
-            android:layout_width=&quot;match_parent&quot;
-            android:layout_height=&quot;wrap_content&quot;
-            android:layout_marginLeft=&quot;@dimen/dp_5&quot;
-            android:layout_marginTop=&quot;@dimen/dp_5&quot;
-            android:layout_marginRight=&quot;@dimen/dp_5&quot;
-            app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot; /&gt;
-    &lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
 <p> 这里就是是哟CoordinatorLayou嵌套RecyclerView，将头部的Banner设置layout_scrollFlags=”scroll”，它将会跟随屏幕一起滑动，滑出屏幕外，而RecyclerView设置的layout_behavior=”@string/appbar_scrolling_view_behavior”将会把View设置在AppBarLayout的下方，并且不会随着屏幕的滑动而滑出屏幕之外。</p>
 </li>
 </ul>
@@ -129,86 +98,7 @@
 <li><p>CollapsingToolbarLayout</p>
 <ol>
 <li><p>吸附效果是需要CoordinatorLayout与CollapsingToolbarLayout一同使用，并且CollapsingToolbarLayout设置layout_scrollFlags=”scroll|snap”，代表被CollapsingToolbarLayout包裹的内容是需要吸附到屏幕顶部的</p>
-<pre><code>&lt;androidx.coordinatorlayout.widget.CoordinatorLayout
-     android:id=&quot;@+id/TV_nestSc&quot;
-     android:layout_width=&quot;match_parent&quot;
-     android:layout_height=&quot;match_parent&quot;
-     android:background=&quot;#FFFFFF&quot;&gt;
-
-     &lt;com.google.android.material.appbar.AppBarLayout
-         android:id=&quot;@+id/appbar&quot;
-         android:layout_width=&quot;match_parent&quot;
-         android:layout_height=&quot;wrap_content&quot;
-         app:elevation=&quot;0dp&quot;&gt;
-
-         &lt;com.google.android.material.appbar.CollapsingToolbarLayout
-             android:id=&quot;@+id/coll_layout&quot;
-             android:layout_width=&quot;match_parent&quot;
-             android:layout_height=&quot;wrap_content&quot;
-             android:fitsSystemWindows=&quot;true&quot;
-             app:layout_scrollFlags=&quot;scroll|snap&quot;&gt;
-
-             &lt;RelativeLayout
-                 android:layout_width=&quot;match_parent&quot;
-                 android:layout_height=&quot;wrap_content&quot;&gt;
-
-                 &lt;LinearLayout
-                     android:id=&quot;@+id/Sy_text&quot;
-                     android:layout_width=&quot;match_parent&quot;
-                     android:layout_height=&quot;@dimen/dp_35&quot;
-                     android:layout_marginLeft=&quot;@dimen/dp_15&quot;
-                     android:layout_marginTop=&quot;@dimen/dp_10&quot;
-                     android:layout_marginRight=&quot;@dimen/dp_15&quot;
-                     android:layout_weight=&quot;1&quot;
-                     android:background=&quot;@drawable/file_background_radius_30_while_gray&quot;
-                     android:gravity=&quot;center_vertical&quot;
-                     android:orientation=&quot;horizontal&quot;&gt;
-
-                     &lt;ImageView
-                         android:layout_width=&quot;@dimen/dp_24&quot;
-                         android:layout_height=&quot;@dimen/dp_24&quot;
-                         android:layout_marginLeft=&quot;@dimen/dp_15&quot;
-                         android:src=&quot;@drawable/search_24_while&quot; /&gt;
-
-                     &lt;TextView
-                         android:layout_width=&quot;0dp&quot;
-                         android:layout_height=&quot;wrap_content&quot;
-                         android:layout_marginLeft=&quot;@dimen/dp_5&quot;
-                         android:layout_weight=&quot;1&quot;
-                         android:text=&quot;查找精彩动态内容&quot;
-                         android:textColor=&quot;#c1bfc0&quot;
-                         android:textSize=&quot;16sp&quot; /&gt;
-                 &lt;/LinearLayout&gt;
-
-                 &lt;TextView
-                     android:id=&quot;@+id/xian_2&quot;
-                     android:layout_width=&quot;match_parent&quot;
-                     android:layout_height=&quot;@dimen/dp_1&quot;
-                     android:layout_below=&quot;@+id/Sy_text&quot;
-                     android:layout_marginTop=&quot;@dimen/dp_10&quot;
-                     android:background=&quot;#e7e7e7&quot; /&gt;
-
-             &lt;/RelativeLayout&gt;
-
-         &lt;/com.google.android.material.appbar.CollapsingToolbarLayout&gt;
-
-     &lt;/com.google.android.material.appbar.AppBarLayout&gt;
-
-     &lt;LinearLayout
-         android:layout_width=&quot;match_parent&quot;
-         android:layout_height=&quot;match_parent&quot;
-         android:animateLayoutChanges=&quot;true&quot;
-         android:orientation=&quot;vertical&quot;
-         app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;&gt;
-
-         &lt;androidx.recyclerview.widget.RecyclerView
-             android:id=&quot;@+id/Recy_dynamic&quot;
-             android:layout_width=&quot;match_parent&quot;
-             android:layout_height=&quot;match_parent&quot;
-             android:background=&quot;#f4f4f4&quot; /&gt;
-     &lt;/LinearLayout&gt;
-
- &lt;/androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">&lt;androidx.coordinatorlayout.widget.CoordinatorLayout</span><br><span class="line">        android:id&#x3D;&quot;@+id&#x2F;TV_nestSc&quot;</span><br><span class="line">        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">        android:background&#x3D;&quot;#FFFFFF&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;com.google.android.material.appbar.AppBarLayout</span><br><span class="line">            android:id&#x3D;&quot;@+id&#x2F;appbar&quot;</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">            app:elevation&#x3D;&quot;0dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;com.google.android.material.appbar.CollapsingToolbarLayout</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;coll_layout&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">                android:fitsSystemWindows&#x3D;&quot;true&quot;</span><br><span class="line">                app:layout_scrollFlags&#x3D;&quot;scroll|snap&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;RelativeLayout</span><br><span class="line">                    android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                    android:layout_height&#x3D;&quot;wrap_content&quot;&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;LinearLayout</span><br><span class="line">                        android:id&#x3D;&quot;@+id&#x2F;Sy_text&quot;</span><br><span class="line">                        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                        android:layout_height&#x3D;&quot;@dimen&#x2F;dp_35&quot;</span><br><span class="line">                        android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                        android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                        android:layout_marginRight&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                        android:layout_weight&#x3D;&quot;1&quot;</span><br><span class="line">                        android:background&#x3D;&quot;@drawable&#x2F;file_background_radius_30_while_gray&quot;</span><br><span class="line">                        android:gravity&#x3D;&quot;center_vertical&quot;</span><br><span class="line">                        android:orientation&#x3D;&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                        &lt;ImageView</span><br><span class="line">                            android:layout_width&#x3D;&quot;@dimen&#x2F;dp_24&quot;</span><br><span class="line">                            android:layout_height&#x3D;&quot;@dimen&#x2F;dp_24&quot;</span><br><span class="line">                            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_15&quot;</span><br><span class="line">                            android:src&#x3D;&quot;@drawable&#x2F;search_24_while&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">                        &lt;TextView</span><br><span class="line">                            android:layout_width&#x3D;&quot;0dp&quot;</span><br><span class="line">                            android:layout_height&#x3D;&quot;wrap_content&quot;</span><br><span class="line">                            android:layout_marginLeft&#x3D;&quot;@dimen&#x2F;dp_5&quot;</span><br><span class="line">                            android:layout_weight&#x3D;&quot;1&quot;</span><br><span class="line">                            android:text&#x3D;&quot;查找精彩动态内容&quot;</span><br><span class="line">                            android:textColor&#x3D;&quot;#c1bfc0&quot;</span><br><span class="line">                            android:textSize&#x3D;&quot;16sp&quot; &#x2F;&gt;</span><br><span class="line">                    &lt;&#x2F;LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">                    &lt;TextView</span><br><span class="line">                        android:id&#x3D;&quot;@+id&#x2F;xian_2&quot;</span><br><span class="line">                        android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                        android:layout_height&#x3D;&quot;@dimen&#x2F;dp_1&quot;</span><br><span class="line">                        android:layout_below&#x3D;&quot;@+id&#x2F;Sy_text&quot;</span><br><span class="line">                        android:layout_marginTop&#x3D;&quot;@dimen&#x2F;dp_10&quot;</span><br><span class="line">                        android:background&#x3D;&quot;#e7e7e7&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;&#x2F;RelativeLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;&#x2F;com.google.android.material.appbar.CollapsingToolbarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;&#x2F;com.google.android.material.appbar.AppBarLayout&gt;</span><br><span class="line"></span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">            android:animateLayoutChanges&#x3D;&quot;true&quot;</span><br><span class="line">            android:orientation&#x3D;&quot;vertical&quot;</span><br><span class="line">            app:layout_behavior&#x3D;&quot;@string&#x2F;appbar_scrolling_view_behavior&quot;&gt;</span><br><span class="line"></span><br><span class="line">            &lt;androidx.recyclerview.widget.RecyclerView</span><br><span class="line">                android:id&#x3D;&quot;@+id&#x2F;Recy_dynamic&quot;</span><br><span class="line">                android:layout_width&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:layout_height&#x3D;&quot;match_parent&quot;</span><br><span class="line">                android:background&#x3D;&quot;#f4f4f4&quot; &#x2F;&gt;</span><br><span class="line">        &lt;&#x2F;LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">    &lt;&#x2F;androidx.coordinatorlayout.widget.CoordinatorLayout&gt;</span><br></pre></td></tr></table></figure>
 <p>吸附效果就是在滑动屏幕的时候，被CollapsingToolbarLayout包裹的内容在接近屏幕顶端的时候会有个吸附效果，之后就会一直吸在屏幕顶端，除非下滑脱离。</p>
 </li>
 </ol>
@@ -218,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknkfim1b0006ekme03a24fah" class="article-share-link">
+      <a data-url="http://example.com/2020/09/21/CoordinatorLayout%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknl50gjs0004kkmedf223b0u" class="article-share-link">
         分享
       </a>
       
@@ -253,6 +143,23 @@
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -363,6 +270,7 @@
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

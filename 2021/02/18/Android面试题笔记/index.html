@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     Android面试题笔记 |
@@ -509,97 +511,28 @@
 <li><p>静态内部类</p>
 <ul>
 <li><p>定义方式为 static class。静态内部类可以直接访问外部类的静态属性和方法，但是不可以访问外部类的实例属性和方法</p>
-<pre><code class="java">public class StaticOutter &#123;
-    private static Integer outterNum = 1;
-
-    private static void outStatic()&#123;
-        System.out.println(&quot;run out static&quot;);
-    &#125;
-
-    public static class StaticInner&#123;
-
-        public void testStaticInner()&#123;
-            System.out.println(&quot;调用外部类的静态方法&quot;);
-            outStatic();
-            System.out.println(&quot;调用外部类的静态属性&quot;);
-            System.out.println(outterNum);
-        &#125;
-
-    &#125;
-
-&#125;</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticOutter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Integer outterNum = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">outStatic</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;run out static&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">StaticInner</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testStaticInner</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;调用外部类的静态方法&quot;</span>);</span><br><span class="line">            outStatic();</span><br><span class="line">            System.out.println(<span class="string">&quot;调用外部类的静态属性&quot;</span>);</span><br><span class="line">            System.out.println(outterNum);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>成员内部类</p>
 <ul>
 <li><p>定义方式为 class。成员内部类除了可以访问外部类的静态属性和方法，还可以访问实例属性和方法，但不可以定义静态变量和静态方法。这里可以吧成员内部类看作一个比较特殊的<strong>实例方法</strong></p>
-<pre><code class="java">public class Outter &#123;
-    private Integer outterNum = 1;
-
-    private void outterMethod()&#123;
-        System.out.println(&quot;运行外部方法......&quot;);
-    &#125;
-
-    public class Inner&#123;
-
-        public void innerMethod()&#123;
-            System.out.println(&quot;outterNum:&quot;+outterNum);
-            System.out.println(&quot;运行outter的方法&quot;);
-            outterMethod();
-        &#125;
-
-    &#125;
-&#125;</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Outter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Integer outterNum = <span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">outterMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;运行外部方法......&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;outterNum:&quot;</span>+outterNum);</span><br><span class="line">            System.out.println(<span class="string">&quot;运行outter的方法&quot;</span>);</span><br><span class="line">            outterMethod();</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>方法内部类</p>
 <ul>
 <li><p>定义方式为 class。方法内部类就是在一个方法中定义的一个类，方法内部类只能在定义的方法中使用。方法内部类可以直接调用定义方法的参数和方法内部的属性，也可以调用外部类中的静态属性和方法</p>
-<pre><code class="java">public class MethodOutter &#123;
-    private Integer outter = 10;
-
-    public void testMethod(Integer param)&#123;
-        String local = &quot;hello&quot;;
-        class MethodInner&#123;
-            public void innerMethod()&#123;
-                System.out.println(&quot;MethodOutter outter:&quot;+outter);
-                System.out.println(&quot;param:&quot;+param);
-                System.out.println(&quot;local:&quot;+local);
-            &#125;
-
-        &#125;
-        MethodInner inner = new MethodInner();
-        inner.innerMethod();
-    &#125;
-
-    public static void main(String[] args) &#123;
-        MethodOutter out = new MethodOutter();
-        out.testMethod(1);
-    &#125;
-&#125;
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MethodOutter</span> </span>&#123;</span><br><span class="line">     <span class="keyword">private</span> Integer outter = <span class="number">10</span>;</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testMethod</span><span class="params">(Integer param)</span></span>&#123;</span><br><span class="line">         String local = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">         <span class="class"><span class="keyword">class</span> <span class="title">MethodInner</span></span>&#123;</span><br><span class="line">             <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">innerMethod</span><span class="params">()</span></span>&#123;</span><br><span class="line">                 System.out.println(<span class="string">&quot;MethodOutter outter:&quot;</span>+outter);</span><br><span class="line">                 System.out.println(<span class="string">&quot;param:&quot;</span>+param);</span><br><span class="line">                 System.out.println(<span class="string">&quot;local:&quot;</span>+local);</span><br><span class="line">             &#125;</span><br><span class="line">             </span><br><span class="line">         &#125;</span><br><span class="line">         MethodInner inner = <span class="keyword">new</span> MethodInner();</span><br><span class="line">         inner.innerMethod();</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">         MethodOutter out = <span class="keyword">new</span> MethodOutter();</span><br><span class="line">         out.testMethod(<span class="number">1</span>);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>匿名内部类</p>
 <ul>
 <li><p>匿名内部类只能使用一次，它没有名字，没有构造方法，但它可以根据参数调用父类的构造方法。和方法内部类一样，匿名内部类可以访问外部类的属性和方法，也可以访问局部变量和参数</p>
-<pre><code class="java">public interface TestInteface &#123;
-   public void show(String param);
-&#125;
-
-public class AnonymousTest &#123;
-   public void test()&#123;
-       new TestInteface() &#123;
-           @Override
-           public void show(String param) &#123;
-               System.out.println(param);
-           &#125;
-       &#125;;
-   &#125;
-&#125;</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestInteface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String param)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnonymousTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">new</span> TestInteface() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String param)</span> </span>&#123;</span><br><span class="line">                System.out.println(param);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -618,11 +551,8 @@ public class AnonymousTest &#123;
 </ul>
 </li>
 <li><p>例子</p>
-<pre><code class="java">public void testAutoBox() &#123;
-    List&lt;Float&gt; list = new ArrayList&lt;&gt;();
-    list.add(1.0f);
-    float firstElement = list.get(0);
-&#125;</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testAutoBox</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    List&lt;Float&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    list.add(<span class="number">1.0f</span>);</span><br><span class="line">    <span class="keyword">float</span> firstElement = list.get(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>在第二行中，创建了一个存放Float类型的List，然后往里添加1.0f(float基础类型)，在将结果返回给float（这里List取出的结果是为Float）</p>
 <p>所以结果很明显了，以float和Float为例，装箱就是调用Float的<strong>valueOf</strong>方法new一个Float并赋值，拆箱就是调用Float对象的<strong>floatValue</strong>方法并赋值返回给float。其他基础类型都是大同小异的，具体可以查看源码。</p>
 </li>
@@ -916,16 +846,10 @@ public class AnonymousTest &#123;
 <li><p>广播的两种注册形式</p>
 <ul>
 <li><p>静态注册（在AndroidManifest中进行注册）在AndroidManifest中进行注册后，不管改应用程序是否处于活动状态，都会进行监听。</p>
-<pre><code class="java">&lt;receiver android:name=&quot;.IncomingSMSReceiver&quot;&gt;  
-    &lt;intent-filter&gt;  
-         &lt;action android:name=&quot;android.provider.Telephony.SMS_RECEIVED&quot;/&gt;  
-    &lt;/intent-filter&gt;  
-&lt;/receiver&gt;  </code></pre>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;receiver android:name=<span class="string">&quot;.IncomingSMSReceiver&quot;</span>&gt;  </span><br><span class="line">    &lt;intent-filter&gt;  </span><br><span class="line">         &lt;action android:name=<span class="string">&quot;android.provider.Telephony.SMS_RECEIVED&quot;</span>/&gt;  </span><br><span class="line">    &lt;/intent-filter&gt;  </span><br><span class="line">&lt;/receiver&gt;  </span><br></pre></td></tr></table></figure>
 </li>
 <li><p>动态注册</p>
-<pre><code class="java">IntentFilter filter = new IntentFilter(&quot;android.provider.Telephony.SMS_RECEIVED&quot;);  
-IncomingSMSReceiver receiver = new IncomingSMSReceiver();  
-registerReceiver(receiver, filter);  </code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(<span class="string">&quot;android.provider.Telephony.SMS_RECEIVED&quot;</span>);  </span><br><span class="line">IncomingSMSReceiver receiver = <span class="keyword">new</span> IncomingSMSReceiver();  </span><br><span class="line">registerReceiver(receiver, filter);  </span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -1060,7 +984,7 @@ registerReceiver(receiver, filter);  </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/" data-id="cknkfim2g002yekme07h6hb44" class="article-share-link">
+      <a data-url="http://example.com/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/" data-id="cknl50gku002wkkmeddz80ryz" class="article-share-link">
         分享
       </a>
       
@@ -1095,6 +1019,23 @@ registerReceiver(receiver, filter);  </code></pre>
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -1205,6 +1146,7 @@ registerReceiver(receiver, filter);  </code></pre>
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

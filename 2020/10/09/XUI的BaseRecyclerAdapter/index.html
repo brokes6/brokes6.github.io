@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     XUI的BaseRecyclerAdapter |
@@ -70,79 +72,27 @@
       <p>第三方UI库的使用</p>
 <a id="more"></a>
 <h2 id="关于XUI的BaseRecyclerAdapter的使用"><a href="#关于XUI的BaseRecyclerAdapter的使用" class="headerlink" title="关于XUI的BaseRecyclerAdapter的使用"></a>关于XUI的BaseRecyclerAdapter的使用</h2><h6 id="正常使用："><a href="#正常使用：" class="headerlink" title="正常使用："></a>正常使用：</h6><ul>
-<li><p>创建一个适配器来继承BaseRecyclerAdapter，想要传入参数（也就是适配器数据）</p>
-<pre><code>public class RecommendedVideoAdapter extends BaseRecyclerAdapter&lt;RecommendVideoBean.BeanData&gt;</code></pre>
-</li>
-<li><p>创建构造方法</p>
-<pre><code>public RecommendedVideoAdapter(Context context,VideoChoiceDialog videoChoiceDialog) &#123;
-    this.videoChoiceDialog = videoChoiceDialog;
-    mContext = context;
-&#125;</code></pre>
-<p> 将上下文对象传入进来，方便之后的使用</p>
-</li>
-<li><p>在bindData中写处理数据的操作</p>
-<pre><code>Override
-protected void bindData(@NonNull RecyclerViewHolder holder, int position, RecommendVideoBean.BeanData item) &#123;
-    cover = holder.findViewById(R.id.Re_cover);
-    play_volume = holder.findViewById(R.id.Re_play_volume);
-    barrage_volume = holder.findViewById(R.id.Re_barrage_volume);
-    Re_video = holder.findViewById(R.id.Re_video_cover);
-    title = holder.findViewById(R.id.Re_title);
-    more = holder.findViewById(R.id.Re_more);
-    Re_video.setOnClickListener(new View.OnClickListener() &#123;
-        @Override
-        public void onClick(View v) &#123;
-            Intent intent = new Intent(mContext, VideoActivity.class);
-            intent.putExtra(&quot;id&quot;, videoBean.getData().get(position).getId());
-            intent.putExtra(&quot;uid&quot;, videoBean.getData().get(position).getUid());
-            mContext.startActivity(intent);
-        &#125;
-    &#125;);
-    if (item != null) &#123;
-        initData(item);
-    &#125;
-&#125;
-
-private void initData(RecommendVideoBean.BeanData item) &#123;
-    Glide.with(mContext)
-            .load(item.getCover())
-            .into(cover);
-    play_volume.setText(item.getPlayNum() + &quot;&quot;);
-    barrage_volume.setText(item.getDanmunum() + &quot;&quot;);
-    title.setText(item.getTitle());
-&#125;</code></pre>
-<p> 包括获取控件和初始化数据</p>
-<h6 id="在Avtivity-Fragment中的使用："><a href="#在Avtivity-Fragment中的使用：" class="headerlink" title="在Avtivity/Fragment中的使用："></a>在Avtivity/Fragment中的使用：</h6></li>
-<li><p>初始化</p>
-<ol>
+<li>创建一个适配器来继承BaseRecyclerAdapter，想要传入参数（也就是适配器数据）  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class RecommendedVideoAdapter extends BaseRecyclerAdapter&lt;RecommendVideoBean.BeanData&gt;</span><br></pre></td></tr></table></figure></li>
+<li>创建构造方法  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public RecommendedVideoAdapter(Context context,VideoChoiceDialog videoChoiceDialog) &#123;</span><br><span class="line">    this.videoChoiceDialog &#x3D; videoChoiceDialog;</span><br><span class="line">    mContext &#x3D; context;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 将上下文对象传入进来，方便之后的使用</li>
+<li>在bindData中写处理数据的操作  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">Override</span><br><span class="line">protected void bindData(@NonNull RecyclerViewHolder holder, int position, RecommendVideoBean.BeanData item) &#123;</span><br><span class="line">    cover &#x3D; holder.findViewById(R.id.Re_cover);</span><br><span class="line">    play_volume &#x3D; holder.findViewById(R.id.Re_play_volume);</span><br><span class="line">    barrage_volume &#x3D; holder.findViewById(R.id.Re_barrage_volume);</span><br><span class="line">    Re_video &#x3D; holder.findViewById(R.id.Re_video_cover);</span><br><span class="line">    title &#x3D; holder.findViewById(R.id.Re_title);</span><br><span class="line">    more &#x3D; holder.findViewById(R.id.Re_more);</span><br><span class="line">    Re_video.setOnClickListener(new View.OnClickListener() &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onClick(View v) &#123;</span><br><span class="line">            Intent intent &#x3D; new Intent(mContext, VideoActivity.class);</span><br><span class="line">            intent.putExtra(&quot;id&quot;, videoBean.getData().get(position).getId());</span><br><span class="line">            intent.putExtra(&quot;uid&quot;, videoBean.getData().get(position).getUid());</span><br><span class="line">            mContext.startActivity(intent);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    if (item !&#x3D; null) &#123;</span><br><span class="line">        initData(item);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private void initData(RecommendVideoBean.BeanData item) &#123;</span><br><span class="line">    Glide.with(mContext)</span><br><span class="line">            .load(item.getCover())</span><br><span class="line">            .into(cover);</span><br><span class="line">    play_volume.setText(item.getPlayNum() + &quot;&quot;);</span><br><span class="line">    barrage_volume.setText(item.getDanmunum() + &quot;&quot;);</span><br><span class="line">    title.setText(item.getTitle());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 包括获取控件和初始化数据<h6 id="在Avtivity-Fragment中的使用："><a href="#在Avtivity-Fragment中的使用：" class="headerlink" title="在Avtivity/Fragment中的使用："></a>在Avtivity/Fragment中的使用：</h6></li>
+<li>初始化<ol>
 <li>获取RecyclerView控件</li>
 <li>设置RecyclerView的排列方式</li>
 <li>创建适配器对象</li>
-<li>RecyclerView设置适配器<pre><code>GridLayoutManager layoutManager1 = new GridLayoutManager(getContext(), 2);
-   adapter = new RecommendedVideoAdapter(getContext(), videoChoiceDialog);
-   binding.ReRecy.setLayoutManager(layoutManager1);
-   binding.ReRecy.setAdapter(adapter);</code></pre>
-</li>
+<li>RecyclerView设置适配器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GridLayoutManager layoutManager1 &#x3D; new GridLayoutManager(getContext(), 2);</span><br><span class="line">      adapter &#x3D; new RecommendedVideoAdapter(getContext(), videoChoiceDialog);</span><br><span class="line">      binding.ReRecy.setLayoutManager(layoutManager1);</span><br><span class="line">      binding.ReRecy.setAdapter(adapter);</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
-<li><p>加载数据<br>直接调用适配器的加载数据的方法，刷新也是一样</p>
-<pre><code>adapter.loadMore(videoBean.getData());
-//loadMore一般是传入一个list（加载）
-for (RecommendVideoBean.BeanData datum : videoBean.getData()) &#123;
-          adapter.add(0, datum);
-      &#125;
-//add一般是传入一个对象（在末尾添加一个）
-adapter.refresh(videoBean.getData());
-//refresh和加载差不多（刷新）</code></pre>
+<li>加载数据<br>直接调用适配器的加载数据的方法，刷新也是一样<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">adapter.loadMore(videoBean.getData());</span><br><span class="line">&#x2F;&#x2F;loadMore一般是传入一个list（加载）</span><br><span class="line">for (RecommendVideoBean.BeanData datum : videoBean.getData()) &#123;</span><br><span class="line">           adapter.add(0, datum);</span><br><span class="line">       &#125;</span><br><span class="line">&#x2F;&#x2F;add一般是传入一个对象（在末尾添加一个）</span><br><span class="line">adapter.refresh(videoBean.getData());</span><br><span class="line">&#x2F;&#x2F;refresh和加载差不多（刷新）</span><br></pre></td></tr></table></figure>
 <h6 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h6></li>
-<li><p>如果想要有item加载时的动画，那么在调用adapter加载数据的时候，就不能使用 loadMore ，必须使用 add 来一个一个添加，否则是没有动画的</p>
-</li>
+<li>如果想要有item加载时的动画，那么在调用adapter加载数据的时候，就不能使用 loadMore ，必须使用 add 来一个一个添加，否则是没有动画的</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/10/09/XUI%E7%9A%84BaseRecyclerAdapter/" data-id="cknkfim1n000tekme6jdl8blx" class="article-share-link">
+      <a data-url="http://example.com/2020/10/09/XUI%E7%9A%84BaseRecyclerAdapter/" data-id="cknl50gk6000qkkmef3nnec1r" class="article-share-link">
         分享
       </a>
       
@@ -177,6 +127,23 @@ adapter.refresh(videoBean.getData());
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -287,6 +254,7 @@ adapter.refresh(videoBean.getData());
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

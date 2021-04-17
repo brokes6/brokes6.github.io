@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     关于Glide各种问题的解决方案集合（不断更新） |
@@ -74,8 +76,8 @@
 </blockquote>
 <h3 id="Glide使用"><a href="#Glide使用" class="headerlink" title="Glide使用"></a>Glide使用</h3><ol>
 <li><p><a target="_blank" rel="noopener" href="https://github.com/bumptech/glide">添加依赖</a></p>
-<pre><code class="java"> implementation &#39;com.github.bumptech.glide:glide:4.11.0&#39;
- annotationProcessor &#39;com.github.bumptech.glide:compiler:4.11.0&#39;</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.github.bumptech.glide:glide:4.11.0&#x27;</span></span><br><span class="line">annotationProcessor <span class="string">&#x27;com.github.bumptech.glide:compiler:4.11.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 <h3 id="关于GlideModule的问题"><a href="#关于GlideModule的问题" class="headerlink" title="关于GlideModule的问题"></a>关于GlideModule的问题</h3><ol>
@@ -84,18 +86,14 @@
 <li><p>继承AppGlideModule</p>
 </li>
 <li><p>添加注解@GlideModule</p>
-<pre><code class="java">@GlideModule
-public class MyGlideModule extends AppGlideModule &#123;
-&#125;
-</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GlideModule</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyGlideModule</span> <span class="keyword">extends</span> <span class="title">AppGlideModule</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>里面并不需要填写内容</p>
 </li>
 </ol>
 <h3 id="替换Glide的请求方式"><a href="#替换Glide的请求方式" class="headerlink" title="替换Glide的请求方式"></a>替换Glide的请求方式</h3><ol>
 <li><p>添加依赖</p>
-<pre><code class="java">implementation &quot;com.github.bumptech.glide:okhttp3-integration:4.11.0&quot;
-implementation &#39;com.squareup.okhttp3:okhttp:4.7.2&#39;</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&quot;com.github.bumptech.glide:okhttp3-integration:4.11.0&quot;</span></span><br><span class="line">implementation <span class="string">&#x27;com.squareup.okhttp3:okhttp:4.7.2&#x27;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在项目中创建一个<strong>class</strong>文件</p>
 </li>
@@ -106,31 +104,13 @@ implementation &#39;com.squareup.okhttp3:okhttp:4.7.2&#39;</code></pre>
 <li><p>重写*<strong>registerComponents**<em>和</em></strong>isManifestParsingEnabled***方法</p>
 </li>
 <li><p>在**<em>registerComponents**</em>方法中替换为OkHttp</p>
-<pre><code class="java">@GlideModule
-public class MyGlideModule extends AppGlideModule &#123;
-    @Override
-    public void applyOptions(Context context, GlideBuilder builder) &#123;
-
-    &#125;
-
-    @Override
-    public void registerComponents(Context context, @NotNull Glide glide, Registry registry) &#123;
-        //Glide 底层默认使用 HttpConnection 进行网络请求,这里替换为 Okhttp
-        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(ProgressManager.getInstance().with(new OkHttpClient.Builder()).build()));
-    &#125;
-
-    @Override
-    public boolean isManifestParsingEnabled() &#123;
-        return false;
-    &#125;
-&#125;</code></pre>
-</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GlideModule</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyGlideModule</span> <span class="keyword">extends</span> <span class="title">AppGlideModule</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">applyOptions</span><span class="params">(Context context, GlideBuilder builder)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">registerComponents</span><span class="params">(Context context, <span class="meta">@NotNull</span> Glide glide, Registry registry)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//Glide 底层默认使用 HttpConnection 进行网络请求,这里替换为 Okhttp</span></span><br><span class="line">        registry.replace(GlideUrl.class, InputStream.class, <span class="keyword">new</span> OkHttpUrlLoader.Factory(ProgressManager.getInstance().with(<span class="keyword">new</span> OkHttpClient.Builder()).build()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isManifestParsingEnabled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/" data-id="cknkfim1r0013ekme3rco9zot" class="article-share-link">
+      <a data-url="http://example.com/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/" data-id="cknl50gkb0012kkme53mu0v9m" class="article-share-link">
         分享
       </a>
       
@@ -165,6 +145,23 @@ public class MyGlideModule extends AppGlideModule &#123;
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -275,6 +272,7 @@ public class MyGlideModule extends AppGlideModule &#123;
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

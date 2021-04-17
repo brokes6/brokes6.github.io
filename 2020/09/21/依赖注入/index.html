@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     依赖注入 |
@@ -74,265 +76,102 @@
 <h6 id="依赖注入的三种实现方式（原生方式）："><a href="#依赖注入的三种实现方式（原生方式）：" class="headerlink" title="依赖注入的三种实现方式（原生方式）："></a>依赖注入的三种实现方式（原生方式）：</h6><ol>
 <li>构造方法注入 该方式是通过构造方法将其所依赖的外部类对象传入进来，是我认为的最简单的方式。其实现方式如下，我们修改之前的代码：</li>
 </ol>
-<pre><code>public class Classes &#123;
-// 依赖类
-private Boy boy;
-/**
-* 构造方法注入，通过构造方法传入该对象
-* @param boy
-*/
-public Classes(Boy boy) &#123;
-this.boy = boy;
-&#125;
-public void run() &#123;
-boy.run();
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class Classes &#123;</span><br><span class="line">&#x2F;&#x2F; 依赖类</span><br><span class="line">private Boy boy;</span><br><span class="line">&#x2F;**</span><br><span class="line">* 构造方法注入，通过构造方法传入该对象</span><br><span class="line">* @param boy</span><br><span class="line">*&#x2F;</span><br><span class="line">public Classes(Boy boy) &#123;</span><br><span class="line">this.boy &#x3D; boy;</span><br><span class="line">&#125;</span><br><span class="line">public void run() &#123;</span><br><span class="line">boy.run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ol start="2">
 <li>Setter 注入：</li>
 </ol>
-<pre><code> public class Classes &#123;
-//....
-private Boy boy;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> public class Classes &#123;</span><br><span class="line">&#x2F;&#x2F;....</span><br><span class="line">private Boy boy;</span><br><span class="line"></span><br><span class="line">public void setBoy(Boy boy)&#123;</span><br><span class="line">    this.boy &#x3D; boy;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public void setBoy(Boy boy)&#123;
-    this.boy = boy;
-&#125;
-//....
-&#125;</code></pre>
 <ol start="3">
 <li>接口方式 接口方式是定义一个接口，该接口中声明一个注入的方法，而需要注入的类实现该接口，实现接口中定义的方法。定义接口，声明注入方法:</li>
 </ol>
-<pre><code>public interface BoyInjection &#123;
-    void inject(Boy boy); 
-&#125;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public interface BoyInjection &#123;</span><br><span class="line">	void inject(Boy boy); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class Classes implements BoyInjection &#123;</span><br><span class="line"> 	&#x2F;&#x2F;.... private Boy boy; </span><br><span class="line">	@Override public void inject(Boy boy) &#123; </span><br><span class="line">	&#x2F;&#x2F;实现接口中的方法 this.boy &#x3D; boy; </span><br><span class="line">&#125; </span><br><span class="line">&#x2F;&#x2F;....</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-public class Classes implements BoyInjection &#123;
-     //.... private Boy boy; 
-    @Override public void inject(Boy boy) &#123; 
-    //实现接口中的方法 this.boy = boy; 
-&#125; 
-//....
- &#125;</code></pre>
 <h6 id="Android-Dagger2依赖注入"><a href="#Android-Dagger2依赖注入" class="headerlink" title="Android Dagger2依赖注入:"></a>Android Dagger2依赖注入:</h6><ul>
 <li>引入依赖库:</li>
 </ul>
-<pre><code> compile &#39;com.google.dagger:dagger:2.11&#39;
-  annotationProcessor &#39;com.google.dagger:dagger-compiler:2.11&#39;
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">compile &#39;com.google.dagger:dagger:2.11&#39;</span><br><span class="line"> annotationProcessor &#39;com.google.dagger:dagger-compiler:2.11&#39;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>版本号以官网为准：<a target="_blank" rel="noopener" href="https://github.com/google/dagger">https://github.com/google/dagger</a> </p>
 <ul>
 <li>创建一个对象:</li>
 </ul>
-<pre><code>public class A &#123;
-    public void eat() &#123;
-        System.out.print(&quot;吃饭了&quot;);
-    &#125;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.print(&quot;吃饭了&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>创建Moudule：</li>
 </ul>
-<pre><code>//第一步 添加@Module 注解
-@Module
-public class MainModule &#123;
-&#125;
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一步 添加@Module 注解</span><br><span class="line">@Module</span><br><span class="line">public class MainModule &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <ul>
 <li>创建具体的示例:</li>
 </ul>
-<pre><code>//第一步 添加@Module 注解
-@Module
-public class MainModule &#123;
-    //第二步 使用Provider 注解 实例化对象
-    @Provides
-    A providerA() &#123;   // providerA只是个名称
-        return new A();
-    &#125;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一步 添加@Module 注解</span><br><span class="line">@Module</span><br><span class="line">public class MainModule &#123;</span><br><span class="line">    &#x2F;&#x2F;第二步 使用Provider 注解 实例化对象</span><br><span class="line">    @Provides</span><br><span class="line">    A providerA() &#123;   &#x2F;&#x2F; providerA只是个名称</span><br><span class="line">        return new A();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>创建一个Component:</li>
 </ul>
-<pre><code>//第一步 添加@Component
-//第二步 添加module
-@Component(modules = &#123;MainModule.class&#125;)  //与刚刚创建的Moudule连接起来
-public interface MainComponent &#123;
-    //第三步  写一个方法 绑定Activity /Fragment
-    void inject(MainActivity activity);
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;第一步 添加@Component</span><br><span class="line">&#x2F;&#x2F;第二步 添加module</span><br><span class="line">@Component(modules &#x3D; &#123;MainModule.class&#125;)  &#x2F;&#x2F;与刚刚创建的Moudule连接起来</span><br><span class="line">public interface MainComponent &#123;</span><br><span class="line">    &#x2F;&#x2F;第三步  写一个方法 绑定Activity &#x2F;Fragment</span><br><span class="line">    void inject(MainActivity activity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>之后Rebuild Project一下，Make Project也行，之后系统会自动创建几个类，用来与activity连接。(这一步操作可能会要等待很长一段时间，10分钟左右)</p>
 </blockquote>
 <ul>
 <li>将Component与Activity/Fragment绑定关系:</li>
 </ul>
-<pre><code>public class MainActivity extends AppCompatActivity &#123;
-    /***
-     * 第二步  使用Inject 注解，获取到A 对象的实例
-     */
-    @Inject  //记得在需要的参数前加@Inject
-A a;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) &#123;
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        /***
-         * 第一步 添加依赖关系
-         */
-        //第一种方式与Activity/Fragment进行绑定
-        DaggerMainConponent.create().inject(this);
-        //第二种方式与Activity/Fragment进行绑定
-        DaggerMainConponent.builder().build().inject(this);
-        /***
-         * 第三步  调用A 对象的方法
-         */
-        a.eat();
-    &#125;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line">    &#x2F;***</span><br><span class="line">     * 第二步  使用Inject 注解，获取到A 对象的实例</span><br><span class="line">     *&#x2F;</span><br><span class="line">    @Inject  &#x2F;&#x2F;记得在需要的参数前加@Inject</span><br><span class="line">A a;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        &#x2F;***</span><br><span class="line">         * 第一步 添加依赖关系</span><br><span class="line">         *&#x2F;</span><br><span class="line">        &#x2F;&#x2F;第一种方式与Activity&#x2F;Fragment进行绑定</span><br><span class="line">        DaggerMainConponent.create().inject(this);</span><br><span class="line">        &#x2F;&#x2F;第二种方式与Activity&#x2F;Fragment进行绑定</span><br><span class="line">        DaggerMainConponent.builder().build().inject(this);</span><br><span class="line">        &#x2F;***</span><br><span class="line">         * 第三步  调用A 对象的方法</span><br><span class="line">         *&#x2F;</span><br><span class="line">        a.eat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>之后就可以了，接下来介绍Dagger2的单例模式.</p>
 <h6 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式:"></a>单例模式:</h6><p>@Singleton 这个注释可以使Dagger进入单例模式，要在Moudule和Component的上方添加上</p>
-<pre><code>@Module
-public class ActivityModule &#123;
-    @Singleton
-    @Provides
-    Student privadeStu()&#123;
-        return new Student();
-    &#125;
-&#125;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Module</span><br><span class="line">public class ActivityModule &#123;</span><br><span class="line">    @Singleton</span><br><span class="line">    @Provides</span><br><span class="line">    Student privadeStu()&#123;</span><br><span class="line">        return new Student();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Singleton</span><br><span class="line">@Component(modules &#x3D; &#123;ActivityModule.class&#125;)</span><br><span class="line">public interface ActivityComponent &#123;</span><br><span class="line">    void inject(MainActivity mainActivity);</span><br><span class="line">    void inject(UserActivity userActivity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-@Singleton
-@Component(modules = &#123;ActivityModule.class&#125;)
-public interface ActivityComponent &#123;
-    void inject(MainActivity mainActivity);
-    void inject(UserActivity userActivity);
-&#125;</code></pre>
 <p>添加@Singleton就变成单例了，在MainActivity里 声明两个Student不同名字的对象分别打印他的地址，你会发现地址是一样的<br>但是你再新建立一个Activity 再次声明 Student stu ，注入对象，你会发现这时候 地址就不一样了。因为持有的对象是Activity。<br>到此已经能在一个Activity里，声明两个对象变量，用@Inject注入，得到的是 同一个对象</p>
 <h6 id="Singleton的分析"><a href="#Singleton的分析" class="headerlink" title="@Singleton的分析:"></a>@Singleton的分析:</h6><p>接下来我要推翻刚才说的@Singleton，看到英文Singleton 是单例的意思，在Dagger2里他就是个命名的一个注解而已<br>他叫什么名字都行 @ABC、@ABB、@ABCC，都行。点开Singleton（ctrl+B）</p>
-<pre><code>@Scope   //作用域的注释，代表着被包括的都是在一个作用域之中
-@Documented
-@Retention(RUNTIME)
-public @interface Singleton &#123;&#125;</code></pre>
-<p>Singleton 用了@Scope（作用域） 标记。 也就是说被 @Scope包裹的Component 都是在一个作用域里的， 作用域！不叫单例<br>好 那直接用Scope包裹Component。编译器提示 直接Remove了这个注解。因为他的目标是 @Target(ANNOTATION_TYPE) 这个表示这个Scope只用于注解，不能用在 类上面</p>
-<h6 id="那我们声明一个注解："><a href="#那我们声明一个注解：" class="headerlink" title="那我们声明一个注解："></a>那我们声明一个注解：</h6><pre><code>@Scope
-@Retention(RetentionPolicy.RUNTIME)
-public @interface ActivityScope &#123;
-&#125;</code></pre>
-<p>接下来我们把刚才加@Singleton的地方全换成@ActivityScope</p>
-<pre><code>@Module
-public class ActivityModule &#123;
-    @ActivityScope
-    @Provides
-    Student privadeStu()&#123;
-        return new Student();
-    &#125;
-&#125;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Scope   &#x2F;&#x2F;作用域的注释，代表着被包括的都是在一个作用域之中</span><br><span class="line">@Documented</span><br><span class="line">@Retention(RUNTIME)</span><br><span class="line">public @interface Singleton &#123;&#125;</span><br></pre></td></tr></table></figure>
 
-@ActivityScope
-@Component(modules = &#123;ActivityModule.class&#125;)
-public interface ActivityComponent &#123;
-    void inject(MainActivity mainActivity);
-    void inject(UserActivity userActivity);
-&#125;</code></pre>
+<p>Singleton 用了@Scope（作用域） 标记。 也就是说被 @Scope包裹的Component 都是在一个作用域里的， 作用域！不叫单例<br>好 那直接用Scope包裹Component。编译器提示 直接Remove了这个注解。因为他的目标是 @Target(ANNOTATION_TYPE) 这个表示这个Scope只用于注解，不能用在 类上面</p>
+<h6 id="那我们声明一个注解："><a href="#那我们声明一个注解：" class="headerlink" title="那我们声明一个注解："></a>那我们声明一个注解：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Scope</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface ActivityScope &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来我们把刚才加@Singleton的地方全换成@ActivityScope</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Module</span><br><span class="line">public class ActivityModule &#123;</span><br><span class="line">    @ActivityScope</span><br><span class="line">    @Provides</span><br><span class="line">    Student privadeStu()&#123;</span><br><span class="line">        return new Student();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@ActivityScope</span><br><span class="line">@Component(modules &#x3D; &#123;ActivityModule.class&#125;)</span><br><span class="line">public interface ActivityComponent &#123;</span><br><span class="line">    void inject(MainActivity mainActivity);</span><br><span class="line">    void inject(UserActivity userActivity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>打印两个对象</p>
-<pre><code>tag: com.mydagger.bean.Student@96575e0
-tag: com.mydagger.bean.Student@96575e0</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tag: com.mydagger.bean.Student@96575e0</span><br><span class="line">tag: com.mydagger.bean.Student@96575e0</span><br></pre></td></tr></table></figure>
+
 <p>刚才说了持有对象的是Activity，那只能在一个Activity中实现单例，那要全局单例怎么做呢？<br>通常要全局使用的对象，要么写个static的类，要么Application。我们直接Application</p>
 <ul>
 <li><p>全局单例:</p>
 <ol>
 <li><p>先定义个全局的注解，刚讲了名字无所谓(这里要创建第二个的注解是因为，一个注解只能作用到一个作用域，简单来说就是不能与等下要创建的的另一个Component的注解相同)</p>
-<pre><code>@Scope  //作用域的意思
-@Retention(RetentionPolicy.RUNTIME)
-public @interface AppScope &#123;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> @Scope  &#x2F;&#x2F;作用域的意思</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">public @interface AppScope &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改代码</p>
-<pre><code>@ActivityScope
-//先绑定自身的Module，在绑定要依赖的Component
-@Component(modules = &#123;ActivityModule.class&#125;,dependencies = AppComponent.class)
-public interface ActivityComponent &#123;
-//第一个activity的绑定方法（XXXActivity就是填写你自己的activity的名字）
-void inject(XXXActivity testActivity);
-//第二个activity的绑定方法
-void inject(XXXActivity testActivity);
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@ActivityScope</span><br><span class="line">&#x2F;&#x2F;先绑定自身的Module，在绑定要依赖的Component</span><br><span class="line">@Component(modules &#x3D; &#123;ActivityModule.class&#125;,dependencies &#x3D; AppComponent.class)</span><br><span class="line">public interface ActivityComponent &#123;</span><br><span class="line">    &#x2F;&#x2F;第一个activity的绑定方法（XXXActivity就是填写你自己的activity的名字）</span><br><span class="line">void inject(XXXActivity testActivity);</span><br><span class="line">&#x2F;&#x2F;第二个activity的绑定方法</span><br><span class="line">    void inject(XXXActivity testActivity);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里增加了一个 dependencies（依赖），当前是ActivityComponent 依赖 AppComponent<br>新建一个 AppComponent, 连接一个Module，提供一个方法 提供 给 MainActivity @Inject使用<br>还有就是dependencies只是依赖与另一个Component，每个Component都必须要有一个不同的Modules（Modules中的bean类不能重复）</p>
-<pre><code>//注意这里的注解与上面注解不同（尽管效果是一样的，但也不能一样）
-@AppScope
-@Component(modules = &#123;AppModule.class&#125;)
-public interface AppComponent &#123;
-//这里要重新创建一个School类(这里写的方法要与Module中的类一致，否则就会报错)
-School getSchool();
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;注意这里的注解与上面注解不同（尽管效果是一样的，但也不能一样）</span><br><span class="line">@AppScope</span><br><span class="line">@Component(modules &#x3D; &#123;AppModule.class&#125;)</span><br><span class="line">public interface AppComponent &#123;</span><br><span class="line">&#x2F;&#x2F;这里要重新创建一个School类(这里写的方法要与Module中的类一致，否则就会报错)</span><br><span class="line">    School getSchool();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 </li>
 </ol>
 </li>
 </ul>
 <p>新建 AppModule, 提供一个方法 用AppScope和Provides标记</p>
-<pre><code>@Module
-public class AppModule &#123;
-//这里的注解要与Component相同
-    @AppScope
-    @Provides
-    School provideSchool()&#123;   //也是返回与上一个Module不一样的Bean类
-        return  new School();
-    &#125;
-&#125;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Module</span><br><span class="line">public class AppModule &#123;</span><br><span class="line">&#x2F;&#x2F;这里的注解要与Component相同</span><br><span class="line">    @AppScope</span><br><span class="line">    @Provides</span><br><span class="line">    School provideSchool()&#123;   &#x2F;&#x2F;也是返回与上一个Module不一样的Bean类</span><br><span class="line">        return  new School();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>继续点绿锤子编译修改Application</p>
-<pre><code>//创建一个自身的单例类
-public static Application app;
-//在创建一个Component类
-AppComponent applicationComponent;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;创建一个自身的单例类</span><br><span class="line">public static Application app;</span><br><span class="line">&#x2F;&#x2F;在创建一个Component类</span><br><span class="line">AppComponent applicationComponent;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public void onCreate() &#123;</span><br><span class="line">super.onCreate();</span><br><span class="line">&#x2F;&#x2F;获取自身的实例</span><br><span class="line">app &#x3D; this;</span><br><span class="line">&#x2F;&#x2F;在onCreate中进行获取Component</span><br><span class="line">    applicationComponent &#x3D; DaggerAppComponent</span><br><span class="line">            .builder()</span><br><span class="line">	&#x2F;&#x2F;每次调用系统创建的Component类进行绑定的时候都要绑定属于自己的Module类</span><br><span class="line">            .appModule(new AppModule())</span><br><span class="line">            .build();</span><br><span class="line">	&#x2F;&#x2F;因为这个Component是给上一个Component（MainComponent）进行依赖的，也就是扩展，所以没有写绑定的方法&#125;</span><br><span class="line"></span><br><span class="line">public static Application getInstance()&#123;</span><br><span class="line">&#x2F;&#x2F;返回自身的实列</span><br><span class="line">    return app;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-@Override
-public void onCreate() &#123;
-super.onCreate();
-//获取自身的实例
-app = this;
-//在onCreate中进行获取Component
-    applicationComponent = DaggerAppComponent
-            .builder()
-    //每次调用系统创建的Component类进行绑定的时候都要绑定属于自己的Module类
-            .appModule(new AppModule())
-            .build();
-    //因为这个Component是给上一个Component（MainComponent）进行依赖的，也就是扩展，所以没有写绑定的方法&#125;
-
-public static Application getInstance()&#123;
-//返回自身的实列
-    return app;
-&#125;</code></pre>
 <p>这里返回一个Application的实例对象。定一个AppComponent（这个是准备给DaggerActivityComponent依赖的）也是Dagger生成的代码。链式编程进行build<br>增加一个School类 和Student类一样 用@Inject修饰构造函数。<br>修改MainActivity，增加</p>
-<pre><code>@Inject
-School school;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Inject</span><br><span class="line">School school;</span><br></pre></td></tr></table></figure>
+
 <p>然后在onCreate后面增加（与activity和Fragmemt进行绑定）</p>
-<pre><code>DaggerActivityComponent.builder()
-//绑定依赖Component（通过Application获取早就创建好的Component）
-.appComponent(Application.getInstance().applicationComponent)
-//绑定自身的Module
-    .activityModule(new ActivityModule())
-.build()
-//绑定Activity
-    .inject(this);</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">DaggerActivityComponent.builder()</span><br><span class="line">&#x2F;&#x2F;绑定依赖Component（通过Application获取早就创建好的Component）</span><br><span class="line">.appComponent(Application.getInstance().applicationComponent)</span><br><span class="line">&#x2F;&#x2F;绑定自身的Module</span><br><span class="line">    .activityModule(new ActivityModule())</span><br><span class="line">.build()</span><br><span class="line">&#x2F;&#x2F;绑定Activity</span><br><span class="line">    .inject(this);</span><br></pre></td></tr></table></figure>
 <p>第二行DaggerActivityComponent 依赖于 Application的 AppComponent 这样就进行了关联<br>到此 全局单例 搞定，测试一下 写两个Activity 声明相同的对象就会发现 两个对象地址 一样的（创建的第二个activity/Fragment中也要进行Component绑定）</p>
-<pre><code>tag: com.mydagger.bean.School@393c7e3
-tag: com.mydagger.bean.School@393c7e3</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tag: com.mydagger.bean.School@393c7e3</span><br><span class="line">tag: com.mydagger.bean.School@393c7e3</span><br></pre></td></tr></table></figure>
 <ul>
-<li>扩展:<br>通常会项目中使用MVP 增加网络配置等 需要全局单例的内容，可以继续建类（Module）进行扩展,得到单例<pre><code>@AppScope
-@Component(modules = &#123;AppModule.class,BModule.class....&#125;)
-public interface AppComponent &#123;
-  School getSchool();
-  //这里需要继续提供方法，给Activity 进行对象的 @Inject    
-&#125;
-</code></pre>
-</li>
+<li>扩展:<br>通常会项目中使用MVP 增加网络配置等 需要全局单例的内容，可以继续建类（Module）进行扩展,得到单例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@AppScope</span><br><span class="line">@Component(modules &#x3D; &#123;AppModule.class,BModule.class....&#125;)</span><br><span class="line">public interface AppComponent &#123;</span><br><span class="line">    School getSchool();</span><br><span class="line">    &#x2F;&#x2F;这里需要继续提供方法，给Activity 进行对象的 @Inject    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">applicationComponent &#x3D; DaggerAppComponent</span><br><span class="line">        .builder()</span><br><span class="line">        .appModule(new AppModule())......</span><br><span class="line">        .build();</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
-<p>applicationComponent = DaggerAppComponent<br>        .builder()<br>        .appModule(new AppModule())……<br>        .build();</p>
-<p>```</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/09/21/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" data-id="cknkfim1o000vekme9vqj4h05" class="article-share-link">
+      <a data-url="http://example.com/2020/09/21/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" data-id="cknl50gk9000xkkmeddwg76ov" class="article-share-link">
         分享
       </a>
       
@@ -367,6 +206,23 @@ public interface AppComponent &#123;
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -477,6 +333,7 @@ public interface AppComponent &#123;
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

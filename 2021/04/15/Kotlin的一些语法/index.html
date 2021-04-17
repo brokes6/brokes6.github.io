@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     Kotlin的一些语法 |
@@ -76,10 +78,10 @@
 <li><p>数组</p>
 <ul>
 <li><p>创建指定大小的空数组</p>
-<pre><code class="kotlin"> var dp = IntArray(n)</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dp = IntArray(n)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>创建数组</p>
-<pre><code class="kotlin"> var dp = arrayOf(1,2,3)//相当于 int[1,2,3]</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dp = arrayOf(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)<span class="comment">//相当于 int[1,2,3]</span></span><br></pre></td></tr></table></figure>
 </li>
 <li></li>
 </ul>
@@ -90,10 +92,10 @@
 <li><p>对一个数字进行循环</p>
 <ul>
 <li><p>循环到那个数字（不包括）</p>
-<pre><code class="kotlin">for(i in 1 until n)//n就是输入的数字</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span> until n)<span class="comment">//n就是输入的数字</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>循环到那个数字（包括）</p>
-<pre><code class="kotlin">for(i in 1..n)//n就是输入的数字</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(i <span class="keyword">in</span> <span class="number">1</span>..n)<span class="comment">//n就是输入的数字</span></span><br></pre></td></tr></table></figure>
 </li>
 <li></li>
 </ul>
@@ -104,90 +106,57 @@
 <li><p>内联扩展函数</p>
 <ul>
 <li><p><strong>let</strong> </p>
-<pre><code class="kotlin">object.let&#123;
-    //默认是it来代表，可以通过it来访问其公有的属性和方法
-    it.todo()
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span>.let&#123;</span><br><span class="line">    <span class="comment">//默认是it来代表，可以通过it来访问其公有的属性和方法</span></span><br><span class="line">	it.todo()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>使用场景</p>
 <blockquote>
 <p><strong>场景一:</strong> 最常用的场景就是使用let函数处理需要针对一个可null的对象统一做判空处理。</p>
 <p><strong>场景二:</strong> 然后就是需要去明确一个变量所处特定的作用域范围内可以使用 </p>
 </blockquote>
-<pre><code class="kotlin">object?.let &#123;
-       it.todo()
-       it.todo1()
-       it.todo2()
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span>?.let &#123;</span><br><span class="line">	   it.todo()</span><br><span class="line">	   it.todo1()</span><br><span class="line">	   it.todo2()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>with</strong></p>
 <p>是将某对象作为函数的参数，在函数块内可以通过 this 指代该对象。返回值为函数块的最后一行或指定return表达式。</p>
-<pre><code class="kotlin">with(object)&#123;
-   //todo
- &#125;</code></pre>
-<p>例子展示</p>
-<pre><code class="kotlin">override fun onBindViewHolder(holder: ViewHolder, position: Int)&#123;
-   val item = getItem(position)?: return
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">with(<span class="keyword">object</span>)&#123;</span><br><span class="line">   <span class="comment">//todo</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
-   with(item)&#123;
-      holder.tvNewsTitle.text = titleEn//这里省略了this.(原本为this.titleEn)
-      holder.tvNewsSummary.text = summary
-      holder.tvExtraInf.text = &quot;难度：$gradeInfo | 单词数：$length | 读后感: $numReviews&quot;
-       ...   
-   &#125;
-&#125;</code></pre>
+<p>例子展示</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onBindViewHolder</span><span class="params">(holder: <span class="type">ViewHolder</span>, position: <span class="type">Int</span>)</span></span>&#123;</span><br><span class="line">   <span class="keyword">val</span> item = getItem(position)?: <span class="keyword">return</span></span><br><span class="line">    </span><br><span class="line">   with(item)&#123;</span><br><span class="line">      holder.tvNewsTitle.text = titleEn<span class="comment">//这里省略了this.(原本为this.titleEn)</span></span><br><span class="line">	  holder.tvNewsSummary.text = summary</span><br><span class="line">	  holder.tvExtraInf.text = <span class="string">&quot;难度：<span class="variable">$gradeInfo</span> | 单词数：<span class="variable">$length</span> | 读后感: <span class="variable">$numReviews</span>&quot;</span></span><br><span class="line">       ...   </span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>可以直接调用with(object)的公有属性</p>
 </blockquote>
 </li>
 <li><p><strong>run</strong></p>
-<pre><code class="kotlin">object.run&#123;
-    //todo
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span>.run&#123;</span><br><span class="line">	<span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>run可以说是let和with的结合体，它既可以方便调用，又以最后一行为返回值(或指定的return值)</p>
 </blockquote>
 <p>例子展示</p>
-<pre><code class="kotlin">override fun onBindViewHolder(holder: ViewHolder, position: Int)&#123;
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onBindViewHolder</span><span class="params">(holder: <span class="type">ViewHolder</span>, position: <span class="type">Int</span>)</span></span>&#123;</span><br><span class="line">   </span><br><span class="line">  getItem(position)?.run&#123;</span><br><span class="line">      holder.tvNewsTitle.text = titleEn</span><br><span class="line">	  holder.tvNewsSummary.text = summary</span><br><span class="line">       ...   </span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-  getItem(position)?.run&#123;
-      holder.tvNewsTitle.text = titleEn
-      holder.tvNewsSummary.text = summary
-       ...   
-   &#125;
-
-&#125;</code></pre>
 <blockquote>
 <p>这里是对上面的with进行改变</p>
 </blockquote>
 </li>
 <li><p><strong>apply</strong> </p>
-<pre><code class="kotlin">object.apply&#123;
-    //todo
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span>.apply&#123;</span><br><span class="line">	<span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>apply</strong>和<strong>run</strong>很像，<strong>run</strong>是返回最后一行或者指定返回结果。而<strong>apply</strong>则是对本身进行修改，返回自己</p>
 </blockquote>
 </li>
 <li><p>例子展示</p>
-<pre><code class="kotlin">user.apply&#123;
-    //这些name都是user中的公有属性
-    name = &quot;xxx&quot;
-    age = 10
-    ...
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">user.apply&#123;</span><br><span class="line">    <span class="comment">//这些name都是user中的公有属性</span></span><br><span class="line">    name = <span class="string">&quot;xxx&quot;</span></span><br><span class="line">    age = <span class="number">10</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>also</strong></p>
-<pre><code class="kotlin">object.also&#123;
-    //todo
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span>.also&#123;</span><br><span class="line">	<span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>also</strong>和<strong>let</strong>很像,<strong>also</strong>是返回它本身，<strong>let</strong>是返回最后一行</p>
 </blockquote>
 <p>例子展示</p>
-<pre><code class="kotlin">val adapter = DetailAdapter().also &#123;
-            binding.userRandomList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            binding.userRandomList.adapter = it
-        &#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> adapter = DetailAdapter().also &#123;</span><br><span class="line">            binding.userRandomList.layoutManager = LinearLayoutManager(<span class="keyword">this</span>, LinearLayoutManager.HORIZONTAL, <span class="literal">false</span>)</span><br><span class="line">            binding.userRandomList.adapter = it</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -197,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/" data-id="cknkfim1e000bekme8ts8gcac" class="article-share-link">
+      <a data-url="http://example.com/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/" data-id="cknl50gjx000bkkmecxjo3rd0" class="article-share-link">
         分享
       </a>
       
@@ -232,6 +201,23 @@
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -342,6 +328,7 @@
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

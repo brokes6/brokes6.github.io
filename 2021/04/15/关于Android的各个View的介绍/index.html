@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     关于Android的各个View的介绍 |
@@ -77,29 +79,32 @@
 <li><p><strong><em>Toolbar</em></strong></p>
 <ul>
 <li><p>设置标题</p>
-<pre><code> app:title=&quot;这里是标题&quot;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:title&#x3D;&quot;这里是标题&quot;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>设置标题前的图标</p>
-<pre><code>app:navigationIcon=&quot;@drawable/ic_baseline_arrow_back&quot;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:navigationIcon&#x3D;&quot;@drawable&#x2F;ic_baseline_arrow_back&quot;</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210407182013.png"></p>
 </li>
 <li><p>是否选择在当前的布局当时是否以“视差”的方式来跟随滚动</p>
-<pre><code>app:layout_collapseMode=&quot;pin&quot;</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:layout_collapseMode&#x3D;&quot;pin&quot;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>其实就是让这个View的滚动的速度比其他正常滚动的View速度稍微慢一点</p>
 </blockquote>
 <h5 id="关于CollapsingToolbarLayout与Toolbar联动使用"><a href="#关于CollapsingToolbarLayout与Toolbar联动使用" class="headerlink" title="关于CollapsingToolbarLayout与Toolbar联动使用"></a>关于CollapsingToolbarLayout与Toolbar联动使用</h5><ul>
 <li><p>设置上滑到Toolbar高度时，Toolbar的背景以及过度颜色</p>
-<pre><code>app:contentScrim=”?attr/colorPrimary”</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:contentScrim&#x3D;”?attr&#x2F;colorPrimary”</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>当上滑到toolbar 高度期间直到达到toolbar高度时，给toolbar设置的背景色，以及过渡颜色。<em>当然，这里不仅仅可以设置颜色，也可以设置图片。</em> 如果不设置该属性，标题栏会过渡为以之前的图片为背景</p>
 </blockquote>
 </li>
 <li><p>设置Toolbar Title位置</p>
-<pre><code>app:expandedTitleGravity=”center_horizontal”</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:expandedTitleGravity&#x3D;”center_horizontal”</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>设置Toolbar Title距离开始位置的边距</p>
-<pre><code>app:expandedTitleMarginStart=”50dp”</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:expandedTitleMarginStart&#x3D;”50dp”</span><br></pre></td></tr></table></figure>
 </li>
 <li></li>
 </ul>
@@ -117,12 +122,8 @@
 </li>
 <li><p>overridePendingTransition()的调用时机 </p>
 <p>这个方法需要在startActivity()或者finish()之后立即调用</p>
-<pre><code class="kotlin">val intent = Intent(activity, MainActivity::class.java)
-        activity.startActivity(intent)
-        activity.overridePendingTransition(
-            R.anim.anim_slide_enter_bottom,
-            R.anim.anim_no_anim
-        )</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> intent = Intent(activity, MainActivity::<span class="keyword">class</span>.java)</span><br><span class="line">        activity.startActivity(intent)</span><br><span class="line">        activity.overridePendingTransition(</span><br><span class="line">            R.anim.anim_slide_enter_bottom,</span><br><span class="line">            R.anim.anim_no_anim</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>overridePendingTransition()需要传入两个参数，第一个为进入动画，第二个为退出动画</p>
 <p>这些资源都需要在anim文件夹中创建</p>
@@ -135,14 +136,8 @@
 <li><p>ObjectAnimator派生自ValueAnimator,所以ValueAnimator能用的方法，ObjectAnimator都能用, ObjectAnimator 是ValueAnimator的子类。</p>
 </li>
 <li><p>例子展示</p>
-<pre><code class="kotlin">private val objectAnimator: ObjectAnimator by lazy &#123;
-        ObjectAnimator.ofFloat(binding.ivCover, ANIMATION_PROPERTY_NAME, 0f, 360f).apply &#123;
-            interpolator = LinearInterpolator()
-            duration = DURATION_CD//设置动画时间
-            repeatCount = ANIMATION_REPEAT_COUNTS
-            start()
-        &#125;
-    &#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> objectAnimator: ObjectAnimator <span class="keyword">by</span> lazy &#123;</span><br><span class="line">        ObjectAnimator.ofFloat(binding.ivCover, ANIMATION_PROPERTY_NAME, <span class="number">0f</span>, <span class="number">360f</span>).apply &#123;</span><br><span class="line">            interpolator = LinearInterpolator()</span><br><span class="line">            duration = DURATION_CD<span class="comment">//设置动画时间</span></span><br><span class="line">            repeatCount = ANIMATION_REPEAT_COUNTS</span><br><span class="line">            start()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>ObjectAnimator.ofFloat</strong>接收4个参数</p>
 <p>第一个：进行动画的View</p>
@@ -178,38 +173,13 @@
 <li><p><em>自定义ObjectAnimator的属性</em></p>
 <ul>
 <li><p>只需要确保View需要改变属性有公开的 <strong>set’()</strong> / <strong>get()</strong> 方法即可</p>
-<pre><code class="kotlin">class Circle(  //圆的半径
-    var radius: Int
-)</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Circle</span></span>(  <span class="comment">//圆的半径</span></span><br><span class="line">    <span class="keyword">var</span> radius: <span class="built_in">Int</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
 <p>接下来只需要给它创建一个set/get方法</p>
-<pre><code class="kotlin">class MyPointView(context: Context?, attrs: AttributeSet?) : View(context, attrs) &#123;
-    private val mCircle: Circle? = Circle(0)
-    protected fun onDraw(canvas: Canvas) &#123;
-        if (mCircle != null) &#123;
-            val paint = Paint()
-            paint.setAntiAlias(true)
-            paint.setColor(Color.RED)
-            paint.setStyle(Paint.Style.FILL)
-            canvas.drawCircle(400, 500, mCircle.getRadius(), paint)
-        &#125;
-        super.onDraw(canvas)
-    &#125;
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPointView</span></span>(context: Context?, attrs: AttributeSet?) : View(context, attrs) &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> mCircle: Circle? = Circle(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDraw</span><span class="params">(canvas: <span class="type">Canvas</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (mCircle != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">val</span> paint = Paint()</span><br><span class="line">            paint.setAntiAlias(<span class="literal">true</span>)</span><br><span class="line">            paint.setColor(Color.RED)</span><br><span class="line">            paint.setStyle(Paint.Style.FILL)</span><br><span class="line">            canvas.drawCircle(<span class="number">400</span>, <span class="number">500</span>, mCircle.getRadius(), paint)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">super</span>.onDraw(canvas)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//set函数</span></span><br><span class="line">    <span class="comment">//get函数</span></span><br><span class="line">    <span class="keyword">var</span> circleRadius: <span class="built_in">Int</span></span><br><span class="line">        <span class="keyword">get</span>() = <span class="number">800</span></span><br><span class="line">        <span class="keyword">set</span>(radius) &#123;</span><br><span class="line">            mCircle.setRadius(radius)</span><br><span class="line">            invalidate()<span class="comment">//invalidate()请求重绘View树，也就是刷新View</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 
-    //set函数
-    //get函数
-    var circleRadius: Int
-        get() = 800
-        set(radius) &#123;
-            mCircle.setRadius(radius)
-            invalidate()//invalidate()请求重绘View树，也就是刷新View
-        &#125;
-
-&#125; </code></pre>
 <p>在Activity中使用</p>
-<pre><code class="kotlin">val animator = ObjectAnimator.ofInt(view, &quot;circleRadius&quot;, 40, 400)
-        animator.interpolator = BounceInterpolator()
-        animator.duration = 2000
-        animator.start()</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> animator = ObjectAnimator.ofInt(view, <span class="string">&quot;circleRadius&quot;</span>, <span class="number">40</span>, <span class="number">400</span>)</span><br><span class="line">        animator.interpolator = BounceInterpolator()</span><br><span class="line">        animator.duration = <span class="number">2000</span></span><br><span class="line">        animator.start()</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -220,11 +190,8 @@
 <li><p>dataBinding</p>
 <ol>
 <li><p>在Model的build.gradle中开启dataBinding</p>
-<pre><code class="kotlin">android&#123;
-    buildFeatures&#123;
-        dataBinding = true
-    &#125;
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">android&#123;</span><br><span class="line">    buildFeatures&#123;</span><br><span class="line">        dataBinding = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>在Android Stuio 4.0以上时，只能使用<strong>buildFeatures</strong>来进行管理</p>
 </blockquote>
@@ -236,20 +203,11 @@
 </blockquote>
 </li>
 <li><p>在Activity中引入</p>
-<pre><code class="kotlin">class MainActivity : BaseActivity(), View.OnClickListener &#123;
-    //先申明为延迟初始化
-    private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-        //使用DataBindingUtil来进行载入布局
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-    &#125;
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">BaseActivity</span></span>(), View.OnClickListener &#123;</span><br><span class="line">    <span class="comment">//先申明为延迟初始化</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding: ActivityMainBinding</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        <span class="comment">//使用DataBindingUtil来进行载入布局</span></span><br><span class="line">    	binding = DataBindingUtil.setContentView(<span class="keyword">this</span>, R.layout.activity_main)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>使用</p>
-<pre><code class="kotlin">binding.randomText.text = &quot;当前随机参数为:$&#123;it?.get(0)?.randomName&#125;&quot;
-binding.randomCountLast.text = &quot;随机次数为:$&#123;it?.get(0)?.randomNum&#125;&quot;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">binding.randomText.text = <span class="string">&quot;当前随机参数为:<span class="subst">$&#123;it?.get(<span class="number">0</span>)?.randomName&#125;</span>&quot;</span></span><br><span class="line">binding.randomCountLast.text = <span class="string">&quot;随机次数为:<span class="subst">$&#123;it?.get(<span class="number">0</span>)?.randomNum&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
 <p>直接使用<em>binding.xxx</em>来引用View</p>
 </li>
 </ol>
@@ -257,26 +215,13 @@ binding.randomCountLast.text = &quot;随机次数为:$&#123;it?.get(0)?.randomNu
 <li><p>viewBinding</p>
 <ol>
 <li><p>在Model的build.gradle中开启dataBinding</p>
-<pre><code class="kotlin">android &#123;
-        ...
-        buildFeatures&#123;
-        viewBinding = true
-    &#125;
-&#125; </code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">android &#123;</span><br><span class="line">        ...</span><br><span class="line">        buildFeatures&#123;</span><br><span class="line">        viewBinding = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 </li>
 <li><p>开启之后，系统将会自动的生成绑定类</p>
 </li>
 <li><p>在Activity中使用</p>
-<pre><code class="kotlin">class MainActivity : BaseActivity(), View.OnClickListener &#123;
-    //先申明为延迟初始化
-    private lateinit var binding: ActivityMainBinding
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">BaseActivity</span></span>(), View.OnClickListener &#123;</span><br><span class="line">    <span class="comment">//先申明为延迟初始化</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">lateinit</span> <span class="keyword">var</span> binding: ActivityMainBinding</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        <span class="comment">//将不需要指明Layout文件</span></span><br><span class="line">        binding = ActivityMainBinding.inflate(layoutInflater)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-        //将不需要指明Layout文件
-        binding = ActivityMainBinding.inflate(layoutInflater)
-    &#125;
-&#125;</code></pre>
 <p>剩下的与dataBinding一致</p>
 </li>
 </ol>
@@ -289,7 +234,7 @@ binding.randomCountLast.text = &quot;随机次数为:$&#123;it?.get(0)?.randomNu
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/" data-id="cknkfim1p000yekmeedug1gr8" class="article-share-link">
+      <a data-url="http://example.com/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/" data-id="cknl50gk8000ukkme9mezchmp" class="article-share-link">
         分享
       </a>
       
@@ -324,6 +269,23 @@ binding.randomCountLast.text = &quot;随机次数为:$&#123;it?.get(0)?.randomNu
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -434,6 +396,7 @@ binding.randomCountLast.text = &quot;随机次数为:$&#123;it?.get(0)?.randomNu
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

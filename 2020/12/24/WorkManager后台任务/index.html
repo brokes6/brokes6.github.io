@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     WorkManager后台任务 |
@@ -87,82 +89,40 @@
 </ul>
 </li>
 <li><p>接下来创建一个类MyWorker 继承 Worker</p>
-<pre><code class="kotlin">class MyWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) &#123;
-    override fun doWork(): Result &#123;
-        Log.e(&quot;work&quot;, &quot;doWork: $data 任务开始&quot; )
-        Thread.sleep(3000)
-        Log.e(&quot;work&quot;, &quot;doWork: $data 任务结束&quot; )
-        return Result.success()
-    &#125;
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyWorker</span></span>(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">doWork</span><span class="params">()</span></span>: Result &#123;</span><br><span class="line">        Log.e(<span class="string">&quot;work&quot;</span>, <span class="string">&quot;doWork: <span class="variable">$data</span> 任务开始&quot;</span> )</span><br><span class="line">        Thread.sleep(<span class="number">3000</span>)</span><br><span class="line">        Log.e(<span class="string">&quot;work&quot;</span>, <span class="string">&quot;doWork: <span class="variable">$data</span> 任务结束&quot;</span> )</span><br><span class="line">        <span class="keyword">return</span> Result.success()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>继承Worker 是需要传入参数，所以需要创建构造方法。这里为了方便观察，于是打印日志</p>
 </li>
 <li><p>然后再Activity中创建全局变量 workMananger，并且创建workRequest且传入</p>
-<pre><code class="kotlin">class MainActivity : AppCompatActivity() &#123;
-    private val workManager = WorkManager.getInstance(this)
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        //这里在XML中创建了一个Button，为其设置点击事件
-        button.setOnClickListener &#123;
-            val wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()
-            .build()
-            workManager.enqueue(wrokRequest)
-            //将创建好的workRequest传递给workManager
-        &#125;
-    &#125;
-&#125;</code></pre>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> : <span class="type">AppCompatActivity</span></span>() &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> workManager = WorkManager.getInstance(<span class="keyword">this</span>)</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        <span class="comment">//这里在XML中创建了一个Button，为其设置点击事件</span></span><br><span class="line">        button.setOnClickListener &#123;</span><br><span class="line">            <span class="keyword">val</span> wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()</span><br><span class="line">            .build()</span><br><span class="line">            workManager.enqueue(wrokRequest)</span><br><span class="line">            <span class="comment">//将创建好的workRequest传递给workManager</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>以上，关于workManager的简单使用就完成了</p>
 </li>
 </ol>
-<h3 id="WorkManager的触发条件与传递数据、串接"><a href="#WorkManager的触发条件与传递数据、串接" class="headerlink" title="WorkManager的触发条件与传递数据、串接"></a>WorkManager的触发条件与传递数据、串接</h3><h5 id="触发条件"><a href="#触发条件" class="headerlink" title="触发条件"></a>触发条件</h5><pre><code class="kotlin">  val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
- val wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()
-            .setConstraints(constraints)
-            .build()</code></pre>
+<h3 id="WorkManager的触发条件与传递数据、串接"><a href="#WorkManager的触发条件与传递数据、串接" class="headerlink" title="WorkManager的触发条件与传递数据、串接"></a>WorkManager的触发条件与传递数据、串接</h3><h5 id="触发条件"><a href="#触发条件" class="headerlink" title="触发条件"></a>触发条件</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">val</span> constraints = Constraints.Builder()</span><br><span class="line">           .setRequiredNetworkType(NetworkType.CONNECTED)</span><br><span class="line">           .build()</span><br><span class="line"><span class="keyword">val</span> wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()</span><br><span class="line">           .setConstraints(constraints)</span><br><span class="line">           .build()</span><br></pre></td></tr></table></figure>
+
 <p>创建一个constraints，并且给他设置触发条件为连接网络时触发，然后传递给workRequest</p>
 <h5 id="传递数据"><a href="#传递数据" class="headerlink" title="传递数据"></a>传递数据</h5><p>可以将数据传递进Worker，Worker也可以把数据传递出来</p>
-<pre><code class="kotlin">val wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()
-            .setConstraints(constraints)
-            .setInputData(workDataOf(INTPUT_WORK_KEY to data))
-            .build()</code></pre>
-<p>传递数据是通过setInputData，接受一个workData参数，workData是一个键值对，最后在Worker中接受数据</p>
-<pre><code class="kotlin">class MyWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) &#123;
-    override fun doWork(): Result &#123;
-        val data = inputData.getString(&quot;Key&quot;)
-        return Result.success(workDataOf(OUT_WORK_KEY to &quot;任务已结束&quot;))
-    &#125;
-&#125;</code></pre>
-<p>通过inputData 来接受数据，并且可以通过return Success来传递出去数据，在Activity/Fragment中通过LiveData观察来获取数据</p>
-<pre><code class="kotlin">workManage.getWorkInfoByIdLiveData(workRequestA.id).observe(this, Observer &#123;
-                Toast.makeText(this, &quot;任务完成，返回数据为$&#123;it.outputData&#125;&quot;, Toast.LENGTH_SHORT).show()
-            &#125;)</code></pre>
-<h5 id="串接"><a href="#串接" class="headerlink" title="串接"></a>串接</h5><p>首先，我们先将创建触发条件与创建workRequest的内容提取出来（快捷键为:ctrl+alt+m）</p>
-<pre><code class="kotlin">private fun createWork(data: String): OneTimeWorkRequest &#123;
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        return OneTimeWorkRequestBuilder&lt;MyWorker&gt;()
-            .setConstraints(constraints)
-            .setInputData(workDataOf(INTPUT_WORK_KEY to data))
-            .build()
-    &#125;</code></pre>
-<p>并且给这个方法传入一个参数，用来进行与Worker之间传递数据,然后使用</p>
-<pre><code class="kotlin">  private val WORK_A_DATA = &quot;A ni shi han han&quot;
-  private val WORK_B_DATA = &quot;B ni shi han han&quot;
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> wrokRequest = OneTimeWorkRequestBuilder&lt;MyWorker&gt;()</span><br><span class="line">            .setConstraints(constraints)</span><br><span class="line">            .setInputData(workDataOf(INTPUT_WORK_KEY to <span class="keyword">data</span>))</span><br><span class="line">            .build()</span><br></pre></td></tr></table></figure>
 
-  val workRequestA = createWork(WORK_A_DATA)
-  val workRequestB = createWork(WORK_B_DATA)
-      workManager.beginWith(workRequestA)
-          .then(workRequestB)
-          .enqueue()</code></pre>
+<p>传递数据是通过setInputData，接受一个workData参数，workData是一个键值对，最后在Worker中接受数据</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyWorker</span></span>(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) &#123;</span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">doWork</span><span class="params">()</span></span>: Result &#123;</span><br><span class="line">        <span class="keyword">val</span> <span class="keyword">data</span> = inputData.getString(<span class="string">&quot;Key&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> Result.success(workDataOf(OUT_WORK_KEY to <span class="string">&quot;任务已结束&quot;</span>))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过inputData 来接受数据，并且可以通过return Success来传递出去数据，在Activity/Fragment中通过LiveData观察来获取数据</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">workManage.getWorkInfoByIdLiveData(workRequestA.id).observe(<span class="keyword">this</span>, Observer &#123;</span><br><span class="line">                Toast.makeText(<span class="keyword">this</span>, <span class="string">&quot;任务完成，返回数据为<span class="subst">$&#123;it.outputData&#125;</span>&quot;</span>, Toast.LENGTH_SHORT).show()</span><br><span class="line">            &#125;)</span><br></pre></td></tr></table></figure>
+
+<h5 id="串接"><a href="#串接" class="headerlink" title="串接"></a>串接</h5><p>首先，我们先将创建触发条件与创建workRequest的内容提取出来（快捷键为:ctrl+alt+m）</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">createWork</span><span class="params">(<span class="keyword">data</span>: <span class="type">String</span>)</span></span>: OneTimeWorkRequest &#123;</span><br><span class="line">        <span class="keyword">val</span> constraints = Constraints.Builder()</span><br><span class="line">            .setRequiredNetworkType(NetworkType.CONNECTED)</span><br><span class="line">            .build()</span><br><span class="line">        <span class="keyword">return</span> OneTimeWorkRequestBuilder&lt;MyWorker&gt;()</span><br><span class="line">            .setConstraints(constraints)</span><br><span class="line">            .setInputData(workDataOf(INTPUT_WORK_KEY to <span class="keyword">data</span>))</span><br><span class="line">            .build()</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>并且给这个方法传入一个参数，用来进行与Worker之间传递数据,然后使用</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> WORK_A_DATA = <span class="string">&quot;A ni shi han han&quot;</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> WORK_B_DATA = <span class="string">&quot;B ni shi han han&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> workRequestA = createWork(WORK_A_DATA)</span><br><span class="line"><span class="keyword">val</span> workRequestB = createWork(WORK_B_DATA)</span><br><span class="line">    workManager.beginWith(workRequestA)</span><br><span class="line">        .then(workRequestB)</span><br><span class="line">        .enqueue()</span><br></pre></td></tr></table></figure>
+
 <p>beginWith() 是传入第一个workRequest，剩下的通过then来传递，最后别忘了调用enqueue()</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/12/24/WorkManager%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/" data-id="cknkfim1l000pekmed2an84ut" class="article-share-link">
+      <a data-url="http://example.com/2020/12/24/WorkManager%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/" data-id="cknl50gk5000pkkme1ayabl41" class="article-share-link">
         分享
       </a>
       
@@ -197,6 +157,23 @@
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -307,6 +284,7 @@
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

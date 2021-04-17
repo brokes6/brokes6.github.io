@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     Room在项目中的使用 |
@@ -72,8 +74,8 @@
 <h1 id="Room在项目中的使用"><a href="#Room在项目中的使用" class="headerlink" title="Room在项目中的使用"></a>Room在项目中的使用</h1><blockquote>
 <p>本篇已Java为主要语言</p>
 </blockquote>
-<h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><pre><code class="java">implementation &quot;androidx.room:room-runtime:2.2.5&quot;
-annotationProcessor  &quot;androidx.room:room-compiler:2.2.5&quot;</code></pre>
+<h3 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&quot;androidx.room:room-runtime:2.2.5&quot;</span></span><br><span class="line">annotationProcessor  <span class="string">&quot;androidx.room:room-compiler:2.2.5&quot;</span></span><br></pre></td></tr></table></figure>
+
 <h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>接下来我就以保存历史为例,先介绍一下各个注释的意思</p>
 <table>
 <thead>
@@ -101,223 +103,41 @@ annotationProcessor  &quot;androidx.room:room-compiler:2.2.5&quot;</code></pre>
 </tbody></table>
 <ol>
 <li><p>创建 HistoryBean</p>
-<pre><code class="java">@Entity
-public class HistoryBean &#123;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HistoryBean</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HistoryBean</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Ignore</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HistoryBean</span><span class="params">(<span class="keyword">int</span> id, String name, String address, String state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.EquipmentId = id;</span><br><span class="line">        <span class="keyword">this</span>.EquipmentName = name;</span><br><span class="line">        <span class="keyword">this</span>.EquipmentAddress = address;</span><br><span class="line">        <span class="keyword">this</span>.EquipmentState = state;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PrimaryKey()</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> EquipmentId;</span><br><span class="line">    <span class="keyword">private</span> String EquipmentName;</span><br><span class="line">    <span class="keyword">private</span> String EquipmentAddress;</span><br><span class="line">    <span class="keyword">private</span> String EquipmentPersonnel;</span><br><span class="line">    <span class="keyword">private</span> String EquipmentState;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getEquipmentId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> EquipmentId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEquipmentId</span><span class="params">(<span class="keyword">int</span> equipmentId)</span> </span>&#123;</span><br><span class="line">        EquipmentId = equipmentId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEquipmentName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> EquipmentName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEquipmentName</span><span class="params">(String equipmentName)</span> </span>&#123;</span><br><span class="line">        EquipmentName = equipmentName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEquipmentAddress</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> EquipmentAddress;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEquipmentAddress</span><span class="params">(String equipmentAddress)</span> </span>&#123;</span><br><span class="line">        EquipmentAddress = equipmentAddress;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEquipmentPersonnel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> EquipmentPersonnel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEquipmentPersonnel</span><span class="params">(String equipmentPersonnel)</span> </span>&#123;</span><br><span class="line">        EquipmentPersonnel = equipmentPersonnel;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEquipmentState</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> EquipmentState;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEquipmentState</span><span class="params">(String equipmentState)</span> </span>&#123;</span><br><span class="line">        EquipmentState = equipmentState;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-    public HistoryBean() &#123;
 
-    &#125;
 
-    @Ignore
-    public HistoryBean(int id, String name, String address, String state) &#123;
-        this.EquipmentId = id;
-        this.EquipmentName = name;
-        this.EquipmentAddress = address;
-        this.EquipmentState = state;
-    &#125;
-
-    @PrimaryKey()
-    private int EquipmentId;
-    private String EquipmentName;
-    private String EquipmentAddress;
-    private String EquipmentPersonnel;
-    private String EquipmentState;
-
-    public int getEquipmentId() &#123;
-        return EquipmentId;
-    &#125;
-
-    public void setEquipmentId(int equipmentId) &#123;
-        EquipmentId = equipmentId;
-    &#125;
-
-    public String getEquipmentName() &#123;
-        return EquipmentName;
-    &#125;
-
-    public void setEquipmentName(String equipmentName) &#123;
-        EquipmentName = equipmentName;
-    &#125;
-
-    public String getEquipmentAddress() &#123;
-        return EquipmentAddress;
-    &#125;
-
-    public void setEquipmentAddress(String equipmentAddress) &#123;
-        EquipmentAddress = equipmentAddress;
-    &#125;
-
-    public String getEquipmentPersonnel() &#123;
-        return EquipmentPersonnel;
-    &#125;
-
-    public void setEquipmentPersonnel(String equipmentPersonnel) &#123;
-        EquipmentPersonnel = equipmentPersonnel;
-    &#125;
-
-    public String getEquipmentState() &#123;
-        return EquipmentState;
-    &#125;
-
-    public void setEquipmentState(String equipmentState) &#123;
-        EquipmentState = equipmentState;
-    &#125;
-&#125;
-</code></pre>
 </li>
 </ol>
 <ol start="2">
 <li><p>创建一个数据库管理类 （AppDatabase）继承 RoomDatabase</p>
-<pre><code class="java">@Database(entities = &#123;HistoryBean.class&#125;, version = 1)
-public abstract class AppDatabase extends RoomDatabase &#123;
-
-   public abstract HistoryDao historyDao();
-
-&#125;</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Database(entities = &#123;HistoryBean.class&#125;, version = 1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AppDatabase</span> <span class="keyword">extends</span> <span class="title">RoomDatabase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> HistoryDao <span class="title">historyDao</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>然后在创建一个数据库操作接口 （HistoryDao）</p>
-<pre><code class="java">@Dao
-public interface HistoryDao &#123;
-    /**
-     * 插入数据
-     *
-     * @param historyBean
-     */
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(HistoryBean historyBean);
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Dao</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">HistoryDao</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> historyBean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Insert(onConflict = OnConflictStrategy.REPLACE)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insertAll</span><span class="params">(HistoryBean historyBean)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除数据</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Query(&quot;DELETE FROM historybean&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deleteAll</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 更新数据（传入不一样的数据，将会自动将不一样的数据替换旧数据）</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> historyBean</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Update</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">updateUsers</span><span class="params">(HistoryBean historyBean)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询数据</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Query(&quot;SELECT * FROM HistoryBean&quot;)</span></span><br><span class="line">    LiveData&lt;List&lt;HistoryBean&gt;&gt; getAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    /**
-     * 删除数据
-     */
-    @Query(&quot;DELETE FROM historybean&quot;)
-    void deleteAll();
 
-    /**
-     * 更新数据（传入不一样的数据，将会自动将不一样的数据替换旧数据）
-     *
-     * @param historyBean
-     */
-    @Update
-    void updateUsers(HistoryBean historyBean);
 
-    /**
-     * 查询数据
-     *
-     * @return
-     */
-    @Query(&quot;SELECT * FROM HistoryBean&quot;)
-    LiveData&lt;List&lt;HistoryBean&gt;&gt; getAll();
-&#125;</code></pre>
 </li>
 </ol>
 <ol start="4">
 <li><p>接下来就是在Activity/Fragment中使用，因为在主线程中是不允许进行数据库操作的，会阻塞线程，所以必须要在子线程中来操作数据库。下面的代码就是使用AsyncTask来进行子线程操作</p>
 <p>那么下面将创建一个数据库操作类，用来方便进行数据库操作</p>
-<pre><code class="java">public class DaoOperation &#123;
-    private static AppDatabase db;
-    private static DaoOperation instance;
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DaoOperation</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> AppDatabase db;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> DaoOperation instance;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这里将DaoOpertaion设置为单例模式，因为会在各种地方使用</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DaoOperation <span class="title">getDatabase</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (AppDatabase.class) &#123;</span><br><span class="line">                <span class="keyword">if</span> (instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">                    db = MyApplication.getDatabase(context);</span><br><span class="line">                    instance = <span class="keyword">new</span> DaoOperation();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这里是对外开放接口</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertHistory</span><span class="params">(HistoryBean historyBean)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> insertHistory(historyBean).execute(historyBean);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dellHistory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> dellHistory().execute();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">upHistory</span><span class="params">(HistoryBean historyBean)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">new</span> upHistory(historyBean).execute(historyBean);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//以下是内部实现过程</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入历史</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">insertHistory</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">HistoryBean</span>, <span class="title">Void</span>, <span class="title">Void</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> HistoryBean historyBean;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">insertHistory</span><span class="params">(HistoryBean historyBean)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.historyBean = historyBean;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(HistoryBean... historyBeans)</span> </span>&#123;</span><br><span class="line">            db.historyDao().insertAll(historyBean);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 删除全部历史</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">dellHistory</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">Void</span>, <span class="title">Void</span>, <span class="title">Void</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">dellHistory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(Void... voids)</span> </span>&#123;</span><br><span class="line">            db.historyDao().deleteAll();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 更改历史（基本用不上）</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">upHistory</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span>&lt;<span class="title">HistoryBean</span>, <span class="title">Void</span>, <span class="title">Void</span>&gt; </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> HistoryBean historyBean;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">upHistory</span><span class="params">(HistoryBean historyBean)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.historyBean = historyBean;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> Void <span class="title">doInBackground</span><span class="params">(HistoryBean... historyBeans)</span> </span>&#123;</span><br><span class="line">            db.historyDao().updateUsers(historyBean);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-    //这里将DaoOpertaion设置为单例模式，因为会在各种地方使用
-    public static DaoOperation getDatabase(Context context) &#123;
-        if (instance == null) &#123;
-            synchronized (AppDatabase.class) &#123;
-                if (instance == null) &#123;
-                    db = MyApplication.getDatabase(context);
-                    instance = new DaoOperation();
-                &#125;
-            &#125;
-        &#125;
-        return instance;
-    &#125;
-
-    //这里是对外开放接口
-    public void insertHistory(HistoryBean historyBean) &#123;
-        new insertHistory(historyBean).execute(historyBean);
-    &#125;
-
-    public void dellHistory() &#123;
-        new dellHistory().execute();
-    &#125;
-
-    public void upHistory(HistoryBean historyBean) &#123;
-        new upHistory(historyBean).execute(historyBean);
-    &#125;
-
-</code></pre>
+<p>关于AsyncTast的使用，其他篇幅就已经讲过了，这里就并进行讲解了 <a href="%E5%85%B3%E4%BA%8EAndroid%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C.md">关于Android多线程操作</a></p>
 </li>
-</ol>
-<pre><code>   //以下是内部实现过程
-   /**
-    * 插入历史
-    */
-   private static class insertHistory extends AsyncTask&lt;HistoryBean, Void, Void&gt; &#123;
-       private final HistoryBean historyBean;
+<li><p>最后在Activty/Fragment中使用（展示经常使用的插入和删除）</p>
+<p><code>插入</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DaoOperation.getDatabase(<span class="keyword">this</span>).insertHistory(<span class="keyword">new</span> HistoryBean(id,name, address,state));</span><br></pre></td></tr></table></figure>
 
-       public insertHistory(HistoryBean historyBean) &#123;
-           this.historyBean = historyBean;
-       &#125;
-
-       @Override
-       protected Void doInBackground(HistoryBean... historyBeans) &#123;
-           db.historyDao().insertAll(historyBean);
-           return null;
-       &#125;
-   &#125;
-
-   /**
-    * 删除全部历史
-    */
-   private static class dellHistory extends AsyncTask&lt;Void, Void, Void&gt; &#123;
-
-       public dellHistory() &#123;
-       &#125;
-
-       @Override
-       protected Void doInBackground(Void... voids) &#123;
-           db.historyDao().deleteAll();
-           return null;
-       &#125;
-   &#125;
-
-   /**
-    * 更改历史（基本用不上）
-    */
-   private static class upHistory extends AsyncTask&lt;HistoryBean, Void, Void&gt; &#123;
-       private final HistoryBean historyBean;
-
-       public upHistory(HistoryBean historyBean) &#123;
-           this.historyBean = historyBean;
-
-       &#125;
-
-       @Override
-       protected Void doInBackground(HistoryBean... historyBeans) &#123;
-           db.historyDao().updateUsers(historyBean);
-           return null;
-       &#125;
-   &#125;</code></pre>
-<pre><code>
-关于AsyncTast的使用，其他篇幅就已经讲过了，这里就并进行讲解了 [关于Android多线程操作](关于Android多线程操作.md)
-
-5. 最后在Activty/Fragment中使用（展示经常使用的插入和删除）
-
-`插入`
-
-```java
-DaoOperation.getDatabase(this).insertHistory(new HistoryBean(id,name, address,state));</code></pre>
-<p>   <code>删除</code></p>
-<pre><code class="java">DaoOperation.getDatabase(this).dellHistory();</code></pre>
-<ol start="6">
+<p><code>删除</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DaoOperation.getDatabase(<span class="keyword">this</span>).dellHistory();</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>展示不一样的数据库查询（下面的代码HistoryModel是因为我当前项目使用的Mvvm的设计模式，我将所以数据操作都放在Model中了）</p>
 <p>因为上面设置查询的结果为LiveData，也就是可观察</p>
-<pre><code class="java">HistoryModel mHistoryModel = new ViewModelProvider(this).get(HistoryModel.class);
-        mHistoryModel.getHistory(this).observe(this, new Observer&lt;List&lt;HistoryBean&gt;&gt;() &#123;
-            @Override
-            public void onChanged(List&lt;HistoryBean&gt; historyBeans) &#123;
-                //这里我是将查询到的数据传入设配器中
-                adapter.loadMore(historyBeans);
-            &#125;
-        &#125;);</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HistoryModel mHistoryModel = <span class="keyword">new</span> ViewModelProvider(<span class="keyword">this</span>).get(HistoryModel.class);</span><br><span class="line">        mHistoryModel.getHistory(<span class="keyword">this</span>).observe(<span class="keyword">this</span>, <span class="keyword">new</span> Observer&lt;List&lt;HistoryBean&gt;&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onChanged</span><span class="params">(List&lt;HistoryBean&gt; historyBeans)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//这里我是将查询到的数据传入设配器中</span></span><br><span class="line">                adapter.loadMore(historyBeans);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+
 <p>关于使用LiveData的好处有多，比如</p>
 <ul>
 <li>会观察当前引用类的生命周期，只会在生命周期内进行操作</li>
@@ -330,7 +150,7 @@ DaoOperation.getDatabase(this).insertHistory(new HistoryBean(id,name, address,st
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/12/24/Room%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknkfim1i000hekme4cwxegog" class="article-share-link">
+      <a data-url="http://example.com/2020/12/24/Room%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknl50gk0000hkkme0nk83lws" class="article-share-link">
         分享
       </a>
       
@@ -365,6 +185,23 @@ DaoOperation.getDatabase(this).insertHistory(new HistoryBean(id,name, address,st
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -475,6 +312,7 @@ DaoOperation.getDatabase(this).insertHistory(new HistoryBean(id,name, address,st
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

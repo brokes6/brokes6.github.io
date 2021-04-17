@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     Room数据库的使用 |
@@ -80,74 +82,9 @@
 <li>Entity：代表数据库中某个表的实体类。</li>
 <li>DAO：包含用于访问数据库的方法。</li>
 </ul>
-<h5 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h5><pre><code>def room_version = &quot;2.2.5&quot;
-implementation &quot;androidx.room:room-runtime:$room_version&quot;
-annotationProcessor &quot;androidx.room:room-compiler:$room_version&quot;</code></pre>
+<h5 id="添加依赖"><a href="#添加依赖" class="headerlink" title="添加依赖"></a>添加依赖</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def room_version &#x3D; &quot;2.2.5&quot;</span><br><span class="line">implementation &quot;androidx.room:room-runtime:$room_version&quot;</span><br><span class="line">annotationProcessor &quot;androidx.room:room-compiler:$room_version&quot;</span><br></pre></td></tr></table></figure>
 <h5 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h5><ol>
-<li><p>首先创建一个Bean类，用来做为数据库的表</p>
-<pre><code>@Entity(indices = &#123;@Index(&quot;BookName&quot;)&#125;)
-public class BookBean &#123;
-
- public BookBean()&#123; &#125;
-
- public BookBean(String name,String autohor,Data data)&#123;
-     this.BookName = name;
-     this.BookAuthor = autohor;
-     this.data = data;
- &#125;
-
- @PrimaryKey(autoGenerate = true)
- private int BookId;
-
- private String BookName;
- private String BookAuthor;
- private static Data data;
-
- public int getBookId() &#123;
-     return BookId;
- &#125;
-
- public void setBookId(int bookId) &#123;
-     BookId = bookId;
- &#125;
-
- public String getBookName() &#123;
-     return BookName;
- &#125;
-
- public void setBookName(String bookName) &#123;
-     BookName = bookName;
- &#125;
-
- public String getBookAuthor() &#123;
-     return BookAuthor;
- &#125;
-
- public void setBookAuthor(String bookAuthor) &#123;
-     BookAuthor = bookAuthor;
- &#125;
-
- public static class Data&#123;
-     private String userName;
-     private int userId;
-
-     public String getUserName() &#123;
-         return userName;
-     &#125;
-
-     public void setUserName(String userName) &#123;
-         this.userName = userName;
-     &#125;
-
-     public int getUserId() &#123;
-         return userId;
-     &#125;
-
-     public void setUserId(int userId) &#123;
-         this.userId = userId;
-     &#125;
- &#125;
-&#125;</code></pre>
+<li>首先创建一个Bean类，用来做为数据库的表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">@Entity(indices &#x3D; &#123;@Index(&quot;BookName&quot;)&#125;)</span><br><span class="line">public class BookBean &#123;</span><br><span class="line"></span><br><span class="line">    public BookBean()&#123; &#125;</span><br><span class="line"></span><br><span class="line">    public BookBean(String name,String autohor,Data data)&#123;</span><br><span class="line">        this.BookName &#x3D; name;</span><br><span class="line">        this.BookAuthor &#x3D; autohor;</span><br><span class="line">        this.data &#x3D; data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @PrimaryKey(autoGenerate &#x3D; true)</span><br><span class="line">    private int BookId;</span><br><span class="line"></span><br><span class="line">    private String BookName;</span><br><span class="line">    private String BookAuthor;</span><br><span class="line">    private static Data data;</span><br><span class="line"></span><br><span class="line">    public int getBookId() &#123;</span><br><span class="line">        return BookId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setBookId(int bookId) &#123;</span><br><span class="line">        BookId &#x3D; bookId;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getBookName() &#123;</span><br><span class="line">        return BookName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setBookName(String bookName) &#123;</span><br><span class="line">        BookName &#x3D; bookName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getBookAuthor() &#123;</span><br><span class="line">        return BookAuthor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setBookAuthor(String bookAuthor) &#123;</span><br><span class="line">        BookAuthor &#x3D; bookAuthor;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class Data&#123;</span><br><span class="line">        private String userName;</span><br><span class="line">        private int userId;</span><br><span class="line"></span><br><span class="line">        public String getUserName() &#123;</span><br><span class="line">            return userName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setUserName(String userName) &#123;</span><br><span class="line">            this.userName &#x3D; userName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int getUserId() &#123;</span><br><span class="line">            return userId;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setUserId(int userId) &#123;</span><br><span class="line">            this.userId &#x3D; userId;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>@Entityd的注释代表数据库中某个表的实体类。默认情况下Room会把Entity里面所有的字段对应到表上的每一列。如果需要制定某个字段不作为表中的一列需要添加@Ignore注解。</li>
 <li>@Index(“BookName”)代表设置数据库中的索引</li>
@@ -155,18 +92,7 @@ public class BookBean &#123;
 <li>@PrimaryKey的（autoGenerate = true）表示主键自增</li>
 </ul>
 </li>
-<li><p>接下来就是创建数据库管理类</p>
-<pre><code>@Database(entities = &#123;BookBean.class&#125;, version = 1)
-public abstract class AppDatabase extends RoomDatabase &#123;
- public abstract BookDao userDao();
-
- static final Migration MIGRATION_1_2 = new Migration(1, 2) &#123;
-     @Override
-     public void migrate(SupportSQLiteDatabase database) &#123;
-        database.execSQL(&quot;ALTER TABLE bookBean ADD COLUMN  index_name&#39;BookName&#39; &quot;);
-     &#125;
- &#125;;
-&#125;</code></pre>
+<li>接下来就是创建数据库管理类<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Database(entities &#x3D; &#123;BookBean.class&#125;, version &#x3D; 1)</span><br><span class="line">public abstract class AppDatabase extends RoomDatabase &#123;</span><br><span class="line">    public abstract BookDao userDao();</span><br><span class="line"></span><br><span class="line">    static final Migration MIGRATION_1_2 &#x3D; new Migration(1, 2) &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void migrate(SupportSQLiteDatabase database) &#123;</span><br><span class="line">           database.execSQL(&quot;ALTER TABLE bookBean ADD COLUMN  index_name&#39;BookName&#39; &quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>@Database表示当前类为数据库管理类</li>
 <li>entities = {BookBean.class}表示数据库相关的所有Entity实体类，他们会转化成数据库里面的表。</li>
@@ -175,28 +101,7 @@ public abstract class AppDatabase extends RoomDatabase &#123;
 <li>static final Migration MIGRATION_1_2 = new Migration(1, 2) 这个是指当数据库升级时，从版本1升级到版本2的升级过程</li>
 </ul>
 </li>
-<li><p>之后就是创建数据库的操作类</p>
-<pre><code>@Dao
-public interface BookDao &#123;
-
- @Query(&quot;SELECT * FROM bookbean&quot;)
- Flowable&lt;List&lt;BookBean&gt;&gt; getAll();
-
- @Query(&quot;SELECT * FROM bookbean WHERE BookId IN (:userIds)&quot;)
- List&lt;BookBean&gt; loadAllByIds(int[] userIds);
-
- @Query(&quot;update bookbean set bookauthor = :value&quot;)
- void setBookAuthor(boolean value);
-
- @Insert
- Completable insertAll(BookBean... users);
-
- @Delete
- Completable delete(BookBean user);
-
- @Update
- Completable updateUsers(BookBean... users);
-&#125;</code></pre>
+<li>之后就是创建数据库的操作类<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Dao</span><br><span class="line">public interface BookDao &#123;</span><br><span class="line"></span><br><span class="line">    @Query(&quot;SELECT * FROM bookbean&quot;)</span><br><span class="line">    Flowable&lt;List&lt;BookBean&gt;&gt; getAll();</span><br><span class="line"></span><br><span class="line">    @Query(&quot;SELECT * FROM bookbean WHERE BookId IN (:userIds)&quot;)</span><br><span class="line">    List&lt;BookBean&gt; loadAllByIds(int[] userIds);</span><br><span class="line"></span><br><span class="line">    @Query(&quot;update bookbean set bookauthor &#x3D; :value&quot;)</span><br><span class="line">    void setBookAuthor(boolean value);</span><br><span class="line"></span><br><span class="line">    @Insert</span><br><span class="line">    Completable insertAll(BookBean... users);</span><br><span class="line"></span><br><span class="line">    @Delete</span><br><span class="line">    Completable delete(BookBean user);</span><br><span class="line"></span><br><span class="line">    @Update</span><br><span class="line">    Completable updateUsers(BookBean... users);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>@Dao 表示这个组件代表了作为DAO的类或者接口。DAO是Room的主要组件，负责定义访问数据库的方法。Room使用过程中一般使用抽象DAO类来定义数据库的CRUD操作。DAO可以是一个接口也可以是一个抽象类。如果它是一个抽象类，它可以有一个构造函数，它将RoomDatabase作为其唯一参数。Room在编译时创建每个DAO实。</li>
 <li>@Query对应数据库的查询，后接查询语句</li>
@@ -207,129 +112,24 @@ public interface BookDao &#123;
 <li>Flowable也是一样，不过这个返回类型是支持背压</li>
 </ul>
 </li>
-<li><p>在Activity/Fragment中使用</p>
-<ol>
-<li><p>首先为了防止重复创建数据库，我们创建一个类继承Application</p>
-<pre><code>public class MyApplication extends Application &#123;
-private static AppDatabase db;
-
-@Override
-public void onCreate() &#123;
-    super.onCreate();
-    db = Room.databaseBuilder(getApplicationContext(),
-            AppDatabase.class, &quot;database-name&quot;)
-            //.addMigrations(MIGRATION_1_2)
-            .build();
-    //.allowMainThreadQueries()//允许在主线程中查询
-&#125;
-
-public static AppDatabase getDatabase()&#123;
-    return db;
-&#125;
-&#125;</code></pre>
-</li>
-<li><p>在需要的Activity/Fragment中获取数据库实例</p>
-<pre><code>public class MainActivity extends AppCompatActivity &#123;
-private ActivityMainBinding binding;
-private AppDatabase db;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) &#123;
-  super.onCreate(savedInstanceState);
-  binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-  db = MyApplication.getDatabase();
-&#125;
-</code></pre>
+<li>在Activity/Fragment中使用<ol>
+<li>首先为了防止重复创建数据库，我们创建一个类继承Application<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class MyApplication extends Application &#123;</span><br><span class="line">    private static AppDatabase db;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onCreate() &#123;</span><br><span class="line">        super.onCreate();</span><br><span class="line">        db &#x3D; Room.databaseBuilder(getApplicationContext(),</span><br><span class="line">                AppDatabase.class, &quot;database-name&quot;)</span><br><span class="line">                &#x2F;&#x2F;.addMigrations(MIGRATION_1_2)</span><br><span class="line">                .build();</span><br><span class="line">        &#x2F;&#x2F;.allowMainThreadQueries()&#x2F;&#x2F;允许在主线程中查询</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static AppDatabase getDatabase()&#123;</span><br><span class="line">        return db;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>在需要的Activity/Fragment中获取数据库实例<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends AppCompatActivity &#123;</span><br><span class="line">   private ActivityMainBinding binding;</span><br><span class="line">   private AppDatabase db;</span><br><span class="line">   </span><br><span class="line">    @Override</span><br><span class="line">   protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">       super.onCreate(savedInstanceState);</span><br><span class="line">       binding &#x3D; DataBindingUtil.setContentView(this, R.layout.activity_main);</span><br><span class="line">       db &#x3D; MyApplication.getDatabase();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="RxJava-Room"><a href="#RxJava-Room" class="headerlink" title="RxJava+Room"></a>RxJava+Room</h5>一般来说对数据库进行操作是不运行在主线程中执行的，因为当进行大量数据库操作时，可能会堵塞主线程，所以可以配合RxJava来使用</li>
+</ol>
 </li>
 </ol>
-<pre><code>##### RxJava+Room
-一般来说对数据库进行操作是不运行在主线程中执行的，因为当进行大量数据库操作时，可能会堵塞主线程，所以可以配合RxJava来使用
-</code></pre>
-</li>
-</ol>
-<h5 id="添加依赖-1"><a href="#添加依赖-1" class="headerlink" title="添加依赖"></a>添加依赖</h5><pre><code> // RxJava support for Room
-    implementation &quot;androidx.room:room-rxjava2:2.2.5&quot;
+<h5 id="添加依赖-1"><a href="#添加依赖-1" class="headerlink" title="添加依赖"></a>添加依赖</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; RxJava support for Room</span><br><span class="line">   implementation &quot;androidx.room:room-rxjava2:2.2.5&quot;</span><br><span class="line"></span><br><span class="line">   implementation &#39;io.reactivex.rxjava2:rxjava:2.0.6&#39;</span><br><span class="line">   implementation &#39;io.reactivex.rxjava2:rxandroid:2.0.1&#39;</span><br></pre></td></tr></table></figure>
 
-    implementation &#39;io.reactivex.rxjava2:rxjava:2.0.6&#39;
-    implementation &#39;io.reactivex.rxjava2:rxandroid:2.0.1&#39;</code></pre>
 <h5 id="使用RxJava来进行数据库操作"><a href="#使用RxJava来进行数据库操作" class="headerlink" title="使用RxJava来进行数据库操作"></a>使用RxJava来进行数据库操作</h5><ul>
-<li><p>增</p>
-<pre><code>Completable completable = db.userDao().insertAll(new BookBean(&quot;HTML(&quot; + i + &quot;)&quot;, &quot;jjj&quot;, data));
-                  completable.subscribeOn(Schedulers.io())
-                          .subscribe(new CompletableObserver() &#123;
-                              @Override
-                              public void onSubscribe(Disposable d) &#123;&#125;
-
-                              @Override
-                              public void onComplete() &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 插入成功&quot;);
-                              &#125;
-
-                              @Override
-                              public void onError(Throwable e) &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 插入失败&quot; + e);
-                              &#125;
-                          &#125;);</code></pre>
-<p>上述操作是往数据库中添加了”一本”书的信息</p>
-</li>
-<li><p>删</p>
-<pre><code>Completable comparable = db.userDao().delete(bean);
-                  comparable.subscribeOn(Schedulers.io())
-                          .subscribe(new CompletableObserver() &#123;
-                              @Override
-                              public void onSubscribe(Disposable d) &#123;
-                              &#125;
-
-                              @Override
-                              public void onComplete() &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 删除数据成功&quot;);
-                              &#125;
-
-                              @Override
-                              public void onError(Throwable e) &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 删除数据失败&quot; + e);
-                              &#125;
-                          &#125;);</code></pre>
-<p>上述操作是往数据库中删除了”全部”书的信息</p>
-</li>
-<li><p>改</p>
-<pre><code>for (BookBean bean : bookBean) &#123;
-                  bean.setBookName(&quot;JAVA&quot;);
-                  Completable completable = db.userDao().updateUsers(bean);
-                  completable.subscribeOn(Schedulers.io())
-                          .subscribe(new CompletableObserver() &#123;
-                              @Override
-                              public void onSubscribe(Disposable d) &#123;
-                              &#125;
-
-                              @Override
-                              public void onComplete() &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 更新数据成功&quot;);
-                              &#125;
-
-                              @Override
-                              public void onError(Throwable e) &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 更新数据失败&quot; + e);
-                              &#125;
-                          &#125;);
-              &#125;</code></pre>
-<p>上述操作是将查询到的数据循环改变BookName的值，在通过数据库操作来更新”全部”数据</p>
-</li>
-<li><p>查</p>
-<pre><code>db.userDao().getAll()
-                      .subscribeOn(Schedulers.io())
-                      .observeOn(AndroidSchedulers.mainThread())
-                      .subscribe(new Consumer&lt;List&lt;BookBean&gt;&gt;() &#123;
-                          @Override
-                          public void accept(List&lt;BookBean&gt; bookBeans) throws Exception &#123;
-                              bookBean = bookBeans;
-                              for (BookBean bean : bookBeans) &#123;
-                                  Log.e(&quot;why&quot;, &quot;onClick: 查询成功,数据为&quot; + bean.toString());
-                              &#125;
-                          &#125;
-                      &#125;);</code></pre>
-<p>上述操作是将查询到的数据”全部”保存起来</p>
-</li>
+<li>增<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Completable completable &#x3D; db.userDao().insertAll(new BookBean(&quot;HTML(&quot; + i + &quot;)&quot;, &quot;jjj&quot;, data));</span><br><span class="line">                  completable.subscribeOn(Schedulers.io())</span><br><span class="line">                          .subscribe(new CompletableObserver() &#123;</span><br><span class="line">                              @Override</span><br><span class="line">                              public void onSubscribe(Disposable d) &#123;&#125;</span><br><span class="line"></span><br><span class="line">                              @Override</span><br><span class="line">                              public void onComplete() &#123;</span><br><span class="line">                                  Log.e(&quot;why&quot;, &quot;onClick: 插入成功&quot;);</span><br><span class="line">                              &#125;</span><br><span class="line"></span><br><span class="line">                              @Override</span><br><span class="line">                              public void onError(Throwable e) &#123;</span><br><span class="line">                                  Log.e(&quot;why&quot;, &quot;onClick: 插入失败&quot; + e);</span><br><span class="line">                              &#125;</span><br><span class="line">                          &#125;);</span><br></pre></td></tr></table></figure>
+上述操作是往数据库中添加了”一本”书的信息</li>
+<li>删<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Completable comparable &#x3D; db.userDao().delete(bean);</span><br><span class="line">                   comparable.subscribeOn(Schedulers.io())</span><br><span class="line">                           .subscribe(new CompletableObserver() &#123;</span><br><span class="line">                               @Override</span><br><span class="line">                               public void onSubscribe(Disposable d) &#123;</span><br><span class="line">                               &#125;</span><br><span class="line"></span><br><span class="line">                               @Override</span><br><span class="line">                               public void onComplete() &#123;</span><br><span class="line">                                   Log.e(&quot;why&quot;, &quot;onClick: 删除数据成功&quot;);</span><br><span class="line">                               &#125;</span><br><span class="line"></span><br><span class="line">                               @Override</span><br><span class="line">                               public void onError(Throwable e) &#123;</span><br><span class="line">                                   Log.e(&quot;why&quot;, &quot;onClick: 删除数据失败&quot; + e);</span><br><span class="line">                               &#125;</span><br><span class="line">                           &#125;);</span><br></pre></td></tr></table></figure>
+上述操作是往数据库中删除了”全部”书的信息</li>
+<li>改<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">for (BookBean bean : bookBean) &#123;</span><br><span class="line">                    bean.setBookName(&quot;JAVA&quot;);</span><br><span class="line">                    Completable completable &#x3D; db.userDao().updateUsers(bean);</span><br><span class="line">                    completable.subscribeOn(Schedulers.io())</span><br><span class="line">                            .subscribe(new CompletableObserver() &#123;</span><br><span class="line">                                @Override</span><br><span class="line">                                public void onSubscribe(Disposable d) &#123;</span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                                @Override</span><br><span class="line">                                public void onComplete() &#123;</span><br><span class="line">                                    Log.e(&quot;why&quot;, &quot;onClick: 更新数据成功&quot;);</span><br><span class="line">                                &#125;</span><br><span class="line"></span><br><span class="line">                                @Override</span><br><span class="line">                                public void onError(Throwable e) &#123;</span><br><span class="line">                                    Log.e(&quot;why&quot;, &quot;onClick: 更新数据失败&quot; + e);</span><br><span class="line">                                &#125;</span><br><span class="line">                            &#125;);</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+上述操作是将查询到的数据循环改变BookName的值，在通过数据库操作来更新”全部”数据</li>
+<li>查<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">db.userDao().getAll()</span><br><span class="line">                       .subscribeOn(Schedulers.io())</span><br><span class="line">                       .observeOn(AndroidSchedulers.mainThread())</span><br><span class="line">                       .subscribe(new Consumer&lt;List&lt;BookBean&gt;&gt;() &#123;</span><br><span class="line">                           @Override</span><br><span class="line">                           public void accept(List&lt;BookBean&gt; bookBeans) throws Exception &#123;</span><br><span class="line">                               bookBean &#x3D; bookBeans;</span><br><span class="line">                               for (BookBean bean : bookBeans) &#123;</span><br><span class="line">                                   Log.e(&quot;why&quot;, &quot;onClick: 查询成功,数据为&quot; + bean.toString());</span><br><span class="line">                               &#125;</span><br><span class="line">                           &#125;</span><br><span class="line">                       &#125;);</span><br></pre></td></tr></table></figure>
+上述操作是将查询到的数据”全部”保存起来</li>
 </ul>
 <blockquote>
 <p>以上就是全部内容</p>
@@ -338,7 +138,7 @@ protected void onCreate(Bundle savedInstanceState) &#123;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/11/21/Room%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknkfim1j000jekme6htk91pw" class="article-share-link">
+      <a data-url="http://example.com/2020/11/21/Room%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/" data-id="cknl50gk1000jkkme5wz2f7kd" class="article-share-link">
         分享
       </a>
       
@@ -373,6 +173,23 @@ protected void onCreate(Bundle savedInstanceState) &#123;
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -483,6 +300,7 @@ protected void onCreate(Bundle savedInstanceState) &#123;
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/

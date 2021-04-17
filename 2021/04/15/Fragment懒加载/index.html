@@ -6,6 +6,8 @@
   
   
   
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
     Fragment懒加载 |
@@ -69,6 +71,7 @@
       
       <p>本篇将讲述Fragment懒加载的使用</p>
 <a id="more"></a>
+
 <h1 id="Fragment懒加载"><a href="#Fragment懒加载" class="headerlink" title="Fragment懒加载"></a>Fragment懒加载</h1><blockquote>
 <p>本篇已Kotlin为主要语言</p>
 </blockquote>
@@ -102,81 +105,16 @@
 </blockquote>
 <ol>
 <li><p>创建ViewPager的适配器</p>
-<pre><code class="kotlin">class ViewPagerAdapter(
-    fm: FragmentManager,
-    private val titles: MutableList&lt;String&gt;,
-    private val fragments: MutableList&lt;Fragment&gt;
-) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) &#123;
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewPagerAdapter</span></span>(</span><br><span class="line">    fm: FragmentManager,</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> titles: MutableList&lt;String&gt;,</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> fragments: MutableList&lt;Fragment&gt;</span><br><span class="line">) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getCount</span><span class="params">()</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        fragments.size</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItem</span><span class="params">(position: <span class="type">Int</span>)</span></span>: Fragment &#123;</span><br><span class="line">        <span class="keyword">return</span> fragments[position]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getPageTitle</span><span class="params">(position: <span class="type">Int</span>)</span></span>: CharSequence? &#123;</span><br><span class="line">        <span class="keyword">return</span> titles[position]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    override fun getCount(): Int &#123;
-        fragments.size
-    &#125;
-
-    override fun getItem(position: Int): Fragment &#123;
-        return fragments[position]
-    &#125;
-
-    override fun getPageTitle(position: Int): CharSequence? &#123;
-        return titles[position]
-    &#125;
-&#125;</code></pre>
 <p>传入3个参数，一个是Fragment管理器，Fragment集合，Fragment标题，然后将behavior值设置为”BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT”</p>
 <blockquote>
 <p>使用了 <code>BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT</code> 后，只有当前可见的 Fragment 才能调用 onResume 方法。</p>
 </blockquote>
 </li>
 <li><p>之后还需要创建一个继承Fragment的类来进行懒加载</p>
-<pre><code class="kotlin">abstract class BaseFragment : Fragment() &#123;
-    /**
-     * 是否执行懒加载
-     */
-    private var isLoaded = false
-    private var mView: View? = null
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseFragment</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否执行懒加载</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> isLoaded = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> mView: View? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View? &#123;</span><br><span class="line">        <span class="keyword">if</span> (mView == <span class="literal">null</span>) &#123;</span><br><span class="line">            mView = initView(inflater, container, savedInstanceState)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> mView</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">initView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View</span><br><span class="line"></span><br><span class="line">    <span class="keyword">abstract</span> <span class="function"><span class="keyword">fun</span> <span class="title">initData</span><span class="params">()</span></span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">setUserVisibleHint</span><span class="params">(isVisibleToUser: <span class="type">Boolean</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.setUserVisibleHint(isVisibleToUser)</span><br><span class="line">        <span class="keyword">this</span>.isVisibleUser = isVisibleToUser</span><br><span class="line">        lazyLoad()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onResume</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onResume()</span><br><span class="line">        <span class="comment">//增加了Fragment是否可见的判断</span></span><br><span class="line">        <span class="keyword">if</span> (!isLoaded &amp;&amp; !isHidden) &#123;</span><br><span class="line">            initData()</span><br><span class="line">            isLoaded = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//在Fragment销毁View的时候，重置状态</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroyView</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestroyView()</span><br><span class="line">        isLoaded = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    override fun onCreate(savedInstanceState: Bundle?) &#123;
-        super.onCreate(savedInstanceState)
-    &#125;
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? &#123;
-        if (mView == null) &#123;
-            mView = initView(inflater, container, savedInstanceState)
-        &#125;
-        return mView
-    &#125;
-
-    abstract fun initView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View
-
-    abstract fun initData()
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) &#123;
-        super.setUserVisibleHint(isVisibleToUser)
-        this.isVisibleUser = isVisibleToUser
-        lazyLoad()
-    &#125;
-
-     override fun onResume() &#123;
-        super.onResume()
-        //增加了Fragment是否可见的判断
-        if (!isLoaded &amp;&amp; !isHidden) &#123;
-            initData()
-            isLoaded = true
-        &#125;
-    &#125;
-
-    //在Fragment销毁View的时候，重置状态
-    override fun onDestroyView() &#123;
-        super.onDestroyView()
-        isLoaded = false
-    &#125;
-&#125;</code></pre>
 <p>这样，只有处于可见状态下的Fragment才能触发onResume方法，才可以进行加载数据</p>
 </li>
 </ol>
@@ -184,7 +122,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="cknkfim1c0008ekmegusoewy3" class="article-share-link">
+      <a data-url="http://example.com/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/" data-id="cknl50gjv0008kkmeamukazsr" class="article-share-link">
         分享
       </a>
       
@@ -219,6 +157,23 @@
 
   
   
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
   
   
 
@@ -329,6 +284,7 @@
 
 
 <script src="/js/tocbot.min.js"></script>
+
 
 <script>
   // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
