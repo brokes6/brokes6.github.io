@@ -141,11 +141,11 @@
   </entry>
   
   <entry>
-    <title>Kotlin的一些语法</title>
+    <title>Kotlin的一些语法和数据结构</title>
     <link href="http://example.com/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/"/>
     <id>http://example.com/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/</id>
     <published>2021-04-15T02:48:00.000Z</published>
-    <updated>2021-04-15T14:54:07.926Z</updated>
+    <updated>2021-04-22T11:50:24.620Z</updated>
     
     
     <summary type="html">&lt;p&gt;本篇将讲述Kotlin的一些语法糖和Lambda的使用&lt;/p&gt;</summary>
