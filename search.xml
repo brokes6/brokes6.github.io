@@ -4,6 +4,67 @@
   
     
     <entry>
+      <title>介绍MVP,MVVM框架模式</title>
+      <link href="2021/04/26/%E4%BB%8B%E7%BB%8DMVP-MVVM%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%BC%8F/"/>
+      <url>2021/04/26/%E4%BB%8B%E7%BB%8DMVP-MVVM%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<p>介绍MVP和MVVM的优劣，以及使用场景</p><a id="more"></a><h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>简单来说就是数据驱动页面</p><p>MVVM是由3部分组成（Model，View，ViewModel）</p><ul><li><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul><li>使用MVVM可以使开发者不用专注于更新视图，只需要去专注实现逻辑</li></ul></li><li><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul><li>由于View与ViewModel的绑定，使得追踪异常变得十分不方便</li><li>数据双向绑定不利于代码的重用，每一个不同的View都需要一个不同的ViewModel</li></ul></li><li><h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul><li>在页面复杂、逻辑较多、数据频繁更新的场景，就可以使用MVVM，Activity/Fragment只用将数据展示到控件上去</li></ul></li></ul><h2 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h2><p>MVP本质上就是为了解耦而产生的，分为3部分（Model(管理数据)，View(展示数据)，Presenter(业务逻辑)）</p><ul><li><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul><li>将模型与视图分离，提高了维护性</li><li>容易测试，将业务逻辑从Activity/Fragment中抽取出来。可以方便的进行单元测试</li></ul></li><li><h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul><li>由于对视图的渲染都放在Presenter中，这会导致视图频繁的与Presenter进行交互，一旦视图发现了错误，需要更改，那么更它连着的Presenter也需要进行更改</li></ul></li><li><h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><ul><li>在数据单一，逻辑简单的场景中，使用MVP更好</li></ul></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+            <tag> Model </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>类型介绍</title>
+      <link href="2021/04/26/%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/"/>
+      <url>2021/04/26/%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/</url>
+      
+        <content type="html"><![CDATA[<p>本篇将介绍一些常用类型于它的包装类的创建于使用</p><a id="more"></a><h1 id="类型介绍"><a href="#类型介绍" class="headerlink" title="类型介绍"></a>类型介绍</h1><blockquote><p>本篇已Kotlin为主要语言</p></blockquote><blockquote><p>本篇将记录那些只知道用但不明白具体的类型</p></blockquote><h4 id="LiveData"><a href="#LiveData" class="headerlink" title="LiveData"></a>LiveData</h4><ul><li><p>LiveData是与数据实体类(POJO类)是一样的，它们都是负责数据存储</p></li><li><p>LiveData也是一个观察者模式的数据实体类，可以与注册它的观察者回调数据是否更新</p></li><li><p>LiveData还能绑定Activity / Fragment，只在它们生命周期处于活跃状态时才触发回调</p></li><li><p>代码展示</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> _photoListLive = MutableLiveData&lt;String&gt;()</span><br><span class="line"><span class="keyword">val</span> photoListLive: LiveData&lt;String&gt;</span><br><span class="line">    <span class="keyword">get</span>() = _photoListLive</span><br></pre></td></tr></table></figure><p>LiveData一般都是与MutableLiveData一同使用</p></li><li><p>LiveData在实体类里可以通知指定某个字段的数据更新.（也就是只要发生有点变化，都会进行回调）</p></li></ul><h4 id="MutableLiveData"><a href="#MutableLiveData" class="headerlink" title="MutableLiveData"></a>MutableLiveData</h4><ul><li>MutableLiveData的父类是LiveData</li><li>MutableLiveData则是完全是整个实体类或者数据类型变化后才通知，不会细节到某个字段</li></ul><h4 id="Mutable-List"><a href="#Mutable-List" class="headerlink" title="Mutable List"></a>Mutable List</h4><ul><li><p>在Kotlin中MutableList属于可变类型</p></li><li><p>MutableList在本质上就是将不可变的List变为可变，随便增加了 插入、删除、替换等方法</p></li><li><p>创建MutableList</p><p>mutableListOf()</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个空的可变list</span></span><br><span class="line"><span class="keyword">val</span> numNull = mutableListOf&lt;<span class="built_in">Int</span>&gt;()</span><br></pre></td></tr></table></figure><p>mutableListOf(vararg elements: T)</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建多个元素的可变list</span></span><br><span class="line"><span class="keyword">val</span> numMutable = mutableListOf(<span class="string">&quot;Alfred&quot;</span>, <span class="number">29</span>, <span class="string">&quot;男&quot;</span>, <span class="string">&quot;180cm&quot;</span>, <span class="string">&quot;70kg&quot;</span>)</span><br></pre></td></tr></table></figure></li><li><p>除此之外，还有add(),addAll(),remove(移除指定元素),removeAt(移除指定位置元素),removeAll(elements: Collection<E>)(删除集合),clear(清除所有元素),set(替换指定位置元素)</p></li></ul><h4 id="List"><a href="#List" class="headerlink" title="List"></a>List</h4><ul><li><p>在Kotlin中List是属于不可变类型</p></li><li><p>创建方法</p><p>listOf()用于创建没有元素的空List</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建一个空List</span></span><br><span class="line"><span class="keyword">val</span> numbersNull = listOf&lt;<span class="built_in">Int</span>&gt;()</span><br></pre></td></tr></table></figure><p>listOf(element: T)创建只有一个元素的List</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建只有一个元素的List</span></span><br><span class="line"><span class="keyword">val</span> numbersOne = listOf&lt;<span class="built_in">Int</span>&gt;(<span class="number">1</span>)</span><br></pre></td></tr></table></figure><p>listOf(vararg elements: T)创建拥有多个元素的List</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建多个元素的List</span></span><br><span class="line"><span class="keyword">val</span> numbersMuch = listOf&lt;<span class="built_in">Int</span>&gt;(<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>)</span><br></pre></td></tr></table></figure></li><li><p>因为List是不可变类型，所以是不能对List进行增删改的操作的</p></li><li><p>List是继承至Collection接口，它们几乎上只实现了isEmpty()、size属性、get()、contains()等方法。</p></li></ul><h4 id="Array-List"><a href="#Array-List" class="headerlink" title="Array List"></a>Array List</h4><ul><li><p>简单来说就是List接口的可调整大小的数组实现，实现所有可选列表操作，并允许所有元素，包括 null</p></li><li><p>ArrayList的方法中没有锁，所以不是线程安全的</p></li><li><p>其内部实现是一个数组结构，我们可以根据索引找到具体的内容，也是有序的</p></li><li><p>创建方法</p><p>ArrayList可以创建List，也可以创建自己</p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list : List&lt;String&gt; = arrayListOf()</span><br></pre></td></tr></table></figure><p>List是不可以使用List来创建自己，只能用上面的方法来创建。当使用ArrayList来创建List时，此时它是一个List对象了，有些ArrayList有但是List没有的属性和方法，它就不能再用了。 </p><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list : ArrayList&lt;String&gt; = arrayListOf()</span><br></pre></td></tr></table></figure><p>而这样创建一对象则保留了ArrayList的所有属性。 </p></li></ul><h4 id="HashSet"><a href="#HashSet" class="headerlink" title="HashSet"></a>HashSet</h4><ul><li>HashSet实现了Collection的set接口</li><li>HashSet是不允许集合中有重复的值，当准备使用HashSet时，首先要确保对象已经重写了<strong>equals</strong>()和<strong>hashCode</strong>()方法，这样才能比较对象的值是否相等</li><li>add(o : Objecy)方法，用来向Set中添加元素，当元素重复时会返回false，成功则会返回True</li></ul><h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><ul><li>HashMap实现了Collection的Map接口，Map接口对键值对进行映射（也就是是存储键值对）</li><li>Map中也是不允许出现重复的值</li><li>虽然HashMap是非线程安全的，但是Collection提供的方法能保证HashMap synchronized（也就是多个线程访问时，能保证只有一个线程更改Map）</li><li>put(Key : Object ,value : Object )用来将元素添加到map中</li></ul><h4 id="ArrayMap"><a href="#ArrayMap" class="headerlink" title="ArrayMap"></a>ArrayMap</h4><ul><li><h4 id="ArraySet"><a href="#ArraySet" class="headerlink" title="ArraySet"></a>ArraySet</h4></li></ul><p>-</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Android </tag>
+            
+            <tag> Class </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>关于HTTP的一些介绍</title>
+      <link href="2021/04/26/%E5%85%B3%E4%BA%8EHTTP%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%8B%E7%BB%8D/"/>
+      <url>2021/04/26/%E5%85%B3%E4%BA%8EHTTP%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BB%8B%E7%BB%8D/</url>
+      
+        <content type="html"><![CDATA[<p>本篇将介绍并分析Http请求</p><a id="more"></a><h1 id="关于HTTP的一些介绍"><a href="#关于HTTP的一些介绍" class="headerlink" title="关于HTTP的一些介绍"></a>关于HTTP的一些介绍</h1><blockquote><p>理论</p></blockquote><h2 id="HTTP的介绍"><a href="#HTTP的介绍" class="headerlink" title="HTTP的介绍"></a>HTTP的介绍</h2><p>在Android中，绝大多数的应用网络通信都是基于Http协议的，Http协议处于应用层，应用层协议就是为了来规范传输格式</p><h2 id="HTTP工作流程"><a href="#HTTP工作流程" class="headerlink" title="HTTP工作流程"></a>HTTP工作流程</h2><ol><li><p>客户端连接到服务器</p><p>客户端发起一个TCP请求到服务器，经过3次握手与服务器建立TCP连接</p></li><li><p>发送数据</p><p>按照Http协议规定的格式来组装数据，通过TCP连接向服务器发送报文</p></li><li><p>服务器接收请求报文并处理</p><p>服务器同过TCP连接接收到客户端发送的请求报文，按照规定格式解读报文，根据解读来生产对应的响应报文</p></li><li><p>服务器将生成的响应报文发送给客户端</p><p>服务器通过TCP连接将响应报文发送给客户端</p></li><li><p>关闭TCP连接</p><p>在服务器将报文发给客户端之后，会将connection模式设置为close，则是服务器主动关闭连接，客户端被动关闭。如果connection模式设置为keepalive，则TCP连接不会马上关闭，还可以继续发送请求</p></li><li><p>客户端处理响应报文</p><p>按照规则进行解析</p></li></ol><h2 id="HTTP报文格式"><a href="#HTTP报文格式" class="headerlink" title="HTTP报文格式"></a>HTTP报文格式</h2><h4 id="请求报文-请求数据"><a href="#请求报文-请求数据" class="headerlink" title="请求报文(请求数据)"></a>请求报文(请求数据)</h4><ul><li><p>请求报文由<strong>请求行</strong>、<strong>请求头部</strong>、<strong>空行</strong>、<strong>请求数据</strong>四部分组成</p></li><li><p>请求数据(这里以百度搜索’<em>白色</em>‘进行示范)</p><p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210426095329.png"></p><blockquote><p><strong>Request URL</strong> ：请求地址</p><p><strong>Request Method</strong>：请求模式</p><p><strong>Status Code</strong>：请求状态码</p><p><strong>Remote Address</strong>：远程主机IP地址</p></blockquote><p>请求格式如下图</p><p><img src="https://easyreadfs.nosdn.127.net/image_edc89a772041476cb6f7d0c8e65819e9"></p></li><li><p>请求参数</p><p>请求参数不在GET中使用，而是在POST中使用，它表示向服务器传递附加的参数，格式如下</p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">&quot;seeType&quot;</span>:<span class="number">1</span>,<span class="attr">&quot;source&quot;</span>:<span class="number">1</span>,<span class="attr">&quot;userId&quot;</span>:<span class="string">&quot;30&quot;</span>&#125;</span><br></pre></td></tr></table></figure></li></ul><h4 id="请求行"><a href="#请求行" class="headerlink" title="请求行"></a>请求行</h4><ul><li><p>请求行是由*<strong>请求方式**<em>、</em></strong>URL地址*<strong>、**<em>协议名+版本号</em></strong>组成</p><blockquote><p>POST(请求方式) /lotto/android/v1.0/order-group/queryOrderGroupPersonInfo(URL地址) HTTP/1.1(协议版本)</p></blockquote></li><li><h5 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式"></a>请求方式</h5><p>HTTP请求的方式总共有8种，分别是GET、POST、HEAD、PUT、DELETE、TRANCE、CONNECTON、OPTIONS。下面介绍常用的2种</p><ul><li><p><strong>GET</strong></p><p>获取Request URL下所以资源(也就是不带参数)</p></li><li><p><strong>POST</strong></p><p>在Request URL所表示的资源后附加参数，以便于向服务器发送请求数据(也就是可以传递参数来获取指定的资源)</p></li></ul></li><li><h5 id="URL地址"><a href="#URL地址" class="headerlink" title="URL地址"></a>URL地址</h5><p>为请求对应的URL地址，它和报文头中的Host属性组成完整的请求URL地址</p></li><li><h5 id="使用协议名称-版本号"><a href="#使用协议名称-版本号" class="headerlink" title="使用协议名称+版本号"></a>使用协议名称+版本号</h5><p>也就是字面意思，使用的协议和它当前的版本</p></li></ul><h4 id="请求头部"><a href="#请求头部" class="headerlink" title="请求头部"></a>请求头部</h4><p>在请求行之后会有0或多个请求头部</p><p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/20210426103319.png"></p><blockquote><p><strong>accept-ranges</strong>：表明其支持部分的请求的标志物，此字段表示可用于定义范围的单位</p><p><strong>age</strong>：age的值一般是近于0的，像是这样Age:0，这样只能在原服务器获取，否则它通常是根据代理的当前日期和**<em>Date**</em>HTTP响应中包含的通用头部之间的差异来计算的。</p></blockquote><h4 id="空行"><a href="#空行" class="headerlink" title="空行"></a>空行</h4>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Http </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>个人简历</title>
       <link href="2021/04/15/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/"/>
       <url>2021/04/15/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/</url>
