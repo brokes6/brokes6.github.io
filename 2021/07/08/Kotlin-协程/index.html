@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Kotlin - 协程 |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Kotlin-协程" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Kotlin - 协程
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/08/Kotlin-%E5%8D%8F%E7%A8%8B/" class="article-date">
+  <time datetime="2021-07-07T16:00:00.000Z" itemprop="datePublished">2021-07-08</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将介绍Android中的协程</p>
+<a id="more"></a>
+<h1 id="Kotlin-协程"><a href="#Kotlin-协程" class="headerlink" title="Kotlin - 协程"></a>Kotlin - 协程</h1><blockquote>
+<p>异步编程 之一 协程</p>
+</blockquote>
+<h3 id="协程的基本介绍"><a href="#协程的基本介绍" class="headerlink" title="协程的基本介绍"></a>协程的基本介绍</h3><p>协程就非常轻量级的线程，线程是由系统调度的。线程它在进行切换或造成阻塞的时候开销都很大，而协程它是有开发者来进行控制的，也是依赖于线程的，但是协程挂起的时候是不需要阻塞线程的，几乎是无代价的。所以协程也想用户状态下的线程，非常轻量级</p>
+<p><strong>协程</strong>还有一点就是当它<code>挂起</code>的时候，它是不会阻塞线程的。它的底层实现就是异步处理阻塞任务</p>
+<blockquote>
+<p>挂起：挂起其实就是用 suspend来修饰一个函数。被suspend修饰的函数称为挂起函数</p>
+</blockquote>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>第一步肯定是添加依赖</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&quot;org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="GlobalScope"><a href="#GlobalScope" class="headerlink" title="GlobalScope"></a>GlobalScope</h4><p>Kotlin中GlobalScope 类提供了几个协程构造函数</p>
+<ol>
+<li><p><strong>launch</strong></p>
+<h5 id="接收参数"><a href="#接收参数" class="headerlink" title="接收参数"></a>接收参数</h5><p>launch是CoroutineScope的扩展函数，接受3个参数，前面两个都是常规参数，最后一个是对象式函数。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">fun</span> CoroutineScope.<span class="title">launch</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    context: <span class="type">CoroutineContext</span> = EmptyCoroutineContext,</span></span></span><br><span class="line"><span class="function"><span class="params">    start: <span class="type">CoroutineStart</span> = CoroutineStart.DEFAULT,</span></span></span><br><span class="line"><span class="function"><span class="params">    block: <span class="type">suspend</span> <span class="type">CoroutineScope</span>.() -&gt; <span class="type">Unit</span></span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>: Job</span><br></pre></td></tr></table></figure>
+
+<p>这样的话就可以采用闭包的写法：() 里面写常规参数，{} 里面写函数式对象的实现</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GlobalScope.launch(Dispatchers.Unconfined) &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>第一个参数CoroutineContext</p>
+<p>网上有说可以理解为协程的上下文，但按功能来说，它就是协程的线程调度器，有4种线程模式，用来指定运行线程：</p>
+<ul>
+<li><p>Dispatchers.Main</p>
+<blockquote>
+<p>使用这个调度器在Android主线程上运行一个协程，可以用来更新UI</p>
+</blockquote>
+</li>
+<li><p>Dispatchres.IO</p>
+<blockquote>
+<p>使用这个调度器可以在主线程之外执行磁盘或网络I/O，在线程池中执行</p>
+</blockquote>
+</li>
+<li><p>Dispatchres.Default</p>
+<blockquote>
+<p>使用这个调度器可以在主线程之执行CPU密集型的工作，在线程池中执行</p>
+</blockquote>
+</li>
+<li><p>Dispatchres.Unconfined</p>
+<blockquote>
+<p>直接在调用者的线程执行</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>第二个参数CoroutineStart</p>
+<p>这个就是启动模式，通过更改启动模式可以达到你需要它的时候，再调用启动(使用LAZY)</p>
+<ul>
+<li><p>DEAFAULT </p>
+<blockquote>
+<p>默认的模式，立即执行协程体</p>
+</blockquote>
+</li>
+<li><p>ATOMIC </p>
+<blockquote>
+<p>立即执行协程体，但在开始运行之前无法取消</p>
+</blockquote>
+</li>
+<li><p>UNDISPATCHED</p>
+<blockquote>
+<p>立即在当前线程执行协程体，直到第一个 suspend 调用</p>
+</blockquote>
+</li>
+<li><p>LAZY</p>
+<blockquote>
+<p>只有在需要的情况下运行</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>block</p>
+<p>这个就是闭包的方法体，用来定义协程内部需要执行的操作</p>
+</li>
+</ol>
+<h5 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h5><ol>
+<li><p>Job</p>
+<p>协程构造函数的返回值，也可以把Job看成协程对象本身，协程的操作都在Job身上了</p>
+<ul>
+<li><p>Job.start</p>
+<blockquote>
+<p>启动协程，但除了将协程设置为Lazy外，都不用手动启动</p>
+</blockquote>
+</li>
+<li><p>Job.join</p>
+<blockquote>
+<p>等待协程执行完毕</p>
+</blockquote>
+</li>
+<li><p>Job.cancel</p>
+<blockquote>
+<p>取消一个协程</p>
+</blockquote>
+</li>
+<li><p>Job.cancelAndJoin</p>
+<blockquote>
+<p>等协程执行完毕之后再取消</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">priavte <span class="keyword">val</span> TAG = <span class="string">&quot;test&quot;</span></span><br><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">    setContentView(R.layout.activity_main)</span><br><span class="line">    Log.e(TAG, <span class="string">&quot;主线程id：<span class="subst">$&#123;mainLooper.thread.id&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">val</span> job = GlobalScope.launch &#123;</span><br><span class="line">        delay(<span class="number">5000</span>)</span><br><span class="line">        Log.e(TAG, <span class="string">&quot;协程执行结束 -- 线程id：<span class="subst">$&#123;Thread.currentThread().id&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    Log.e(TAG, <span class="string">&quot;主线程执行结束&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line">...</span><br><span class="line"><span class="comment">//Job中的方法</span></span><br><span class="line">job.isActive</span><br><span class="line">job.isCancelled</span><br><span class="line">job.isCompleted</span><br><span class="line">job.cancel()</span><br><span class="line">jon.join()</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1797490-e9c404941aafcb87.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/398/format/webp" alt="img"></p>
+<h5 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h5><p>在上面的launch中，我添加了等待5秒，但主线程还是可以继续执行。也就可以看出，launch是不会阻断主线程的</p>
+</li>
+<li><p><strong>async</strong></p>
+<p><strong>async</strong>与<strong>launch</strong>的用法基本一致区别在于：async的返回值是Deferred。async可以支持并发，一般与await一同使用</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> TAG = <span class="string">&quot;async&quot;</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        GlobalScope.launch &#123;</span><br><span class="line">            <span class="keyword">val</span> toDayTime = GlobalScope.async &#123;</span><br><span class="line">                getThisTime()</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">val</span> yesTerDay = GlobalScope.async &#123;</span><br><span class="line">                getYesterdayTime()</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">val</span> time = toDayTime.await() + yesTerDay.await()</span><br><span class="line">            Log.e(TAG, <span class="string">&quot;昨天时间 和 今天时间为 --&gt; <span class="variable">$time</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">getThisTime</span><span class="params">()</span></span>: String &#123;</span><br><span class="line">        delay(<span class="number">3000</span>)</span><br><span class="line">        Log.e(TAG, <span class="string">&quot;getThisTime: 这里已经执行完毕&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;3-&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">getYesterdayTime</span><span class="params">()</span></span>: String &#123;</span><br><span class="line">        delay(<span class="number">5000</span>)</span><br><span class="line">        Log.e(TAG, <span class="string">&quot;getYesterdayTime: 这里也已经执行完毕&quot;</span> )</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;7&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:</p>
+<p><img src="C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210705110146134.png" alt="image-20210705110146134"></p>
+<p>这里也可以看出async是不阻塞线程的，也就是是getThisTime()和getYestertdayTime()是同时进行的.所以获取到<code>time</code>的时间是5s，而不是8s。</p>
+<blockquote>
+<p>launch 没有返回值，或者说返回只是 job ，能够知道任务的状态，却不能携带返回结果。async 有返回值，也就是返回的是 Deferred ,它是继承的 job ，所有job有的，它都有，还具备了job没有的携带数据回来的能力。<br>所以， launch 可以用来运行不需要操作结果的协程（如文件删除，创建等）， async 可以用来运行异步耗时任务并且需要返回值的任务（网络请求，数据库操作，文件读写等）。</p>
+</blockquote>
+</li>
+<li><p>withContext</p>
+<p>withContext这个函数主要用来切换到指定的线程，并且再withContext闭包结束之后再切换回之前的线程</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">coroutineScope.launch(Dispatchers.Main) &#123;      <span class="comment">//  在 UI 线程开始</span></span><br><span class="line">    <span class="keyword">val</span> image = withContext(Dispatchers.IO) &#123;  <span class="comment">// 切换到 IO 线程，并在执行完成后切回 UI 线程</span></span><br><span class="line">        getImage(imageId)                      <span class="comment">// 将会运行在 IO 线程</span></span><br><span class="line">    &#125;</span><br><span class="line">    avatarIv.setImageBitmap(image)             <span class="comment">// 回到 UI 线程更新 UI</span></span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="非GlobalScope的API"><a href="#非GlobalScope的API" class="headerlink" title="非GlobalScope的API"></a>非GlobalScope的API</h4><ol>
+<li><p><strong>runBlocking</strong></p>
+<p>runBlocking与launch的功能基本一致，不同在于runBlocking是会阻塞线程的(和Thread.sleep()一样)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> TAG = <span class="string">&quot;runBlocking&quot;</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        runBlocking &#123;</span><br><span class="line">            <span class="keyword">val</span> a = await()</span><br><span class="line">            Log.e(TAG, <span class="string">&quot;onCreate: --&gt; <span class="variable">$a</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        repeat(<span class="number">8</span>) &#123;</span><br><span class="line">            Log.e(TAG, <span class="string">&quot;主线程执行<span class="variable">$it</span>&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">await</span><span class="params">()</span></span>: String &#123;</span><br><span class="line">        delay(<span class="number">2000</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;等待时间已过期&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>运行结果</p>
+<p><img src="C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210705115001967.png" alt="image-20210705115001967"></p>
+</li>
+</ol>
+<h3 id="协程体-挂起函数"><a href="#协程体-挂起函数" class="headerlink" title="协程体(挂起函数)"></a>协程体(挂起函数)</h3><p>协程体是一个用suspend关键字修饰的一个函数类型，也就是挂起函数。注意：挂起函数只能在协程中或其他挂起函数中使用，而且它是顺序执行的，下面将演示一下顺序执行</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> TAG: String = <span class="string">&quot;launch&quot;</span></span><br><span class="line">overrid <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    GlobalScope.launch&#123;</span><br><span class="line">        <span class="keyword">val</span> name = getName()</span><br><span class="line">        <span class="keyword">val</span> userInfo = getUserInfo(name)</span><br><span class="line">        Log.e(TAG,<span class="string">&quot;userInfo --&gt; <span class="subst">$&#123;userInfo&#125;</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    repeat(<span class="number">8</span>)&#123;</span><br><span class="line">        Log.e(TAG,<span class="string">&quot;在主线程执行 --&gt; <span class="variable">$it</span>&quot;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">getName</span><span class="params">()</span></span>: String&#123;</span><br><span class="line">    delay(<span class="number">2000</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Tom&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">getUserInfo</span><span class="params">(name: <span class="type">String</span>)</span></span>: String&#123;</span><br><span class="line">    delay(<span class="number">2000</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;userInfo.Name --&gt; <span class="variable">$token</span>&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:</p>
+<p><img src="C:\Users\Admin\AppData\Roaming\Typora\typora-user-images\image-20210705104310480.png" alt="image-20210705104310480"></p>
+<h4 id="挂起与恢复"><a href="#挂起与恢复" class="headerlink" title="挂起与恢复"></a>挂起与恢复</h4><p>协程之外线程里肯定还有需要执行的代码，我们来看看前面的代码在挂起后何时才能恢复执行。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">getToken</span><span class="params">()</span></span>: String &#123;</span><br><span class="line">  delay(<span class="number">1</span>)</span><br><span class="line">  Log.d(TAG, <span class="string">&quot;getToken 开始执行，时间:  <span class="subst">$&#123;System.currentTimeMillis()&#125;</span>&quot;</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;ask&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">suspend</span> <span class="function"><span class="keyword">fun</span> <span class="title">getResponse</span><span class="params">(token: <span class="type">String</span>)</span></span>: String &#123;</span><br><span class="line">  delay(<span class="number">2</span>)</span><br><span class="line">  Log.d(TAG, <span class="string">&quot;getResponse 开始执行，时间:  <span class="subst">$&#123;System.currentTimeMillis()&#125;</span>&quot;</span>)</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;response&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">setText</span><span class="params">(response: <span class="type">String</span>)</span></span> &#123;</span><br><span class="line">  Log.d(TAG, <span class="string">&quot;setText 执行，时间:  <span class="subst">$&#123;System.currentTimeMillis()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">GlobalScope.launch(Dispatchers.Unconfined) &#123;</span><br><span class="line">  Log.d(TAG, <span class="string">&quot;协程 开始执行，时间:  <span class="subst">$&#123;System.currentTimeMillis()&#125;</span>&quot;</span>)</span><br><span class="line">  <span class="keyword">val</span> token = getToken()</span><br><span class="line">  <span class="keyword">val</span> response = getResponse(token)</span><br><span class="line">  setText(response)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (i <span class="keyword">in</span> <span class="number">1</span>..<span class="number">10</span>) &#123;</span><br><span class="line">  Log.d(TAG, <span class="string">&quot;主线程打印第<span class="variable">$i</span> 次，时间:  <span class="subst">$&#123;System.currentTimeMillis()&#125;</span>&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果:</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1785445-d23383aef9745388.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/406/format/webp" alt="img"></p>
+<p>协程挂起后，虽然延迟的时间到了，但是还得等到线程空闲时才能继续执行，这里要注意，协程可没有竞争 CPU 时间段，协程挂起后即便可以恢复执行了也不是马上就能恢复执行。简单来说，就是协程挂起之后想要恢复，必须得等到线程空闲了才可以继续，不然继续等</p>
+<h3 id="协程生命周期"><a href="#协程生命周期" class="headerlink" title="协程生命周期"></a>协程生命周期</h3><p>这里可以将所有有生命周期的类继承CoroutineSocpe，这样就可以让全部协程跟着生命周期结束</p>
+<ul>
+<li><p>如在activity里面使用</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MainActivity : AppCompatActivity(), CoroutineScope <span class="keyword">by</span> MainScope()&#123;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onDestroy</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onDestory()</span><br><span class="line">        cancel()</span><br><span class="line">     &#125;</span><br><span class="line">&#125;  </span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在其他UI逻辑类中使用</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainActivityFacede</span> : <span class="type">CoroutineScope &#123;</span></span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> job = Job()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">val</span> coroutineContext: CoroutineContext</span><br><span class="line">        <span class="keyword">get</span>() = Dispatchers.Main + job</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">destroy</span><span class="params">()</span></span> &#123;</span><br><span class="line">        job.cancel()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码都会在调用 destroy 的时候取消这个作用域中的协程运行</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/08/Kotlin-%E5%8D%8F%E7%A8%8B/" data-id="ckqto3hlf000l6kmegafleu6j" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kotlin/" rel="tag">Kotlin</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%8F%E7%A8%8B/" rel="tag">协程</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/07/07/%E5%9B%9E%E8%B0%83%E5%9C%B0%E7%8B%B1/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">回调地狱</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

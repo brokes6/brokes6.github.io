@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-04-26T02:52:09.136Z</updated>
+  <updated>2021-07-07T16:01:02.063Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,129 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Kotlin - 协程</title>
+    <link href="http://example.com/2021/07/08/Kotlin-%E5%8D%8F%E7%A8%8B/"/>
+    <id>http://example.com/2021/07/08/Kotlin-%E5%8D%8F%E7%A8%8B/</id>
+    <published>2021-07-07T16:00:00.000Z</published>
+    <updated>2021-07-07T16:01:02.063Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍Android中的协程&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="Kotlin" scheme="http://example.com/tags/Kotlin/"/>
+    
+    <category term="协程" scheme="http://example.com/tags/%E5%8D%8F%E7%A8%8B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>回调地狱</title>
+    <link href="http://example.com/2021/07/07/%E5%9B%9E%E8%B0%83%E5%9C%B0%E7%8B%B1/"/>
+    <id>http://example.com/2021/07/07/%E5%9B%9E%E8%B0%83%E5%9C%B0%E7%8B%B1/</id>
+    <published>2021-07-07T15:59:00.000Z</published>
+    <updated>2021-07-07T15:59:40.819Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍一下什么是回调地狱&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Anroid" scheme="http://example.com/tags/Anroid/"/>
+    
+    <category term="Callback" scheme="http://example.com/tags/Callback/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>异步操作(二)</title>
+    <link href="http://example.com/2021/07/07/%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C-%E4%BA%8C/"/>
+    <id>http://example.com/2021/07/07/%E5%BC%82%E6%AD%A5%E6%93%8D%E4%BD%9C-%E4%BA%8C/</id>
+    <published>2021-07-07T15:50:00.000Z</published>
+    <updated>2021-07-07T15:58:53.171Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将讲解Android夜间模式，用添加蒙版的方式来实现&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Thread" scheme="http://example.com/tags/Thread/"/>
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="RxJava" scheme="http://example.com/tags/RxJava/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>夜间模式</title>
+    <link href="http://example.com/2021/07/07/%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://example.com/2021/07/07/%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F/</id>
+    <published>2021-07-07T15:49:00.000Z</published>
+    <updated>2021-07-07T15:50:35.780Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将讲解Android夜间模式，用添加蒙版的方式来实现&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="Theme" scheme="http://example.com/tags/Theme/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android事件分发机制(二)</title>
+    <link href="http://example.com/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%BA%8C/"/>
+    <id>http://example.com/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%BA%8C/</id>
+    <published>2021-07-07T15:47:00.000Z</published>
+    <updated>2021-07-07T15:48:52.489Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Android事件分发机制理解与描述的第二篇，主要是先介绍事件分发的流程&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="事件分发" scheme="http://example.com/tags/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android事件分发机制(一)</title>
+    <link href="http://example.com/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%B8%80/"/>
+    <id>http://example.com/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%B8%80/</id>
+    <published>2021-07-07T15:45:00.000Z</published>
+    <updated>2021-07-07T15:46:43.558Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Android事件分发机制理解与描述的第一篇，主要是先介绍事件分发机制的概念&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="事件分发" scheme="http://example.com/tags/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
     <title>介绍MVP,MVVM框架模式</title>
     <link href="http://example.com/2021/04/26/%E4%BB%8B%E7%BB%8DMVP-MVVM%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%BC%8F/"/>
     <id>http://example.com/2021/04/26/%E4%BB%8B%E7%BB%8DMVP-MVVM%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%BC%8F/</id>
     <published>2021-04-26T02:50:00.000Z</published>
-    <updated>2021-04-26T02:52:09.136Z</updated>
+    <updated>2021-07-07T15:45:58.997Z</updated>
     
     
     <summary type="html">&lt;p&gt;介绍MVP和MVVM的优劣，以及使用场景&lt;/p&gt;</summary>
@@ -287,120 +405,6 @@
     <category term="Service" scheme="http://example.com/tags/Service/"/>
     
     <category term="Money" scheme="http://example.com/tags/Money/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>WorkManager后台任务</title>
-    <link href="http://example.com/2020/12/24/WorkManager%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/"/>
-    <id>http://example.com/2020/12/24/WorkManager%E5%90%8E%E5%8F%B0%E4%BB%BB%E5%8A%A1/</id>
-    <published>2020-12-24T07:57:00.000Z</published>
-    <updated>2021-04-15T14:55:52.623Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;介绍JetPack中的WorkManager&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Thread" scheme="http://example.com/tags/Thread/"/>
-    
-    <category term="Kotlin" scheme="http://example.com/tags/Kotlin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Room在项目中的使用</title>
-    <link href="http://example.com/2020/12/24/Room%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://example.com/2020/12/24/Room%E5%9C%A8%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2020-12-24T07:56:00.000Z</published>
-    <updated>2021-04-15T14:56:31.865Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;介绍JetPack中的Room&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Java" scheme="http://example.com/tags/Java/"/>
-    
-    <category term="Sql" scheme="http://example.com/tags/Sql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SmallestWidth 限定符</title>
-    <link href="http://example.com/2020/12/17/SmallestWidth-%E9%99%90%E5%AE%9A%E7%AC%A6/"/>
-    <id>http://example.com/2020/12/17/SmallestWidth-%E9%99%90%E5%AE%9A%E7%AC%A6/</id>
-    <published>2020-12-17T09:42:00.000Z</published>
-    <updated>2021-04-15T14:56:51.953Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;介绍Android屏幕适配的方法&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="屏幕适配" scheme="http://example.com/tags/%E5%B1%8F%E5%B9%95%E9%80%82%E9%85%8D/"/>
-    
-    <category term="NoLimits" scheme="http://example.com/tags/NoLimits/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Andorid的多线程操作/UI</title>
-    <link href="http://example.com/2020/12/17/Andorid%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C-UI/"/>
-    <id>http://example.com/2020/12/17/Andorid%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%93%8D%E4%BD%9C-UI/</id>
-    <published>2020-12-17T09:41:00.000Z</published>
-    <updated>2021-04-15T14:57:17.176Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;介绍在Android中任何开启多线程&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Thread" scheme="http://example.com/tags/Thread/"/>
-    
-    <category term="Java" scheme="http://example.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Room数据库的使用</title>
-    <link href="http://example.com/2020/11/21/Room%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://example.com/2020/11/21/Room%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2020-11-21T08:49:00.000Z</published>
-    <updated>2021-04-15T14:57:39.517Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Room数据库的补充&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Android" scheme="http://example.com/tags/Android/"/>
-    
-    <category term="SQL" scheme="http://example.com/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>广播通知强制下线</title>
-    <link href="http://example.com/2020/10/21/%E5%B9%BF%E6%92%AD%E9%80%9A%E7%9F%A5%E5%BC%BA%E5%88%B6%E4%B8%8B%E7%BA%BF/"/>
-    <id>http://example.com/2020/10/21/%E5%B9%BF%E6%92%AD%E9%80%9A%E7%9F%A5%E5%BC%BA%E5%88%B6%E4%B8%8B%E7%BA%BF/</id>
-    <published>2020-10-21T10:06:00.000Z</published>
-    <updated>2021-04-15T14:57:50.382Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Android广播的使用&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Android" scheme="http://example.com/tags/Android/"/>
-    
-    <category term="Function" scheme="http://example.com/tags/Function/"/>
     
   </entry>
   

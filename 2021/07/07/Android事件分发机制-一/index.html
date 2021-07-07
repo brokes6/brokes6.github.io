@@ -10,7 +10,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <title>
-    介绍MVP,MVVM框架模式 |
+    Android事件分发机制(一) |
     
     Fuxinbo博客</title>
   
@@ -33,7 +33,7 @@
 <body>
   <main class="content">
     <section class="outer">
-  <article id="post-介绍MVP-MVVM框架模式" class="article article-type-post" itemscope
+  <article id="post-Android事件分发机制-一" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -42,7 +42,7 @@
       
 
 <h1 class="article-title" itemprop="name">
-  介绍MVP,MVVM框架模式
+  Android事件分发机制(一)
 </h1>
 
 
@@ -52,8 +52,8 @@
 
     
     <div class="article-meta">
-      <a href="/2021/04/26/%E4%BB%8B%E7%BB%8DMVP-MVVM%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%BC%8F/" class="article-date">
-  <time datetime="2021-04-26T02:50:00.000Z" itemprop="datePublished">2021-04-26</time>
+      <a href="/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%B8%80/" class="article-date">
+  <time datetime="2021-07-07T15:45:00.000Z" itemprop="datePublished">2021-07-07</time>
 </a>
       
     </div>
@@ -69,51 +69,43 @@
       
       
       
-      <p>介绍MVP和MVVM的优劣，以及使用场景</p>
+      <p>Android事件分发机制理解与描述的第一篇，主要是先介绍事件分发机制的概念</p>
 <a id="more"></a>
-
-<h2 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h2><p>简单来说就是数据驱动页面</p>
-<p>MVVM是由3部分组成（Model，View，ViewModel）</p>
+<h1 id="Android事件分发机制-一"><a href="#Android事件分发机制-一" class="headerlink" title="Android事件分发机制(一)"></a>Android事件分发机制(一)</h1><blockquote>
+<p>本篇是个人对Android事件分发机制理解与描述的第一篇，主要是先介绍事件分发机制的概念</p>
+</blockquote>
+<h3 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h3><p>任何对手机屏幕的操作都离不开事件分发机制，清楚事件分发机制可以更好的去实现复杂交互</p>
+<blockquote>
+<p>事件分发机制用来解决的问题都是在Android控件之间传递用户对屏幕的操作，如滑动等</p>
+</blockquote>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>在Android中，系统不会将用户操作这一整个<strong>操作</strong>都传递下来，而是会分成多个<strong>事件</strong>一个一个下发</p>
+<blockquote>
+<p>系统会把用户的操作分解成一系列的事件, 然后逐个传递这些事件. 事件可以看作是用户操作过程的节点, 每次分发只会分发一个事件.</p>
+</blockquote>
+<p>比如说，用户滑动了一下屏幕，那么系统将会传递-手指接触屏幕 –&gt; 移动手指(或者多个) –&gt; 手指离开屏幕. Android事件分发机制所传递的就是这些分解之后的事件(手指接触屏幕, 移动手指, 手指离开屏幕).</p>
+<p>在Android这些操作都是用<code>MotionEvent</code>类来代表。大部分事件分发机制中涉及的方法里面都包含一个<code>MotionEvent</code>实例，下面将介绍一下<code>MotionEvent</code>有那些类型</p>
 <ul>
-<li><h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>使用MVVM可以使开发者不用专注于更新视图，只需要去专注实现逻辑</li>
+<li><code>ACTION_DOWN</code>：代表着手指首次接触屏幕，是所有操作的第一步，也就是说在传递事件的过程中，所以事件分发的第一个事件总是<code>ACTION_DOWN</code></li>
+<li><code>ACTION_MOVE</code>：代表着手指在屏幕上移动，主要是用来区分点击还是滑动</li>
+<li><code>ACTION_UP</code>：代表着手指从屏幕上移开，是所有操作的最后一步，也就是是在事件传递中，所以事件序列里面最后一个事件分发的总是<code>ACTION_UP</code></li>
+<li><code>ACTION_CANCEL</code>：代表着事件传递被中断，也就是说事件被消费了，消费概念将在下面介绍</li>
+<li><code>ACTION_POINTER_DOWN</code>：代表着又有新的手指接触屏幕</li>
+<li><code>ACTION_POINTER_UP</code>：代表又有别的手指离开屏幕</li>
 </ul>
-</li>
-<li><h3 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>由于View与ViewModel的绑定，使得追踪异常变得十分不方便</li>
-<li>数据双向绑定不利于代码的重用，每一个不同的View都需要一个不同的ViewModel</li>
-</ul>
-</li>
-<li><h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
-<li>在页面复杂、逻辑较多、数据频繁更新的场景，就可以使用MVVM，Activity/Fragment只用将数据展示到控件上去</li>
-</ul>
-</li>
-</ul>
-<h2 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h2><p>MVP本质上就是为了解耦而产生的，分为3部分（Model(管理数据)，View(展示数据)，Presenter(业务逻辑)）</p>
-<ul>
-<li><h3 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h3><ul>
-<li>将模型与视图分离，提高了维护性</li>
-<li>容易测试，将业务逻辑从Activity/Fragment中抽取出来。可以方便的进行单元测试</li>
-</ul>
-</li>
-<li><h3 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h3><ul>
-<li>由于对视图的渲染都放在Presenter中，这会导致视图频繁的与Presenter进行交互，一旦视图发现了错误，需要更改，那么更它连着的Presenter也需要进行更改</li>
-</ul>
-</li>
-<li><h3 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
-<li>在数据单一，逻辑简单的场景中，使用MVP更好</li>
-</ul>
-</li>
-</ul>
+<h3 id="消费"><a href="#消费" class="headerlink" title="消费"></a>消费</h3><p>在Android中事件是层层传递的，先传给最上方的控件，在由最上方的控件决定要不要使用掉这个事件(也就是销毁掉事件，自己来处理)来是否继续传递事件。消费的意思是指被控件消耗掉了。</p>
+<h3 id="分发"><a href="#分发" class="headerlink" title="分发"></a>分发</h3><p>事件分发机制的目的是在控件间传递事件, 那么分发的对象自然是控件了</p>
+<blockquote>
+<p>控件即是分发者也是分发对象.</p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2021/04/26/%E4%BB%8B%E7%BB%8DMVP-MVVM%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%BC%8F/" data-id="ckny0708w0007cwme6ivw1j82" class="article-share-link">
+      <a data-url="http://example.com/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%B8%80/" data-id="ckqtnkh9200006kmeh9vd430m" class="article-share-link">
         分享
       </a>
       
-<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Model/" rel="tag">Model</a></li></ul>
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/" rel="tag">事件分发</a></li></ul>
 
     </footer>
 
@@ -123,19 +115,19 @@
   
 <nav class="article-nav">
   
-  <a href="/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%B8%80/" class="article-nav-link">
+  <a href="/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%BA%8C/" class="article-nav-link">
     <strong class="article-nav-caption">前一篇</strong>
     <div class="article-nav-title">
       
-      Android事件分发机制(一)
+      Android事件分发机制(二)
       
     </div>
   </a>
   
   
-  <a href="/2021/04/26/%E7%B1%BB%E5%9E%8B%E4%BB%8B%E7%BB%8D/" class="article-nav-link">
+  <a href="/2021/04/26/%E4%BB%8B%E7%BB%8DMVP-MVVM%E6%A1%86%E6%9E%B6%E6%A8%A1%E5%BC%8F/" class="article-nav-link">
     <strong class="article-nav-caption">后一篇</strong>
-    <div class="article-nav-title">类型介绍</div>
+    <div class="article-nav-title">介绍MVP,MVVM框架模式</div>
   </a>
   
 </nav>

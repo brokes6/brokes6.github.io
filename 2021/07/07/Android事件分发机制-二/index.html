@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Android事件分发机制(二) |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Android事件分发机制-二" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Android事件分发机制(二)
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%BA%8C/" class="article-date">
+  <time datetime="2021-07-07T15:47:00.000Z" itemprop="datePublished">2021-07-07</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>Android事件分发机制理解与描述的第二篇，主要是先介绍事件分发的流程</p>
+<a id="more"></a>
+<h1 id="Android事件分发机制-二"><a href="#Android事件分发机制-二" class="headerlink" title="Android事件分发机制(二)"></a>Android事件分发机制(二)</h1><blockquote>
+<p>本篇是个人对Android事件分发机制理解与描述的第二篇，主要是先介绍事件分发的流程</p>
+</blockquote>
+<p>下面将通过Android源码来讲解事件分发流程</p>
+<h3 id="事件分发流程"><a href="#事件分发流程" class="headerlink" title="事件分发流程"></a>事件分发流程</h3><h4 id="Activity"><a href="#Activity" class="headerlink" title="Activity"></a>Activity</h4><p>事件最开始会由系统分发给Activity。来调用Activity.dispatchTouchEvent(MotionEvent e)</p>
+<blockquote>
+<p>注意，这个时候是还没有进入<code>控件</code>间的事件分发。这是因为Activity不是一个View，也不是一个ViewGroup</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Activity.dispatchTouchEvent</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent ev)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ev.getAction() == MotionEvent.ACTION_DOWN) &#123; </span><br><span class="line">        onUserInteraction(); </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">if</span> (getWindow().superDispatchTouchEvent(ev)) &#123;<span class="comment">// 分发了这个事件 </span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">return</span> onTouchEvent(ev);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>Activity.DispathcTouchEven()</code>中，我们可以看见，Activity通过<code>getWindow</code>获取<code>Window</code>抽象类，也就是获取<code>PhoneWindow</code>，在调用<code>PhoneWindow.superDispatchTouchEvent()</code>的方法继续将事件分发下去，但是PhoneWindow仍然还不是个View或ViewGroup，所以我们还要继续深入下去</p>
+<blockquote>
+<p>getWindow()返回的是一个Window抽象类，在Android中，唯一继承了Window的类就是PhoneWindow，所以在这里Activity就是在调用PhoneWindow.superDispatchTouchEvent(MotionEvent e)</p>
+</blockquote>
+<h4 id="PhoneWindow"><a href="#PhoneWindow" class="headerlink" title="PhoneWindow"></a>PhoneWindow</h4><p><code>PhoneWindow</code>是<code>Android</code>中最基本的窗口系统，每一个<code>Activity</code>都会创建<code>PhoneWindow</code>对象，是<code>Activity</code>和整个<code>View</code>系统交互的接口。但是在事件分发中，它就只是扮演一个中间角色，进行传递事件，所以这里我们不会太关心PhoneWindow</p>
+<p>下面就先来看看<code>PhoneWindow.superDispatchTouchEvent(MotionEvent e)</code>这个方法吧</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// PhoneWindow.java</span></span><br><span class="line"><span class="keyword">private</span> DecorView mDecor;</span><br><span class="line"><span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">superDispatchTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> mDecor.superDispatchTouchEvent(event);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// PhoneWindow.DecorView 内部类</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">DecorView</span> <span class="keyword">extends</span> <span class="title">FrameLayout</span> <span class="keyword">implements</span> <span class="title">RootViewSurfaceTaker</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">superDispatchTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.dispatchTouchEvent(event); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>PhoneWindow.superDispatchTouchEvent(MotionEvent event)</code>的内部，是调用了一个<code>mDecor.superDispatchTouchEvent(event)</code>。这个<code>mDecor</code>其实是<code>Window</code>下面的<code>DecorView</code>，也就是说<code>PhoneWindow</code>内部是调用了<code>DecorView.superDispatchTouchEvent(MotionEvent event)</code></p>
+<blockquote>
+<p>这里再梳理一遍，首先系统将事件分发给到了Activity，Activity再将事件分发给PhoneWindow，PhoneWindow再将事件分发给到了DecorView。而DecorView是一个ViewGroup(一个继承与FrameLayout的ViewGroup)，所以接下来就是属于控件间的事件分发了</p>
+</blockquote>
+<p>所以<code>PhoneWindow</code>继续将事件传递到了<code>DecorView</code>，终于传递到<code>ViewGroup</code>上了，接下来就是属于控件间的事件分发了</p>
+<h4 id="ViewGroup"><a href="#ViewGroup" class="headerlink" title="ViewGroup"></a>ViewGroup</h4><p>从上面就可以知道，第一个接受到事件的就是<code>DecorView</code>，而<code>DecorView</code>是继承<code>FrameLayout</code>，而<code>DecorView</code>内部也是直接调用了<code>super.dispatchTouchEvent(event)</code></p>
+<p>所以控件间事件传递的起始方法就是<code>ViewGroup.dispatchTouchEvent(MotionEvent event)</code>，下面将讲解它是如何把事件传递给下一个控件的，是如何判断返回值标识事件是否被消费</p>
+<ul>
+<li><h5 id="传递规则"><a href="#传递规则" class="headerlink" title="传递规则"></a>传递规则</h5><p>因为想要将事件继续分发下去，所以再ViewGroup中肯定先要遍历一遍子View</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = childrenCount - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">    <span class="comment">// 允许修改默认的child获取规则, 但是一般情况下会获取</span></span><br><span class="line">    <span class="comment">// 先判断preorderedList中是否已经存有子View，有的话就直接在里面取出，没有的话就从childern[]中取</span></span><br><span class="line">    children[childIndex] <span class="keyword">final</span> View child = (preorderedList == <span class="keyword">null</span>) ? children[childIndex] : preorderedList.get(childIndex); </span><br><span class="line">    <span class="comment">// 省略通常不会影响流程的代码 </span></span><br><span class="line">    <span class="keyword">if</span> (dispatchTransformedTouchEvent(ev, <span class="keyword">false</span>, child, idBitsToAssign)) &#123;<span class="comment">// 关键方法 </span></span><br><span class="line">        <span class="comment">// ... </span></span><br><span class="line">        newTouchTarget = addTouchTarget(child, idBitsToAssign);<span class="comment">// 关键方法 </span></span><br><span class="line">        <span class="comment">// ... break; </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上面代码遍历的过程中，有一个关键判断执行了<code>ViewGroup.dispathTransformedTouchEvent()</code>这个方法。这个方法的作用就是判断传入进来的<code>child</code>是否为空，如果为空的话，就执行<code>super.dispatchTouchEvent(event)</code>，不为空的话就执行<code>child.dispatchTouchEvent(event)</code>。正常情况下都是不为空的，所以就是在这里将事件传递给了子<code>View</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">dispatchTransformedTouchEvent</span><span class="params">(MotionEvent event, <span class="keyword">boolean</span> cancel,</span></span></span><br><span class="line"><span class="function"><span class="params">           View child, <span class="keyword">int</span> desiredPointerIdBits)</span> </span>&#123;</span><br><span class="line">      		...</span><br><span class="line">           <span class="keyword">if</span> (child == <span class="keyword">null</span>) &#123;</span><br><span class="line">               handled = <span class="keyword">super</span>.dispatchTouchEvent(event);</span><br><span class="line">           &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">               handled = child.dispatchTouchEvent(event);</span><br><span class="line">           &#125;</span><br><span class="line">		...</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>传递给子View之后，返回True就表示子控件接收到了这个事件，注意在这个方法下面还要一个重要的方法，那就是<code>newTouchTarget = addTouchTarget(child, idBitsToAssign)</code>这个方法只会在返回为True，也就是子控件接受到了事件的时候才会执行。这个方法的主要作用就是把当前这个接收事件的子控件转换成了<code>TouchTarget</code>对象并赋值给了<code>mFirstTouchTarget</code></p>
+<p>至于为什么要这样做，那是因为，在这个循环的外面有几层这样的判断：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!canceled &amp;&amp; !intercepted) &#123; </span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="keyword">if</span> (actionMasked == MotionEvent.ACTION_DOWN || (split &amp;&amp; actionMasked == MotionEvent.ACTION_POINTER_DOWN) || actionMasked == MotionEvent.ACTION_HOVER_MOVE) &#123; </span><br><span class="line">        <span class="comment">// ... </span></span><br><span class="line">        <span class="keyword">if</span> (newTouchTarget == <span class="keyword">null</span> &amp;&amp; childrenCount != <span class="number">0</span>) &#123; </span><br><span class="line">            <span class="comment">// 遍历代码 </span></span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第一层判断是判断<code>ACTION_CANCEL</code>事件和被当前控件拦截事件。第二层判断是限制了事件只能是<code>ACTION_DOWN</code>，只有事件是<code>ACTION_DOWN</code>的时候才会继续执行，也就是说<code>ACTION_MOVE</code>等中间事件，是不会执行遍历代码的。第三层判断是只有之前能接收到事件的控件才会继续接收事件，之前不能接收到事件的控件是不会分发事件的</p>
+<blockquote>
+<p>简单点来说就是ViewGroup第一次会遍历所有控件并分发事件，接收到事件的View就会被转成TouchTarget记录起来。之后的中间事件(ACTION_MOVE等…)都只会传递给TouchTarget</p>
+</blockquote>
+<blockquote>
+<p>而mFirstTouchTarget其实是一个链表, 会把事件分发给链表中的所有子控件, 这是针对多点触控的处理, 不是本文关注的问题, 不作分析, 只需要知道其他非<code>ACTION_DOWN</code>事件的传递不会重新遍历所有子控件, <code>ACTION_DOWN</code>是整个操作(一系列事件)的起点, 在这时候就已经确定后续事件需要传递的子控件了</p>
+</blockquote>
+</li>
+</ul>
+<h4 id="View"><a href="#View" class="headerlink" title="View"></a>View</h4><p>分析到这里我们已经知道事件分发机制是怎样在控件间传递事件的了。</p>
+<p>父控件遍历子控件, 询问所有子控件是否接收<code>ACTION_DOWN</code>事件, 然后保存接收事件的子控件到链表, 确定后续事件的分发对象, 当其他事件传递给父控件时直接传递事件给链表中的子控件. 当没有子控件接收<code>ACTION_DOWN</code>时执行<code>View.dispatchTouchEvent</code>，下一篇将专门分析<code>View</code>类</p>
+<h3 id="拦截"><a href="#拦截" class="headerlink" title="拦截"></a>拦截</h3><h4 id="Activity处拦截"><a href="#Activity处拦截" class="headerlink" title="Activity处拦截"></a>Activity处拦截</h4><p>因为Activity.dispatchTouchEvent(MotionEvent e)是整个事件分发的起点站，所以主要重写这个方法，不调用<code>PhoneWindow.superDispatchTouchEvent(MotionEvent ev)</code>就可以使得整个Activity内的控件收不到任何事件</p>
+<h4 id="ViewGroup处拦截"><a href="#ViewGroup处拦截" class="headerlink" title="ViewGroup处拦截"></a>ViewGroup处拦截</h4><p>可以通过<code>ViewGroup.onInterceptTouchEvent</code>来拦截特定的事件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%BA%8C/" data-id="ckqtnmfqh00046kmeaok2afp3" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91/" rel="tag">事件分发</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/07/07/%E5%A4%9C%E9%97%B4%E6%A8%A1%E5%BC%8F/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      夜间模式
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/07/07/Android%E4%BA%8B%E4%BB%B6%E5%88%86%E5%8F%91%E6%9C%BA%E5%88%B6-%E4%B8%80/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Android事件分发机制(一)</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
