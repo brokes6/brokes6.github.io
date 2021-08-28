@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Material Design - MaterialShapeDrawable |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Material-Design-MaterialShapeDrawable" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Material Design - MaterialShapeDrawable
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/28/Material-Design-MaterialShapeDrawable/" class="article-date">
+  <time datetime="2021-08-28T15:56:00.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将介绍Material Design下的MaterialShapeDrawable</p>
+<a id="more"></a>
+<h1 id="Material-Design"><a href="#Material-Design" class="headerlink" title="Material Design"></a>Material Design</h1><blockquote>
+<p>Material Design - MaterialShapeDrawable</p>
+</blockquote>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&quot;com.google.android.material:material:1.3.0&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><blockquote>
+<p>Google介绍：材质形状的基本可绘制类，用于处理生成路径的阴影、高度、比例和颜色。</p>
+</blockquote>
+<p>我的理解就是可动态改变Drawable的绘制路径</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li><p>创建一个MaterialShapeDrawable</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> backgroundShapeDrawable: MaterialShapeDrawable <span class="keyword">by</span> lazy(LazyThreadSafetyMode.NONE) &#123;</span><br><span class="line">        MaterialShapeDrawable(<span class="keyword">this</span>,<span class="literal">null</span>,R.attr.bottomSheetStyle,<span class="number">0</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MaterialShapeDrawable()的构造函数接收4个参数，第一个为Context、第二个为attrs资源属性文件、第三个为defStyleAttr样式、第四个为defStyleRes</p>
+</li>
+<li><p>设置Drawable内容</p>
+<p>MaterialShapeDrawable创建完了，那么接下就要设置来里面的Drawable的内容了</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> foregroundShapeDrawable: MaterialShapeDrawable <span class="keyword">by</span> lazy(LazyThreadSafetyMode.NONE) &#123;</span><br><span class="line">        MaterialShapeDrawable(</span><br><span class="line">            <span class="keyword">this</span>,</span><br><span class="line">            <span class="literal">null</span>,</span><br><span class="line">            R.attr.bottomSheetStyle,</span><br><span class="line">            <span class="number">0</span></span><br><span class="line">        ).apply &#123;</span><br><span class="line">            <span class="comment">// 设置填充颜色</span></span><br><span class="line">            fillColor = ColorStateList.valueOf(</span><br><span class="line">                ContextCompat.getColor(</span><br><span class="line">                    <span class="keyword">this</span><span class="symbol">@ListScalingActivity</span>,</span><br><span class="line">                    R.color.gray</span><br><span class="line">                )</span><br><span class="line">            )</span><br><span class="line">            <span class="comment">// 设置阴影大小</span></span><br><span class="line">            elevation = dpToPixel(<span class="number">16f</span>)</span><br><span class="line">            <span class="comment">// 是否启用假阴影</span></span><br><span class="line">            shadowCompatibilityMode = MaterialShapeDrawable.SHADOW_COMPAT_MODE_NEVER</span><br><span class="line">            <span class="comment">// 初始化Drawable叠加功能</span></span><br><span class="line">            initializeElevationOverlay(<span class="keyword">this</span><span class="symbol">@ListScalingActivity</span>)</span><br><span class="line">            <span class="comment">// 设置Drawable的绘制路径</span></span><br><span class="line">            shapeAppearanceModel = shapeAppearanceModel.toBuilder()</span><br><span class="line">                .setTopEdge(<span class="comment">// 在边缘处理</span></span><br><span class="line">                    SemiCircleEdgeCutoutTreatment(<span class="comment">// 绘制一个圆形</span></span><br><span class="line">                        dpToPixel(<span class="number">8f</span>),</span><br><span class="line">                        dpToPixel(<span class="number">24f</span>),<span class="comment">// 半径</span></span><br><span class="line">                        <span class="number">0F</span>,<span class="comment">// 圆形的位置</span></span><br><span class="line">                        dpToPixel(<span class="number">32f</span>)</span><br><span class="line">                    )</span><br><span class="line">                )</span><br><span class="line">                .build()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里我为了方便设置属性，使用了apply扩展函数</p>
+<blockquote>
+<p>fillColor：填充背景的颜色</p>
+<p>elevation：阴影高度</p>
+<p>dpToPixel：这个是扩展函数，用于将px转换为dp</p>
+<p>shapeAppearanceModel：Drawable绘制路径</p>
+<p>initializeElevationOverlay()：初始化Drawable的叠加功能</p>
+<p>shapeAppearanceModel.setTopEdge()：在顶部边缘上进行处理</p>
+<p>SemiCircleEdgeCutoutTreatment()：在边缘上的任意一个地方绘制一个圆形</p>
+</blockquote>
+</li>
+<li><p>设置完成之后在添加给控件</p>
+<p>效果如下：</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/image-20210817105344089.png" alt="image-20210817105344089"></p>
+<p>将会得到一个中间下凹的背景(我在中间加入了一张图片)</p>
+</li>
+<li><p>动态改变</p>
+<p>我们可以使用<code>MaterialShapeDrawable.interpolation()</code>方法来还原</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">foregroundShapeDrawable.interpolation = progress</span><br></pre></td></tr></table></figure>
+
+<p><code>MaterialShapeDrawable.interpolation()</code>方法表示设置路径的插值，介于0-1之间，1表示一个完全渲染的路径，0表示一个完整修复的路径。也就是是0表示不变，1表示恢复原状</p>
+<p>然后可以通过监听滑动值来进行动态更改</p>
+</li>
+<li><p>将会得到如下效果</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/MaterialShapeDrawable.gif" alt="MaterialShapeDrawable">这里的效果是通过<code>BottomSheetBehavior</code>+<code>MaterialShapeDrawable</code>+图片缩放达成的，可以看到效果非常不错</p>
+<p>如果想要了解使用<code>BottomSheetBehavior</code>那么可以去看看我的另一篇文章<code>Material Design - BottomSheetBehavior</code></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/28/Material-Design-MaterialShapeDrawable/" data-id="cksvyuyjk000j3wme3yv86qca" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material/" rel="tag">Material</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/08/28/Android%E6%8E%A8%E9%80%81%E5%8E%9F%E7%90%86/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      Android推送原理
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/08/28/Material-Design-BottomSheetBehavior/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Material Design - BottomSheetBehavior</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Android推送原理 |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Android推送原理" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Android推送原理
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/28/Android%E6%8E%A8%E9%80%81%E5%8E%9F%E7%90%86/" class="article-date">
+  <time datetime="2021-08-28T15:57:00.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>这里将会介绍Android上的推送原理</p>
+<a id="more"></a>
+<h1 id="Android推送原理"><a href="#Android推送原理" class="headerlink" title="Android推送原理"></a>Android推送原理</h1><blockquote>
+<p>这里将会介绍Android上的推送原理</p>
+</blockquote>
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>在用户未打开或打开的情况下，客户端主动的向用户推送服务器最新消息</p>
+<h2 id="系统级别的推送"><a href="#系统级别的推送" class="headerlink" title="系统级别的推送"></a>系统级别的推送</h2><p>系统级别的推送就代表着，在任何时候都可以进行推送，也不用担心会被系统杀死</p>
+<h3 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h3><h4 id="C2DM"><a href="#C2DM" class="headerlink" title="C2DM"></a>C2DM</h4><p>全称：Cloud to Device Messaging 云端推送</p>
+<p>这个是基于Push方法进行获取消息的，也就是说C2DM服务负责处理例如消息队列等事务，并向运行设备的应用发送这些消息</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/8421477-0402b7d5bc3096cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/593/format/webp"></p>
+<blockquote>
+<p>这张图网上全都是😓</p>
+</blockquote>
+<ul>
+<li><p>优点</p>
+<p>C2DM提供了一个简单的、轻量级的机制，允许服务器可以通知移动应用程序直接与服务器进行通信，以便于从服务器获取应用程序更新和用户数据</p>
+</li>
+<li><p>缺点</p>
+<p>缺点很明显，这些都是需要依赖于Google服务，但是国内大部分的机型都阉割了Google服务，这就导致无法使用，并且连接上Google还需要进行网络代理</p>
+</li>
+</ul>
+<h2 id="推送的几种方式"><a href="#推送的几种方式" class="headerlink" title="推送的几种方式"></a>推送的几种方式</h2><h3 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h3><p>从字面意思就可以知道，这是一种服务端主动向客户端进行发送消息的模式，也就是客户端跟服务端之间会维护一个长连接</p>
+<h3 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h3><p>这是一种由客户端主动向服务端请求消息的模式</p>
+<ul>
+<li>缺点<ol>
+<li>成本大，需要自己实现与服务器之间的通信，例如消息排队等；</li>
+<li>客户端中需要一直保持着请求服务的存活，并且还要间隔一定时间就要向服务端发起请求消息，这样也会导致消息不能及时到达</li>
+</ol>
+</li>
+</ul>
+<h3 id="SMS"><a href="#SMS" class="headerlink" title="SMS"></a>SMS</h3><p>这种模式是基于Push的方式，如果服务端上有新的消息，那么服务端会发送一个类似于短信的信令到客户端，客户端接受到信令之后，就会主动向服务端请求消息</p>
+<ul>
+<li>优点<ol>
+<li>客户端消耗小</li>
+<li>可实现完全的实时操作</li>
+</ol>
+</li>
+<li>缺点<ol>
+<li>成本较高，因为目前来说，很难找到免费的短消息发送网关来实现这种方案，只能通过向运营商缴纳相应的短信费用</li>
+</ol>
+</li>
+</ul>
+<h2 id="推送的设计"><a href="#推送的设计" class="headerlink" title="推送的设计"></a>推送的设计</h2><p>一般来说，进行推送最好的方式就是：移动网络长连接(Push)。因为手机平台本身的特点，电量、网络、流量的限制移动互联网应用在设计上跟传统PC 上的应用很大不一样。所以需要根据手机平台的特点，尽量节省流量、电量，同时还要保证数据能及时的到达客户端。在手机平台上，常用的方法有如下2种</p>
+<h3 id="定时查询"><a href="#定时查询" class="headerlink" title="定时查询"></a>定时查询</h3><p>这种就是上面推送方法所讲的Pull，在性能、电量等各方面来说都是使用实时推送(Push)会更好一点，所以这里就不着重讲解</p>
+<h3 id="实时推送"><a href="#实时推送" class="headerlink" title="实时推送"></a>实时推送</h3><p>这种就是手机和服务端之间维护一个TCP长连接，当服务端有新数据的时候，就实时推送到客户端。但是Push的实现和维护成本都会比较高，在移动网络下长连接的维护，相对也有一些技术上的难度。下面就来讲讲移动网络下长连接的维护</p>
+<p><img src="https://img-blog.csdnimg.cn/20200826193844584.png#pic_center"></p>
+<h4 id="移动网络长连接"><a href="#移动网络长连接" class="headerlink" title="移动网络长连接"></a>移动网络长连接</h4><p>这里就先要讲一下移动网络的特点</p>
+<h5 id="移动网络"><a href="#移动网络" class="headerlink" title="移动网络"></a>移动网络</h5><p>现在绝大多数的IP地址应该都还是IPV4，但是IPV4的IP数量有限，运营商分配给手机的的IP是运营商内网的IP，手机想要访问互联网，就必须得先通过运营商的网关，去做一个网络地址转换。简单来说就是运营商的网关需要维护一个外网IP、端口内网IP、端口对应的关系，以确保内网中的手机可以随时的与互联网的服务器通信</p>
+<p><img src="https://img-blog.csdnimg.cn/20190409151034430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MjcyNDQ2Nw==,size_16,color_FFFFFF,t_70"></p>
+<p>但是大部分移动无线网络运营商都在链路一段时间没有数据通讯时，会淘汰NAT 表中的对应项，造成链路中断。所以说要想维护好长连接就得避免链路中断</p>
+<blockquote>
+<p>NAT表：NAT映射表存在在路由器里面，实现的是私有IP与公有IP之间的转换；实际上可能是你家一台路由器拥有一个公网IP，而所有连在这台路由器上的所有设备都共享一个公网IP</p>
+</blockquote>
+<h4 id="客户端长连接的维护"><a href="#客户端长连接的维护" class="headerlink" title="客户端长连接的维护"></a>客户端长连接的维护</h4><p>为了不让NAT链路中断，所以我们需要定时发送心跳包，来刷新NAT表项，防止淘汰。在Android上定时运行任务的常用方法有如下两种</p>
+<h5 id="Timter-其他计时器的实现"><a href="#Timter-其他计时器的实现" class="headerlink" title="Timter/其他计时器的实现"></a>Timter/其他计时器的实现</h5><p>Timeter类可以用来执行需要循环执行的任务，但是Timeter有个问题，就是它是需要使用WakeLock来保持CPU的唤醒，这样会大量消耗手机电量，所以这种方法不太可行。其他计时器的实现也是一样，比如说是通过While和Thread.sleep来实现</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PushService</span> : <span class="type">Service</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> url = <span class="string">&quot;你请求的网络地址&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> pushThread: PushThread <span class="keyword">by</span> lazy &#123; PushThread() &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">()</span></span> &#123;</span><br><span class="line">        pushThread.start()</span><br><span class="line">        <span class="keyword">super</span>.onCreate()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onBind</span><span class="params">(intent: <span class="type">Intent</span>?)</span></span>: IBinder? &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">PushThread</span> : <span class="type">Thread</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">run</span><span class="params">()</span></span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">                Thread.sleep(<span class="number">10000</span>)</span><br><span class="line">                <span class="comment">// TODO</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码就是通过开启了个Service，在onCreate中开启了一个线程，线程中每隔10秒向服务器发送一次请求</p>
+<h5 id="AlarmManager"><a href="#AlarmManager" class="headerlink" title="AlarmManager"></a>AlarmManager</h5><p>而AlarmManager是Android系统封装的用于管理RTC模块，RTC(Real Time Clock)是一个独立的时钟，在CPU处于休眠状态下也可以正常运行，在预定时间到达时，会中断CPU休眠，唤醒CPU。这不是完美符合我们的预期吗，没达到预定时间的时候CPU正常休眠，到达时间则唤醒工作，这样一来手机的耗电量问题也得到了改善</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PushManager</span></span>(<span class="keyword">private</span> <span class="keyword">val</span> context: Context) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> mAlarmMgr: AlarmManager <span class="keyword">by</span> lazy &#123; context.getSystemService(Context.ALARM_SERVICE) <span class="keyword">as</span> AlarmManager &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">startRequest</span><span class="params">()</span></span> &#123;</span><br><span class="line">        cancelRequestAlarm()</span><br><span class="line">        mAlarmMgr.setRepeating(</span><br><span class="line">            AlarmManager.RTC_WAKEUP,</span><br><span class="line">            System.currentTimeMillis() + <span class="number">1000</span>,</span><br><span class="line">            <span class="number">10000</span>,</span><br><span class="line">            getOperationIntent()</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">cancelRequest</span><span class="params">()</span></span> &#123;</span><br><span class="line">        mAlarmMgr.cancel(getOperationIntent())</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 发送广播的意图</span></span><br><span class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">fun</span> <span class="title">getOperationIntent</span><span class="params">()</span></span>: PendingIntent &#123;</span><br><span class="line">        <span class="keyword">val</span> intent = Intent()</span><br><span class="line">        intent.action = <span class="string">&quot;push&quot;</span></span><br><span class="line">        <span class="keyword">return</span> PendingIntent.getBroadcast(context, <span class="number">0</span>, intent, PendingIntent.FLAG_UPDATE_CURRENT)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>AlarmManager是系统服务，所以不能用一般的构造方法去构造，可以使用getSystemService()来获取系统级别的服务</p>
+<p>接下来我写了一个发起请求的方法，内部是通过PendingIentent去通知广播，具体的请求应该在广播中处理</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">startRequest</span><span class="params">()</span></span> &#123;</span><br><span class="line">    cancelRequestAlarm()</span><br><span class="line">    mAlarmMgr.setRepeating(</span><br><span class="line">        AlarmManager.RTC_WAKEUP,</span><br><span class="line">        System.currentTimeMillis() + <span class="number">1000</span>,</span><br><span class="line">        <span class="number">10000</span>,</span><br><span class="line">        getOperationIntent()</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>里面调用了AlarmManager设置重复执行定时任务setRepeating()，setRepeating()接收4个参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第一个参数标识闹钟类型</td>
+<td>AlarmManager.ELAPSED_REALTIME_WAKEUP(从手机开机后的时间，包含了手机睡眠时间)/AlarmManager.RTC_WAKEUP(使用系统设置中的时间)</td>
+</tr>
+<tr>
+<td>第二个参数表示任务的首次执行时间</td>
+<td>这里就与第一个参数相关了，如果第一个参数设置为AlarmManager.ELAPSED_REALTIME_WAKEUP，那么当前时间就为SystemClock.elapsedRealtime()。如果第一个参数设置为AlarmManager.RTC_WAKEUP，那么当前时间就为System.currentTimeMillis()</td>
+</tr>
+<tr>
+<td>第三个参数为两次任务执行的间隔</td>
+<td>传入你想要的间隔时间</td>
+</tr>
+<tr>
+<td>第四个参数为对应的相应操作</td>
+<td>一般这里都是去发送广播，然后在广播中执行相应的操作。当然也可以getActivity()、getService()</td>
+</tr>
+</tbody></table>
+<p>这样就可以最大程度上可以解决电量消耗问题和定时器被系统回收问题</p>
+<p>至于电量消耗问题还可以进一步的解决，可以执行一些策略</p>
+<ul>
+<li>在移动网络下每隔5分钟去请求一次信息</li>
+<li>在Wifi情况下每隔2分钟去请求一次信息</li>
+<li>在熄屏情况下停止请求</li>
+<li>熄屏一分钟则杀死推送进程</li>
+</ul>
+<h2 id="推送服务持久化"><a href="#推送服务持久化" class="headerlink" title="推送服务持久化"></a>推送服务持久化</h2><p>比如说我们的推送相关的服务是在Service上，那么客户端如何防止用户在使用第三方或者系统本身的清理后台杀死进程呢？</p>
+<p>这里就可以用到Android中的ActivityManager内部类RunningAppProcessInfo</p>
+<h3 id="RunningAppProcessInfo"><a href="#RunningAppProcessInfo" class="headerlink" title="RunningAppProcessInfo"></a>RunningAppProcessInfo</h3><p>RunningAppProcessInfo是用来记录当前系统中进程状态的类，下面讲介绍一些常用值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constant for &#123;<span class="doctag">@link</span> #importance&#125;: this is a persistent process.</span></span><br><span class="line"><span class="comment"> * Only used when reporting to process observers.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@hide</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMPORTANCE_PERSISTENT = <span class="number">50</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constant for &#123;<span class="doctag">@link</span> #importance&#125;: this process is running the</span></span><br><span class="line"><span class="comment"> * foreground UI.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMPORTANCE_FOREGROUND = <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constant for &#123;<span class="doctag">@link</span> #importance&#125;: this process is running something</span></span><br><span class="line"><span class="comment"> * that is actively visible to the user, though not in the immediate</span></span><br><span class="line"><span class="comment"> * foreground.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMPORTANCE_VISIBLE = <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constant for &#123;<span class="doctag">@link</span> #importance&#125;: this process is running something</span></span><br><span class="line"><span class="comment"> * that is considered to be actively perceptible to the user.  An</span></span><br><span class="line"><span class="comment"> * example would be an application performing background music playback.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMPORTANCE_PERCEPTIBLE = <span class="number">130</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constant for &#123;<span class="doctag">@link</span> #importance&#125;: this process is running an</span></span><br><span class="line"><span class="comment"> * application that can not save its state, and thus can&#x27;t be killed</span></span><br><span class="line"><span class="comment"> * while in the background.</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@hide</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMPORTANCE_CANT_SAVE_STATE = <span class="number">170</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constant for &#123;<span class="doctag">@link</span> #importance&#125;: this process is contains services</span></span><br><span class="line"><span class="comment"> * that should remain running.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMPORTANCE_SERVICE = <span class="number">300</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constant for &#123;<span class="doctag">@link</span> #importance&#125;: this process process contains</span></span><br><span class="line"><span class="comment"> * background code that is expendable.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMPORTANCE_BACKGROUND = <span class="number">400</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Constant for &#123;<span class="doctag">@link</span> #importance&#125;: this process is empty of any</span></span><br><span class="line"><span class="comment"> * actively running code.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> IMPORTANCE_EMPTY = <span class="number">500</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>一般数值大于IMPORTANCE_SERVICE(300)的进程都表示着，已经长时间没用，或者为空了</p>
+</li>
+<li><p>一般数值大于IMPORTANCE_VISIBLE(200)的进程都是非可见进程，也就是在后台运行了</p>
+</li>
+</ul>
+<p>大多数第三方的清理软件都是清理大于IMPORTANCE_VISIBLE的值，也就是说只要我们进程的值小于IMPORTANCE_VISIBLE(200)，就不会被清理软件清理掉。在Serivce中，有一个方法叫startForeground()这个方法的只用是以可见进程的模式启动Serivce(也就是进程值会小于200)。但是这样会在设备通知栏持续显示一个通知，别急这也有解决办法，只需要讲id传为0即可避免显示通知。相应的想要关闭Service也得用对应的stopForgeround()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#Service</span><br><span class="line"><span class="comment">//如果你的服务已经启动(通过&#123;@link Context#startService(Intent)&#125;运行)，那么  </span></span><br><span class="line"><span class="comment">//还可以让这个服务在前台运行，提供正在进行的  </span></span><br><span class="line"><span class="comment">//在此状态下显示给用户的通知。  </span></span><br><span class="line"><span class="comment">//默认情况下，启动的服务是后台的，这意味着它们的进程不会被给出  </span></span><br><span class="line"><span class="comment">//前台CPU调度(除非该进程中的其他东西是前台的)，  </span></span><br><span class="line"><span class="comment">//如果系统需要杀死它们来回收更多的内存(例如在  </span></span><br><span class="line"><span class="comment">//网络浏览器)，它们可以被杀死而不会造成太大的伤害。</span></span><br><span class="line">startForeground()</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/28/Android%E6%8E%A8%E9%80%81%E5%8E%9F%E7%90%86/" data-id="cksvywj5z000p3wme2jw65pz2" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%8E%A8%E9%80%81/" rel="tag">推送</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/08/28/Material-Design-Navigation/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      Material Design - Navigation
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/08/28/Material-Design-MaterialShapeDrawable/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Material Design - MaterialShapeDrawable</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

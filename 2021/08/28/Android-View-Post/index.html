@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Android-View.Post |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Android-View-Post" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Android-View.Post
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/28/Android-View-Post/" class="article-date">
+  <time datetime="2021-08-28T15:58:00.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将介绍Android中的协程</p>
+<a id="more"></a>
+<h1 id="View-Post"><a href="#View-Post" class="headerlink" title="View.Post"></a>View.Post</h1><blockquote>
+<p>Android源码剖析</p>
+</blockquote>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">view.post&#123;</span><br><span class="line">    notifyAnimState(listener,ANIM_STATE_END)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>众所周知，在子线程中是不能进行UI操作的，那么想要在子线程中进行UI操作，或者在很多场景下，一些操作想要延迟处理，该怎么办呢。答案就是都可以使用Handler来解决，但是说实话写Handler还是有点麻烦，还得注意内存泄漏问题。所以就可以使用<code>View.post()</code>或者<code>View.postDelay()</code>来替代Handler</p>
+<p>但是用归用，难道就不好奇<code>View.post</code>为什么可以在子线程中操作UI，为什么可以解决在<code>Activity</code>的<code>OnCreate()</code>里调用<code>View.post()</code>来解决获取View高宽为0的问题。所以接下来将通过查看源码来解答以上两个问题</p>
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><h4 id="View"><a href="#View" class="headerlink" title="View#"></a>View#</h4><blockquote>
+<p>以下所有代码都处于View中</p>
+</blockquote>
+<h5 id="Post"><a href="#Post" class="headerlink" title="Post"></a>Post</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">post</span><span class="params">(Runnable action)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> AttachInfo attachInfo = mAttachInfo;</span><br><span class="line">    <span class="keyword">if</span> (attachInfo != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> attachInfo.mHandler.post(action);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Postpone the runnable until we know on which thread it needs to run.</span></span><br><span class="line">    <span class="comment">// Assume that the runnable will be successfully placed after attach.</span></span><br><span class="line">    getRunQueue().post(action);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面不是好奇为什么<code>View.post()</code>可以在子线程中操作UI吗，其实跟我们想的差不多，<code>post</code>内部也是使用<code>Handler</code>来实现的。那么我们继续看看Android是怎么封装的</p>
+<p>post里的代码还是蛮少的，我们慢慢来分析：</p>
+<ol>
+<li><p>首先将成员变量<code>mAttachInfo</code>赋值给<code>attachInfo</code>，再判断<code>attachInfo</code>是否为空(也就是判断<code>mAttachInfo</code>是否为空)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">post</span><span class="params">(Runnable action)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> AttachInfo attachInfo = mAttachInfo;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果<code>attachInfo</code>不为空的话，那么就直接调用<code>Handler.post()</code>将<code>Runnable</code>传进去</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">post</span><span class="params">(Runnable action)</span> </span>&#123;</span><br><span class="line">  	...</span><br><span class="line">      <span class="keyword">if</span> (attachInfo != <span class="keyword">null</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> attachInfo.mHandler.post(action);</span><br><span class="line">      &#125;</span><br><span class="line">...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<blockquote>
+<p><code>Runnable</code>就是个接口，实现了<code>Runnable</code>接口的类，称为 <strong>线程辅助类</strong>；<code>Thread</code>类才是真正的线程类，也就是最终还是想要通过<code>Thread</code>来创建线程并把<strong>线程辅助类</strong>传入进去</p>
+</blockquote>
+<ol start="3">
+<li><p>如果<code>attachInfo</code>为空的话，则执行从队列中获取一个值来执行<code>Post</code>。这里我们先不管这个队列中存储的是什么，是个什么队列，先继续往下看</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">post</span><span class="params">(Runnable action)</span> </span>&#123;</span><br><span class="line">...</span><br><span class="line">      getRunQueue().post(action);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最终返回True，表示执行完成</p>
+</li>
+</ol>
+<p><code>View.post()</code>里的代码已经看完了，但是又多出了几个新问题，也就是<code>mAttachInfo</code>到底是在哪里创建的，需要什么条件。<code>getRunQueue</code>又是啥，那么也就只能继续往下深入了</p>
+<h5 id="mAttachInfo"><a href="#mAttachInfo" class="headerlink" title="mAttachInfo"></a>mAttachInfo</h5><p>我们直接在<code>Android Studio</code>使用<code>Ctrl + F</code>来进行查找，在搜索的时候可以使用点小技巧，搜索<code>mAttachInfo =</code> (等号前后都有空格)。这样就可以直接查到两处赋值操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatchAttachedToWindow</span><span class="params">(AttachInfo info, <span class="keyword">int</span> visibility)</span> </span>&#123;</span><br><span class="line">        mAttachInfo = info;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatchDetachedFromWindow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">     mAttachInfo = <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这两处分别对应了赋值和置空，刚好是在对应的一个生命周期内。接下来就继续了解<code>dispatchAttachedToWindow</code>和<code>dispatchDetachedFromWindow</code>分别在什么时候在哪里被调用了</p>
+<p>好吧😛，其实可以先不用管它们两个在什么时候被调用了，至少在现在看来，在<code>Activity.onCreate()</code>的时候<code>dispatchAttachedToWindow</code>还是没有被调用的。但是我们在<code>onCreate()</code>里执行<strong>View.post</strong>里的操作仍然可以保证是在<code>View</code>的高宽计算完毕的，为什么呢？那么原因只可能在另一个<code>return</code>里了<code>getRunQueue.post</code></p>
+<h5 id="getRunQueue"><a href="#getRunQueue" class="headerlink" title="getRunQueue"></a>getRunQueue</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> HandlerActionQueue <span class="title">getRunQueue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (mRunQueue == <span class="keyword">null</span>) &#123;</span><br><span class="line">        mRunQueue = <span class="keyword">new</span> HandlerActionQueue();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mRunQueue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里的<code>getRunQueue</code>就是返回<code>HandlerActionQueue</code>，外部确实就是调用<code>HandlerActionQueue.post</code>，继续深入</p>
+<h4 id="HandlerActionQueue"><a href="#HandlerActionQueue" class="headerlink" title="HandlerActionQueue#"></a>HandlerActionQueue#</h4><blockquote>
+<p>以下所有代码都处于HandlerActionQueue中</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HandlerActionQueue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> HandlerAction[] mActions; <span class="comment">// 这里创建了一个HandlerAction数组</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mCount; <span class="comment">// 还有一个计数</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">post</span><span class="params">(Runnable action)</span> </span>&#123;</span><br><span class="line">        postDelayed(action, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postDelayed</span><span class="params">(Runnable action, <span class="keyword">long</span> delayMillis)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> HandlerAction handlerAction = <span class="keyword">new</span> HandlerAction(action, delayMillis);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;<span class="comment">// 加锁，同步进行</span></span><br><span class="line">            <span class="keyword">if</span> (mActions == <span class="keyword">null</span>) &#123;</span><br><span class="line">                mActions = <span class="keyword">new</span> HandlerAction[<span class="number">4</span>];<span class="comment">// 如果为空，则创建默认大小为4的数组</span></span><br><span class="line">            &#125;</span><br><span class="line">            mActions = GrowingArrayUtils.append(mActions, mCount, handlerAction);</span><br><span class="line">            mCount++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>GrowingArrayUtils：从名字就可以看出来，是一个可以自动扩展的Array工具类</p>
+</blockquote>
+<p><code>HandlerActionQueue.post</code>内部则是调用了<code>postDelayed()</code>，<code>postDelayed()</code>内部则是将<code>Runnable</code>和<code>long</code>作为参数创建一个<code>HandlerAction</code>，之后再添加到<code>mActions</code>数组中去，那就顺便看一下<code>HandlerAction</code></p>
+<h5 id="HandlerAction"><a href="#HandlerAction" class="headerlink" title="HandlerAction"></a>HandlerAction</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">HandlerAction</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> Runnable action;</span><br><span class="line">    <span class="keyword">final</span> <span class="keyword">long</span> delay;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HandlerAction</span><span class="params">(Runnable action, <span class="keyword">long</span> delay)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.action = action;</span><br><span class="line">        <span class="keyword">this</span>.delay = delay;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matches</span><span class="params">(Runnable otherAction)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> otherAction == <span class="keyword">null</span> &amp;&amp; action == <span class="keyword">null</span></span><br><span class="line">                || action != <span class="keyword">null</span> &amp;&amp; action.equals(otherAction);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>蛮简单的一个类，主要作用就是把<code>View.post</code>传入的<code>Runnable</code>保存起来，如果是<code>postDelay()</code>，那就也把延迟时间用<code>delay</code>保存起来</p>
+<p>现在我们回到上层，梳理一下。我们一开始调用的<code>View.post</code>传入的<code>Runnable</code>，在传到<code>HandlerActionQueue</code>里会包装成<code>HanlderAction</code>，然后再缓存起来。再<code>HanlderActionQueue</code>内部创建了个默认大小为4的<code>HanlderAction</code>数组，当数组不够用的时候，就会通过<code>GrowingArrayUtils.append()</code>来进行扩展。</p>
+<h5 id="总结大概流程："><a href="#总结大概流程：" class="headerlink" title="总结大概流程："></a>总结大概流程：</h5><p><code>Activity.onCreate</code> –&gt; 调用<code>View.post()</code> –&gt; 还没进行<code>dispatchAttachedToWindow</code>  –&gt; <code>HandlerActionQueue</code>保存到数组中</p>
+<p>那么什么时候这些存储起来的<code>Runnable</code>来会被执行呢，这又得回到<code>HandlerActionQueue</code>这里了</p>
+<h5 id="executeActions"><a href="#executeActions" class="headerlink" title="executeActions"></a>executeActions</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">executeActions</span><span class="params">(Handler handler)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">        <span class="keyword">final</span> HandlerAction[] actions = mActions;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, count = mCount; i &lt; count; i++) &#123; <span class="comment">// 全部遍历出来，然后加到Handler里面去</span></span><br><span class="line">            <span class="keyword">final</span> HandlerAction handlerAction = actions[i];</span><br><span class="line">            handler.postDelayed(handlerAction.action, handlerAction.delay);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        mActions = <span class="keyword">null</span>;</span><br><span class="line">        mCount = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>HandlerActionQueue</code>里面，有一个<code>executeActions</code>的这么一个方法，就是用来处理<code>HandlerAction</code>的。还要一个主要的地方就是这些被缓存的<code>Runnable</code>也都是被<strong>Handler</strong>处理的，那么这个<strong>Hanlder</strong>是哪里来的呢</p>
+<h4 id="View-1"><a href="#View-1" class="headerlink" title="View#"></a>View#</h4><blockquote>
+<p>以下所有代码都处于View中</p>
+</blockquote>
+<h5 id="dispatchAttachedToWindow"><a href="#dispatchAttachedToWindow" class="headerlink" title="dispatchAttachedToWindow"></a>dispatchAttachedToWindow</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dispatchAttachedToWindow</span><span class="params">(AttachInfo info, <span class="keyword">int</span> visibility)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Transfer all pending runnables.</span></span><br><span class="line">       <span class="keyword">if</span> (mRunQueue != <span class="keyword">null</span>) &#123;</span><br><span class="line">           mRunQueue.executeActions(info.mHandler);</span><br><span class="line">           mRunQueue = <span class="keyword">null</span>;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从代码中很清晰的就可以看到，只要<code>mRunQueue</code>不为空，在执行<code>dispatchAttachedToWindow</code>的时候就会去运行</p>
+<h5 id="再次总结大概流程🎉："><a href="#再次总结大概流程🎉：" class="headerlink" title="再次总结大概流程🎉："></a>再次总结大概流程🎉：</h5><p><code>Activity.onCreate</code> –&gt; 调用<code>View.post()</code> –&gt; 还没进行<code>dispatchAttachedToWindow</code>  –&gt; 使用<code>HandlerActionQueue</code>将<code>Runnable</code>保存到数组中 –&gt; <code>View.dispatchAttachedToWindow</code>被执行 –&gt; <code>mRunQueue</code>不为空 –&gt; <code>mRunQueue.executeActions()</code>运行被储存的<code>Runnable</code> —&gt;由于<code>View.dispatchAttachedToWindow</code>被执行，<code>mAttachInfo</code>不为空，则剩下的都交给<code>mAttachInfo.mHandler</code></p>
+<p>图片流程：</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/image-20210730143624882.png" alt="image-20210730143624882"></p>
+<p>到这里我们就可以回答一开始提的第二个问题，为什么可以解决在<code>Activity</code>的<code>OnCreate()</code>里调用<code>View.post()</code>来解决获取<code>View</code>高宽为0的问题。答案就是View先会将传入进来的<code>Runnable</code>都缓存起来，等到<code>dispatchAttachedToWindow</code>  执行，在先将缓存起来的<code>Runnable</code>遍历运行，之后的就正常交给<code>mAttachInfo.mHandler</code>。最后我们就只用搞清楚<code>mAttachInfo</code>是在哪里初始化的和什么时候会调用<code>dispatchAttachedToWindow</code> </p>
+<p>通过查询，会在<code>ViewRootlmpl.performTraversals()</code>和<code>ViewGroup.addViewInner()</code>里被调用</p>
+<h4 id="ViewGroup"><a href="#ViewGroup" class="headerlink" title="ViewGroup#"></a>ViewGroup#</h4><blockquote>
+<p>以下所有代码都处于ViewGroup 中</p>
+</blockquote>
+<p>咱们先来看<code>ViewGroup</code>，在<code>ViewGroup</code>的<code>addViewInner()</code>方法内部会调用到<code>dispatchAttachedToWindow</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addViewInner</span><span class="params">(View child, <span class="keyword">int</span> index, LayoutParams params,<span class="keyword">boolean</span> preventRequestLayout)</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    AttachInfo ai = mAttachInfo;</span><br><span class="line">		   ...</span><br><span class="line">            child.dispatchAttachedToWindow(mAttachInfo, (mViewFlags&amp;VISIBILITY_MASK));</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>addViewInner()</code>是<code>ViewGroup</code>在添加<code>View</code>时内部的逻辑，也就是当<code>ViewGroup.addView()</code>的时候，如果<code>mAttachInfo</code>不为空，则会去调用子类的<code>dispatchAttachedToWindow()</code>，并将自身的<code>AttachInfo</code>传入过去。然后子<code>View</code>则会将传递过来的<code>mAttachInfo</code>赋值给自己的<code>AttachInfo</code></p>
+<p>那么<code>ViewGroup</code>的<code>AttachInfo</code>是那来的呢，我们继续深入，最终找到的结果非常Amazed啊！。<code>ViewGroup</code>是继承<code>View</code>的，<code>ViewGroup</code>中的<code>AttachInfo</code>是直接使用<code>View</code>中<code>AttachInfo</code>，可以很牛，直接绕回来了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">View</span> <span class="keyword">implements</span> <span class="title">Drawable</span>.<span class="title">Callback</span>, <span class="title">KeyEvent</span>.<span class="title">Callback</span>,<span class="title">AccessibilityEventSource</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    AttachInfo mAttachInfo;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>ViewGroup</code>内部也有一个<code>dispatchAttachedToWindow</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">dispatchAttachedToWindow</span><span class="params">(AttachInfo info, <span class="keyword">int</span> visibility)</span> </span>&#123;</span><br><span class="line">      ...</span><br><span class="line">      <span class="keyword">super</span>.dispatchAttachedToWindow(info, visibility);</span><br><span class="line">      ...</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) &#123;</span><br><span class="line">          <span class="keyword">final</span> View child = children[i];</span><br><span class="line">          child.dispatchAttachedToWindow(info,</span><br><span class="line">                  combineVisibility(visibility, child.getVisibility()));</span><br><span class="line">      &#125;</span><br><span class="line">...</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>在该方法被调用时，会先调用父类的<code>dispatchAttachedToWindow</code>，也就是调用<code>View.dispatchAttachedToWindow</code>（<code>View</code>中的<code>AttachInfo</code>也是在这个时候被赋值的），接着遍历所有子类，调用子类的<code>dispatchAttachedToWindow</code>，并传入自身的<code>AttachInfo</code>。但是这样一来，我们就直接进入循环了… 所以我们还是去看看<code>ViewRootlmpl</code>，希望那里会有答案</p>
+<h4 id="ViewRootlmpl"><a href="#ViewRootlmpl" class="headerlink" title="ViewRootlmpl#"></a>ViewRootlmpl#</h4><blockquote>
+<p>以下所有代码都处于ViewRootlmpl中</p>
+</blockquote>
+<h5 id="performTraversals"><a href="#performTraversals" class="headerlink" title="performTraversals()"></a>performTraversals()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">performTraversals</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> <span class="keyword">final</span> View host = mView; <span class="comment">//这里的View是Activity中的DecorView</span></span><br><span class="line"> ...</span><br><span class="line"> <span class="keyword">if</span> (mFirst) &#123;</span><br><span class="line"> 	...</span><br><span class="line"> 	host.dispatchAttachedToWindow(mAttachInfo, <span class="number">0</span>);</span><br><span class="line"> 	mAttachInfo.mTreeObserver.dispatchOnWindowAttachedChange(<span class="keyword">true</span>);</span><br><span class="line"> 	dispatchApplyInsets(host);</span><br><span class="line"> 	...</span><br><span class="line"> &#125;</span><br><span class="line"> mFirst = <span class="keyword">false</span>;</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，<code>performTraversals()</code>这个方法是用来通知<code>Activity</code>的<code>View</code>树来开始测量、布局、绘制。而<code>DecorView</code>就是<code>Activity</code>的根布局，<code>View</code>树的起点，是一个<code>FrameLayout</code>(是一个<code>ViewGroup</code>)。所以就是在这里第一次将<code>mAttachInfo</code>传给了<code>DecorView</code>中的所有子类</p>
+<p>可以了，现在只用找到<code>mAttachInfo</code>是在哪里进行的初始化就可以了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ViewRootImpl</span><span class="params">(Context context, Display display, IWindowSession session,<span class="keyword">boolean</span> useSfChoreographer)</span> </span>&#123;</span><br><span class="line"> ...   </span><br><span class="line"> mAttachInfo = <span class="keyword">new</span> View.AttachInfo(mWindowSession, mWindow, display, <span class="keyword">this</span>, mHandler, <span class="keyword">this</span>,context);</span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>找到了，在<code>ViewRootImpl</code>的一个构造方法中，创建了一个<code>AttachInfo</code>。所以说<code>ViewRootImpl</code>是<code>AttachInfo</code>的开头，<code>AttachInfo</code>是从这里开始往下传递的</p>
+<p>但又有一个小问题出现了，那就是创建<code>AttachInfo</code>中放入的参数<code>mHandler</code>，<code>mHandler</code>是那来的呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> ViewRootHandler mHandler = <span class="keyword">new</span> ViewRootHandler();</span><br></pre></td></tr></table></figure>
+
+<p><code>mHandler</code>是在内部被创建的，又因为<code>ViewRootImpl</code>是在主线程中，所以这里创建的<code>Handler</code>会自动的获取当前线程的<code>Looper</code>，所以也就可以回答一开始所问的问题，为什么可以在子线程中调用<code>View.post</code>来更新<code>ui</code>，因为内部的<code>Handler</code>始终都是在主线程上的</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>当调用<code>View.post</code>的时候，<code>View</code>内部会先判断是否调用过<code>dispatchAttachedToWindow</code>，也就是<code>mAttachInfo</code>是否为空。为空的话，则会先将传入进来的<code>Runnable</code>通过调用<code>HandlerActionQueue</code>封装成<code>HandlerAction</code>保存在数组中，等待<code>dispatchAttachedToWindow</code>被执行。当<code>dispatchAttachedToWindow</code>被执行的时候，则会先将存储在<code>HandlerActionQueue</code>里的数组中的<code>HandlerAction</code>提取出来运行，之后的<code>Runnable</code>都将直接调用<code>mAttachInfo.post()</code>来运行</p>
+<p>关于<code>mAttachInfo</code>的流程：一开始<code>ViewRootlmpl</code>通知<code>Activity</code>根<code>View</code>开始测量、布局、绘制。也就是通知<code>Activity.DevorView</code>去进行测量会调用<code>view.dispatchAttachedToWindow()</code>的方法，将自身的<code>mAttachInfo</code>传给根<code>View</code>。而根<code>View</code>(<code>DevorView</code>)是一个<code>ViewGroup</code>，所以在<code>ViewGroup</code>的<code>dispatchAttachedToWindow</code>又会遍历子<code>View</code>，通过调用子<code>View</code>的<code>dispatchAttachedToWindow</code>将<code>mAttachInfo</code>传递给每个子<code>View</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/28/Android-View-Post/" data-id="cksvyy5t4000t3wme0raae51i" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/View/" rel="tag">View</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/08/28/Material-Design-Navigation/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Material Design - Navigation</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

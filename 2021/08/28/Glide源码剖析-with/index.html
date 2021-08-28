@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Glide源码剖析-with |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Glide源码剖析-with" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Glide源码剖析-with
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-with/" class="article-date">
+  <time datetime="2021-08-28T15:54:00.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将分析源码Glide.with()方法</p>
+<a id="more"></a>
+<h1 id="Glide源码剖析-with"><a href="#Glide源码剖析-with" class="headerlink" title="Glide源码剖析-with"></a>Glide源码剖析-with</h1><blockquote>
+<p>将分析源码Glide.with()</p>
+</blockquote>
+<p>在大多数情况下，我们使用<code>Glide</code>进行图片加载无非就是下面一句话</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#Activity</span><br><span class="line">Glide.with(<span class="keyword">this</span>).load(src).into(imageView)</span><br></pre></td></tr></table></figure>
+
+<p>可以见得<code>Glide</code>帮我们在背后完成了海量的操作，所以下面我们将先按照使用者的角度来进行剖析</p>
+<h2 id="with"><a href="#with" class="headerlink" title="with()"></a>with()</h2><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Glide.with(<span class="keyword">this</span>)</span><br></pre></td></tr></table></figure>
+
+<p><code>with()</code>是<code>Glide</code>中的<strong>一组静态方法</strong>。为什么说是一组呢，因为它有很多个重载方法。在我们日常使用中，我们经常性的会往<code>with()</code>里传递<code>Activity</code>，有时也会传递<code>Fragment</code>。所以<code>Glide.with()</code>是一组静态方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#Glide</span><br><span class="line">...</span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RequestManager <span class="title">with</span><span class="params">(<span class="meta">@NonNull</span> Context context)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getRetriever(context).get(context);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RequestManager <span class="title">with</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getRetriever(activity).get(activity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RequestManager <span class="title">with</span><span class="params">(<span class="meta">@NonNull</span> FragmentActivity activity)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getRetriever(activity).get(activity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RequestManager <span class="title">with</span><span class="params">(<span class="meta">@NonNull</span> Fragment fragment)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getRetriever(fragment.getContext()).get(fragment);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Deprecated</span></span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RequestManager <span class="title">with</span><span class="params">(<span class="meta">@NonNull</span> android.app.Fragment fragment)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getRetriever(fragment.getActivity()).get(fragment);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> RequestManager <span class="title">with</span><span class="params">(<span class="meta">@NonNull</span> View view)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> getRetriever(view.getContext()).get(view);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>上述代码是精简过之后的代码。可以见得虽然往里面传递了不同的参数，但最终都还是指向了<code>getRetriever().get()</code>，那接下来就先看看<code>getRetriever()</code>是个什么方法把</p>
+<h3 id="getRetriever"><a href="#getRetriever" class="headerlink" title="getRetriever()"></a>getRetriever()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#Glide</span><br><span class="line">  <span class="meta">@NonNull</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> RequestManagerRetriever <span class="title">getRetriever</span><span class="params">(<span class="meta">@Nullable</span> Context context)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Context could be null for other reasons (ie the user passes in null), but in practice it will</span></span><br><span class="line">    <span class="comment">// only occur due to errors with the Fragment lifecycle.</span></span><br><span class="line">    Preconditions.checkNotNull(</span><br><span class="line">        context,</span><br><span class="line">        <span class="string">&quot;You cannot start a load on a not yet attached View or a Fragment where getActivity() &quot;</span></span><br><span class="line">            + <span class="string">&quot;returns null (which usually occurs when getActivity() is called before the Fragment &quot;</span></span><br><span class="line">            + <span class="string">&quot;is attached or after the Fragment is destroyed).&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> Glide.get(context).getRequestManagerRetriever();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>getRetriever()的代码不多。我们可以简单分析以下</p>
+<ol>
+<li><p>Preconditions.checkNotNull()</p>
+<p>Preconditions.checkNotNull()：就是个判空处理，它接收2个参数。第一个就是需要判空的对象，第二个则是如果为空则会抛出的异常信息</p>
+<ul>
+<li>使用优势<ol>
+<li>节省时间</li>
+<li>简单使用，如果全部手写，可能需要写十几处判空的逻辑,还要处理异常</li>
+<li>适用于空指针异常处理</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>Glide.get().getRequestManagerRetriever()</p>
+<p>这里可以看出先调用了<code>Glide.get()</code>在调用<code>getRequestManagerRetriever</code>()获取<code>RequestManagerRetriever</code>对象。那么就先看一下<code>Glide.get()</code>方法把</p>
+<h5 id="Glide-get"><a href="#Glide-get" class="headerlink" title="Glide.get()"></a>Glide.get()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#Glide</span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="comment">// Double checked locking is safe here.</span></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;GuardedBy&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Glide <span class="title">get</span><span class="params">(<span class="meta">@NonNull</span> Context context)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (glide == <span class="keyword">null</span>) &#123;</span><br><span class="line">    GeneratedAppGlideModule annotationGeneratedModule =</span><br><span class="line">        getAnnotationGeneratedGlideModules(context.getApplicationContext());</span><br><span class="line">    <span class="keyword">synchronized</span> (Glide.class) &#123;</span><br><span class="line">      <span class="keyword">if</span> (glide == <span class="keyword">null</span>) &#123;</span><br><span class="line">        checkAndInitializeGlide(context, annotationGeneratedModule);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">   </span><br><span class="line">  <span class="keyword">return</span> glide;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就是单例模式下获取本身。至于是如何进行构造的我们先不用理会，这里就只用明白就是获取一个自己出来即可</p>
+<p>那剩下的就只有<code>getRequestManagerRetriever</code>()了</p>
+<h5 id="getRequestManagerRetriever"><a href="#getRequestManagerRetriever" class="headerlink" title="getRequestManagerRetriever()"></a>getRequestManagerRetriever()</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#Glide</span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">final</span> RequestManagerRetriever requestManagerRetriever;</span><br><span class="line">  ...</span><br><span class="line">  <span class="meta">@NonNull</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> RequestManagerRetriever <span class="title">getRequestManagerRetriever</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> requestManagerRetriever;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码啥也没做，就是返回了个<code>RequestManagerRetriever</code>回来。至于它是在哪被初始化的，我们先也不展开了</p>
+</li>
+</ol>
+<p>回到<code>Glide.with()</code>我们梳理一遍，<code>with()</code>内部先调用了<code>getRetriever()</code>去获取<code>RequestManagerRetriever</code>，在调用了<code>.get()</code>方法，相当于是直接调用了<code>RequestManagerRetriever.get()</code>方法。所以说最终还是调用的是<code>RequestManagerRetriever.get()</code>方法</p>
+<p>那我们也就只能继续去查看<code>RequestManagerRetriever.get()</code>方法了</p>
+<h3 id="RequestManagerRetriever"><a href="#RequestManagerRetriever" class="headerlink" title="RequestManagerRetriever"></a>RequestManagerRetriever</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#RequestManagerRetriever</span><br><span class="line">...</span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestManager <span class="title">get</span><span class="params">(<span class="meta">@NonNull</span> Context context)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (context == <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;You cannot start a load on a null Context&quot;</span>);</span><br><span class="line">      <span class="comment">// 判断是否在主线程、判断context是否是Application</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Util.isOnMainThread() &amp;&amp; !(context <span class="keyword">instanceof</span> Application)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (context <span class="keyword">instanceof</span> FragmentActivity) &#123;</span><br><span class="line">      <span class="keyword">return</span> get((FragmentActivity) context);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (context <span class="keyword">instanceof</span> Activity) &#123;</span><br><span class="line">      <span class="keyword">return</span> get((Activity) context);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (context <span class="keyword">instanceof</span> ContextWrapper</span><br><span class="line">        <span class="comment">// Only unwrap a ContextWrapper if the baseContext has a non-null application context.</span></span><br><span class="line">        <span class="comment">// Context#createPackageContext may return a Context without an Application instance,</span></span><br><span class="line">        <span class="comment">// in which case a ContextWrapper may be used to attach one.</span></span><br><span class="line">        &amp;&amp; ((ContextWrapper) context).getBaseContext().getApplicationContext() != <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> get(((ContextWrapper) context).getBaseContext());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> getApplicationManager(context);</span><br><span class="line">&#125; </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>我们一个一个分析</p>
+<ol>
+<li><p>方法一开始就先进行了判空处理</p>
+</li>
+<li><p>之后会判断当前是否处于主线程中和传入进来的<code>context</code>是否是<code>Application</code></p>
+<ul>
+<li>如果任意一个条件不满足，则会直接调用getApplicationManager()</li>
+</ul>
+</li>
+<li><p>接下就只有三种情况：</p>
+<ul>
+<li>第一种就是传入进来的context是FragmentActivity，那么会返回get((FragmentActivity) context)</li>
+<li>第二种就是传入进来的context是Activity，那么会返回get((Activity) context)</li>
+<li>最后一种就是传入进来的context是属于ContextWrapper，那么会返回get(((ContextWrapper) context).getBaseContext())</li>
+</ul>
+<blockquote>
+<p>ContextWrapper是继承于Context，而Activity、Service、Application也都是ContextWrapper的直接或间接子类</p>
+</blockquote>
+</li>
+</ol>
+<p>所以说<code>RequestManagerRetriever.get()</code>方法会根据传递进来的<code>context</code>类型来返回不同的<code>RequestManager</code>，那就继续看看<code>get()</code>方法把</p>
+<h4 id="get"><a href="#get" class="headerlink" title="get()"></a>get()</h4><p>这里就先以参数为<code>FragmentActivity</code>作为例子，别的都大同小异</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#RequestManagerRetriever</span><br><span class="line">...</span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestManager <span class="title">get</span><span class="params">(<span class="meta">@NonNull</span> FragmentActivity activity)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (Util.isOnBackgroundThread()) &#123;<span class="comment">// 判断是否处于子线程中</span></span><br><span class="line">    <span class="keyword">return</span> get(activity.getApplicationContext());</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    assertNotDestroyed(activity);<span class="comment">// 判断传入的Activity是否被销毁</span></span><br><span class="line">    frameWaiter.registerSelf(activity);</span><br><span class="line">    FragmentManager fm = activity.getSupportFragmentManager();<span class="comment">// 获取activity的FragmentManager</span></span><br><span class="line">    <span class="keyword">return</span> supportFragmentGet(activity, fm, <span class="comment">/*parentHint=*/</span> <span class="keyword">null</span>, isActivityVisible(activity));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>一开始就直接判断当前是否处于后台线程，是的话就直接返回<code>get(activity.getApplicationContext())</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (Util.isOnBackgroundThread()) &#123;</span><br><span class="line">   <span class="keyword">return</span> get(activity.getApplicationContext());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Util.isOnBackgroundThread()：判断当前线程是否是后台线程，是返回true，不是返回false</p>
+</blockquote>
+</li>
+<li><p>判断传入进来的<code>activity</code>是否已经被销毁</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assertNotDestroyed(activity);</span><br></pre></td></tr></table></figure>
+
+<h6 id="assertNotDestroyed"><a href="#assertNotDestroyed" class="headerlink" title="assertNotDestroyed"></a>assertNotDestroyed</h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#RequestManagerRetriever</span><br><span class="line">  <span class="meta">@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">assertNotDestroyed</span><span class="params">(<span class="meta">@NonNull</span> Activity activity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN_MR1 &amp;&amp; activity.isDestroyed()) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">&quot;You cannot start a load for a destroyed activity&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>就判断一下当前的SDK是否大于等于17和传入进来的<code>activity</code>是否被销毁</p>
+<blockquote>
+<p>Build.VERSION_CODES.JELLY_BEAN_MR1：API 17</p>
+</blockquote>
+</li>
+<li><p>获取当前传入<code>activity</code>的<code>FragmentManager</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FragmentManager fm = activity.getSupportFragmentManager();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后调用<code>supportFragmentGet()</code>，返回<code>RequestManager</code>出去。😔还是得继续看下去，看看是如何返回<code>RequestManager</code></p>
+</li>
+</ol>
+<h5 id="RequestManager"><a href="#RequestManager" class="headerlink" title="RequestManager"></a>RequestManager</h5><p>这里就是重头戏了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">#RequestManagerRetriever</span><br><span class="line">  <span class="meta">@NonNull</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> RequestManager <span class="title">supportFragmentGet</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="meta">@NonNull</span> Context context,</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="meta">@NonNull</span> FragmentManager fm,</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="meta">@Nullable</span> Fragment parentHint,// 注意这里是可为空</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="keyword">boolean</span> isParentVisible)</span> </span>&#123;</span><br><span class="line">    SupportRequestManagerFragment current = getSupportRequestManagerFragment(fm, parentHint);</span><br><span class="line">    RequestManager requestManager = current.getRequestManager();<span class="comment">// 这里也可能为空</span></span><br><span class="line">    <span class="keyword">if</span> (requestManager == <span class="keyword">null</span>) &#123; <span class="comment">// 开始判空</span></span><br><span class="line">      <span class="comment">// TODO(b/27524013): Factor out this Glide.get() call.</span></span><br><span class="line">      Glide glide = Glide.get(context); <span class="comment">// 开始构建</span></span><br><span class="line">      requestManager = factory.build(glide, current.getGlideLifecycle(), current.getRequestManagerTreeNode(), context);</span><br><span class="line">      <span class="comment">// This is a bit of hack, we&#x27;re going to start the RequestManager, but not the</span></span><br><span class="line">      <span class="comment">// corresponding Lifecycle. It&#x27;s safe to start the RequestManager, but starting the</span></span><br><span class="line">      <span class="comment">// Lifecycle might trigger memory leaks. See b/154405040</span></span><br><span class="line">      <span class="keyword">if</span> (isParentVisible) &#123;</span><br><span class="line">        requestManager.onStart();</span><br><span class="line">      &#125;</span><br><span class="line">      current.setRequestManager(requestManager);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> requestManager;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>首先第八行获取了一个SupporRequestManagerFragment，这其实是一个隐形的Fragment</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SupportRequestManagerFragment current = getSupportRequestManagerFragment(fm, parentHint);</span><br></pre></td></tr></table></figure>
+
+<p>通过参数FragmentManager和Fragment(可空)来创建一个隐形的Fragment</p>
+<blockquote>
+<p>这里创建一个隐形的Fragment的意图就是，想通过添加一个隐形的Fragment到Activity中去，来监听Fragment的生命周期，便于控制加载</p>
+<p>因为Fragment的生命周期是跟随着Activity的，所以可以根据这个方法来监听到Activity的生命周期</p>
+</blockquote>
+</li>
+<li><p>下面又通过刚获取的Fragment又获取到了RequestManager</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RequestManager requestManager = current.getRequestManager();</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>RequestManager：其实就是一个生命周期管理类，用来判断当前的生命周期来选择是否继续加载图片</p>
+</blockquote>
+<p>到这里为止，Glide就可以根据这个 Fragment 的生命周期进行请求管理了。</p>
+</li>
+<li><p>但是如果是第一次，那么获取到的RequestManager会为空，就需要继续判空处理，如果刚刚current.getRequestManager()获取为空，则重新创建一个RequsetManager</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (requestManager == <span class="keyword">null</span>) &#123;</span><br><span class="line">  <span class="comment">// Factor out this Glide.get() call.</span></span><br><span class="line">  Glide glide = Glide.get(context);</span><br><span class="line">  <span class="comment">// 这有点小技巧，我们要启动RequestManager，但不是</span></span><br><span class="line">  <span class="comment">// 相应的生命周期。 启动RequestManager是安全的，但是启动  </span></span><br><span class="line">  <span class="comment">// 生命周期可能会触发内存泄漏</span></span><br><span class="line">  requestManager =</span><br><span class="line">      factory.build(</span><br><span class="line">          glide, current.getGlideLifecycle(), current.getRequestManagerTreeNode(), context);</span><br><span class="line">  <span class="keyword">if</span> (isParentVisible) &#123;</span><br><span class="line">    requestManager.onStart();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 将创建好的requestManager添加到SupportRequestManagerFragment 上去</span></span><br><span class="line">  current.setRequestManager(requestManager);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，又重新获取了一次<code>Glide</code>单例，并通过<code>Fractory</code>工厂类来构建<code>RequestManager</code>，构建需要三个参数</p>
+<ol>
+<li>Glide实例</li>
+<li>这里的 current.getGlideLifecycle() 就是getSupportRequestManagerFragment中实例化的 ActivityFragmentLifecycle。这样 RequestManager 就与 ActivityFragmentLifecycle 进行了关联</li>
+<li>Context</li>
+</ol>
+<p>创建完<code>RequestManager</code>之后，就根据传递进来的<code>isParentVisible</code>来通知<code>requestManager</code>是否开始</p>
+<blockquote>
+<p>isParentVisible：字面意思就是之前传递进来的Fragment Activity是否显示</p>
+</blockquote>
+<p>最后就是将 <code>RequestManager</code> 设置到 <code>SupportRequestManagerFragment</code> 中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">current.setRequestManager(requestManager);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h4 id="getApplicationContext"><a href="#getApplicationContext" class="headerlink" title="getApplicationContext()"></a>getApplicationContext()</h4><p>接下来在看一个Application的情况，因为大体上就可以分为两种，context是Application和context不是Application</p>
+<p>先放出代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#RequestManagerRetriever</span><br><span class="line">  <span class="meta">@NonNull</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> RequestManager <span class="title">getApplicationManager</span><span class="params">(<span class="meta">@NonNull</span> Context context)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Either an application context or we&#x27;re on a background thread.</span></span><br><span class="line">    <span class="keyword">if</span> (applicationManager == <span class="keyword">null</span>) &#123;</span><br><span class="line">      <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;<span class="comment">// 保证同步</span></span><br><span class="line">        <span class="keyword">if</span> (applicationManager == <span class="keyword">null</span>) &#123;</span><br><span class="line">		  <span class="comment">// 通常，暂停/恢复是由我们添加到片段或活动的片段来处理的。 然而，在这种情况下，由于附加到应用程序的管理器将不会接收生命周期事件，我们必须强制管理器使用ApplicationLifecycle开始恢复。  </span></span><br><span class="line">          <span class="comment">// TODO(b/27524013): Factor out this Glide.get() call.</span></span><br><span class="line">          Glide glide = Glide.get(context.getApplicationContext());</span><br><span class="line">          applicationManager =</span><br><span class="line">              factory.build(</span><br><span class="line">                  glide,</span><br><span class="line">                  <span class="keyword">new</span> ApplicationLifecycle(),</span><br><span class="line">                  <span class="keyword">new</span> EmptyRequestManagerTreeNode(),</span><br><span class="line">                  context.getApplicationContext());</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> applicationManager;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>总体上于非Application的差不了多少，不过我们也还是继续分析</p>
+<ol>
+<li><p>还是和之前一样，先使用传递进来的context去获取到Glide，然后通过Glide去创建Request Manager</p>
+</li>
+<li><p>只不过在<code>getApplicationManager()</code>这里，通过Factory创建Request Manager的参数可不一样。在这里第一个参数还是Glide，但是第二个参数就变成了<code>ApplicationLifecycle()</code>，之前是传入Fragment的<code>getGlideLifecycle()</code>也就是Fragment的生命周期</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ApplicationLifecycle</span> <span class="keyword">implements</span> <span class="title">Lifecycle</span> </span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addListener</span><span class="params">(<span class="meta">@NonNull</span> LifecycleListener listener)</span> </span>&#123;</span><br><span class="line">    listener.onStart();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeListener</span><span class="params">(<span class="meta">@NonNull</span> LifecycleListener listener)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Do nothing.</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看出<code>ApplicationLifecycle</code>是空实现，也就是说这里没有专门做生命周期的处理， 因为 Application 对象的生命周期即为应用程序的生命周期，所以在这里图片请求的生命周期是和应用程序同步的。</p>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>所以说，<code>Glide.with()</code>就是根据传递进来的context是什么它就会返回什么样的Request Manager出去，至于Request Manager内部就是创建了一个隐形的Fragment上去，通过这个隐形的Fragment来监听Activity的生命周期变化</p>
+<p>也可以说是Glide为了能够自动的配合生命周期来控制图片的加载和暂停，所以才想出判断传入进来的Context是否是Application来考虑是通过一个隐形的Fragment来感知Activity的生命周期还是直接使用ApplicationLifecycle</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-with/" data-id="cksvyswlx000c3wmeb9ybg1ws" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Glide/" rel="tag">Glide</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" rel="tag">源码剖析</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-load/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      Glide源码剖析-load
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-into/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Glide源码剖析-into</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

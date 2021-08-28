@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Material Design - Navigation |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Material-Design-Navigation" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Material Design - Navigation
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/28/Material-Design-Navigation/" class="article-date">
+  <time datetime="2021-08-28T15:57:00.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将介绍Android中的协程</p>
+<a id="more"></a>
+<h1 id="Material-Design"><a href="#Material-Design" class="headerlink" title="Material Design"></a>Material Design</h1><blockquote>
+<p>Material Design - Navigation</p>
+</blockquote>
+<h3 id="Navigation导航跳转"><a href="#Navigation导航跳转" class="headerlink" title="Navigation导航跳转"></a>Navigation导航跳转</h3><p>在 Google I/O 2018 上新出现了一个导航组件（Navigation Architecture Component），导航组件类似iOS开发里的StoryBoard，可以可视化的编辑App页面的导航关系。</p>
+<h4 id="Navigation依赖"><a href="#Navigation依赖" class="headerlink" title="Navigation依赖"></a>Navigation依赖</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;androidx.navigation:navigation-fragment-ktx:2.3.0&#x27;</span></span><br><span class="line">implementation <span class="string">&#x27;androidx.navigation:navigation-ui-ktx:2.3.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Navigation使用"><a href="#Navigation使用" class="headerlink" title="Navigation使用"></a>Navigation使用</h4><ol>
+<li><p>先创建2个<code>Fragment</code>，用于导航跳转</p>
+<h5 id="FragmentA"><a href="#FragmentA" class="headerlink" title="FragmentA"></a>FragmentA</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FragmentA</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> binding: FragmentABinding <span class="keyword">by</span> lazy &#123; FragmentABinding.inflate(layoutInflater) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View &#123;</span><br><span class="line">        <span class="keyword">return</span> binding.root</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/button&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">&quot;按钮&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintLeft_toLeftOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>FragmentA</code>里面也就只是放了个<code>Button</code>用于跳转</p>
+<h5 id="FragmentB"><a href="#FragmentB" class="headerlink" title="FragmentB"></a>FragmentB</h5><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FragmentB</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> binding: FragmentBBinding <span class="keyword">by</span> lazy &#123; FragmentBBinding.inflate(layoutInflater) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View? &#123;</span><br><span class="line">        <span class="keyword">return</span> binding.root</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="布局-1"><a href="#布局-1" class="headerlink" title="布局"></a>布局</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">com.google.android.material.card.MaterialCardView</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">&quot;http://schemas.android.com/tools&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:transitionName</span>=<span class="string">&quot;fragmentB&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/med_title&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginStart</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;30dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textColor</span>=<span class="string">&quot;@color/black&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;20sp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textStyle</span>=<span class="string">&quot;bold&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintLeft_toLeftOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">tools:text</span>=<span class="string">&quot;标题&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/mad_author&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginEnd</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;@string/ma_author&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textColor</span>=<span class="string">&quot;@color/black&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;15sp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintRight_toRightOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toBottomOf</span>=<span class="string">&quot;@+id/med_title&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/mad_text&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;0dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginLeft</span>=<span class="string">&quot;@dimen/dp_10&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;10dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginRight</span>=<span class="string">&quot;@dimen/dp_10&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;@string/mad_text&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textColor</span>=<span class="string">&quot;@color/black&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:textSize</span>=<span class="string">&quot;18sp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintLeft_toLeftOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toBottomOf</span>=<span class="string">&quot;@+id/mad_author&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">com.google.android.material.card.MaterialCardView</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>FragmentB</code>这里就放了几个<code>TextView</code>。相当于是详情页，方便后面进行更改</p>
+</li>
+<li><p>在<code>res</code>文件下创建一个名为<code>navigation</code>的文件夹</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/image-20210817140632663.png" alt="image-20210817140632663"></p>
+</li>
+<li><p>在<code>navigation</code>文件夹下在创建一个名为<code>navigation_graph</code>的xml文件</p>
+</li>
+<li><p>创建完成之后，打开<code>navigation_graph</code></p>
+<p>在xml文件中点击右上角的Design切换页面</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/image-20210817141242213.png" alt="image-20210817141242213"></p>
+<p>之后就可以通过鼠标点击来操作了，非常简单</p>
+<p>在点击xml文件中左上角的+号，将刚刚创建的2个<code>Fragment</code>拖进来，之后的样子会是如下图所示</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/image-20210817141752272.png" alt="image-20210817141752272"></p>
+<p>当然你们肯定是还没有连线的，接下来就将它们联系起来</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/image-20210817141910247.png" alt="image-20210817141910247"></p>
+<p>选中右边的一侧，拖至另一个Frag<code>m</code>ent，就联系上了</p>
+<p>最后在<code>xml</code>文件的<code>Split</code>代码页面中，给第一行的<code>navigation</code>添加上开始页面</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">navigation</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/navigation_graph&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:startDestination</span>=<span class="string">&quot;@id/homeFragment&quot;</span>&gt;</span> //《---这里</span><br><span class="line">    </span><br><span class="line">    ....</span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">navigation</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>MainActivity</code>的<code>xml</code>中，添加一个<code>FragmentContainerView</code>，将上面创建好的<code>navigation</code>添加上去</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.fragment.app.FragmentContainerView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/fragmentA&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">&quot;androidx.navigation.fragment.NavHostFragment&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:defaultNavHost</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:navGraph</span>=<span class="string">&quot;@navigation/navigation_graph&quot;</span> /&gt;</span> //《--这里</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.coordinatorlayout.widget.CoordinatorLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>NavHostFragment是导航视图的展示容器(name为固定写法，必须指明为)</p>
+<p>defaultNavHost字段表示是否拦截返回按键操作(若为true，需要的Activity中重写onSupportNavigateUp方法。 因为默认情况下返回键是不会回退fragment页面的)</p>
+</blockquote>
+</li>
+<li><p>就大功告成拉，打开软件，先是会显示<code>FragmentA</code>。你可以在<code>FragmentA</code>中添加一个按钮，通过如下代码进行跳转</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">button.setOnClickListener &#123;</span><br><span class="line">    Navigation.findNavController(it).navigate(R.id.action_fragmentA_to_fragmentB)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>这里的R.id.action_fragmentA_to_fragmentB是刚才navigation中FragmentA的action定义的</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">action</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/action_fragmentA_to_fragmentB&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:destination</span>=<span class="string">&quot;@id/fragmentBB&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>通过指定<code>action</code>的<code>id</code>来告诉<code>Navigation</code>跳转的逻辑。其他页面也是一样</p>
+</li>
+</ol>
+<h3 id="Materal共享属性动画"><a href="#Materal共享属性动画" class="headerlink" title="Materal共享属性动画"></a>Materal共享属性动画</h3><p>接下来才是重点，在<code>Materal Design</code>中提供了容器变换、共享轴模式、淡出淡入、弹出这些转场模式</p>
+<p>这里就可以使用<code>navigaion</code>+容器变换来实现非常炫酷的转场动画</p>
+<h4 id="Materal依赖"><a href="#Materal依赖" class="headerlink" title="Materal依赖"></a>Materal依赖</h4><p><code>Materal</code>动画是需要<code>Materal</code>依赖</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.google.android.material:material:1.4.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Materal转场动画使用"><a href="#Materal转场动画使用" class="headerlink" title="Materal转场动画使用"></a>Materal转场动画使用</h4><p>我们接着上面的项目继续更改</p>
+<ol>
+<li><p>将<code>FragmentA</code>继续完善</p>
+<p>将<code>FragmentA</code>的布局改为<code>RecyclerView</code>，做成列表</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">&quot;http://schemas.android.com/apk/res-auto&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">androidx.recyclerview.widget.RecyclerView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/ma_list&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintLeft_toLeftOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">androidx.constraintlayout.widget.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加<code>navigation</code>插件</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apply <span class="attr">plugin:</span> <span class="string">&#x27;com.android.application&#x27;</span></span><br><span class="line">apply <span class="attr">plugin:</span> <span class="string">&#x27;kotlin-android&#x27;</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">apply <span class="attr">plugin:</span> <span class="string">&quot;androidx.navigation.safeargs.kotlin&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完善<code>FragmentA</code>代码(关于适配器的内容，我就不介绍了，就只是做个列表出来用于跳转而已)</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FragmentA</span> : <span class="type">Fragment</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> binding: FragmentABinding <span class="keyword">by</span> lazy &#123; FragmentABinding.inflate(layoutInflater) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> adapter: MaterialAdapter <span class="keyword">by</span> lazy &#123; MaterialAdapter() &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">        inflater: <span class="type">LayoutInflater</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">        container: <span class="type">ViewGroup</span>?,</span></span></span><br><span class="line"><span class="function"><span class="params">        savedInstanceState: <span class="type">Bundle</span>?</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span></span>: View &#123;</span><br><span class="line">        <span class="keyword">return</span> binding.root</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        enterTransition = MaterialFadeThrough().apply &#123;</span><br><span class="line">            duration = <span class="number">300</span>.toLong() <span class="comment">// 设置过度时间</span></span><br><span class="line">        &#125;</span><br><span class="line">        binding.maList.run &#123;<span class="comment">// 正常的设置适配器</span></span><br><span class="line">            adapter = <span class="keyword">this</span><span class="symbol">@FragmentA</span>.adapter</span><br><span class="line">            layoutManager = LinearLayoutManager(context)</span><br><span class="line">        &#125;</span><br><span class="line">        adapter.run &#123;<span class="comment">// 适配器的点击事件</span></span><br><span class="line">            addChildClickViewIds(R.id.ma_root)</span><br><span class="line">            setOnItemChildClickListener &#123; adapter, view, position -&gt;</span><br><span class="line">                <span class="keyword">val</span> transitionName = <span class="string">&quot;fragmentB&quot;</span><span class="comment">// 共享元素的Transition名称</span></span><br><span class="line">                <span class="keyword">val</span> extras = FragmentNavigatorExtras(view to transitionName)</span><br><span class="line">                <span class="keyword">val</span> directions =</span><br><span class="line">                    FragmentADirections.actionFragmentAToFragmentB((adapter.<span class="keyword">data</span>[position] <span class="keyword">as</span> <span class="built_in">Int</span>).toLong())</span><br><span class="line">                <span class="keyword">val</span> navHostFragment =</span><br><span class="line">                    activity?.supportFragmentManager?.findFragmentById(R.id.fragmentA) <span class="keyword">as</span> NavHostFragment</span><br><span class="line">                <span class="keyword">val</span> navController = navHostFragment.navController</span><br><span class="line">                navController.navigate(directions, extras)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        adapter.setList(arrayListOf(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>))</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>enterTransition：进入别的场景时的过度</p>
+<p>FragmentNavigatorExtras：使用给定的共享元素实例 </p>
+<p>directions：动作，就是表明要跳到哪里</p>
+<p>findNavController()：扩展函数，用于获取NavController</p>
+</blockquote>
+</li>
+<li><p><code>FragmentB</code>代码部分</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FragmentB</span> : <span class="type">Fragment</span></span>()&#123;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)</span><br><span class="line">        sharedElementEnterTransition = MaterialContainerTransform().apply &#123;</span><br><span class="line">            <span class="comment">//  drawingViewId 是视图的 id，在其上方，容器变换将在 z 轴空间进行</span></span><br><span class="line">            drawingViewId = R.id.fragmentA</span><br><span class="line">            duration = resources.getInteger(R.integer.reply_motion_duration_large).toLong()</span><br><span class="line">            <span class="comment">// 由于我们也想将列表页面通过动画转换出视图，所以将 scrimColor 设置为透明</span></span><br><span class="line">            scrimColor = Color.TRANSPARENT</span><br><span class="line">            setAllContainerColors(requireActivity().themeColor(R.attr.colorSurface))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>sharedElementEnterTransition：设置将用于共享元素转移到内容场景的过渡</p>
+<p>这里的R.id.fragmentA是MainActivity布局中的FragmentContainerView</p>
+</blockquote>
+</li>
+<li><p>之后就可以启动看一下效果了，不出意外的话，效果会于下图一致(Gif图的速度会过快)</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/Material.gif" alt="Material"></p>
+<p>官方效果</p>
+<p><img src="https://codelabs.developers.google.com/codelabs/material-motion-android/img/9df2b39d5a150418.gif" alt="9df2b39d5a150418.gif"></p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/28/Material-Design-Navigation/" data-id="cksvyvpgq000m3wme4vhzhh0d" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material/" rel="tag">Material</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/08/28/Android-View-Post/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      Android-View.Post
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/08/28/Android%E6%8E%A8%E9%80%81%E5%8E%9F%E7%90%86/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Android推送原理</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

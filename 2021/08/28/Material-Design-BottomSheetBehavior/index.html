@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Material Design - BottomSheetBehavior |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Material-Design-BottomSheetBehavior" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Material Design - BottomSheetBehavior
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/28/Material-Design-BottomSheetBehavior/" class="article-date">
+  <time datetime="2021-08-28T15:55:00.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将介绍Material Design下的BottomSheetBehavior</p>
+<a id="more"></a>
+<h1 id="Material-Design"><a href="#Material-Design" class="headerlink" title="Material Design"></a>Material Design</h1><blockquote>
+<p>Material Design - BottomSheetBehavior</p>
+</blockquote>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><p>BottomSheetBehavior是在Design23.3推出的底部动作条，所以说，想要用上BottomSheetBehavior那么就要保证design依赖在23.3或者以上</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;com.android.support:design:26.0.0-alpha1&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>当然Androidx也是可以的</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">&#x27;androidx.appcompat:appcompat:1.2.0&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h3><p>BottomSheetBehavior不是一个控件(View)而是一个显示控制器</p>
+<p>只需要在Xml中，往需要的View中添加<code>app:layout_behavior=&quot;@string/bottom_sheet_behavior&quot;</code>，然后通过控制BottomSheetBehavior的状态来控制显示</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">FrameLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/background_container&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:behavior_halfExpandedRatio</span>=<span class="string">&quot;0.5&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:behavior_hideable</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:behavior_skipCollapsed</span>=<span class="string">&quot;true&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_behavior</span>=<span class="string">&quot;@string/bottom_sheet_behavior&quot;</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    	...</span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">FrameLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="布局属性"><a href="#布局属性" class="headerlink" title="布局属性"></a>布局属性</h4><ol>
+<li><p>behavior_halfExpandedRatio:</p>
+<p>设置展开的高度占父类高度的比例，比例范围介于0-1。在上图中，设置为0.5就表示着BottomSheetBehavior展开后占父类高度的50%，也就是一半</p>
+</li>
+<li><p>behavior_hideable:</p>
+<p>设置BottomSheetBehavior是否可以通过向下拖动来进行隐藏，也就是下图中的效果</p>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/BottomSheetBehavior.gif" alt="BottomSheetBehavior"></p>
+</li>
+</ol>
+<ol start="3">
+<li><p>behavior_skipCollapsed</p>
+<p>设置BottomSheetBehavior一旦展开就跳过折叠状态，跳过过度效果。除非它是可隐藏的</p>
+</li>
+</ol>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><ol>
+<li><p>先给想要成为BottomSheetBehavior的View添加上<code>app:layout_behavior</code></p>
+</li>
+<li><p>在代码中进行获取</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">val</span> behavior: BottomSheetBehavior&lt;FrameLayout&gt; <span class="keyword">by</span> lazy(LazyThreadSafetyMode.NONE) &#123;</span><br><span class="line">        BottomSheetBehavior.from(binding.backgroundContainer)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里是使用了BottomSheetBehavior.from()来将View关联起来的</p>
+</li>
+<li><p>通过控BottomSheetBehavior的状态来控制是否展开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">behavior.state &#x3D; BottomSheetBehavior.STATE_HALF_EXPANDED</span><br></pre></td></tr></table></figure>
+
+<p>BottomSheetBehavior的状态码如下</p>
+<table>
+<thead>
+<tr>
+<th>状态码</th>
+<th>状态效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>STATE_DRAGGING</td>
+<td>指BottomSheet处于被手指拖着</td>
+</tr>
+<tr>
+<td>STATE_SETTLING</td>
+<td>指BottomSheet处于正在折叠的过程中</td>
+</tr>
+<tr>
+<td>STATE_EXPANDED</td>
+<td>指BottomSheet处于展开的状态</td>
+</tr>
+<tr>
+<td>STATE_COLLAPSED</td>
+<td>指BottomSheet处于折叠的状态</td>
+</tr>
+<tr>
+<td>STATE_HIDDEN</td>
+<td>指BottomSheet处于隐藏的状态</td>
+</tr>
+<tr>
+<td>STATE_HALF_EXPANDED</td>
+<td>指BottomSheet是半展开的(当mFitToContents为false时使用)</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>之后BottomSheetBehavior就会根据现在的状态来自动的更改UI</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/28/Material-Design-BottomSheetBehavior/" data-id="cksvytvxq000f3wme1si82la3" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Material/" rel="tag">Material</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/08/28/Material-Design-MaterialShapeDrawable/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      Material Design - MaterialShapeDrawable
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-load/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Glide源码剖析-load</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

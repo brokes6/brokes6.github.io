@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-07-07T16:01:02.063Z</updated>
+  <updated>2021-08-28T15:59:23.526Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,177 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android-View.Post</title>
+    <link href="http://example.com/2021/08/28/Android-View-Post/"/>
+    <id>http://example.com/2021/08/28/Android-View-Post/</id>
+    <published>2021-08-28T15:58:00.000Z</published>
+    <updated>2021-08-28T15:59:23.526Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍Android中的协程&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="View" scheme="http://example.com/tags/View/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Material Design - Navigation</title>
+    <link href="http://example.com/2021/08/28/Material-Design-Navigation/"/>
+    <id>http://example.com/2021/08/28/Material-Design-Navigation/</id>
+    <published>2021-08-28T15:57:00.000Z</published>
+    <updated>2021-08-28T15:57:24.360Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍Android中的协程&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="Material" scheme="http://example.com/tags/Material/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android推送原理</title>
+    <link href="http://example.com/2021/08/28/Android%E6%8E%A8%E9%80%81%E5%8E%9F%E7%90%86/"/>
+    <id>http://example.com/2021/08/28/Android%E6%8E%A8%E9%80%81%E5%8E%9F%E7%90%86/</id>
+    <published>2021-08-28T15:57:00.000Z</published>
+    <updated>2021-08-28T15:58:07.061Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;这里将会介绍Android上的推送原理&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="推送" scheme="http://example.com/tags/%E6%8E%A8%E9%80%81/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Material Design - MaterialShapeDrawable</title>
+    <link href="http://example.com/2021/08/28/Material-Design-MaterialShapeDrawable/"/>
+    <id>http://example.com/2021/08/28/Material-Design-MaterialShapeDrawable/</id>
+    <published>2021-08-28T15:56:00.000Z</published>
+    <updated>2021-08-28T15:56:55.554Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍Material Design下的MaterialShapeDrawable&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="Material" scheme="http://example.com/tags/Material/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Material Design - BottomSheetBehavior</title>
+    <link href="http://example.com/2021/08/28/Material-Design-BottomSheetBehavior/"/>
+    <id>http://example.com/2021/08/28/Material-Design-BottomSheetBehavior/</id>
+    <published>2021-08-28T15:55:00.000Z</published>
+    <updated>2021-08-28T15:56:12.675Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍Material Design下的BottomSheetBehavior&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="Material" scheme="http://example.com/tags/Material/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Glide源码剖析-load</title>
+    <link href="http://example.com/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-load/"/>
+    <id>http://example.com/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-load/</id>
+    <published>2021-08-28T15:54:00.000Z</published>
+    <updated>2021-08-28T15:54:42.928Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将分析源码Glide.load()方法&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Glide" scheme="http://example.com/tags/Glide/"/>
+    
+    <category term="源码剖析" scheme="http://example.com/tags/%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Glide源码剖析-with</title>
+    <link href="http://example.com/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-with/"/>
+    <id>http://example.com/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-with/</id>
+    <published>2021-08-28T15:54:00.000Z</published>
+    <updated>2021-08-28T15:55:26.105Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将分析源码Glide.with()方法&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Glide" scheme="http://example.com/tags/Glide/"/>
+    
+    <category term="源码剖析" scheme="http://example.com/tags/%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Glide源码剖析-into</title>
+    <link href="http://example.com/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-into/"/>
+    <id>http://example.com/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-into/</id>
+    <published>2021-08-28T15:53:00.000Z</published>
+    <updated>2021-08-28T15:53:40.283Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将分析源码Glide.into()方法&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Glide" scheme="http://example.com/tags/Glide/"/>
+    
+    <category term="源码剖析" scheme="http://example.com/tags/%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android跨进程通信-AIDL(使用)</title>
+    <link href="http://example.com/2021/08/28/Android%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-AIDL-%E4%BD%BF%E7%94%A8/"/>
+    <id>http://example.com/2021/08/28/Android%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-AIDL-%E4%BD%BF%E7%94%A8/</id>
+    <published>2021-08-28T15:52:00.000Z</published>
+    <updated>2021-08-28T15:53:55.448Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍进程间通信(IPC)机制-AIDL&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="IPC" scheme="http://example.com/tags/IPC/"/>
+    
+    <category term="跨进程通信" scheme="http://example.com/tags/%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>Kotlin - 协程</title>
@@ -230,181 +401,6 @@
     <category term="Kotlin" scheme="http://example.com/tags/Kotlin/"/>
     
     <category term="ViewModel" scheme="http://example.com/tags/ViewModel/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Fragment懒加载</title>
-    <link href="http://example.com/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/"/>
-    <id>http://example.com/2021/04/15/Fragment%E6%87%92%E5%8A%A0%E8%BD%BD/</id>
-    <published>2021-04-15T02:51:00.000Z</published>
-    <updated>2021-04-16T14:56:54.365Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本篇将讲述Fragment懒加载的使用&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Android" scheme="http://example.com/tags/Android/"/>
-    
-    <category term="View" scheme="http://example.com/tags/View/"/>
-    
-    <category term="Fragment" scheme="http://example.com/tags/Fragment/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于Glide各种问题的解决方案集合（不断更新）</title>
-    <link href="http://example.com/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/"/>
-    <id>http://example.com/2021/04/15/%E5%85%B3%E4%BA%8EGlide%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E9%9B%86%E5%90%88%EF%BC%88%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0%EF%BC%89/</id>
-    <published>2021-04-15T02:51:00.000Z</published>
-    <updated>2021-04-15T15:00:30.021Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本篇将讲述使用Glide时遇到的各种问题与解决&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Error" scheme="http://example.com/tags/Error/"/>
-    
-    <category term="Android" scheme="http://example.com/tags/Android/"/>
-    
-    <category term="Glide" scheme="http://example.com/tags/Glide/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AndroidStudio错误统计</title>
-    <link href="http://example.com/2021/04/15/AndroidStudio%E9%94%99%E8%AF%AF%E7%BB%9F%E8%AE%A1/"/>
-    <id>http://example.com/2021/04/15/AndroidStudio%E9%94%99%E8%AF%AF%E7%BB%9F%E8%AE%A1/</id>
-    <published>2021-04-15T02:49:00.000Z</published>
-    <updated>2021-04-15T14:53:27.248Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本篇将描述个人在使用Android Studio时遇到的奇奇怪怪的错误&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Error" scheme="http://example.com/tags/Error/"/>
-    
-    <category term="kotlin" scheme="http://example.com/tags/kotlin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于Android的各个View的介绍</title>
-    <link href="http://example.com/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/"/>
-    <id>http://example.com/2021/04/15/%E5%85%B3%E4%BA%8EAndroid%E7%9A%84%E5%90%84%E4%B8%AAView%E7%9A%84%E4%BB%8B%E7%BB%8D/</id>
-    <published>2021-04-15T02:49:00.000Z</published>
-    <updated>2021-04-15T14:52:53.804Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本篇将介绍Android一些冷门View的使用&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="kotlin" scheme="http://example.com/tags/kotlin/"/>
-    
-    <category term="View" scheme="http://example.com/tags/View/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kotlin的一些语法和数据结构</title>
-    <link href="http://example.com/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/"/>
-    <id>http://example.com/2021/04/15/Kotlin%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AF%AD%E6%B3%95/</id>
-    <published>2021-04-15T02:48:00.000Z</published>
-    <updated>2021-04-22T11:50:24.620Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本篇将讲述Kotlin的一些语法糖和Lambda的使用&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="kotlin" scheme="http://example.com/tags/kotlin/"/>
-    
-    <category term="syntax" scheme="http://example.com/tags/syntax/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Android面试题笔记</title>
-    <link href="http://example.com/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
-    <id>http://example.com/2021/02/18/Android%E9%9D%A2%E8%AF%95%E9%A2%98%E7%AC%94%E8%AE%B0/</id>
-    <published>2021-02-18T02:43:00.000Z</published>
-    <updated>2021-04-15T14:54:40.841Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;Android面试题记录&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Android" scheme="http://example.com/tags/Android/"/>
-    
-    <category term="面试题" scheme="http://example.com/tags/%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Collapsing与Navigation</title>
-    <link href="http://example.com/2020/12/24/Collapsing%E4%B8%8ENavigation/"/>
-    <id>http://example.com/2020/12/24/Collapsing%E4%B8%8ENavigation/</id>
-    <published>2020-12-24T07:59:00.000Z</published>
-    <updated>2021-04-15T14:54:52.885Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;介绍Collapsing与Navigation的使用&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="View" scheme="http://example.com/tags/View/"/>
-    
-    <category term="Kotlin" scheme="http://example.com/tags/Kotlin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>DrawerLayout的使用</title>
-    <link href="http://example.com/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://example.com/2020/12/24/DrawerLayout%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2020-12-24T07:58:00.000Z</published>
-    <updated>2021-04-15T14:55:34.058Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;介绍Android中的DrawerLayout的使用&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="View" scheme="http://example.com/tags/View/"/>
-    
-    <category term="Kotlin" scheme="http://example.com/tags/Kotlin/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PicGo与Typora 上传图片</title>
-    <link href="http://example.com/2020/12/24/PicGo%E4%B8%8ETypora-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/"/>
-    <id>http://example.com/2020/12/24/PicGo%E4%B8%8ETypora-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87/</id>
-    <published>2020-12-24T07:57:00.000Z</published>
-    <updated>2021-04-15T14:56:12.924Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;关于PicGo的配置与使用&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Service" scheme="http://example.com/tags/Service/"/>
-    
-    <category term="Money" scheme="http://example.com/tags/Money/"/>
     
   </entry>
   

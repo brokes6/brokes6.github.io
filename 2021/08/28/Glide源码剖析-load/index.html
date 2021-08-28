@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Glide源码剖析-load |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Glide源码剖析-load" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Glide源码剖析-load
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-load/" class="article-date">
+  <time datetime="2021-08-28T15:54:00.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将分析源码Glide.load()方法</p>
+<a id="more"></a>
+<h1 id="Glide源码剖析-load"><a href="#Glide源码剖析-load" class="headerlink" title="Glide源码剖析-load"></a>Glide源码剖析-load</h1><blockquote>
+<p>将分析源码Glide.load()</p>
+</blockquote>
+<h2 id="load"><a href="#load" class="headerlink" title="load()"></a>load()</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Glide.with(<span class="keyword">this</span>).load(<span class="string">&quot;图片资源&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>load()一共有9个重载方法，都返回<code>RequestBuilder&lt;Drawable&gt;</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> Object model)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> Bitmap bitmap)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> Drawable drawable)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> String string)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> Uri uri)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> File file)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@RawRes</span> <span class="meta">@DrawableRes</span> <span class="meta">@Nullable</span> Integer resourceId)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> URL url)</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> <span class="keyword">byte</span>[] model)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>这些重载方法内部都会调用<code>asDrawable().load()</code>，这里就拿最常用的<code>load(String string)</code>来作为例子</p>
+<p>我们先来看一下<code>asDrawable()</code></p>
+<h3 id="asDrawable"><a href="#asDrawable" class="headerlink" title="asDrawable()"></a>asDrawable()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#RequestManager</span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="meta">@CheckResult</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RequestBuilder&lt;Drawable&gt; <span class="title">asDrawable</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> as(Drawable.class);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="meta">@CheckResult</span></span><br><span class="line"><span class="keyword">public</span> &lt;ResourceType&gt; <span class="function">RequestBuilder&lt;ResourceType&gt; <span class="title">as</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="meta">@NonNull</span> Class&lt;ResourceType&gt; resourceClass)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> RequestBuilder&lt;&gt;(glide, <span class="keyword">this</span>, resourceClass, context);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码就是通过使用传递进来的参数来创建一个RequestBuilder()，所以<code>asDrawable()</code>方法最终创建了 RequestBuilder 的实例并返回，查看RequestBuilder的构造函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#RequestBuilder</span><br><span class="line">  <span class="function"><span class="keyword">protected</span> <span class="title">RequestBuilder</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">      <span class="meta">@NonNull</span> Glide glide,</span></span></span><br><span class="line"><span class="function"><span class="params">      RequestManager requestManager,</span></span></span><br><span class="line"><span class="function"><span class="params">      Class&lt;TranscodeType&gt; transcodeClass,</span></span></span><br><span class="line"><span class="function"><span class="params">      Context context)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.glide = glide;</span><br><span class="line">    <span class="keyword">this</span>.requestManager = requestManager;</span><br><span class="line">    <span class="keyword">this</span>.transcodeClass = transcodeClass;</span><br><span class="line">    <span class="keyword">this</span>.context = context;</span><br><span class="line">    <span class="keyword">this</span>.transitionOptions = requestManager.getDefaultTransitionOptions(transcodeClass);</span><br><span class="line">    <span class="keyword">this</span>.glideContext = glide.getGlideContext();</span><br><span class="line"></span><br><span class="line">    initRequestListeners(requestManager.getDefaultRequestListeners());</span><br><span class="line">    apply(requestManager.getDefaultRequestOptions());</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>构造函数里也是将参数赋值给了一些常量，之后初始化了请求监听</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">initRequestListeners(requestManager.getDefaultRequestListeners());</span><br></pre></td></tr></table></figure>
+
+<p>最后调用了apply()将默认选择应用于请求</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#RequestBuilder</span><br><span class="line">  <span class="meta">@NonNull</span></span><br><span class="line">  <span class="meta">@CheckResult</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> RequestBuilder&lt;TranscodeType&gt; <span class="title">apply</span><span class="params">(<span class="meta">@NonNull</span> BaseRequestOptions&lt;?&gt; requestOptions)</span> </span>&#123;</span><br><span class="line">    Preconditions.checkNotNull(requestOptions);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.apply(requestOptions);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码很少，就执行了两个操作。先判断传入及拿来的Options是否是为空，其次调用父类的apply，将Options传入</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">#BaseRequestOptions</span><br><span class="line">  <span class="function"><span class="keyword">public</span> T <span class="title">apply</span><span class="params">(<span class="meta">@NonNull</span> BaseRequestOptions&lt;?&gt; o)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 基本上就是设置一些默认配置项</span></span><br><span class="line">    <span class="keyword">if</span> (isAutoCloneEnabled) &#123;</span><br><span class="line">      <span class="keyword">return</span> clone().apply(o);</span><br><span class="line">    &#125;</span><br><span class="line">    BaseRequestOptions&lt;?&gt; other = o;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, SIZE_MULTIPLIER)) &#123;</span><br><span class="line">      sizeMultiplier = other.sizeMultiplier;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, USE_UNLIMITED_SOURCE_GENERATORS_POOL)) &#123;</span><br><span class="line">      useUnlimitedSourceGeneratorsPool = other.useUnlimitedSourceGeneratorsPool;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, USE_ANIMATION_POOL)) &#123;</span><br><span class="line">      useAnimationPool = other.useAnimationPool;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, DISK_CACHE_STRATEGY)) &#123;</span><br><span class="line">      diskCacheStrategy = other.diskCacheStrategy;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, PRIORITY)) &#123;</span><br><span class="line">      priority = other.priority;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, ERROR_PLACEHOLDER)) &#123;</span><br><span class="line">      errorPlaceholder = other.errorPlaceholder;</span><br><span class="line">      errorId = <span class="number">0</span>;</span><br><span class="line">      fields &amp;= ~ERROR_ID;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, ERROR_ID)) &#123;</span><br><span class="line">      errorId = other.errorId;</span><br><span class="line">      errorPlaceholder = <span class="keyword">null</span>;</span><br><span class="line">      fields &amp;= ~ERROR_PLACEHOLDER;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, PLACEHOLDER)) &#123;</span><br><span class="line">      placeholderDrawable = other.placeholderDrawable;</span><br><span class="line">      placeholderId = <span class="number">0</span>;</span><br><span class="line">      fields &amp;= ~PLACEHOLDER_ID;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, PLACEHOLDER_ID)) &#123;</span><br><span class="line">      placeholderId = other.placeholderId;</span><br><span class="line">      placeholderDrawable = <span class="keyword">null</span>;</span><br><span class="line">      fields &amp;= ~PLACEHOLDER;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, IS_CACHEABLE)) &#123;</span><br><span class="line">      isCacheable = other.isCacheable;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, OVERRIDE)) &#123;</span><br><span class="line">      overrideWidth = other.overrideWidth;</span><br><span class="line">      overrideHeight = other.overrideHeight;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, SIGNATURE)) &#123;</span><br><span class="line">      signature = other.signature;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, RESOURCE_CLASS)) &#123;</span><br><span class="line">      resourceClass = other.resourceClass;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, FALLBACK)) &#123;</span><br><span class="line">      fallbackDrawable = other.fallbackDrawable;</span><br><span class="line">      fallbackId = <span class="number">0</span>;</span><br><span class="line">      fields &amp;= ~FALLBACK_ID;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, FALLBACK_ID)) &#123;</span><br><span class="line">      fallbackId = other.fallbackId;</span><br><span class="line">      fallbackDrawable = <span class="keyword">null</span>;</span><br><span class="line">      fields &amp;= ~FALLBACK;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, THEME)) &#123;</span><br><span class="line">      theme = other.theme;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, TRANSFORMATION_ALLOWED)) &#123;</span><br><span class="line">      isTransformationAllowed = other.isTransformationAllowed;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, TRANSFORMATION_REQUIRED)) &#123;</span><br><span class="line">      isTransformationRequired = other.isTransformationRequired;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, TRANSFORMATION)) &#123;</span><br><span class="line">      transformations.putAll(other.transformations);</span><br><span class="line">      isScaleOnlyOrNoTransform = other.isScaleOnlyOrNoTransform;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (isSet(other.fields, ONLY_RETRIEVE_FROM_CACHE)) &#123;</span><br><span class="line">      onlyRetrieveFromCache = other.onlyRetrieveFromCache;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Applying options with dontTransform() is expected to clear our transformations.</span></span><br><span class="line">    <span class="keyword">if</span> (!isTransformationAllowed) &#123;</span><br><span class="line">      transformations.clear();</span><br><span class="line">      fields &amp;= ~TRANSFORMATION;</span><br><span class="line">      isTransformationRequired = <span class="keyword">false</span>;</span><br><span class="line">      fields &amp;= ~TRANSFORMATION_REQUIRED;</span><br><span class="line">      isScaleOnlyOrNoTransform = <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    fields |= other.fields;</span><br><span class="line">    options.putAll(other.options);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> selfOrThrowIfLocked();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>isSet()：将两个Int类型参数进行与运算。（就是比较二进制数，是1为1，否则为0）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isSet</span><span class="params">(<span class="keyword">int</span> fields, <span class="keyword">int</span> flag)</span> </span>&#123;</span><br><span class="line"> <span class="keyword">return</span> (fields &amp; flag) != <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>上面基本上都是在配置配置项，包括磁盘缓存策略，加载中的占位图，加载失败的占位图等。 到这里 asDrawable() 方法完成了。接下来查看load部分</p>
+<h3 id="asDrawable-load"><a href="#asDrawable-load" class="headerlink" title="asDrawable().load()"></a>asDrawable().load()</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#RequestBuilder</span><br><span class="line">  <span class="meta">@NonNull</span></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="meta">@CheckResult</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> RequestBuilder&lt;TranscodeType&gt; <span class="title">load</span><span class="params">(<span class="meta">@Nullable</span> String string)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> loadGeneric(string);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>里面也就调用了loadGeneric()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#RequestBuilder</span><br><span class="line">  <span class="meta">@NonNull</span></span><br><span class="line">  <span class="function"><span class="keyword">private</span> RequestBuilder&lt;TranscodeType&gt; <span class="title">loadGeneric</span><span class="params">(<span class="meta">@Nullable</span> Object model)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isAutoCloneEnabled()) &#123;</span><br><span class="line">      <span class="keyword">return</span> clone().loadGeneric(model);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.model = model;</span><br><span class="line">    isModelSet = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">return</span> selfOrThrowIfLocked();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>先判断需不需要进行克隆，需要的话则会将克隆一个RequestBuilder，包括目前为止的所有配置项</p>
+<blockquote>
+<p>返回此请求生成器的副本，其中包含到目前为止在此生成器上放置的所有选项。  </p>
+<p>该方法返回一个“深度”副本，其中所有非不可变参数都被复制，这样对一个构建器的更改不会影响到另一个构建器。 然而，除了不可变参数外，当前模型不会被复制，因此对模型的更改将影响两个构建器。  </p>
+<p>[^Ps]: 以上内容来自有道翻译</p>
+</blockquote>
+</li>
+<li><p>将传入进来的图片资源赋值给成员变量model，在设置isModelSet为true，代表着已经设置过了</p>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>load()方法就比较简单了，主要就是通过之前创建的Glide和RequestManager来构建RequestBuilder，将参数赋值给成员变量model。还要就是设置一些默认配置项</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-load/" data-id="cksvyrycp00093wme3ijm2mat" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Glide/" rel="tag">Glide</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" rel="tag">源码剖析</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/08/28/Material-Design-BottomSheetBehavior/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      Material Design - BottomSheetBehavior
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-with/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Glide源码剖析-with</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>

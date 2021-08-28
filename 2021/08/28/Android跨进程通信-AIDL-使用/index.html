@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    Android跨进程通信-AIDL(使用) |
+    
+    Fuxinbo博客</title>
+  
+  <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Android跨进程通信-AIDL-使用" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Android跨进程通信-AIDL(使用)
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/08/28/Android%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-AIDL-%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2021-08-28T15:52:00.000Z" itemprop="datePublished">2021-08-28</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将介绍进程间通信(IPC)机制-AIDL</p>
+<a id="more"></a>
+<h1 id="Android跨进程通信-AIDL-使用"><a href="#Android跨进程通信-AIDL-使用" class="headerlink" title="Android跨进程通信-AIDL(使用)"></a>Android跨进程通信-AIDL(使用)</h1><blockquote>
+<p>本文将介绍进程间通信(IPC)机制-AIDL</p>
+</blockquote>
+<h2 id="AIDL介绍"><a href="#AIDL介绍" class="headerlink" title="AIDL介绍"></a>AIDL介绍</h2><p>ADIL是Android中进程间通信的一种机制，我们可以利用它定义客户端与服务端进行进程间通信的编程接口</p>
+<p>在Android中，一个进程是无法访问另一个进程的内存，所以为了解决进程间通讯的问题，Android使用一种接口定义语言来公开服务的<strong>接口</strong>，本质上，AIDL非常像一个接口，通过公开接口，让别的进程调用该接口，从而实现进程间的通讯。</p>
+<h2 id="使用AIDL"><a href="#使用AIDL" class="headerlink" title="使用AIDL"></a>使用AIDL</h2><h3 id="数据实体类"><a href="#数据实体类" class="headerlink" title="数据实体类"></a>数据实体类</h3><p>首先先创建一个实体数据类，用来进程间进行通信</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(</span><br><span class="line">    <span class="keyword">val</span> name: String?,</span><br><span class="line">    <span class="keyword">val</span> age: <span class="built_in">Int</span></span><br><span class="line">) : Parcelable &#123;</span><br><span class="line">    <span class="keyword">constructor</span>(parcel: Parcel) : <span class="keyword">this</span>(</span><br><span class="line">        parcel.readString(),</span><br><span class="line">        parcel.readInt()</span><br><span class="line">    ) &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">writeToParcel</span><span class="params">(parcel: <span class="type">Parcel</span>, flags: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        parcel.writeString(name)</span><br><span class="line">        parcel.writeInt(age)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">describeContents</span><span class="params">()</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">companion</span> <span class="keyword">object</span> CREATOR : Parcelable.Creator&lt;Person&gt; &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">createFromParcel</span><span class="params">(parcel: <span class="type">Parcel</span>)</span></span>: Person &#123;</span><br><span class="line">            <span class="keyword">return</span> Person(parcel)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">newArray</span><span class="params">(size: <span class="type">Int</span>)</span></span>: Array&lt;Person?&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> arrayOfNulls(size)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意！这里的Person的目录结构必须要和下方创建的aidl文件目录结构一致</p>
+<p>什么意思呢，就是说这里创建的Person类是直接放在java下的，那么等下创建的aidl文件也必须是在最外层</p>
+</blockquote>
+<p>这个类还需要实现Parcelable接口，为什么呢，因为AIDL只支持几种数据类型</p>
+<ol>
+<li>java基本类型</li>
+<li>List、Map</li>
+<li>实现了Parcelable接口</li>
+</ol>
+<p>所以说这里需要继承Parcelable</p>
+<h3 id="AIDL接口"><a href="#AIDL接口" class="headerlink" title="AIDL接口"></a>AIDL接口</h3><blockquote>
+<p>在Android Studio高版本中，通过右键创建的.aidl文件都会被Android Studio强制放到main下的aidl文件夹中</p>
+<p>这里的aidl文件是放在最外层的，那么刚刚创建的Person文件也是需要放在java下的最外层</p>
+</blockquote>
+<p><img src="https://fu-bucket-key.oss-cn-shenzhen.aliyuncs.com/img/image-20210826194036950.png" alt="image-20210826194036950"></p>
+<p>我们还需要在aidl文件夹下在创建一个文件夹，名字为包名即可</p>
+<p>之后，首先先创建一个名字为Person.aidl类，是的，这里的名字与上面创建的数据实体类的名称相同</p>
+<blockquote>
+<p>这里的 Person 我理解的是 Person.aidl，然后通过 Person.aidl 又找到真正的实体 Person 类。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Person.aidl</span></span><br><span class="line"><span class="keyword">package</span> com.example.studynode;</span><br><span class="line"></span><br><span class="line">parcelable Person;</span><br></pre></td></tr></table></figure>
+
+<p>这里使用了自定义Parcelable对象，接着我们去定义个接口用来通信</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IMyAidl.aidl</span></span><br><span class="line"><span class="keyword">package</span> com.example.studynode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.example.studynode.Person;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IMyAidl</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">addPerson</span><span class="params">(in Person person)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">List&lt;Person&gt; <span class="title">getPersonList</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，我们定义了两个方法，一个是用来添加数据，一个是用来获取总共的数据。之后就只需点一下有右上角的小锤子(Make Project)就ok了，系统会自动的生成一个java文件</p>
+<h3 id="服务端"><a href="#服务端" class="headerlink" title="服务端"></a>服务端</h3><p>这里就使用Service来进行跨进程通信，所以就先创建一个Service</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AidlService</span> : <span class="type">Service</span></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> mPersons: ArrayList&lt;Person&gt;? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> mInBinder: IBinder = <span class="keyword">object</span> : IMyAidl.Stub() &#123;</span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">addPerson</span><span class="params">(person: <span class="type">Person</span>)</span></span> &#123;</span><br><span class="line">            mPersons?.add(person)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getPersonList</span><span class="params">()</span></span>: MutableList&lt;Person&gt;? &#123;</span><br><span class="line">            <span class="keyword">return</span> mPersons</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onBind</span><span class="params">(intent: <span class="type">Intent</span>?)</span></span>: IBinder &#123;</span><br><span class="line">        mPersons = ArrayList()</span><br><span class="line">        <span class="keyword">return</span> mInBinder</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面代码总共创建了两个东西</p>
+<ol>
+<li>创建了一个ArrayList，用来存放数据</li>
+<li>为了实现来自.aidl文件生成的接口，需要继承Binder接口（例如Ibinder接口),并且实现从.aidl文件中继承法，在上面代码中，使用匿名实例实现一个叫IMyAidl（定义在IMyAidl.aidl中）的接口，实现了两个方法，addPerson和getPersonList</li>
+</ol>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AidlActivity</span> : <span class="type">BaseSimpleActivity</span>&lt;<span class="type">ActivityAidlBinding</span>&gt;</span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="keyword">val</span> binding: ActivityAidlBinding <span class="keyword">by</span> lazy &#123; ActivityAidlBinding.inflate(layoutInflater) &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> iMyAidl: IMyAidl? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> adapter: AidlAdapter <span class="keyword">by</span> lazy &#123; AidlAdapter() &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> serviceConnection: ServiceConnection = <span class="keyword">object</span> : ServiceConnection &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onServiceConnected</span><span class="params">(name: <span class="type">ComponentName</span>?, service: <span class="type">IBinder</span>?)</span></span> &#123;</span><br><span class="line">            Log.d(<span class="string">&quot;AIDL&quot;</span>, <span class="string">&quot;onServiceConnected: 绑定Service成功&quot;</span>)</span><br><span class="line">            iMyAidl = IMyAidl.Stub.asInterface(service)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onServiceDisconnected</span><span class="params">(name: <span class="type">ComponentName</span>?)</span></span> &#123;</span><br><span class="line">            iMyAidl = <span class="literal">null</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">initView</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        binding.aidlList.apply &#123;</span><br><span class="line">            layoutManager =</span><br><span class="line">                LinearLayoutManager(<span class="keyword">this</span><span class="symbol">@AidlActivity</span>)</span><br><span class="line">            adapter = <span class="keyword">this</span><span class="symbol">@AidlActivity</span>.adapter</span><br><span class="line">        &#125;</span><br><span class="line">        binding.aidlButton1.setOnClickListener &#123;</span><br><span class="line">            iMyAidl?.addPerson(Person(<span class="string">&quot;Tom&quot;</span>, Random.nextInt(<span class="number">10</span>)))</span><br><span class="line">        &#125;</span><br><span class="line">        binding.aidlButton2.setOnClickListener &#123;</span><br><span class="line">            iMyAidl?.personList?.let &#123;</span><br><span class="line">                adapter.setList(it)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">initData</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> intent = Intent().apply &#123;</span><br><span class="line">            component = ComponentName(</span><br><span class="line">                <span class="string">&quot;com.example.studynode&quot;</span>,</span><br><span class="line">                <span class="string">&quot;com.example.studynode.aidl.service.AidlService&quot;</span></span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码中，主要就是绑定了Service，至于IMyAidl这个类就是系统为我们刚刚写的aidl接口自动创建的类。然后我们在绑定服务中拿到了Binder并转换成了AIDL，最后通过按钮来进行通信，按下按钮就向Servlce多添加组数据，然后使用Recycler展示出来</p>
+<blockquote>
+<p>ComponentName：这个类主要用来定义可见一个应用程序组件，例如：Activity，Service，BroadcastReceiver或者ContentProvider。也就是说可以使用ComponentName来启动四大组件</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/28/Android%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1-AIDL-%E4%BD%BF%E7%94%A8/" data-id="cksvyp38m00003wme9nph4c88" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IPC/" rel="tag">IPC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%B7%A8%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1/" rel="tag">跨进程通信</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  <a href="/2021/08/28/Glide%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90-into/" class="article-nav-link">
+    <strong class="article-nav-caption">前一篇</strong>
+    <div class="article-nav-title">
+      
+      Glide源码剖析-into
+      
+    </div>
+  </a>
+  
+  
+  <a href="/2021/07/08/Kotlin-%E5%8D%8F%E7%A8%8B/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Kotlin - 协程</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+<div class="vcomments" id="vcomments"></div>
+
+<script src="https://unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  new Valine({
+    el: '#vcomments',
+    appId: 'TikGGR5AGLNjsKeqDK5xAx6b-gzGzoHsz',
+    appKey: 'uehuRLLYmGdERs7oCOpzh5Sk',
+    notify: 'false',
+    verify: 'true',
+    avatar: 'mp',
+    pageSize: '10',
+    placeholder: '请输入...'
+  })
+</script>
+
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">Home</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">Archives</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">Gallery</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">About</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
