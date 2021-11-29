@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-29T04:40:29.374Z</updated>
+  <updated>2021-11-29T14:27:50.250Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Android-ASM修改字节码</title>
+    <link href="http://example.com/2021/11/29/Android-ASM%E4%BF%AE%E6%94%B9%E5%AD%97%E8%8A%82%E7%A0%81/"/>
+    <id>http://example.com/2021/11/29/Android-ASM%E4%BF%AE%E6%94%B9%E5%AD%97%E8%8A%82%E7%A0%81/</id>
+    <published>2021-11-29T14:21:00.000Z</published>
+    <updated>2021-11-29T14:27:50.250Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍使用ASM来修改字节码&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="ASM" scheme="http://example.com/tags/ASM/"/>
+    
+    <category term="[object Object]" scheme="http://example.com/tags/object-Object/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Android-Semaphore</title>
+    <link href="http://example.com/2021/11/29/Android-Semaphore/"/>
+    <id>http://example.com/2021/11/29/Android-Semaphore/</id>
+    <published>2021-11-29T14:20:00.000Z</published>
+    <updated>2021-11-29T14:24:50.841Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本篇将介绍使用Semaphore来实现生产者模型&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="Android" scheme="http://example.com/tags/Android/"/>
+    
+    <category term="设计模型" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%9E%8B/"/>
+    
+    <category term="[object Object]" scheme="http://example.com/tags/object-Object/"/>
+    
+  </entry>
   
   <entry>
     <title>Android-View.Post</title>
@@ -357,50 +399,6 @@
     
     
     <category term="Http" scheme="http://example.com/tags/Http/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>个人简历</title>
-    <link href="http://example.com/2021/04/15/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/"/>
-    <id>http://example.com/2021/04/15/%E4%B8%AA%E4%BA%BA%E7%AE%80%E5%8E%86/</id>
-    <published>2021-04-15T14:48:00.000Z</published>
-    <updated>2021-08-29T05:26:11.922Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;付鑫博&quot;&gt;&lt;a href=&quot;#付鑫博&quot; class=&quot;headerlink&quot; title=&quot;付鑫博&quot;&gt;&lt;/a&gt;付鑫博&lt;/h2&gt;&lt;p&gt;电话: 18126157220 丨邮箱: &lt;a</summary>
-        
-      
-    
-    
-    
-    
-    <category term="简历" scheme="http://example.com/tags/%E7%AE%80%E5%8E%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Kotlin中使用ViewModel的数据共享</title>
-    <link href="http://example.com/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/"/>
-    <id>http://example.com/2021/04/15/Kotlin%E4%B8%AD%E4%BD%BF%E7%94%A8ViewModel%E7%9A%84%E6%95%B0%E6%8D%AE%E5%85%B1%E4%BA%AB/</id>
-    <published>2021-04-15T02:53:00.000Z</published>
-    <updated>2021-04-16T15:57:51.507Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;本篇将讲述对于使用ViewModel来进行Fragment之间的数据共享，使用的技术为ViewModel，dataBinding&lt;/p&gt;</summary>
-    
-    
-    
-    
-    <category term="Android" scheme="http://example.com/tags/Android/"/>
-    
-    <category term="Kotlin" scheme="http://example.com/tags/Kotlin/"/>
-    
-    <category term="ViewModel" scheme="http://example.com/tags/ViewModel/"/>
     
   </entry>
   

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  
+  
+  <meta name="description" content="学习新技术, 总结知识, 分享喜闻乐见之事">
+  
+  <title>
+    Android-ASM修改字节码 |
+    
+    Fuxinbo博客
+  </title>
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<script src="/js/pace.min.js"></script>
+
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Fuxinbo博客" type="application/atom+xml">
+</head>
+
+<body>
+  <main class="content">
+    <section class="outer">
+  <article id="post-Android-ASM修改字节码" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+      
+
+<h1 class="article-title" itemprop="name">
+  Android-ASM修改字节码
+</h1>
+
+
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2021/11/29/Android-ASM%E4%BF%AE%E6%94%B9%E5%AD%97%E8%8A%82%E7%A0%81/" class="article-date">
+  <time datetime="2021-11-29T14:21:00.000Z" itemprop="datePublished">2021-11-29</time>
+</a>
+      
+    </div>
+    
+
+    
+    
+<div class="tocbot"></div>
+
+    
+
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+      
+      <p>本篇将介绍使用ASM来修改字节码</p>
+<a id="more"></a>
+<h1 id="Android-ASM修改字节码"><a href="#Android-ASM修改字节码" class="headerlink" title="Android-ASM修改字节码"></a>Android-ASM修改字节码</h1><blockquote>
+<p> 本篇将介绍ASM的使用</p>
+<p> (本篇对<a target="_blank" rel="noopener" href="https://juejin.cn/post/6999646242125529096#heading-10">Android 进阶之路：ASM 修改字节码，这样学就对了！ - 掘金 (juejin.cn)</a>有一定的借鉴与参考)</p>
+</blockquote>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>众所周知，JAVA文件经过JAVAC编译之后会生成Class文件，之后这个Class文件就可以被JAVA虚拟机所加载。</p>
+<p>既然JAVA虚拟机可以加载这种Class文件，那么肯定存在某种规则能够读取Class文件的内容。</p>
+<p>那么如果我们能掌握这种规则，岂不是我们可以对编译好的Class文件进行修改，之后在给它保存回去？YES，这是完全没问题的</p>
+<p>所以今天我们要讲述的重点来了，那就是<strong>ASM-操作字节码</strong></p>
+<h2 id="分析Class文件"><a href="#分析Class文件" class="headerlink" title="分析Class文件"></a>分析Class文件</h2><p>首先，如果你需要知道这个类中有那些方法，那你希望可以怎么获取？那肯定是越简单越好，最好是返回一个List回来，List存储着所以方法的名称</p>
+<h3 id="classNode"><a href="#classNode" class="headerlink" title="classNode"></a>classNode</h3><p>哦豁，还真有这个东西，那就是ClassNode。但是这个ClassNode相当于是个容器，它本身并不会去获取这个类的所有方法。那我们该如何使用呢?</p>
+<ol>
+<li><p>首先，我们先创建一个User类，来模拟一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> age;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后我们通过一些操作(也就是通过ClassReader去读取给定路径下的类，然后遍历内部)，再将数据填充到ClassNode内部</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    <span class="comment">// 这里为了方便就直接获取了</span></span><br><span class="line">    Class <span class="class"><span class="keyword">class</span> </span>= User.class; </span><br><span class="line">    <span class="comment">// 这里也就是通过class类去获取路径</span></span><br><span class="line">    String <span class="keyword">package</span> = Utils.getClassFilePack(<span class="class"><span class="keyword">class</span>)</span>;</span><br><span class="line">    <span class="comment">// 这里通过一个输入流将路径放入其中进行解析到ClassReader中去</span></span><br><span class="line">    ClassReader cr = <span class="keyword">new</span> ClassReader(<span class="keyword">new</span> FileInputStream(<span class="keyword">package</span>));</span><br><span class="line">    <span class="comment">// 这里是指定了ASM的版本</span></span><br><span class="line">    ClassNode cn = <span class="keyword">new</span> ClassNode(Opcodes.ASM5);</span><br><span class="line">    <span class="comment">// 让classreader内部去遍历，将结果都存放到classNode中去</span></span><br><span class="line">    cr.accept(cn,<span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 之后我们就可以通过ClassNode的methods和fields来获取类的方法和属性</span></span><br><span class="line">	List&lt;MethodNode&gt; methods = cn.methods;</span><br><span class="line">    List&lt;FieldNode&gt; fields = cn.fields;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>上述代码中，有一个getClassFilePack()方法，是用于通过class文件来获取路径</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getClassFilePath</span><span class="params">(Class clazz)</span> </span>&#123;</span><br><span class="line">        String buildDir = clazz.getProtectionDomain().getCodeSource().getLocation().getFile();</span><br><span class="line">        String fileName = clazz.getSimpleName() + <span class="string">&quot;.class&quot;</span>;</span><br><span class="line">        File file = <span class="keyword">new</span> File(buildDir + clazz.getPackage().getName().replaceAll(<span class="string">&quot;[.]&quot;</span>, <span class="string">&quot;/&quot;</span>) + <span class="string">&quot;/&quot;</span>, fileName);</span><br><span class="line">        <span class="keyword">return</span> file.getAbsolutePath();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><em>/ps: 具体请参考<a target="_blank" rel="noopener" href="https://juejin.cn/post/6999646242125529096#heading-10">Android 进阶之路：ASM 修改字节码，这样学就对了！ - 掘金 (juejin.cn)</a></em></p>
+</blockquote>
+</li>
+<li><p>通过上面的这几步，现在已经知道了这个类中有那些属性和方法，我们通过打印在来看一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">methods:</span><br><span class="line">	&lt;init&gt;, ()V</span><br><span class="line">	getName, ()Ljava/lang/String; <span class="comment">// 对应 String getName()</span></span><br><span class="line">	getAge, ()I <span class="comment">// 对应 int getAge()</span></span><br><span class="line">fields:</span><br><span class="line">	name, Ljava/lang/String; <span class="comment">// 对应 String name</span></span><br><span class="line">	age, I <span class="comment">// 对应 int age</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这样去获取类中的方法和属性会不会有点麻烦，还得先让ClassReader去遍历一遍，在将数据放入到ClassNode中去，最后我们才可以进行访问</p>
+<p>确实，所以还有一种方法可以知道类中的方法和属性，还是可以实时”监听”。这就要请出ClassVisitor</p>
+<h3 id="ClassVisitor"><a href="#ClassVisitor" class="headerlink" title="ClassVisitor"></a>ClassVisitor</h3><p>ClassVisitor与ClassNode的区别就是，一个相当于是在遍历的时候就通知你，一个是全部遍历完了，装填到ClassNode再让你知道</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    <span class="comment">// 老样子获取到Class文件</span></span><br><span class="line">    Class clazz = User.class;</span><br><span class="line">    <span class="comment">// 获取路径</span></span><br><span class="line">    String clazzFilePath = Utils.getClassFilePath(clazz);</span><br><span class="line">    <span class="comment">// 获取到ClasReader</span></span><br><span class="line">	ClassReader classReader = <span class="keyword">new</span> ClassReader(<span class="keyword">new</span> FileInputStream(clazzFilePath));</span><br><span class="line">    <span class="comment">// 这里就不一样了，不在是创建ClassNode，而是创建了ClassVisitor，还实现了两个抽象方法</span></span><br><span class="line">    ClassVisitor classVisitor = <span class="keyword">new</span> ClassVisitor(Opcodes.ASM5) &#123;</span><br><span class="line">        <span class="comment">// visitField的作用是，当遍历到属性时，就会调用</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> FieldVisitor <span class="title">visitField</span><span class="params">(<span class="keyword">int</span> access, String name, String descriptor, String signature, Object value)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;field:&quot;</span> + name + <span class="string">&quot; , type = &quot;</span> + descriptor);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.visitField(access, name, descriptor, signature, value);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// visitMethod的作用是，当遍历到方法时，就会调用</span></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> MethodVisitor <span class="title">visitMethod</span><span class="params">(<span class="keyword">int</span> access, String name, String descriptor, String signature, String[] exceptions)</span> </span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;method:&quot;</span> + name + <span class="string">&quot; , type = &quot;</span> + descriptor);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">super</span>.visitMethod(access, name, descriptor, signature, exceptions);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// 将ClassVisitor放入，继续让ClassReader进行遍历</span></span><br><span class="line">    classReader.accept(classVisitor, <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们来看一下输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">field:name , type = Ljava/lang/String;</span><br><span class="line">field:age , type = I</span><br><span class="line">method:&lt;init&gt; , type = ()V</span><br><span class="line">method:getName , type = ()Ljava/lang/String;</span><br><span class="line">method:getAge , type = ()I</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这其实和上面的ClassNode差不多的。如果我们自己实现一个ClassVisitor，再把遍历结果保存起来，那岂不是相当于我们自己实现了个ClassNode？</p>
+<p>我们再看一下ClassNode是继承于谁？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassNode</span> <span class="keyword">extends</span> <span class="title">ClassVisitor</span> </span></span><br></pre></td></tr></table></figure>
+
+<p>哦豁，ClassNode就是继承与ClassVisitor的。所以说ClassNode相关的原理就是我们上面使用ClassVisitor那样的</p>
+<h2 id="修改字节码"><a href="#修改字节码" class="headerlink" title="修改字节码"></a>修改字节码</h2><p>既然我们可以知道到这个类中有那些属性和方法，接下来我们是不是得尝试对其中的内容进行修改呢？</p>
+<blockquote>
+<p>下面我们将会以官方给出的代码为例子，进行讲解</p>
+</blockquote>
+<p>官方源代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">         Thread.sleep(<span class="number">100</span>);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过ASM修改字节码后的代码:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">C</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> timer;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        timer -= System.currentTimeMillis();</span><br><span class="line">        Thread.sleep(<span class="number">100</span>);</span><br><span class="line">        timer += System.currentTimeMillis();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就是创建了个局部变量time，然后在<code>m()</code>中与<code>System.currentTimeMillis()</code>进行运算</p>
+<blockquote>
+<p>System.currentTimeMillis()：获取当前的系统时间戳</p>
+</blockquote>
+<h3 id="ClassWriter"><a href="#ClassWriter" class="headerlink" title="ClassWriter"></a>ClassWriter</h3><p>上面已经介绍了如何在遍历中获取类属性、方法信息，那应该也有一个Api是可以将信息按Class格式写入获取的把？</p>
+<p>有的，刚好是有的，那就是<code>ClassWriter</code>。它所做的事前就是，在遍历时保存信息，最后将信息按Class格式写入到文件</p>
+<p>诶，<code>ClassWriter</code>也可以保存信息？，那岂不是？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassWriter</span> <span class="keyword">extends</span> <span class="title">ClassVisitor</span></span></span><br></pre></td></tr></table></figure>
+
+<p>是的，<code>ClassWriter</code>也是继承与<code>ClassVisitor</code>的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    Class <span class="class"><span class="keyword">class</span> </span>= Test.class;</span><br><span class="line">    String cp = Utils.getClassFilePath(clazz);</span><br><span class="line">    ClassReader cr = <span class="keyword">new</span> ClassReader(<span class="keyword">new</span> FileInputStream(cp));</span><br><span class="line">    ClassWriter cw = <span class="keyword">new</span> ClassWriter(<span class="number">0</span>);</span><br><span class="line">    cr.accept(cw,<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 上面的还是之前那样，这里将ClassWriter内部保存的信息，转变为byte[]</span></span><br><span class="line">    <span class="keyword">byte</span>[] by = cw.toByteArray();</span><br><span class="line">    <span class="comment">// 在通过输出流，输出到指定位置</span></span><br><span class="line">    FileOutputStream out = <span class="keyword">new</span> FileOutputStream(<span class="string">&quot;/输出路径&quot;</span>);</span><br><span class="line">    out.write(by);</span><br><span class="line">    out.flush();</span><br><span class="line">    out.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述操作，也就是完成了一个类的复制，如果输出路径传入的是原本类的路径，那么就是完成了覆盖。也就是完成了保存的操作</p>
+<h4 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h4><p>接下来我们就对源文件进行添加代码，等等，<code>ClassReader</code>只接受一个<code>ClassVisitor</code>参数，因为我们最后要保存，所以<code>ClassWriter</code>是一定要传入的，那<code>ClassVisitor</code>监听怎么办呢？别急，我们看一下<code>ClassVisitor</code>的构造方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ClassVisitor</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> api, <span class="keyword">final</span> ClassVisitor classVisitor)</span> </span></span><br></pre></td></tr></table></figure>
+
+<p>这不就明白了吗，<code>ClassVisitor</code>构造方法里，还可以再传一个对象。也就是说自己作为代理对象，需要拦截的方法，我们复写做操作</p>
+<ol>
+<li><p>所以，我们先创建一个类继承<code>ClassVisitor</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClassVisitor</span> <span class="keyword">extends</span> <span class="title">ClassVisitor</span> <span class="keyword">implements</span> <span class="title">Opcodes</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestClassVisitor</span><span class="params">(ClassVisitor cv)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(Opcodes.ASM5, cv);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Opcodes.ASM5:是ASM的版本，在构建的时候需要指明</p>
+</blockquote>
+</li>
+<li><p>接下来我们需要先知道一下<code>ClassVisitor</code>内部一些方法的执行顺序，以便于插入代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visit  -&gt; visitSource? -&gt; visitOuterClass? -&gt; ( visitAnnotation | visitAttribute )*</span><br><span class="line">-&gt; ( visitInnerClass | visitField | visitMethod )* -&gt; visitEnd</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>？：带问号的表明可能不会执行</p>
+<p>*： 带 * 号的表明可能会执行多次 </p>
+</blockquote>
+<p>那么我们需要一个只会执行一次的方法，那么就选<code>visitEnd</code>把</p>
+</li>
+<li><p>位置选择好之后，我们还需要了解一下，<code>ClassWriter</code>内部的生成代码机制</p>
+<p><code>ClassWriter</code>内部会更具一个field来判断是否生成此代码，它本身也会通过<code>visitField</code> 去收集相关信息</p>
+<p>也就是说，只要我们手动调用一次<code>ClassWriter.visitField()</code>，<code>ClassWriter</code>就会以为真的有这个field，然后记录下来，后面进行生成</p>
+<p>那就好办了，我们只需要在选好的地方，调用一下<code>ClassWriter.visitField()</code>，将想插入的代码放入其中就ok了</p>
+</li>
+<li><p>写代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestClassVisitor</span> <span class="keyword">extends</span> <span class="title">ClassVisitor</span> <span class="keyword">implements</span> <span class="title">Opcodes</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestClassVisitor</span><span class="params">(ClassVisitor cv)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(Opcodes.ASM5, cv);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitEnd</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">// cv:这里调用ClassVisitor的委托者，也就是我们设置的ClassWriter</span></span><br><span class="line">        <span class="comment">// 往里添加了一个field，内容为 public static Long time</span></span><br><span class="line">        FieldVisitor fv = cv.visitField(Opcodes.ACC_PUBLIC + Opcodes.ACC_STATIC, <span class="string">&quot;timer&quot;</span>,<span class="string">&quot;J&quot;</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassVisitor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * The ASM API version implemented by this visitor. The value of this field must be one of &#123;<span class="doctag">@link</span></span></span><br><span class="line"><span class="comment">   * Opcodes#ASM4&#125;, &#123;<span class="doctag">@link</span> Opcodes#ASM5&#125;, &#123;<span class="doctag">@link</span> Opcodes#ASM6&#125; or &#123;<span class="doctag">@link</span> Opcodes#ASM7&#125;.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">int</span> api;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/** The class visitor to which this visitor must delegate method calls. May be null. */</span></span><br><span class="line">  <span class="keyword">protected</span> ClassVisitor cv;</span><br><span class="line">    </span><br><span class="line"> ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>cv 是ClassVisitor内部的委托者</p>
+</blockquote>
+</li>
+<li><p>之后我们将代码组装在一起</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    Class <span class="class"><span class="keyword">class</span> </span>= Test.class;</span><br><span class="line">    String cp = Utils.getClassFilePath(clazz);</span><br><span class="line">    ClassReader cr = <span class="keyword">new</span> ClassReader(<span class="keyword">new</span> FileInputStream(cp));</span><br><span class="line">    ClassWriter cw = <span class="keyword">new</span> ClassWriter(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 将ClassWriter放入到刚刚创建的TestClassVisitor中去当代理</span></span><br><span class="line">    TestClassVisitor tc = TestClassVisitor(cw);</span><br><span class="line">    cr.accept(tc,<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">byte</span>[] by = cw.toByteArray();</span><br><span class="line">    FileOutputStream out = <span class="keyword">new</span> FileOutputStream(<span class="string">&quot;/输出路径&quot;</span>);</span><br><span class="line">    out.write(by);</span><br><span class="line">    out.flush();</span><br><span class="line">    out.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行查看一下反编译源码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Class Test&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">long</span> time;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> <span class="keyword">throws</span> java.lang.Eception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ok，添加代码是完成了。接下来就来修改代码</p>
+</li>
+</ol>
+<h4 id="修改方法"><a href="#修改方法" class="headerlink" title="修改方法"></a>修改方法</h4><p>既然是要修改方法，那么就可以直接上方介绍的<code>ClassVisitor.visitMethod()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MethodVisitor <span class="title">visitMethod</span><span class="params">(<span class="keyword">int</span> access, String name, String desc, String signature, String[] exceptions)</span> </span>&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到这个方法中包含了，方法所申明的相关信息。但是没有实际运行时相关代码信息，这可咋整？</p>
+<p>别急，这个方法的返回值是<code>MethodVisitor</code>。所以我们 <code>ClassReader</code> 遍历class 文件的思路肯定是：先给你方法声明相关信息，然后我们给它返回一个 <code>MethodVisitor</code>，它拿到这个 <code>MethodVisitor</code>，再通过 <code>MethodVisitor</code>开始遍历这个方法内部的所有信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> MethodVisitor <span class="title">visitMethod</span><span class="params">(<span class="keyword">int</span> access, String name, String desc, String signature, String[] exceptions)</span> </span>&#123;</span><br><span class="line">    MethodVisitor mv = cv.visitMethod(access, name, desc, signature, exceptions);</span><br><span class="line">	MyMethodVisitor(mv);</span><br><span class="line">    <span class="keyword">return</span> mv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来应该也是要选择在那个方法中进行插入，所以这就要求我们知道<code>MethodVisitor</code>中的各个方法执行顺序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">visitAnnotationDefault?  -&gt; (visitAnnotation | visitParameterAnnotation | visitAttribute）* -&gt; (visitCode(visitTryCatchBlock |visitLabel |visitFrame |visitXxxInsn | visitLocalVariable |visitLineNumber )*visitMaxs )? -&gt;  visitEnd</span><br></pre></td></tr></table></figure>
+
+<p>以上方法中，一开始会先遍历一些注解或者参数信息等，之后在从<code>visirCode</code>开始遍历整个方法。所以我们选择在<code>visitCode ()</code>方法中进行修改代码的操作，在<code>visitXxxInsn</code>内部判断是否return</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyMethodVisitor</span> <span class="keyword">extends</span> <span class="title">MethodVisitor</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyMethodVisitor</span><span class="params">(MethodVisitor mv)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(Opcodes.ASM5, mv);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.visitCode();</span><br><span class="line">		<span class="comment">// 将静态变量timer，压到操作栈</span></span><br><span class="line">    	mv.visitFieldInsn(GETSTATIC, mOwner, <span class="string">&quot;timer&quot;</span>, <span class="string">&quot;J&quot;</span>);</span><br><span class="line">        <span class="comment">// 调用System.currentTimeMillis，将返回结果压到操作栈</span></span><br><span class="line">   		mv.visitMethodInsn(INVOKESTATIC, <span class="string">&quot;java/lang/System&quot;</span>,<span class="string">&quot;currentTimeMillis&quot;</span>, <span class="string">&quot;()J&quot;</span>);</span><br><span class="line">        <span class="comment">// 进行相减</span></span><br><span class="line">    	mv.visitInsn(LSUB);</span><br><span class="line">        <span class="comment">// 将操作栈中的值赋值给timer</span></span><br><span class="line">    	mv.visitFieldInsn(PUTSTATIC, mOwner, <span class="string">&quot;timer&quot;</span>, <span class="string">&quot;J&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>换成人看的代码就是:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timer -= System.currentTimeMillis();</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>同样的，我们再在<code>visitInsn</code>，把<code>return</code>前的方法也改一下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">visitInsn</span><span class="params">(<span class="keyword">int</span> opcode)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 判断当前方法的code，也就是状态是否是小于return状态</span></span><br><span class="line">    <span class="keyword">if</span> ((opcode &gt;= IRETURN &amp;&amp; opcode &lt;= RETURN) || opcode == ATHROW) &#123;</span><br><span class="line">        mv.visitFieldInsn(GETSTATIC, mOwner, <span class="string">&quot;timer&quot;</span>, <span class="string">&quot;J&quot;</span>);</span><br><span class="line">        mv.visitMethodInsn(INVOKESTATIC, <span class="string">&quot;java/lang/System&quot;</span>,</span><br><span class="line">                <span class="string">&quot;currentTimeMillis&quot;</span>, <span class="string">&quot;()J&quot;</span>);</span><br><span class="line">        <span class="comment">// 上面代码和上面那一步基本相同，都是先将timer压入操作栈，在将另一个数也压出</span></span><br><span class="line">        <span class="comment">// 在操作栈中进行相加操作</span></span><br><span class="line">        mv.visitInsn(LADD);</span><br><span class="line">		<span class="comment">// 最后在将操作栈中的值赋值给timer</span></span><br><span class="line">        mv.visitFieldInsn(PUTSTATIC, mOwner, <span class="string">&quot;timer&quot;</span>, <span class="string">&quot;J&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    mv.visitInsn(opcode);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="栈的深度"><a href="#栈的深度" class="headerlink" title="栈的深度"></a>栈的深度</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/11/29/Android-ASM%E4%BF%AE%E6%94%B9%E5%AD%97%E8%8A%82%E7%A0%81/" data-id="ckwkrf6xg000418li45vt63sq" class="article-share-link">
+        分享
+      </a>
+      
+<ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ASM/" rel="tag">ASM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/" rel="tag">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/object-Object/" rel="tag">[object Object]</a></li></ul>
+
+    </footer>
+
+  </div>
+
+  
+  
+<nav class="article-nav">
+  
+  
+  <a href="/2021/11/29/Android-Semaphore/" class="article-nav-link">
+    <strong class="article-nav-caption">后一篇</strong>
+    <div class="article-nav-title">Android-Semaphore</div>
+  </a>
+  
+</nav>
+
+  
+
+  
+  
+  
+  
+
+</article>
+</section>
+    <footer class="footer">
+  <div class="outer">
+    <div class="float-right">
+      <ul class="list-inline">
+  
+  <li><i class="fe fe-smile-alt"></i> <span id="busuanzi_value_site_uv"></span></li>
+  
+  <li><i class="fe fe-bookmark"></i> <span id="busuanzi_value_page_pv"></span></li>
+  
+</ul>
+    </div>
+    <ul class="list-inline">
+      <li>Fuxinbo博客 &copy; 2021</li>
+      
+        <li>京ICP备17054916号-2</li>
+      
+      <li>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></li>
+      <li>theme  <a target="_blank" rel="noopener" href="https://github.com/zhwangart/hexo-theme-ocean">Ocean</a></li>
+    </ul>
+  </div>
+</footer>
+  </main>
+  <aside class="sidebar">
+    <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/hexo.svg" alt="Fuxinbo博客"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">文章</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/gallery">相册</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link nav-item-search" title="搜索">
+        <i class="fe fe-search"></i>
+        搜索
+      </a>
+    </li>
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      <div class="totop" id="totop">
+  <i class="fe fe-rocket"></i>
+</div>
+    </li>
+    <li class="nav-item">
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="fe fe-feed"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+  </aside>
+  
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/copybtn.js"></script>
+
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+  });
+</script>
+
+
+
+<script src="/js/ocean.js"></script>
+
+</body>
+
+</html>
